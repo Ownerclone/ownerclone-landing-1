@@ -63,4 +63,6 @@ export default async function Blog() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="mb-6
+          <h1 className="mb-6">
+  Restaurant Owner Insights
+</h1>
