@@ -33,5 +33,17 @@ const hardcodedPosts = [
 async function getPosts() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-    const res = await fetch(`${baseUrl}/api/blog?status=published`, {
-      cache: 'no-
+    const res = await fetch(`${baseUrl}/api/blog?status=published`)
+    
+    if (!res.ok) {
+      console.error('Failed to fetch posts:', res.status)
+      return []
+    }
+    
+    const data = await res.json()
+    return data.posts || []
+  } catch (error) {
+    console.error('Error fetching posts:', error)
+    return []
+  }
+}
