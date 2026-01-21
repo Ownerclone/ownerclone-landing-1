@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { FaClock, FaUser } from 'react-icons/fa'
 
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Restaurant Owner Insights & Tips | OwnerClone Blog',
