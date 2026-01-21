@@ -116,7 +116,7 @@ export default function ScreenplayEditor({
       }
     });
     
-    return [...new Set(suggestions)];
+    return Array.from(new Set(suggestions)];
   };
 
   const updateElement = (index: number, content: string) => {
