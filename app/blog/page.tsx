@@ -2,8 +2,6 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { FaClock, FaUser } from 'react-icons/fa'
 
-export const dynamic = 'force-dynamic'
-
 export const metadata: Metadata = {
   title: 'Restaurant Owner Insights & Tips | OwnerClone Blog',
   description: 'Real-world restaurant management advice from owners who have been there.',
@@ -32,7 +30,9 @@ const hardcodedPosts = [
 async function getPosts() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-    const res = await fetch(`${baseUrl}/api/blog?status=published`)
+    const res = await fetch(`${baseUrl}/api/blog?status=published`, {
+      next: { revalidate: 0 }
+    })
     
     if (!res.ok) {
       console.error('Failed to fetch posts:', res.status)
