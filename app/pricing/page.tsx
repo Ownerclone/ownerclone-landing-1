@@ -363,7 +363,7 @@ export default function Pricing() {
             Get Started Today
           </Link>
           <p className="mt-6 text-primary-200">
-            Questions? Call us at (404) 555-0123 or email info@ownerclone.com
+            Questions? Send us an email - info@ownerclone.com
           </p>
         </div>
       </section>
