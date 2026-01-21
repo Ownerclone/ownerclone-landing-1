@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 }
 
 const hardcodedPosts: any[] = []
-]
 
 async function getPosts() {
   try {
