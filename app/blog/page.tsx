@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   keywords: ['restaurant management blog', 'restaurant owner tips'],
 }
 
-// Hardcoded posts (your original content)
 const hardcodedPosts = [
   {
     id: 'hardcoded-1',
@@ -26,15 +25,13 @@ const hardcodedPosts = [
     created_at: '2024-01-10',
     isHardcoded: true
   },
-  // Add more hardcoded posts here if you have them
 ]
 
 async function getPosts() {
   try {
-    // Fetch from LOCAL API (same deployment)
     const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/blog?status=published`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
-      cache: 'no-store' // For development
+      next: { revalidate: 60 },
+      cache: 'no-store'
     })
     
     if (!res.ok) {
@@ -53,16 +50,10 @@ async function getPosts() {
 export default async function Blog() {
   const dbPosts = await getPosts()
   
-  // Combine hardcoded posts with database posts
   const allPosts = [...hardcodedPosts, ...dbPosts].sort((a, b) => {
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   })
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="mb-6">
-  Restaurant Owner Insights
-</h1>
+      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py
