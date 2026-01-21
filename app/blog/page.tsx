@@ -1,7 +1,19 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { FaClock, FaUser } from 'react-icons/fa'
+import { Metadata } from 'next'
+import Link from 'next/link'
+import { FaClock, FaUser } from 'react-icons/fa'
 
+// Add these two lines:
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+export const metadata: Metadata = {
+  title: 'Restaurant Owner Insights & Tips | OwnerClone Blog',
+  description: 'Real-world restaurant management advice from owners who have been there.',
+  keywords: ['restaurant management blog', 'restaurant owner tips'],
+}
 export const metadata: Metadata = {
   title: 'Restaurant Owner Insights & Tips | OwnerClone Blog',
   description: 'Real-world restaurant management advice from owners who have been there.',
