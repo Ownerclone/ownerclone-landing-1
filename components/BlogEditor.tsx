@@ -134,9 +134,7 @@ export default function BlogEditor({
     return <div className="flex items-center justify-center h-full">Loading editor...</div>;
   }
 
-  const textContent = editor.state.doc.textContent;
-  const words = textContent.split(/\s+/).filter(w => w.length > 0);
-  const wordCount = words.length;
+ const wordCount = editor ? editor.state.doc.textContent.split(' ').length : 0;
   
   return (
     <div className="h-full flex flex-col bg-white">
