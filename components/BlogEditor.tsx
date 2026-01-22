@@ -148,9 +148,10 @@ export default function BlogEditor({
             {isSaving ? 'Saving...' : 'Save'}
           </button>
           <div className="text-sm text-gray-600">
-  {editor.state.doc.textContent.split(' ').filter(w => w).length} words
-</div>
+            {editor.state.doc.textContent.split(' ').filter((w: string) => w).length} words
+          </div>
         </div>
+
         {/* Formatting Toolbar */}
         <div className="flex flex-wrap gap-1">
           <button
@@ -292,4 +293,116 @@ export default function BlogEditor({
 
           {/* Excerpt */}
           <div className="mb-6">
-            <label classNam
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Excerpt (Summary)
+            </label>
+            <TextareaAutosize
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.target.value)}
+              placeholder="Brief summary of the post..."
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              minRows={2}
+            />
+          </div>
+
+          {/* Rich Text Editor */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Content
+            </label>
+            <div className="border rounded-lg">
+              <EditorContent editor={editor} />
+            </div>
+          </div>
+
+          {/* SEO Section */}
+          <div className="border-t pt-6 mt-6">
+            <h3 className="text-lg font-semibold mb-4">SEO Settings</h3>
+
+            <div className="space-y-4">
+              {/* Meta Title */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Meta Title
+                </label>
+                <input
+                  type="text"
+                  value={metaTitle}
+                  onChange={(e) => setMetaTitle(e.target.value)}
+                  placeholder={title || 'SEO title (60 chars max)'}
+                  maxLength={60}
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  {metaTitle.length}/60 characters
+                </p>
+              </div>
+
+              {/* Meta Description */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Meta Description
+                </label>
+                <TextareaAutosize
+                  value={metaDescription}
+                  onChange={(e) => setMetaDescription(e.target.value)}
+                  placeholder="Brief description for search engines (160 chars max)"
+                  maxLength={160}
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  minRows={2}
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  {metaDescription.length}/160 characters
+                </p>
+              </div>
+
+              {/* Keywords */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Keywords
+                </label>
+                <div className="flex gap-2 mb-2">
+                  <input
+                    type="text"
+                    value={currentKeyword}
+                    onChange={(e) => setCurrentKeyword(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addKeyword())}
+                    placeholder="Add keyword..."
+                    className="flex-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    onClick={addKeyword}
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {keywords.map((keyword) => (
+                    <span
+                      key={keyword}
+                      className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                    >
+                      {keyword}
+                      <button
+                        onClick={() => removeKeyword(keyword)}
+                        className="hover:text-blue-900"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Status Bar */}
+      <div className="border-t px-6 py-2 bg-gray-50 text-xs text-gray-600">
+        {autoSave && <span className="text-green-600">Auto-save enabled</span>}
+      </div>
+    </div>
+  );
+}
