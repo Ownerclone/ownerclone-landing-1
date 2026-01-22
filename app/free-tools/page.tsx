@@ -291,7 +291,7 @@ export default function FreeToolsPage() {
               <h4 className="font-bold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li><a href="/about" className="hover:text-blue-400 transition">About</a></li>
-                <li><a href="/demo" className="hover:text-blue-400 transition">Request Demo</a></li>
+                <li><a href="/pricing" className="hover:text-blue-400 transition">Request Demo</a></li>
               </ul>
             </div>
           </div>
