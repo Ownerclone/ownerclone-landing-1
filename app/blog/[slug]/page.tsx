@@ -61,7 +61,10 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       </header>
 
       <div className="prose prose-lg max-w-none">
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+<div 
+  className="prose prose-lg max-w-none" 
+  dangerouslySetInnerHTML={{ __html: post.content }} 
+/>     
       </div>
     </article>
   )
