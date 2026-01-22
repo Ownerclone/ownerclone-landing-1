@@ -151,7 +151,6 @@ export default function BlogEditor({
           </button>
           <div className="text-sm text-gray-600">{wordCount} words</div>
         </div>
-
         {/* Formatting Toolbar */}
         <div className="flex flex-wrap gap-1">
           <button
