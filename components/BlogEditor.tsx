@@ -134,8 +134,6 @@ export default function BlogEditor({
     return <div className="flex items-center justify-center h-full">Loading editor...</div>;
   }
 
- const wordCount = editor ? editor.state.doc.textContent.split(' ').length : 0;
-  
   return (
     <div className="h-full flex flex-col bg-white">
       {/* Toolbar */}
@@ -149,7 +147,9 @@ export default function BlogEditor({
             <Save className="w-4 h-4" />
             {isSaving ? 'Saving...' : 'Save'}
           </button>
-          <div className="text-sm text-gray-600">{wordCount} words</div>
+          <div className="text-sm text-gray-600">
+  {editor.state.doc.textContent.split(' ').filter(w => w).length} words
+</div>
         </div>
         {/* Formatting Toolbar */}
         <div className="flex flex-wrap gap-1">
