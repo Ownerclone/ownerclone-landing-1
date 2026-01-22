@@ -134,8 +134,10 @@ export default function BlogEditor({
     return <div className="flex items-center justify-center h-full">Loading editor...</div>;
   }
 
-  const wordCount = editor.state.doc.textContent.split(/\s+/).filter(w => w.length > 0).length;
-
+  const textContent = editor.state.doc.textContent;
+  const words = textContent.split(/\s+/).filter(w => w.length > 0);
+  const wordCount = words.length;
+  
   return (
     <div className="h-full flex flex-col bg-white">
       {/* Toolbar */}
