@@ -240,7 +240,7 @@ export default function FreeToolsPage() {
               OwnerClone integrates with your POS system to automatically calculate food cost %, prime cost, detect theft, and forecast demand—without any manual data entry.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/demo" className="bg-white text-blue-600 px-10 py-4 rounded-lg font-bold text-lg hover:shadow-2xl transition inline-block">
+              <a href="/pricing" className="bg-white text-blue-600 px-10 py-4 rounded-lg font-bold text-lg hover:shadow-2xl transition inline-block">
                 Join Early Access
               </a>
               <a href="/#features" className="border-2 border-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition inline-block">
