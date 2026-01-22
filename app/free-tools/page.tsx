@@ -80,35 +80,50 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* Food Cost Calculator */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
+            {/* Food Cost Calculator - NOW WORKING! */}
+            <a href="/free-tools/food-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">🍽️</div>
               <h3 className="text-2xl font-bold mb-3">Food Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
                 Calculate food cost percentage for any recipe. See if you're hitting industry benchmarks (28-35%).
               </p>
               <div className="flex items-center text-blue-400 font-semibold">
-                <span>Coming Soon</span>
+                <span>Try Calculator</span>
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
                 </svg>
               </div>
-            </div>
+            </a>
 
-            {/* Prime Cost Calculator */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
+            {/* Prime Cost Calculator - NOW WORKING! */}
+            <a href="/free-tools/prime-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold mb-3">Prime Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
                 Track your most important profitability metric: COGS + Labor. Target is 60% or less.
               </p>
               <div className="flex items-center text-blue-400 font-semibold">
-                <span>Coming Soon</span>
+                <span>Try Calculator</span>
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
                 </svg>
               </div>
-            </div>
+            </a>
+
+            {/* Labor Cost Calculator - NOW WORKING! */}
+            <a href="/free-tools/labor-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
+              <div className="text-5xl mb-4">👥</div>
+              <h3 className="text-2xl font-bold mb-3">Labor Cost Calculator</h3>
+              <p className="text-gray-400 mb-6">
+                Calculate labor cost percentage and optimize your staffing costs to stay profitable.
+              </p>
+              <div className="flex items-center text-blue-400 font-semibold">
+                <span>Try Calculator</span>
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
 
             {/* Break-Even Calculator */}
             <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
@@ -137,18 +152,6 @@ export default function FreeToolsPage() {
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
                 </svg>
-              </div>
-            </div>
-
-            {/* Coming Soon Card */}
-            <div className="bg-gray-800/50 rounded-2xl p-8 border border-gray-700 border-dashed">
-              <div className="text-5xl mb-4 opacity-50">⏳</div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-500">More Coming Soon</h3>
-              <p className="text-gray-500 mb-6">
-                Labor cost calculator, inventory management, and more professional tools launching soon.
-              </p>
-              <div className="text-gray-600 font-semibold">
-                Stay tuned
               </div>
             </div>
 
@@ -274,8 +277,9 @@ export default function FreeToolsPage() {
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li><a href="/free-tools" className="hover:text-blue-400 transition">All Calculators</a></li>
                 <li><a href="/free-tools/startup-cost" className="hover:text-blue-400 transition">Startup Cost Calculator</a></li>
-                <li><span className="text-gray-600">Food Cost Calculator</span></li>
-                <li><span className="text-gray-600">Prime Cost Calculator</span></li>
+                <li><a href="/free-tools/food-cost" className="hover:text-blue-400 transition">Food Cost Calculator</a></li>
+                <li><a href="/free-tools/prime-cost" className="hover:text-blue-400 transition">Prime Cost Calculator</a></li>
+                <li><a href="/free-tools/labor-cost" className="hover:text-blue-400 transition">Labor Cost Calculator</a></li>
               </ul>
             </div>
 
