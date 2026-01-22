@@ -362,7 +362,7 @@ export default function StartupCostCalculator() {
             OwnerClone automatically tracks all your startup expenses, ongoing costs, and profitability metrics in real-time.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/demo" className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:shadow-xl transition">
+            <Link href="/pricing" className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:shadow-xl transition">
               Join Early Access
             </Link>
             <Link href="/free-tools" className="border-2 border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition">
