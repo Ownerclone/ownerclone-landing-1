@@ -34,7 +34,7 @@ export default function FreeToolsPage() {
               <a href="/free-tools" className="text-blue-400 font-semibold">Free Tools</a>
               <a href="/#pricing" className="text-gray-300 hover:text-blue-400 transition">Pricing</a>
               <a href="/blog" className="text-gray-300 hover:text-blue-400 transition">Blog</a>
-              <a href="/demo" className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition">
+              <a href="/pricing" className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition">
                 Join Early Access
               </a>
             </div>
