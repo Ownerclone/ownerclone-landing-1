@@ -111,6 +111,72 @@ export default function PerPlatePricingCalculator() {
               + Add Ingredient
             </button>
           </div>
+
+          {/* Instructions */}
+          <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-sm text-gray-700">
+              <strong>How to use:</strong> Enter how you <em>buy</em> the ingredient (per lb, per oz, per g), 
+              then enter how much you <em>use</em> on the plate.
+            </p>
+            <p className="text-sm text-gray-600 mt-1">
+              Examples: Buy chicken at $3.99/lb, use 6 oz on plate • Buy olive oil at $12/oz, use 0.5 oz on plate
+            </p>
+          </div>
+
+          {/* Smart Conversion Helper */}
+          <div className="mb-6 p-5 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-lg">
+            <h4 className="font-bold text-gray-900 mb-3 flex items-center">
+              <span className="text-2xl mr-2">🤔</span>
+              Buy by &quot;each&quot; but portion by weight?
+            </h4>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-4 rounded-lg border border-yellow-200">
+                <p className="text-sm font-semibold text-gray-700 mb-3">Quick Conversion Calculator:</p>
+                <div className="flex items-center gap-2 mb-2">
+                  <input 
+                    type="text"
+                    placeholder="$1.50" 
+                    className="w-24 px-3 py-2 border-2 border-gray-300 rounded text-center font-mono"
+                    disabled
+                  />
+                  <span className="text-gray-600 font-bold">÷</span>
+                  <input 
+                    type="text"
+                    placeholder="150g" 
+                    className="w-24 px-3 py-2 border-2 border-gray-300 rounded text-center font-mono"
+                    disabled
+                  />
+                  <span className="text-gray-600 font-bold">=</span>
+                  <div className="px-3 py-2 bg-green-100 border-2 border-green-300 rounded">
+                    <span className="font-bold text-green-700">$0.01/g</span>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  Use a calculator to divide price by weight, then enter the result below
+                </p>
+              </div>
+              <div className="bg-white p-4 rounded-lg border border-yellow-200">
+                <p className="font-semibold text-gray-900 mb-2">Example: Green Peppers</p>
+                <ul className="text-sm text-gray-700 space-y-1.5">
+                  <li>• Cost: $1.50 each</li>
+                  <li>• Average weight: ~150g per pepper</li>
+                  <li>• Price per gram: $1.50 ÷ 150g = <strong>$0.01/g</strong></li>
+                  <li>• You use 56g on plate</li>
+                  <li className="pt-2 border-t border-gray-200">
+                    <strong>✓ Enter as:</strong> $0.01 per g, use 56g on plate
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="mt-4 p-3 bg-blue-100 border border-blue-300 rounded">
+              <p className="text-sm text-gray-800">
+                <strong>💡 Pro Tip:</strong> Weigh 3-5 items and use the average. Green peppers vary from 120-180g, 
+                so using 150g as your standard gives accurate costing. Common weights: 
+                <span className="font-semibold"> Lemon ~58g • Tomato ~150g • Onion ~110g • Egg ~50g</span>
+              </p>
+            </div>
+          </div>
           
           <div className="space-y-4">
             {ingredients.map((ing) => {
