@@ -4,7 +4,15 @@ import { useState } from 'react'
 
 export default function PerPlatePricingCalculator() {
   const [ingredients, setIngredients] = useState([
-    { id: 1, name: '', price: '', unit: 'lb', quantity: '' }
+    { 
+      id: 1, 
+      name: '', 
+      soldBy: 'weight', // 'each', 'case', 'weight'
+      caseQuantity: '', // number of items in case OR weight of case
+      casePrice: '',
+      plateAmount: '',
+      plateUnit: 'oz' // 'each', '1/2 each', '1/4 each', 'oz', 'g', 'lb', 'kg'
+    }
   ])
   const [targetFoodCost, setTargetFoodCost] = useState('30')
   const [platesPerWeek, setPlatesPerWeek] = useState('100')
@@ -19,7 +27,15 @@ export default function PerPlatePricingCalculator() {
 
   const addIngredient = () => {
     const newId = Math.max(...ingredients.map(i => i.id), 0) + 1
-    setIngredients([...ingredients, { id: newId, name: '', price: '', unit: 'lb', quantity: '' }])
+    setIngredients([...ingredients, { 
+      id: newId, 
+      name: '', 
+      soldBy: 'weight',
+      caseQuantity: '',
+      casePrice: '',
+      plateAmount: '',
+      plateUnit: 'oz'
+    }])
   }
 
   const removeIngredient = (id) => {
@@ -29,36 +45,92 @@ export default function PerPlatePricingCalculator() {
   }
 
   const updateIngredient = (id, field, value) => {
-    setIngredients(ingredients.map(ing => 
-      ing.id === id ? { ...ing, [field]: value } : ing
-    ))
-  }
-
-  const adjustPortion = (id, percentage) => {
     setIngredients(ingredients.map(ing => {
-      if (ing.id === id && ing.quantity) {
-        const currentQty = parseFloat(ing.quantity)
-        const newQty = currentQty * (1 + percentage / 100)
-        return { ...ing, quantity: newQty.toFixed(2) }
+      if (ing.id === id) {
+        const updated = { ...ing, [field]: value }
+        
+        // Auto-adjust plateUnit when soldBy changes
+        if (field === 'soldBy') {
+          if (value === 'each' || value === 'case') {
+            updated.plateUnit = 'each'
+          } else if (value === 'weight') {
+            updated.plateUnit = 'oz'
+          }
+        }
+        
+        return updated
       }
       return ing
     }))
   }
 
+  const adjustPortion = (id, percentage) => {
+    setIngredients(ingredients.map(ing => {
+      if (ing.id === id && ing.plateAmount) {
+        const currentQty = parseFloat(ing.plateAmount)
+        const newQty = currentQty * (1 + percentage / 100)
+        return { ...ing, plateAmount: newQty.toFixed(2) }
+      }
+      return ing
+    }))
+  }
+
+  // Calculate price per unit (auto-populated field)
+  const calculatePricePerUnit = (ing) => {
+    const casePrice = parseFloat(ing.casePrice) || 0
+    const caseQty = parseFloat(ing.caseQuantity) || 0
+    
+    if (casePrice === 0) return null
+
+    if (ing.soldBy === 'each') {
+      return { value: casePrice, unit: 'each' }
+    }
+    
+    if (ing.soldBy === 'case' && caseQty > 0) {
+      return { value: casePrice / caseQty, unit: 'each' }
+    }
+    
+    if (ing.soldBy === 'weight' && caseQty > 0) {
+      // Assume caseQuantity is in lb for weight
+      const pricePerLb = casePrice / caseQty
+      const pricePerOz = pricePerLb / 16
+      const pricePerGram = pricePerLb / 453.592
+      return { 
+        value: pricePerLb, 
+        unit: 'lb',
+        perOz: pricePerOz,
+        perGram: pricePerGram
+      }
+    }
+    
+    return null
+  }
+
   // Calculate cost per ingredient
   const calculateIngredientCost = (ing) => {
-    const price = parseFloat(ing.price) || 0
-    const quantity = parseFloat(ing.quantity) || 0
-    
-    if (price === 0 || quantity === 0) return 0
+    const plateAmount = parseFloat(ing.plateAmount) || 0
+    if (plateAmount === 0) return 0
 
-    // Convert price unit to grams
-    const pricePerGram = price / conversions[ing.unit]
-    
-    // Convert quantity to grams
-    const quantityInGrams = quantity * conversions[ing.unit]
-    
-    return pricePerGram * quantityInGrams
+    const priceInfo = calculatePricePerUnit(ing)
+    if (!priceInfo) return 0
+
+    // Handle "each" based pricing (each, 1/2 each, 1/4 each)
+    if (ing.plateUnit === 'each' || ing.plateUnit === '1/2 each' || ing.plateUnit === '1/4 each') {
+      let multiplier = 1
+      if (ing.plateUnit === '1/2 each') multiplier = 0.5
+      if (ing.plateUnit === '1/4 each') multiplier = 0.25
+      
+      return priceInfo.value * plateAmount * multiplier
+    }
+
+    // Handle weight-based pricing
+    if (priceInfo.perGram) {
+      // Convert plate amount to grams
+      const gramsOnPlate = plateAmount * conversions[ing.plateUnit]
+      return priceInfo.perGram * gramsOnPlate
+    }
+
+    return 0
   }
 
   // Total plate cost
@@ -113,171 +185,204 @@ export default function PerPlatePricingCalculator() {
           </div>
 
           {/* Instructions */}
-          <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm text-gray-700">
-              <strong>How to use:</strong> Enter how you <em>buy</em> the ingredient (per lb, per oz, per g), 
-              then enter how much you <em>use</em> on the plate.
+              <strong>How to use:</strong> Enter how you <em>buy</em> each ingredient, and we&apos;ll auto-calculate the price per unit. 
+              Then enter how much you <em>use</em> on the plate.
             </p>
-            <p className="text-sm text-gray-600 mt-1">
-              Examples: Buy chicken at $3.99/lb, use 6 oz on plate • Buy olive oil at $12/oz, use 0.5 oz on plate
+            <p className="text-sm text-gray-600 mt-2">
+              <strong>Examples:</strong>
             </p>
-          </div>
-
-          {/* Smart Conversion Helper */}
-          <div className="mb-6 p-5 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-lg">
-            <h4 className="font-bold text-gray-900 mb-3 flex items-center">
-              <span className="text-2xl mr-2">🤔</span>
-              Buy by &quot;each&quot; but portion by weight?
-            </h4>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white p-4 rounded-lg border border-yellow-200">
-                <p className="text-sm font-semibold text-gray-700 mb-3">Quick Conversion Calculator:</p>
-                <div className="flex items-center gap-2 mb-2">
-                  <input 
-                    type="text"
-                    placeholder="$1.50" 
-                    className="w-24 px-3 py-2 border-2 border-gray-300 rounded text-center font-mono"
-                    disabled
-                  />
-                  <span className="text-gray-600 font-bold">÷</span>
-                  <input 
-                    type="text"
-                    placeholder="150g" 
-                    className="w-24 px-3 py-2 border-2 border-gray-300 rounded text-center font-mono"
-                    disabled
-                  />
-                  <span className="text-gray-600 font-bold">=</span>
-                  <div className="px-3 py-2 bg-green-100 border-2 border-green-300 rounded">
-                    <span className="font-bold text-green-700">$0.01/g</span>
-                  </div>
-                </div>
-                <p className="text-xs text-gray-500 mt-2">
-                  Use a calculator to divide price by weight, then enter the result below
-                </p>
-              </div>
-              <div className="bg-white p-4 rounded-lg border border-yellow-200">
-                <p className="font-semibold text-gray-900 mb-2">Example: Green Peppers</p>
-                <ul className="text-sm text-gray-700 space-y-1.5">
-                  <li>• Cost: $1.50 each</li>
-                  <li>• Average weight: ~150g per pepper</li>
-                  <li>• Price per gram: $1.50 ÷ 150g = <strong>$0.01/g</strong></li>
-                  <li>• You use 56g on plate</li>
-                  <li className="pt-2 border-t border-gray-200">
-                    <strong>✓ Enter as:</strong> $0.01 per g, use 56g on plate
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="mt-4 p-3 bg-blue-100 border border-blue-300 rounded">
-              <p className="text-sm text-gray-800">
-                <strong>💡 Pro Tip:</strong> Weigh 3-5 items and use the average. Green peppers vary from 120-180g, 
-                so using 150g as your standard gives accurate costing. Common weights: 
-                <span className="font-semibold"> Lemon ~58g • Tomato ~150g • Onion ~110g • Egg ~50g</span>
-              </p>
-            </div>
+            <ul className="text-sm text-gray-600 mt-1 ml-4 space-y-1">
+              <li>• Wings: Sold by <strong>case</strong>, 263 wings per case, $80/case → Use 8 each on plate</li>
+              <li>• Chicken: Sold by <strong>weight</strong>, 40 lb case, $159.60 → Use 6 oz on plate</li>
+              <li>• Pepper: Sold by <strong>each</strong>, $1.50 each → Use 1/4 each on plate</li>
+            </ul>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-6">
             {ingredients.map((ing) => {
               const cost = calculateIngredientCost(ing)
+              const priceInfo = calculatePricePerUnit(ing)
               
               return (
-                <div key={ing.id} className="border-2 border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
-                  <div className="grid grid-cols-12 gap-4 mb-3">
-                    {/* Ingredient Name */}
+                <div key={ing.id} className="border-2 border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors bg-gray-50">
+                  {/* Row 1: Ingredient Name */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Ingredient Name</label>
                     <input
                       type="text"
-                      placeholder="Ingredient name"
+                      placeholder="e.g., Chicken Wings, Green Pepper, Chicken Breast"
                       value={ing.name}
                       onChange={(e) => updateIngredient(ing.id, 'name', e.target.value)}
-                      className="col-span-12 md:col-span-3 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg"
                     />
-                    
+                  </div>
+
+                  {/* Row 2: How is it sold? */}
+                  <div className="grid md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Sold By</label>
+                      <select
+                        value={ing.soldBy}
+                        onChange={(e) => updateIngredient(ing.id, 'soldBy', e.target.value)}
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                      >
+                        <option value="each">Each (single item)</option>
+                        <option value="case">Case (multiple items)</option>
+                        <option value="weight">Weight (lb/kg)</option>
+                      </select>
+                    </div>
+
+                    {/* Conditional: Case Quantity or Weight */}
+                    {ing.soldBy === 'case' && (
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">Items per Case</label>
+                        <input
+                          type="number"
+                          placeholder="e.g., 263"
+                          value={ing.caseQuantity}
+                          onChange={(e) => updateIngredient(ing.id, 'caseQuantity', e.target.value)}
+                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                          step="1"
+                        />
+                      </div>
+                    )}
+
+                    {ing.soldBy === 'weight' && (
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">Case Weight (lb)</label>
+                        <input
+                          type="number"
+                          placeholder="e.g., 40"
+                          value={ing.caseQuantity}
+                          onChange={(e) => updateIngredient(ing.id, 'caseQuantity', e.target.value)}
+                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                          step="0.1"
+                        />
+                      </div>
+                    )}
+
                     {/* Price */}
-                    <div className="col-span-6 md:col-span-2 relative">
-                      <span className="absolute left-3 top-2.5 text-gray-500">$</span>
-                      <input
-                        type="number"
-                        placeholder="Price"
-                        value={ing.price}
-                        onChange={(e) => updateIngredient(ing.id, 'price', e.target.value)}
-                        className="w-full pl-7 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                        step="0.01"
-                      />
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        {ing.soldBy === 'each' ? 'Price per Each' : 'Price per Case'}
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                        <input
+                          type="number"
+                          placeholder="e.g., 80.00"
+                          value={ing.casePrice}
+                          onChange={(e) => updateIngredient(ing.id, 'casePrice', e.target.value)}
+                          className="w-full pl-8 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                          step="0.01"
+                        />
+                      </div>
                     </div>
-                    
-                    {/* Unit */}
-                    <select
-                      value={ing.unit}
-                      onChange={(e) => updateIngredient(ing.id, 'unit', e.target.value)}
-                      className="col-span-6 md:col-span-2 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                    >
-                      <option value="lb">per lb</option>
-                      <option value="oz">per oz</option>
-                      <option value="kg">per kg</option>
-                      <option value="g">per g</option>
-                    </select>
-                    
-                    {/* Quantity */}
-                    <input
-                      type="number"
-                      placeholder="Amount"
-                      value={ing.quantity}
-                      onChange={(e) => updateIngredient(ing.id, 'quantity', e.target.value)}
-                      className="col-span-6 md:col-span-2 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                      step="0.01"
-                    />
-                    
-                    {/* Unit Display */}
-                    <div className="col-span-6 md:col-span-2 flex items-center">
-                      <span className="text-gray-600 text-sm">{ing.unit} on plate</span>
+                  </div>
+
+                  {/* Auto-calculated Price Per Unit Display */}
+                  {priceInfo && (
+                    <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-sm font-semibold text-green-800">
+                        ✓ Auto-calculated: 
+                        {ing.soldBy === 'weight' ? (
+                          <>
+                            <span className="ml-2">${priceInfo.value.toFixed(2)}/lb</span>
+                            <span className="ml-2 text-gray-600">or ${priceInfo.perOz.toFixed(3)}/oz</span>
+                            <span className="ml-2 text-gray-600">or ${priceInfo.perGram.toFixed(4)}/g</span>
+                          </>
+                        ) : (
+                          <span className="ml-2">${priceInfo.value.toFixed(3)} per {priceInfo.unit}</span>
+                        )}
+                      </p>
                     </div>
-                    
+                  )}
+
+                  {/* Row 3: Amount on Plate */}
+                  <div className="grid md:grid-cols-3 gap-4 mb-4">
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Amount on Plate</label>
+                      <div className="flex gap-2">
+                        <input
+                          type="number"
+                          placeholder="e.g., 8"
+                          value={ing.plateAmount}
+                          onChange={(e) => updateIngredient(ing.id, 'plateAmount', e.target.value)}
+                          className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                          step="0.01"
+                        />
+                        <select
+                          value={ing.plateUnit}
+                          onChange={(e) => updateIngredient(ing.id, 'plateUnit', e.target.value)}
+                          className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                          disabled={ing.soldBy === 'each' || ing.soldBy === 'case'}
+                        >
+                          {(ing.soldBy === 'each' || ing.soldBy === 'case') ? (
+                            <>
+                              <option value="each">each</option>
+                              <option value="1/2 each">1/2 each</option>
+                              <option value="1/4 each">1/4 each</option>
+                            </>
+                          ) : (
+                            <>
+                              <option value="oz">oz</option>
+                              <option value="g">g</option>
+                              <option value="lb">lb</option>
+                              <option value="kg">kg</option>
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    </div>
+
                     {/* Delete Button */}
-                    <div className="col-span-12 md:col-span-1 flex items-center justify-end">
+                    <div className="flex items-end justify-end">
                       {ingredients.length > 1 && (
                         <button
                           onClick={() => removeIngredient(ing.id)}
-                          className="text-red-500 hover:text-red-700 text-2xl font-bold"
+                          className="px-4 py-3 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-semibold"
                         >
-                          ×
+                          Remove
                         </button>
                       )}
                     </div>
                   </div>
 
                   {/* Portion Control & Cost Display */}
-                  {ing.name && ing.price && ing.quantity && (
-                    <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-gray-200">
-                      <span className="text-sm font-semibold text-gray-700">Portion Control:</span>
-                      <button
-                        onClick={() => adjustPortion(ing.id, -20)}
-                        className="px-3 py-1 bg-red-100 text-red-700 rounded text-sm font-semibold hover:bg-red-200 transition"
-                      >
-                        -20%
-                      </button>
-                      <button
-                        onClick={() => adjustPortion(ing.id, -10)}
-                        className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded text-sm font-semibold hover:bg-yellow-200 transition"
-                      >
-                        -10%
-                      </button>
-                      <button
-                        onClick={() => adjustPortion(ing.id, 10)}
-                        className="px-3 py-1 bg-green-100 text-green-700 rounded text-sm font-semibold hover:bg-green-200 transition"
-                      >
-                        +10%
-                      </button>
-                      <button
-                        onClick={() => adjustPortion(ing.id, 20)}
-                        className="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm font-semibold hover:bg-blue-200 transition"
-                      >
-                        +20%
-                      </button>
-                      <div className="ml-auto">
-                        <span className="text-sm text-gray-600">Cost: </span>
-                        <span className="text-lg font-bold text-blue-600">${cost.toFixed(2)}</span>
+                  {ing.name && ing.casePrice && ing.plateAmount && (
+                    <div className="pt-4 border-t border-gray-300">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span className="text-sm font-semibold text-gray-700">Portion Control:</span>
+                        <button
+                          onClick={() => adjustPortion(ing.id, -20)}
+                          className="px-3 py-1 bg-red-100 text-red-700 rounded text-sm font-semibold hover:bg-red-200 transition"
+                        >
+                          -20%
+                        </button>
+                        <button
+                          onClick={() => adjustPortion(ing.id, -10)}
+                          className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded text-sm font-semibold hover:bg-yellow-200 transition"
+                        >
+                          -10%
+                        </button>
+                        <button
+                          onClick={() => adjustPortion(ing.id, 10)}
+                          className="px-3 py-1 bg-green-100 text-green-700 rounded text-sm font-semibold hover:bg-green-200 transition"
+                        >
+                          +10%
+                        </button>
+                        <button
+                          onClick={() => adjustPortion(ing.id, 20)}
+                          className="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm font-semibold hover:bg-blue-200 transition"
+                        >
+                          +20%
+                        </button>
+                        <div className="ml-auto">
+                          <span className="text-sm text-gray-600">Ingredient Cost: </span>
+                          <span className="text-2xl font-bold text-blue-600">${cost.toFixed(3)}</span>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -395,7 +500,7 @@ export default function PerPlatePricingCalculator() {
                     </tr>
                   </thead>
                   <tbody>
-                    {ingredients.filter(ing => ing.name && ing.price && ing.quantity).map((ing) => {
+                    {ingredients.filter(ing => ing.name && ing.casePrice && ing.plateAmount).map((ing) => {
                       const cost = calculateIngredientCost(ing)
                       const percentage = (cost / totalPlateCost) * 100
                       
@@ -403,10 +508,10 @@ export default function PerPlatePricingCalculator() {
                         <tr key={ing.id} className="border-b border-gray-200">
                           <td className="py-2 px-3 text-gray-900">{ing.name}</td>
                           <td className="py-2 px-3 text-right text-gray-700">
-                            {parseFloat(ing.quantity).toFixed(2)} {ing.unit}
+                            {parseFloat(ing.plateAmount).toFixed(2)} {ing.plateUnit}
                           </td>
                           <td className="py-2 px-3 text-right font-semibold text-gray-900">
-                            ${cost.toFixed(2)}
+                            ${cost.toFixed(3)}
                           </td>
                           <td className="py-2 px-3 text-right text-gray-600">
                             {percentage.toFixed(1)}%
