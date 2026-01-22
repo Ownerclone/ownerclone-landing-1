@@ -125,35 +125,35 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 5. Break-Even Calculator - NEED TO BUILD */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
-              <div className="text-5xl mb-4">🎯</div>
-              <h3 className="text-2xl font-bold mb-3">Break-Even Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Find out exactly how many customers you need per day to break even and start making profit.
-              </p>
-              <div className="flex items-center text-gray-500 font-semibold">
-                <span>Coming Soon</span>
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-            </div>
+            {/* Break-Even Calculator - NOW WORKING! */}
+<a href="/free-tools/break-even" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
+  <div className="text-5xl mb-4">🎯</div>
+  <h3 className="text-2xl font-bold mb-3">Break-Even Calculator</h3>
+  <p className="text-gray-400 mb-6">
+    Find out exactly how many customers you need per day to break even and start making profit.
+  </p>
+  <div className="flex items-center text-blue-400 font-semibold">
+    <span>Try Calculator</span>
+    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+    </svg>
+  </div>
+</a>
 
-            {/* 6. Menu Pricing Calculator - NEED TO BUILD */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
-              <div className="text-5xl mb-4">💵</div>
-              <h3 className="text-2xl font-bold mb-3">Menu Pricing Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Price your menu items for maximum profit using multiple pricing strategies and methods.
-              </p>
-              <div className="flex items-center text-gray-500 font-semibold">
-                <span>Coming Soon</span>
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-            </div>
+            {/* Menu Pricing Calculator - NOW WORKING! */}
+<a href="/free-tools/menu-pricing" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
+  <div className="text-5xl mb-4">💵</div>
+  <h3 className="text-2xl font-bold mb-3">Menu Pricing Calculator</h3>
+  <p className="text-gray-400 mb-6">
+    Price your menu items for maximum profit using multiple pricing strategies and methods.
+  </p>
+  <div className="flex items-center text-blue-400 font-semibold">
+    <span>Try Calculator</span>
+    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+    </svg>
+  </div>
+</a>
 
           </div>
         </div>
