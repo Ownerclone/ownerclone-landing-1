@@ -10,6 +10,7 @@ export default function Navigation() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/features', label: 'Features' },
+    { href: '/free-tools', label: 'Free Tools' },
     { href: '/roadmap', label: 'Roadmap' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/blog', label: 'Blog' },
