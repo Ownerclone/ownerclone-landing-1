@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'Free Restaurant Calculators | Food Cost, Prime Cost, Break-Even | OwnerClone',
-  description: 'Professional restaurant financial calculators. Calculate food cost %, prime cost, break-even point, startup costs, and menu pricing. Free tools used by thousands of restaurant owners.',
-  keywords: ['restaurant calculator', 'food cost calculator', 'prime cost calculator', 'restaurant startup cost calculator', 'break even calculator restaurant', 'menu pricing calculator'],
+  description: 'Professional restaurant financial calculators. Calculate food cost %, prime cost, break-even point, startup costs, labor costs, and menu pricing. Free tools used by thousands of restaurant owners.',
+  keywords: ['restaurant calculator', 'food cost calculator', 'prime cost calculator', 'restaurant startup cost calculator', 'break even calculator restaurant', 'menu pricing calculator', 'labor cost calculator'],
   openGraph: {
     title: 'Free Restaurant Calculators | OwnerClone',
     description: 'Professional restaurant financial calculators. Calculate food cost, prime cost, break-even, and more.',
@@ -60,12 +60,12 @@ export default function FreeToolsPage() {
         </div>
       </section>
 
-      {/* Calculator Grid */}
+      {/* Calculator Grid - ALL 6 CALCULATORS */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* Startup Cost Calculator - NOW WORKING! */}
+            {/* 1. Startup Cost Calculator - WORKING */}
             <a href="/free-tools/startup-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">💰</div>
               <h3 className="text-2xl font-bold mb-3">Startup Cost Calculator</h3>
@@ -80,7 +80,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* Food Cost Calculator - NOW WORKING! */}
+            {/* 2. Food Cost Calculator - WORKING */}
             <a href="/free-tools/food-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">🍽️</div>
               <h3 className="text-2xl font-bold mb-3">Food Cost Calculator</h3>
@@ -95,7 +95,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* Prime Cost Calculator - NOW WORKING! */}
+            {/* 3. Prime Cost Calculator - WORKING */}
             <a href="/free-tools/prime-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold mb-3">Prime Cost Calculator</h3>
@@ -110,7 +110,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* Labor Cost Calculator - NOW WORKING! */}
+            {/* 4. Labor Cost Calculator - WORKING */}
             <a href="/free-tools/labor-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">👥</div>
               <h3 className="text-2xl font-bold mb-3">Labor Cost Calculator</h3>
@@ -125,32 +125,32 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* Break-Even Calculator */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
+            {/* 5. Break-Even Calculator - NEED TO BUILD */}
+            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
               <div className="text-5xl mb-4">🎯</div>
               <h3 className="text-2xl font-bold mb-3">Break-Even Calculator</h3>
               <p className="text-gray-400 mb-6">
                 Find out exactly how many customers you need per day to break even and start making profit.
               </p>
-              <div className="flex items-center text-blue-400 font-semibold">
+              <div className="flex items-center text-gray-500 font-semibold">
                 <span>Coming Soon</span>
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
             </div>
 
-            {/* Menu Pricing Calculator */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
+            {/* 6. Menu Pricing Calculator - NEED TO BUILD */}
+            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
               <div className="text-5xl mb-4">💵</div>
               <h3 className="text-2xl font-bold mb-3">Menu Pricing Calculator</h3>
               <p className="text-gray-400 mb-6">
                 Price your menu items for maximum profit using multiple pricing strategies and methods.
               </p>
-              <div className="flex items-center text-blue-400 font-semibold">
+              <div className="flex items-center text-gray-500 font-semibold">
                 <span>Coming Soon</span>
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
             </div>
