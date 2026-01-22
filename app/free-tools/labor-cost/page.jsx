@@ -21,7 +21,7 @@ export default function LaborCostCalculator() {
   const getStatus = (percentage) => {
     if (percentage === 0) return { color: 'text-gray-500', bg: 'bg-gray-100', message: 'Enter your numbers to see results' }
     if (percentage < 25) return { color: 'text-green-600', bg: 'bg-green-50', message: 'Excellent! Very efficient labor management.' }
-    if (percentage < 30) return { color: 'text-green-600', bg: 'bg-green-50', message: 'Great! You\'re in the optimal range.' }
+    if (percentage < 30) return { color: 'text-green-600', bg: 'bg-green-50', message: 'Great! You are in the optimal range.' }
     if (percentage < 35) return { color: 'text-yellow-600', bg: 'bg-yellow-50', message: 'Acceptable, but look for efficiency improvements.' }
     return { color: 'text-red-600', bg: 'bg-red-50', message: 'Too high! Your labor costs are hurting profitability.' }
   }
@@ -77,7 +77,7 @@ export default function LaborCostCalculator() {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Benefits & Other Labor Costs ($)
+                      Benefits and Other Labor Costs ($)
                     </label>
                     <input
                       type="number"
@@ -117,7 +117,7 @@ export default function LaborCostCalculator() {
                         <span className="font-semibold">${payrollTax.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Benefits & Other:</span>
+                        <span className="text-gray-600">Benefits and Other:</span>
                         <span className="font-semibold">${benefitsCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                       </div>
                       <div className="flex justify-between pt-2 border-t-2 border-blue-200">
@@ -178,7 +178,7 @@ export default function LaborCostCalculator() {
                   {laborCostPercentage > 0 && (
                     <div className={`mt-6 p-4 rounded-lg ${status.bg} border-2 ${laborCostPercentage > 35 ? 'border-red-300' : laborCostPercentage > 30 ? 'border-yellow-300' : 'border-green-300'}`}>
                       <div className={`font-bold ${status.color} mb-2`}>
-                        {laborCostPercentage < 25 ? '✓ Excellent!' : laborCostPercentage < 30 ? '✓ Great!' : laborCostPercentage < 35 ? '⚠ Acceptable' : '⚠ Too High'}
+                        {laborCostPercentage < 25 ? 'Excellent!' : laborCostPercentage < 30 ? 'Great!' : laborCostPercentage < 35 ? 'Acceptable' : 'Too High'}
                       </div>
                       <div className="text-gray-700">{status.message}</div>
                     </div>
@@ -216,4 +216,15 @@ export default function LaborCostCalculator() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/pricing" className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition">
-                Joi
+                Join Early Access
+              </Link>
+              <Link href="/#features" className="bg-blue-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-400 transition border-2 border-white">
+                See Features
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
