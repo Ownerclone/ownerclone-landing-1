@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Built by Someone Who's Been in Your Shoes Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
+      <section className="relative py-32 px-4 mt-20 bg-gradient-to-b from-transparent to-[#0f1419]">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
             Built by Someone Who's <span className="gradient-text-blue">Been in Your Shoes</span>
