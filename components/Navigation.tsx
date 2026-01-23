@@ -33,4 +33,58 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-300 hover:text-[#38bdf8] font-medium transition-colo
+                className="text-gray-300 hover:text-[#38bdf8] font-medium transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            ))}
+            
+            {/* Login Button - Blue outlined style */}
+            <Link 
+              href="/login" 
+              className="px-6 py-2 bg-transparent text-[#38bdf8] font-bold text-sm rounded-lg border-2 border-[#0ea5e9] hover:border-[#38bdf8] hover:bg-[#38bdf8]/10 transition-all duration-300"
+            >
+              Login
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-gray-300 hover:text-[#38bdf8]"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden pb-4">
+            <div className="flex flex-col space-y-3">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-gray-300 hover:text-[#38bdf8] font-medium py-2 transition-colors duration-200"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              
+              {/* Mobile Login Button */}
+              <Link
+                href="/login"
+                className="px-6 py-2 bg-transparent text-[#38bdf8] font-bold text-sm rounded-lg border-2 border-[#0ea5e9] hover:border-[#38bdf8] hover:bg-[#38bdf8]/10 transition-all duration-300 text-center"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  )
+}
