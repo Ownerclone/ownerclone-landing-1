@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { FaUtensils, FaUsers, FaCookie, FaGlassWhiskey } from 'react-icons/fa'
+import { FaUtensils, FaUsers, FaShieldAlt, FaCrystalBall } from 'react-icons/fa'
 
 export const metadata: Metadata = {
   title: 'Features - Restaurant Management Modules | OwnerClone',
@@ -14,6 +14,7 @@ export default function Features() {
       icon: FaUtensils,
       name: 'Food Module',
       tagline: 'Track Everything Down to the Gram',
+      wittyHeadline: 'Your Food Costs Are Lying to You',
       description: 'Stop guessing at your food costs. Upload supplier invoices from Sysco, US Foods, or any vendor and OwnerClone automatically extracts pricing using GPT-4 Vision. Our AI generates professional recipes for your entire menu, calculates per-plate costs down to the gram, and alerts you when ingredient prices spike before they destroy your margins. The average restaurant saves $1,800/month by catching price increases, optimizing portions, and identifying which menu items are profitable vs. which ones are bleeding you dry.',
       features: [
         'AI-powered invoice parsing with GPT-4 Vision',
@@ -30,6 +31,7 @@ export default function Features() {
       icon: FaUsers,
       name: 'Labor Module',
       tagline: 'Schedule Smarter, Save More',
+      wittyHeadline: 'Stop Paying People to Stand Around (Or Getting Slammed Short-Handed)',
       description: 'Labor is your second-biggest cost, and being off by even one person destroys margins. The Labor module integrates with your POS time clock data to track actual vs. scheduled hours, flags overtime before it happens, and uses Prophet forecasting to recommend optimal staffing levels for each shift. Stop paying people to stand around on slow days and stop getting slammed short-handed on busy nights. Track labor cost percentage in real-time and get alerts when costs exceed targets.',
       features: [
         'POS time clock integration (Toast, Skytab, any POS)',
@@ -43,9 +45,10 @@ export default function Features() {
       ]
     },
     {
-      icon: FaCookie,
+      icon: FaShieldAlt,
       name: 'Theft Shield',
       tagline: 'Catch Theft Before It Costs You $40K',
+      wittyHeadline: 'That Manager You Trust? They Might Be Stealing From You Right Now',
       description: 'Manager void scams average $40,000 before they\'re discovered - that\'s exactly what happened at my restaurant. Theft Shield monitors every POS transaction for fraud patterns: excessive voids, after-hours activity, voiding other employees\' transactions, suspicious comps, and under-ringing schemes. Our AI analyzes your data against patterns from 1,000+ restaurants and sends real-time alerts with timestamps, employee names, and evidence. Stop watching hours of security footage hoping to find something - Theft Shield tells you exactly which transactions to investigate.',
       features: [
         'Manager void scam detection (the $40K case)',
@@ -59,9 +62,10 @@ export default function Features() {
       ]
     },
     {
-      icon: FaGlassWhiskey,
+      icon: FaCrystalBall,
       name: 'Prophet',
       tagline: 'Predict Demand 7 Days Out with 90% Accuracy',
+      wittyHeadline: 'Know Next Friday Will Be Slammed Before Your Competition Does',
       description: 'Stop guessing on staffing and food orders. Prophet predicts your customer traffic 7 days in advance with 90%+ accuracy by analyzing your sales history, weather forecasts, local events (concerts, sports, festivals), holidays, school calendars, and paydays. Know exactly when to staff up for a busy Friday or when to send people home early on a slow Tuesday. Get specific staffing recommendations ("add 2 servers and 1 line cook") and prep quantities ("order 200 lbs wings vs your usual 80 lbs"). The average restaurant saves $900/month by eliminating waste and preventing lost revenue from understaffing.',
       features: [
         '7-day demand forecast with 90%+ accuracy',
@@ -108,6 +112,11 @@ export default function Features() {
             
             return (
               <div key={module.name} className="space-y-8">
+                {/* Witty H3 Tagline - Centered and Blue */}
+                <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center">
+                  {module.wittyHeadline}
+                </h3>
+                
                 {/* Centered Description Paragraph */}
                 <p className="text-lg text-gray-300 leading-relaxed text-center max-w-4xl mx-auto">
                   {module.description}
