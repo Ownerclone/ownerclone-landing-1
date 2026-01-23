@@ -12,15 +12,11 @@ export default function Home() {
         
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          {/* Main Headline */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
-            <span className="text-white">Restaurant Management</span>
-            <br />
-            <span className="text-white">Software Built by </span>
-            <span className="gradient-text-blue-silver">Restaurant Owners</span>
-            <br />
-            <span className="text-white">for </span>
-            <span className="gradient-text-blue-silver">Restaurant Owners</span>
+          {/* Main Headline - Smaller, Better Layout */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
+            <span className="text-white block mb-2">Restaurant Management Software</span>
+            <span className="text-lg sm:text-xl md:text-2xl text-gray-400 font-normal block mb-4">Built by</span>
+            <span className="gradient-text-steel block">Restaurant Owners for Restaurant Owners!</span>
           </h1>
           
           {/* Subheadline */}
