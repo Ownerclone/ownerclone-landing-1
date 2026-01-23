@@ -102,6 +102,9 @@ export default function Features() {
             Four powerful modules that work together to give you complete control over your operations, costs, and profitability. No more spreadsheets. No more guessing. Just real data and actionable insights.
           </p>
         </div>
+        
+        {/* Blue separator line at bottom of hero */}
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#38bdf8]"></div>
       </section>
 
       {/* Modules Grid */}
@@ -111,13 +114,15 @@ export default function Features() {
             const Icon = module.icon
             
             return (
-              <div key={module.name} className="space-y-8">
-                {/* Witty H3 Tagline - Centered and Blue with underline */}
-                <div className="flex flex-col items-center">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center mb-3">
-                    {module.wittyHeadline}
-                  </h3>
-                  <div className="w-24 h-0.5 bg-cyan-bright"></div>
+              <div key={module.name} className="space-y-6">
+                {/* Witty H3 Tagline - Centered and Blue */}
+                <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center">
+                  {module.wittyHeadline}
+                </h3>
+                
+                {/* Blue line under tagline - 2pt, centered */}
+                <div className="flex justify-center mb-4">
+                  <div className="w-32 h-[2px] bg-[#38bdf8]"></div>
                 </div>
                 
                 {/* Centered Description Paragraph */}
