@@ -60,12 +60,12 @@ export default function FreeToolsPage() {
         </div>
       </section>
 
-      {/* Calculator Grid - ALL CALCULATORS */}
+      {/* Calculator Grid - 9 CALCULATORS TOTAL */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* 1. Startup Cost Calculator - WORKING */}
+            {/* 1. Startup Cost Calculator */}
             <a href="/free-tools/startup-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">💰</div>
               <h3 className="text-2xl font-bold mb-3">Startup Cost Calculator</h3>
@@ -80,7 +80,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 2. Food Cost Calculator - WORKING */}
+            {/* 2. Food Cost Calculator */}
             <a href="/free-tools/food-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">🍽️</div>
               <h3 className="text-2xl font-bold mb-3">Food Cost Calculator</h3>
@@ -95,7 +95,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 3. Prime Cost Calculator - WORKING */}
+            {/* 3. Prime Cost Calculator */}
             <a href="/free-tools/prime-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold mb-3">Prime Cost Calculator</h3>
@@ -110,7 +110,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 4. Labor Cost Calculator - WORKING */}
+            {/* 4. Labor Cost Calculator */}
             <a href="/free-tools/labor-cost" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">👥</div>
               <h3 className="text-2xl font-bold mb-3">Labor Cost Calculator</h3>
@@ -125,7 +125,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 5. Break-Even Calculator - WORKING */}
+            {/* 5. Break-Even Calculator */}
             <a href="/free-tools/break-even" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">🎯</div>
               <h3 className="text-2xl font-bold mb-3">Break-Even Calculator</h3>
@@ -140,7 +140,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 6. Menu Pricing Calculator - WORKING */}
+            {/* 6. Menu Pricing Calculator */}
             <a href="/free-tools/menu-pricing" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">💵</div>
               <h3 className="text-2xl font-bold mb-3">Menu Pricing Calculator</h3>
@@ -155,7 +155,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 7. Per Plate Pricing Calculator - WORKING */}
+            {/* 7. Per Plate Pricing Calculator */}
             <a href="/free-tools/per-plate-pricing" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">🍴</div>
               <h3 className="text-2xl font-bold mb-3">Per Plate Pricing Calculator</h3>
@@ -170,7 +170,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 8. Google Review Calculator - NEW! */}
+            {/* 8. Google Review Calculator */}
             <a href="/free-tools/google-review" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 relative">
               <div className="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
               <div className="text-5xl mb-4">⭐</div>
@@ -186,35 +186,21 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 9. Revenue Projections Calculator - COMING SOON */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
-              <div className="text-5xl mb-4">📈</div>
-              <h3 className="text-2xl font-bold mb-3">Revenue Projections</h3>
+            {/* 9. Third Party Fees Calculator */}
+            <a href="/free-tools/third-party-fees" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 relative">
+              <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
+              <div className="text-5xl mb-4">💸</div>
+              <h3 className="text-2xl font-bold mb-3">Third Party True Fees</h3>
               <p className="text-gray-400 mb-6">
-                Project monthly and annual revenue based on covers, average check size, and operating days.
+                See the REAL cost of DoorDash, Uber Eats, and GrubHub. Calculate annual losses and ROI for direct ordering.
               </p>
-              <div className="flex items-center text-gray-500 font-semibold">
-                <span>Coming Soon</span>
+              <div className="flex items-center text-orange-400 font-semibold">
+                <span>Try Calculator</span>
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
                 </svg>
               </div>
-            </div>
-
-            {/* 10. Inventory Valuation Calculator - COMING SOON */}
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
-              <div className="text-5xl mb-4">📦</div>
-              <h3 className="text-2xl font-bold mb-3">Inventory Valuation</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate your current inventory value and track usage rates to reduce waste and over-ordering.
-              </p>
-              <div className="flex items-center text-gray-500 font-semibold">
-                <span>Coming Soon</span>
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-            </div>
+            </a>
 
           </div>
         </div>
@@ -340,8 +326,8 @@ export default function FreeToolsPage() {
                 <li><a href="/free-tools/startup-cost" className="hover:text-blue-400 transition">Startup Cost Calculator</a></li>
                 <li><a href="/free-tools/food-cost" className="hover:text-blue-400 transition">Food Cost Calculator</a></li>
                 <li><a href="/free-tools/prime-cost" className="hover:text-blue-400 transition">Prime Cost Calculator</a></li>
-                <li><a href="/free-tools/labor-cost" className="hover:text-blue-400 transition">Labor Cost Calculator</a></li>
                 <li><a href="/free-tools/google-review" className="hover:text-purple-400 transition">Google Review Calculator</a></li>
+                <li><a href="/free-tools/third-party-fees" className="hover:text-orange-400 transition">Third Party Fees Calculator</a></li>
               </ul>
             </div>
 
