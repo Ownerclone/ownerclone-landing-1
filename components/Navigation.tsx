@@ -27,7 +27,7 @@ export default function Navigation() {
     {/* O - Circle */}
     <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6"/>
     {/* C - Flipped, slight overlap, thicker */}
-    <path d="M 54 12 A 18 18 0 1 0 44 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
+    <path d="M 54 12 A 18 18 0 1 0 54 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
   </svg>
   <span className="text-2xl font-bold text-[#38bdf8]">OwnerClone</span>
 </Link>
