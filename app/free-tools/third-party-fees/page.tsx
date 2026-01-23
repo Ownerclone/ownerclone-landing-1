@@ -1,0 +1,568 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+
+interface PlatformFees {
+  name: string;
+  commission: number;
+  serviceFee: number;
+  marketingFee: number;
+  paymentProcessing: { percent: number; fixed: number };
+  color: string;
+}
+
+const platforms: { [key: string]: PlatformFees } = {
+  doordash: {
+    name: 'DoorDash',
+    commission: 25, // 15-30% typical
+    serviceFee: 3.5,
+    marketingFee: 15, // per order for promotions
+    paymentProcessing: { percent: 2.9, fixed: 0.30 },
+    color: 'red'
+  },
+  ubereats: {
+    name: 'Uber Eats',
+    commission: 30, // Can be 15-30%
+    serviceFee: 0, // Built into commission
+    marketingFee: 5, // Uber Eats Plus, ads
+    paymentProcessing: { percent: 2.9, fixed: 0.30 },
+    color: 'green'
+  },
+  grubhub: {
+    name: 'GrubHub',
+    commission: 20, // 10-30% depending on tier
+    serviceFee: 10, // Percentage or flat fee
+    marketingFee: 20, // Promotions, placements
+    paymentProcessing: { percent: 3.05, fixed: 0.30 },
+    color: 'orange'
+  }
+};
+
+export default function ThirdPartyFeesCalculator() {
+  const [selectedPlatform, setSelectedPlatform] = useState<string>('doordash');
+  const [averageOrderValue, setAverageOrderValue] = useState<string>('45');
+  const [ordersPerMonth, setOrdersPerMonth] = useState<string>('300');
+  const [showResults, setShowResults] = useState(false);
+  const [compareAll, setCompareAll] = useState(false);
+
+  const calculateFees = (platformKey: string, orderValue: number) => {
+    const platform = platforms[platformKey];
+    
+    // Commission
+    const commissionFee = (orderValue * platform.commission) / 100;
+    
+    // Service fee (if applicable)
+    const serviceFee = platform.serviceFee > 0 
+      ? platform.serviceFee 
+      : 0;
+    
+    // Marketing fee
+    const marketingFee = platform.marketingFee;
+    
+    // Payment processing
+    const paymentProcessingFee = (orderValue * platform.paymentProcessing.percent / 100) + platform.paymentProcessing.fixed;
+    
+    // Total fees
+    const totalFees = commissionFee + serviceFee + marketingFee + paymentProcessingFee;
+    
+    // What you actually receive
+    const netRevenue = orderValue - totalFees;
+    
+    // Effective fee percentage
+    const effectiveFeePercent = (totalFees / orderValue) * 100;
+    
+    return {
+      orderValue,
+      commissionFee,
+      serviceFee,
+      marketingFee,
+      paymentProcessingFee,
+      totalFees,
+      netRevenue,
+      effectiveFeePercent
+    };
+  };
+
+  const handleCalculate = () => {
+    const orderValue = parseFloat(averageOrderValue);
+    const orders = parseInt(ordersPerMonth);
+    
+    if (!orderValue || orderValue <= 0 || !orders || orders <= 0) {
+      alert('Please enter valid values');
+      return;
+    }
+    
+    setShowResults(true);
+  };
+
+  const orderValue = parseFloat(averageOrderValue) || 0;
+  const orders = parseInt(ordersPerMonth) || 0;
+  
+  const singlePlatformResult = calculateFees(selectedPlatform, orderValue);
+  const monthlyLoss = singlePlatformResult.totalFees * orders;
+  const annualLoss = monthlyLoss * 12;
+  const monthlyNet = singlePlatformResult.netRevenue * orders;
+  const annualNet = monthlyNet * 12;
+  
+  // Calculate what you'd make with direct ordering (assume 2.9% + $0.30 processing only)
+  const directOrderProcessingFee = (orderValue * 2.9 / 100) + 0.30;
+  const directOrderNet = orderValue - directOrderProcessingFee;
+  const directMonthlyNet = directOrderNet * orders;
+  const directAnnualNet = directMonthlyNet * 12;
+  
+  const savingsVsDirect = annualNet > 0 ? directAnnualNet - annualNet : 0;
+
+  // All platforms comparison
+  const allPlatformsComparison = Object.keys(platforms).map(key => ({
+    key,
+    ...platforms[key],
+    calculation: calculateFees(key, orderValue)
+  }));
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-red-600 via-orange-600 to-yellow-600 py-12 px-4">
+      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-12 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">💰 Third Party Delivery True Cost Calculator</h1>
+          <p className="text-xl opacity-95">See the REAL fees you're paying DoorDash, Uber Eats & GrubHub</p>
+        </div>
+
+        <div className="p-8">
+          {/* Warning Box */}
+          <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-xl mb-8">
+            <h3 className="text-red-900 font-bold text-lg mb-2">⚠️ Most Restaurant Owners Are Shocked By These Numbers</h3>
+            <p className="text-red-800">
+              Third-party platforms advertise "15-20% commission" but the TRUE cost is often <strong>40-50% of your order value</strong> after all fees, marketing, and promotions are added up. This calculator shows you the complete picture.
+            </p>
+          </div>
+
+          {/* Calculator Inputs */}
+          <div className="mb-10 pb-10 border-b-2 border-gray-200">
+            <h2 className="text-3xl font-semibold text-orange-600 mb-6">📊 Your Numbers</h2>
+
+            <div className="space-y-6">
+              {/* Platform Selection */}
+              <div>
+                <label className="block font-semibold text-gray-700 mb-3">Select Delivery Platform</label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <button
+                    onClick={() => setSelectedPlatform('doordash')}
+                    className={`p-4 rounded-xl border-2 font-semibold transition ${
+                      selectedPlatform === 'doordash'
+                        ? 'border-red-500 bg-red-50 text-red-700'
+                        : 'border-gray-300 hover:border-red-300'
+                    }`}
+                  >
+                    🔴 DoorDash
+                  </button>
+                  <button
+                    onClick={() => setSelectedPlatform('ubereats')}
+                    className={`p-4 rounded-xl border-2 font-semibold transition ${
+                      selectedPlatform === 'ubereats'
+                        ? 'border-green-500 bg-green-50 text-green-700'
+                        : 'border-gray-300 hover:border-green-300'
+                    }`}
+                  >
+                    🟢 Uber Eats
+                  </button>
+                  <button
+                    onClick={() => setSelectedPlatform('grubhub')}
+                    className={`p-4 rounded-xl border-2 font-semibold transition ${
+                      selectedPlatform === 'grubhub'
+                        ? 'border-orange-500 bg-orange-50 text-orange-700'
+                        : 'border-gray-300 hover:border-orange-300'
+                    }`}
+                  >
+                    🟠 GrubHub
+                  </button>
+                </div>
+              </div>
+
+              {/* Average Order Value */}
+              <div>
+                <label className="block font-semibold text-gray-700 mb-2">Average Order Value ($)</label>
+                <input
+                  type="number"
+                  min="1"
+                  step="0.01"
+                  placeholder="e.g., 45.00"
+                  value={averageOrderValue}
+                  onChange={(e) => setAverageOrderValue(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200 transition"
+                />
+                <p className="text-sm text-gray-500 mt-2">💡 Tip: Check your POS reports for average delivery order size</p>
+              </div>
+
+              {/* Orders Per Month */}
+              <div>
+                <label className="block font-semibold text-gray-700 mb-2">Orders Per Month</label>
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="e.g., 300"
+                  value={ordersPerMonth}
+                  onChange={(e) => setOrdersPerMonth(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200 transition"
+                />
+              </div>
+
+              {/* Compare All Toggle */}
+              <div className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  id="compareAll"
+                  checked={compareAll}
+                  onChange={(e) => setCompareAll(e.target.checked)}
+                  className="w-5 h-5 text-orange-600 rounded focus:ring-orange-500"
+                />
+                <label htmlFor="compareAll" className="font-semibold text-gray-700">
+                  Compare all platforms side-by-side
+                </label>
+              </div>
+            </div>
+
+            <button
+              onClick={handleCalculate}
+              className="w-full mt-8 bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 rounded-xl text-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition"
+            >
+              Calculate True Cost
+            </button>
+          </div>
+
+          {/* Results Section */}
+          {showResults && (
+            <div className="space-y-8 animate-fadeIn">
+              {!compareAll ? (
+                // Single Platform Results
+                <>
+                  {/* Fee Breakdown */}
+                  <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold text-orange-700 mb-6">
+                      💸 {platforms[selectedPlatform].name} Fee Breakdown (Per Order)
+                    </h3>
+
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center py-3 border-b border-orange-200">
+                        <span className="text-gray-700 font-medium">Order Subtotal</span>
+                        <span className="text-2xl font-bold text-gray-900">${orderValue.toFixed(2)}</span>
+                      </div>
+
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600">Commission ({platforms[selectedPlatform].commission}%)</span>
+                        <span className="text-red-600 font-semibold">-${singlePlatformResult.commissionFee.toFixed(2)}</span>
+                      </div>
+
+                      {singlePlatformResult.serviceFee > 0 && (
+                        <div className="flex justify-between items-center py-2">
+                          <span className="text-gray-600">Service Fee</span>
+                          <span className="text-red-600 font-semibold">-${singlePlatformResult.serviceFee.toFixed(2)}</span>
+                        </div>
+                      )}
+
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600">Marketing/Promotions</span>
+                        <span className="text-red-600 font-semibold">-${singlePlatformResult.marketingFee.toFixed(2)}</span>
+                      </div>
+
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600">Payment Processing</span>
+                        <span className="text-red-600 font-semibold">-${singlePlatformResult.paymentProcessingFee.toFixed(2)}</span>
+                      </div>
+
+                      <div className="flex justify-between items-center py-3 border-t-2 border-orange-300 mt-4">
+                        <span className="text-gray-700 font-bold">Total Fees</span>
+                        <span className="text-2xl font-bold text-red-600">-${singlePlatformResult.totalFees.toFixed(2)}</span>
+                      </div>
+
+                      <div className="flex justify-between items-center py-3 bg-white rounded-xl px-4 border-2 border-green-500">
+                        <span className="text-gray-700 font-bold">You Actually Receive</span>
+                        <span className="text-3xl font-bold text-green-600">${singlePlatformResult.netRevenue.toFixed(2)}</span>
+                      </div>
+
+                      <div className="bg-red-100 border border-red-300 rounded-xl p-4 mt-4">
+                        <p className="text-red-900 font-bold text-center">
+                          Effective Fee Rate: {singlePlatformResult.effectiveFeePercent.toFixed(1)}% of order value
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Monthly/Annual Impact */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-xl">
+                      <h4 className="text-lg font-bold text-orange-700 mb-3">📅 Monthly Impact</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Gross Revenue</span>
+                          <span className="font-semibold">${(orderValue * orders).toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Total Fees Paid</span>
+                          <span className="font-semibold text-red-600">-${monthlyLoss.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between pt-2 border-t">
+                          <span className="text-gray-700 font-bold">Net Revenue</span>
+                          <span className="font-bold text-green-600">${monthlyNet.toLocaleString()}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-xl">
+                      <h4 className="text-lg font-bold text-red-700 mb-3">📆 Annual Impact</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Gross Revenue</span>
+                          <span className="font-semibold">${(orderValue * orders * 12).toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Total Fees Paid</span>
+                          <span className="font-semibold text-red-600">-${annualLoss.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between pt-2 border-t">
+                          <span className="text-gray-700 font-bold">Net Revenue</span>
+                          <span className="font-bold text-green-600">${annualNet.toLocaleString()}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Direct Ordering Comparison */}
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-500">
+                    <h3 className="text-2xl font-bold text-green-700 mb-6">
+                      🎯 What If You Had Direct Online Ordering?
+                    </h3>
+
+                    <div className="grid md:grid-cols-3 gap-6 mb-6">
+                      <div className="bg-white rounded-xl p-6 text-center">
+                        <div className="text-sm text-gray-600 mb-2">Processing Fee Only</div>
+                        <div className="text-3xl font-bold text-gray-900">${directOrderProcessingFee.toFixed(2)}</div>
+                        <div className="text-xs text-gray-500 mt-1">per order</div>
+                      </div>
+
+                      <div className="bg-white rounded-xl p-6 text-center">
+                        <div className="text-sm text-gray-600 mb-2">You'd Receive</div>
+                        <div className="text-3xl font-bold text-green-600">${directOrderNet.toFixed(2)}</div>
+                        <div className="text-xs text-gray-500 mt-1">per order</div>
+                      </div>
+
+                      <div className="bg-white rounded-xl p-6 text-center">
+                        <div className="text-sm text-gray-600 mb-2">Annual Savings</div>
+                        <div className="text-3xl font-bold text-green-600">${savingsVsDirect.toLocaleString()}</div>
+                        <div className="text-xs text-gray-500 mt-1">vs {platforms[selectedPlatform].name}</div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-xl p-6">
+                      <h4 className="font-bold text-gray-900 mb-3">💡 ROI Analysis</h4>
+                      <div className="space-y-2 text-gray-700">
+                        <p>• <strong>Custom website with ordering:</strong> $3,000-5,000 one-time</p>
+                        <p>• <strong>Your annual savings:</strong> ${savingsVsDirect.toLocaleString()}</p>
+                        <p>• <strong>Payback period:</strong> {savingsVsDirect > 0 ? Math.ceil((4000 / savingsVsDirect) * 12) : 0} months</p>
+                        <p className="pt-3 border-t mt-3 font-semibold text-green-700">
+                          After payback, you keep an extra ${savingsVsDirect.toLocaleString()} EVERY YEAR
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                // All Platforms Comparison
+                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">📊 Platform Comparison</h3>
+                  
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse">
+                      <thead>
+                        <tr className="bg-gray-200">
+                          <th className="p-3 text-left font-bold">Fee Type</th>
+                          <th className="p-3 text-center font-bold text-red-700">DoorDash</th>
+                          <th className="p-3 text-center font-bold text-green-700">Uber Eats</th>
+                          <th className="p-3 text-center font-bold text-orange-700">GrubHub</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white">
+                        <tr className="border-b">
+                          <td className="p-3 font-semibold">Commission</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.commissionFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.commissionFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.commissionFee.toFixed(2)}</td>
+                        </tr>
+                        <tr className="border-b">
+                          <td className="p-3 font-semibold">Service Fee</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.serviceFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.serviceFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.serviceFee.toFixed(2)}</td>
+                        </tr>
+                        <tr className="border-b">
+                          <td className="p-3 font-semibold">Marketing</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.marketingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.marketingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.marketingFee.toFixed(2)}</td>
+                        </tr>
+                        <tr className="border-b">
+                          <td className="p-3 font-semibold">Processing</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.paymentProcessingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.paymentProcessingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.paymentProcessingFee.toFixed(2)}</td>
+                        </tr>
+                        <tr className="bg-red-50 font-bold">
+                          <td className="p-3">Total Fees</td>
+                          <td className="p-3 text-center text-red-600">${allPlatformsComparison[0].calculation.totalFees.toFixed(2)}</td>
+                          <td className="p-3 text-center text-red-600">${allPlatformsComparison[1].calculation.totalFees.toFixed(2)}</td>
+                          <td className="p-3 text-center text-red-600">${allPlatformsComparison[2].calculation.totalFees.toFixed(2)}</td>
+                        </tr>
+                        <tr className="bg-green-50 font-bold">
+                          <td className="p-3">You Receive</td>
+                          <td className="p-3 text-center text-green-600">${allPlatformsComparison[0].calculation.netRevenue.toFixed(2)}</td>
+                          <td className="p-3 text-center text-green-600">${allPlatformsComparison[1].calculation.netRevenue.toFixed(2)}</td>
+                          <td className="p-3 text-center text-green-600">${allPlatformsComparison[2].calculation.netRevenue.toFixed(2)}</td>
+                        </tr>
+                        <tr className="bg-orange-50 font-bold">
+                          <td className="p-3">Effective Rate</td>
+                          <td className="p-3 text-center text-orange-600">{allPlatformsComparison[0].calculation.effectiveFeePercent.toFixed(1)}%</td>
+                          <td className="p-3 text-center text-orange-600">{allPlatformsComparison[1].calculation.effectiveFeePercent.toFixed(1)}%</td>
+                          <td className="p-3 text-center text-orange-600">{allPlatformsComparison[2].calculation.effectiveFeePercent.toFixed(1)}%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="mt-6 grid md:grid-cols-3 gap-4">
+                    {allPlatformsComparison.map(platform => {
+                      const annualFeesThisPlatform = platform.calculation.totalFees * orders * 12;
+                      return (
+                        <div key={platform.key} className="bg-white rounded-xl p-4 text-center border-2 border-gray-200">
+                          <div className="font-bold text-gray-700 mb-2">{platform.name}</div>
+                          <div className="text-sm text-gray-600 mb-1">Annual Fees</div>
+                          <div className="text-2xl font-bold text-red-600">${annualFeesThisPlatform.toLocaleString()}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Action Items */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-indigo-700 mb-6">🎯 What You Can Do About This</h3>
+                
+                <div className="space-y-4">
+                  <div className="bg-white border-l-4 border-green-500 p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-gray-900 mb-3">1. Build Your Own Online Ordering</h4>
+                    <p className="text-gray-700 mb-3">
+                      Invest $3,000-5,000 in a custom website with integrated ordering. With your numbers, this pays for itself in {savingsVsDirect > 0 ? Math.ceil((4000 / savingsVsDirect) * 12) : 'N/A'} months.
+                    </p>
+                    <ul className="space-y-2 text-gray-600 text-sm">
+                      <li>• Keep 97%+ of every order (vs 50-60% on third-party)</li>
+                      <li>• Build your own customer database</li>
+                      <li>• Control the entire customer experience</li>
+                      <li>• No commission increases or surprise fees</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-white border-l-4 border-blue-500 p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-gray-900 mb-3">2. Renegotiate Your Rates</h4>
+                    <p className="text-gray-700 mb-3">
+                      Many restaurants don't realize commission rates are negotiable. If you do high volume:
+                    </p>
+                    <ul className="space-y-2 text-gray-600 text-sm">
+                      <li>• Request a lower commission tier (can drop from 30% to 15%)</li>
+                      <li>• Opt out of paid promotions/marketing</li>
+                      <li>• Use "self-delivery" to avoid delivery fees</li>
+                      <li>• Consider switching to a lower-cost platform</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-white border-l-4 border-purple-500 p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-gray-900 mb-3">3. Increase Delivery Menu Prices</h4>
+                    <p className="text-gray-700 mb-3">
+                      Most successful restaurants have separate pricing for delivery:
+                    </p>
+                    <ul className="space-y-2 text-gray-600 text-sm">
+                      <li>• Add 20-30% to delivery menu prices to cover fees</li>
+                      <li>• Customers expect delivery to cost more</li>
+                      <li>• Protects your margins on unavoidable third-party orders</li>
+                      <li>• Many competitors are already doing this</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-white border-l-4 border-orange-500 p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-gray-900 mb-3">4. Promote Direct Ordering Heavily</h4>
+                    <p className="text-gray-700 mb-3">
+                      Train your team and market aggressively to shift customers to direct:
+                    </p>
+                    <ul className="space-y-2 text-gray-600 text-sm">
+                      <li>• QR codes on tables linking to your ordering site</li>
+                      <li>• Offer 10% off for direct orders (still more profitable than third-party)</li>
+                      <li>• Receipt inserts with direct ordering info</li>
+                      <li>• Loyalty program exclusive to direct orders</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CTA Section */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-10 text-center mt-10">
+            <h2 className="text-3xl font-bold mb-4">Stop Giving Away Half Your Revenue</h2>
+            <p className="text-xl mb-6 opacity-95">
+              OwnerClone helps you build direct customer relationships and keep more of what you earn.
+            </p>
+            <div className="bg-white/20 rounded-xl p-6 mb-6 max-w-2xl mx-auto">
+              <div className="grid grid-cols-2 gap-6 text-center">
+                <div>
+                  <div className="text-3xl font-bold mb-1">✓</div>
+                  <div className="text-sm">Custom Online Ordering</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-1">✓</div>
+                  <div className="text-sm">Customer Database</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-1">✓</div>
+                  <div className="text-sm">Loyalty Programs</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-1">✓</div>
+                  <div className="text-sm">SMS Marketing</div>
+                </div>
+              </div>
+            </div>
+            <Link href="/" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-xl text-lg font-semibold hover:shadow-xl transform hover:-translate-y-0.5 transition">
+              Learn More About OwnerClone
+            </Link>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-gray-100 px-8 py-6 text-center text-gray-600">
+          <p>Made with ❤️ by <Link href="/" className="text-orange-600 hover:underline">OwnerClone</Link> - AI-Powered Restaurant Management</p>
+          <p className="mt-3">
+            <Link href="/free-tools" className="text-orange-600 hover:underline">← Back to All Calculators</Link> | 
+            <Link href="/features" className="text-orange-600 hover:underline ml-2">Explore Features</Link> | 
+            <Link href="/blog" className="text-orange-600 hover:underline ml-2">Restaurant Resources</Link>
+          </p>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.4s ease;
+        }
+      `}</style>
+    </div>
+  );
+}
