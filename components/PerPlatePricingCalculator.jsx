@@ -3,11 +3,13 @@
 import { useState } from 'react'
 
 export default function PerPlatePricingCalculator() {
+  const [dishName, setDishName] = useState('')
   const [ingredients, setIngredients] = useState([
     { 
       id: 1, 
       name: '', 
-      soldBy: 'weight', // 'each', 'case', 'weight'
+      soldBy: 'weight', // 'each', 'dozen', 'case', 'weight'
+      dozenPerCase: '', // if soldBy is 'dozen'
       caseQuantity: '', // number of items in case OR weight of case
       casePrice: '',
       plateAmount: '',
@@ -31,6 +33,7 @@ export default function PerPlatePricingCalculator() {
       id: newId, 
       name: '', 
       soldBy: 'weight',
+      dozenPerCase: '',
       caseQuantity: '',
       casePrice: '',
       plateAmount: '',
@@ -51,7 +54,7 @@ export default function PerPlatePricingCalculator() {
         
         // Auto-adjust plateUnit when soldBy changes
         if (field === 'soldBy') {
-          if (value === 'each' || value === 'case') {
+          if (value === 'each' || value === 'case' || value === 'dozen') {
             updated.plateUnit = 'each'
           } else if (value === 'weight') {
             updated.plateUnit = 'oz'
@@ -79,11 +82,19 @@ export default function PerPlatePricingCalculator() {
   const calculatePricePerUnit = (ing) => {
     const casePrice = parseFloat(ing.casePrice) || 0
     const caseQty = parseFloat(ing.caseQuantity) || 0
+    const dozenPerCase = parseFloat(ing.dozenPerCase) || 0
     
     if (casePrice === 0) return null
 
     if (ing.soldBy === 'each') {
       return { value: casePrice, unit: 'each' }
+    }
+
+    if (ing.soldBy === 'dozen' && dozenPerCase > 0) {
+      // Formula: (dozen per case × 12) ÷ case price = price per each
+      const totalItems = dozenPerCase * 12
+      const pricePerEach = casePrice / totalItems
+      return { value: pricePerEach, unit: 'each', totalItems }
     }
     
     if (ing.soldBy === 'case' && caseQty > 0) {
@@ -172,17 +183,21 @@ export default function PerPlatePricingCalculator() {
       {/* Main Calculator Card */}
       <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
         
+        {/* Dish Name */}
+        <div className="mb-8">
+          <label className="block text-lg font-bold text-gray-900 mb-2">Dish Name</label>
+          <input
+            type="text"
+            placeholder="e.g., Buffalo Wings, Grilled Salmon, Greek Salad"
+            value={dishName}
+            onChange={(e) => setDishName(e.target.value)}
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg"
+          />
+        </div>
+
         {/* Ingredients Section */}
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">Recipe Ingredients</h2>
-            <button
-              onClick={addIngredient}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold"
-            >
-              + Add Ingredient
-            </button>
-          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Recipe Ingredients</h2>
 
           {/* Instructions */}
           <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
@@ -194,7 +209,7 @@ export default function PerPlatePricingCalculator() {
               <strong>Examples:</strong>
             </p>
             <ul className="text-sm text-gray-600 mt-1 ml-4 space-y-1">
-              <li>• Wings: Sold by <strong>case</strong>, 263 wings per case, $80/case → Use 8 each on plate</li>
+              <li>• Wings: Sold by <strong>dozen</strong>, 30 dozen/case, $80/case → Auto-calculates $0.22 each → Use 8 each</li>
               <li>• Chicken: Sold by <strong>weight</strong>, 40 lb case, $159.60 → Use 6 oz on plate</li>
               <li>• Pepper: Sold by <strong>each</strong>, $1.50 each → Use 1/4 each on plate</li>
             </ul>
@@ -220,7 +235,7 @@ export default function PerPlatePricingCalculator() {
                   </div>
 
                   {/* Row 2: How is it sold? */}
-                  <div className="grid md:grid-cols-3 gap-4 mb-4">
+                  <div className="grid md:grid-cols-4 gap-4 mb-4">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Sold By</label>
                       <select
@@ -229,12 +244,28 @@ export default function PerPlatePricingCalculator() {
                         className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
                       >
                         <option value="each">Each (single item)</option>
+                        <option value="dozen">Dozen (eggs, wings)</option>
                         <option value="case">Case (multiple items)</option>
                         <option value="weight">Weight (lb/kg)</option>
                       </select>
                     </div>
 
-                    {/* Conditional: Case Quantity or Weight */}
+                    {/* Conditional: Dozen per Case */}
+                    {ing.soldBy === 'dozen' && (
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">Dozen per Case</label>
+                        <input
+                          type="number"
+                          placeholder="e.g., 30, 15, 1"
+                          value={ing.dozenPerCase}
+                          onChange={(e) => updateIngredient(ing.id, 'dozenPerCase', e.target.value)}
+                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                          step="1"
+                        />
+                      </div>
+                    )}
+
+                    {/* Conditional: Items per Case */}
                     {ing.soldBy === 'case' && (
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Items per Case</label>
@@ -249,6 +280,7 @@ export default function PerPlatePricingCalculator() {
                       </div>
                     )}
 
+                    {/* Conditional: Case Weight */}
                     {ing.soldBy === 'weight' && (
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Case Weight (lb)</label>
@@ -264,7 +296,7 @@ export default function PerPlatePricingCalculator() {
                     )}
 
                     {/* Price */}
-                    <div>
+                    <div className={ing.soldBy === 'each' ? 'md:col-span-3' : ''}>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
                         {ing.soldBy === 'each' ? 'Price per Each' : 'Price per Case'}
                       </label>
@@ -293,6 +325,11 @@ export default function PerPlatePricingCalculator() {
                             <span className="ml-2 text-gray-600">or ${priceInfo.perOz.toFixed(3)}/oz</span>
                             <span className="ml-2 text-gray-600">or ${priceInfo.perGram.toFixed(4)}/g</span>
                           </>
+                        ) : ing.soldBy === 'dozen' ? (
+                          <>
+                            <span className="ml-2">${priceInfo.value.toFixed(3)} per {priceInfo.unit}</span>
+                            <span className="ml-2 text-gray-600">({priceInfo.totalItems} items in case)</span>
+                          </>
                         ) : (
                           <span className="ml-2">${priceInfo.value.toFixed(3)} per {priceInfo.unit}</span>
                         )}
@@ -317,9 +354,9 @@ export default function PerPlatePricingCalculator() {
                           value={ing.plateUnit}
                           onChange={(e) => updateIngredient(ing.id, 'plateUnit', e.target.value)}
                           className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                          disabled={ing.soldBy === 'each' || ing.soldBy === 'case'}
+                          disabled={ing.soldBy === 'each' || ing.soldBy === 'case' || ing.soldBy === 'dozen'}
                         >
-                          {(ing.soldBy === 'each' || ing.soldBy === 'case') ? (
+                          {(ing.soldBy === 'each' || ing.soldBy === 'case' || ing.soldBy === 'dozen') ? (
                             <>
                               <option value="each">each</option>
                               <option value="1/2 each">1/2 each</option>
@@ -389,6 +426,14 @@ export default function PerPlatePricingCalculator() {
                 </div>
               )
             })}
+
+            {/* Add Ingredient Button - MOVED TO BOTTOM */}
+            <button
+              onClick={addIngredient}
+              className="w-full py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold"
+            >
+              + Add Another Ingredient
+            </button>
           </div>
         </div>
 
@@ -410,7 +455,9 @@ export default function PerPlatePricingCalculator() {
         {/* Results Section */}
         {totalPlateCost > 0 && (
           <div className="border-t-2 border-gray-200 pt-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">💰 Plate Cost & Pricing</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              💰 {dishName ? `${dishName} - ` : ''}Plate Cost & Pricing
+            </h3>
             
             {/* Total Plate Cost */}
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg mb-8">
