@@ -18,10 +18,10 @@
     --blue-light: 199 95% 59%;
     --blue-dark: 199 94% 39%;
     
-    /* Silver Gradient Colors */
-    --silver-light: 215 20% 82%;
-    --silver-medium: 215 16% 65%;
-    --silver-dark: 215 16% 47%;
+    /* Metallic Silver Colors - Darker, more steel-like */
+    --silver-light: 210 10% 55%;
+    --silver-medium: 210 12% 45%;
+    --silver-dark: 210 15% 35%;
   }
 }
 
@@ -30,12 +30,32 @@
   .gradient-text-blue-silver {
     background: linear-gradient(135deg, 
       hsl(var(--blue-cyan)) 0%, 
-      hsl(var(--blue-light)) 50%, 
-      hsl(var(--silver-light)) 100%
+      hsl(var(--blue-light)) 30%,
+      hsl(var(--silver-medium)) 70%, 
+      hsl(var(--silver-dark)) 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Add metallic texture effect */
+    filter: contrast(1.1) brightness(1.05);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  .gradient-text-steel {
+    background: linear-gradient(135deg, 
+      hsl(var(--silver-dark)) 0%,
+      hsl(var(--silver-medium)) 25%,
+      hsl(var(--silver-light)) 50%,
+      hsl(var(--silver-medium)) 75%,
+      hsl(var(--silver-dark)) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Stainless steel texture effect */
+    filter: contrast(1.2) brightness(0.95);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
   
   .gradient-text-blue {
