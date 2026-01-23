@@ -11,7 +11,7 @@ export default function Home() {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-blue" style={{ animationDelay: '1s' }}></div>
         
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-8 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 text-center">
           {/* Main Headline - Smaller, Better Layout */}
           <h1 className="font-black mb-6 leading-tight">
             <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white block mb-2">Restaurant Management Software</span>
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Built by Someone Who's Been in Your Shoes Section */}
-      <section className="relative pt-8 pb-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
+      <section className="relative pt-0 pb-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
             Built by Someone Who's <span className="gradient-text-blue">Been in Your Shoes</span>
