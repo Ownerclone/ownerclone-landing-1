@@ -1,84 +1,170 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { useTheme } from '@/lib/theme-context';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/features', label: 'Features' },
-    { href: '/free-tools', label: 'Free Tools' },
-    { href: '/roadmap', label: 'Roadmap' },
-    { href: '/pricing', label: 'Pricing' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
-  ]
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg'
+          : 'bg-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <img src="/ownerclone-logo.jpg" alt="OwnerClone" className="h-10 md:h-12" />
-            <span className="text-2xl font-bold text-primary-600">OwnerClone</span>
+            <svg viewBox="0 0 100 60" className="w-12 h-12">
+              <circle
+                cx="20"
+                cy="30"
+                r="18"
+                fill="none"
+                stroke="#3B82F6"
+                strokeWidth="4"
+              />
+              <path
+                d="M 60 12 A 18 18 0 1 1 60 48"
+                fill="none"
+                stroke="#3B82F6"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+            </svg>
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">
+              OwnerClone
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link href="/pricing" className="btn-primary">
-              Get Started
+            <Link
+              href="/features"
+              className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition"
+            >
+              Features
+            </Link>
+            <Link
+              href="/pricing"
+              className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition"
+            >
+              Pricing
+            </Link>
+            <Link
+              href="/free-tools"
+              className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition"
+            >
+              Free Tools
+            </Link>
+            <Link
+              href="/blog"
+              className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition"
+            >
+              Blog
+            </Link>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-yellow-500" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-700" />
+              )}
+            </button>
+
+            <Link
+              href="/demo"
+              className="gradient-bg px-6 py-2 rounded-lg font-semibold text-white hover:shadow-lg hover:shadow-blue-500/50 transition"
+            >
+              Start Free Trial
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-700 hover:text-primary-600"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-3">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-gray-700 hover:text-primary-600 font-medium py-2 transition-colors duration-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                href="/pricing"
-                className="btn-primary text-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Get Started
-              </Link>
-            </div>
+          <div className="md:hidden flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-yellow-500" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-700" />
+              )}
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-900 dark:text-white"
+            >
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
           </div>
-        )}
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+          <div className="px-4 py-4 space-y-3">
+            <Link
+              href="/features"
+              className="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-500"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Features
+            </Link>
+            <Link
+              href="/pricing"
+              className="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-500"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            <Link
+              href="/free-tools"
+              className="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-500"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Free Tools
+            </Link>
+            <Link
+              href="/blog"
+              className="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-500"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Blog
+            </Link>
+            <Link
+              href="/demo"
+              className="block gradient-bg px-6 py-3 rounded-lg font-semibold text-white text-center"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Start Free Trial
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
-  )
+  );
 }
