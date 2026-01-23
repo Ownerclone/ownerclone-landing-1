@@ -1,65 +1,116 @@
-import Link from 'next/link'
-import { FaChartLine, FaDollarSign, FaUsers, FaClock, FaShieldAlt, FaBrain, FaUtensils, FaBell } from 'react-icons/fa'
-
 export default function Home() {
   return (
-    <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="section-container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">
-              Restaurant Management Software Built by Restaurant Owners for Restaurant Owners
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-primary-100">
-              Stop drowning in spreadsheets. Start making money. Automate your restaurant operations with seamless POS integration, real-time analytics, and AI-driven insights.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/pricing" className="px-8 py-4 bg-white text-primary-600 font-bold rounded-lg hover:bg-primary-50 transition-colors duration-200 shadow-lg hover:shadow-xl text-lg">
-                Get Started Today
-              </Link>
-              <Link href="/features" className="px-8 py-4 bg-primary-700 text-white font-bold rounded-lg border-2 border-white hover:bg-primary-600 transition-colors duration-200 text-lg">
-                See How It Works
-              </Link>
+    <main className="min-h-screen bg-gradient-space">
+      {/* Hero Section - Space Age Design */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 grid-pattern opacity-50"></div>
+        
+        {/* Gradient Orbs for Depth */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse-blue"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-blue" style={{ animationDelay: '1s' }}></div>
+        
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+          {/* Main Headline */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
+            <span className="text-white">Restaurant Management</span>
+            <br />
+            <span className="text-white">Software Built by </span>
+            <span className="gradient-text-blue-silver">Restaurant Owners</span>
+            <br />
+            <span className="text-white">for </span>
+            <span className="gradient-text-blue-silver">Restaurant Owners</span>
+          </h1>
+          
+          {/* Subheadline */}
+          <p className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+            Stop drowning in spreadsheets. Start making money. Automate your restaurant operations with seamless POS integration, real-time analytics, and AI-driven insights.
+          </p>
+          
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            {/* Primary Button - Blue to Silver Gradient */}
+            <a 
+              href="#demo" 
+              className="group relative px-8 py-4 bg-gradient-blue-silver text-white font-bold text-lg rounded-lg overflow-hidden transition-all duration-300 glow-blue-hover"
+            >
+              <span className="relative z-10">Get Started Today</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            
+            {/* Secondary Button - Glass Effect */}
+            <a 
+              href="#how-it-works" 
+              className="px-8 py-4 glass-effect text-white font-bold text-lg rounded-lg border border-blue-400/30 hover:border-blue-400/60 transition-all duration-300"
+            >
+              See How It Works
+            </a>
+          </div>
+          
+          {/* Value Props */}
+          <div className="flex flex-wrap justify-center gap-8 text-gray-400">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <span>Only $0.20 per customer visit per month</span>
             </div>
-            <p className="mt-6 text-primary-200">
-              Only $0.20 per customer visit per month • No setup fees • Cancel anytime
-            </p>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <span>No setup fees</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <span>Cancel anytime</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* The Problem Section */}
-      <section className="bg-gray-50">
-        <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-6 text-gray-900">Built by Someone Who's Been in Your Shoes</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Our founder spent two decades building a successful film equipment rental business with locations across multiple cities and international operations. After achieving that success, he decided to enter the restaurant industry and opened three concepts: an Italian restaurant, a BBQ smokehouse, and a sports bar. Despite having entrepreneurial experience, the restaurant industry was different - operational chaos that couldn't be seen until it was too late. Those experiences led to the creation of OwnerClone: a system that shows you the problems before they become disasters.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="text-4xl mb-4">😰</div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">You're Losing Money and Don't Know Where</h3>
-              <p className="text-gray-600">
+      {/* Built by Someone Who's Been in Your Shoes Section */}
+      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
+            Built by Someone Who's <span className="gradient-text-blue">Been in Your Shoes</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+            Our founder spent two decades building a successful film equipment rental business with locations across multiple cities and international operations. After achieving that success, he decided to enter the restaurant industry and opened three concepts: an Italian restaurant, a BBQ smokehouse, and a sports bar. Despite having entrepreneurial experience, the restaurant industry was different - operational chaos that couldn't be seen until it was too late. Those experiences led to the creation of OwnerClone: a system that shows you the problems before they become disasters.
+          </p>
+        </div>
+      </section>
+
+      {/* Problems Section - 3 Cards */}
+      <section className="relative py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Problem Card 1 */}
+            <div className="card-space rounded-2xl p-8">
+              <div className="text-5xl mb-4">😰</div>
+              <h3 className="text-2xl font-bold text-white mb-4">You're Losing Money and Don't Know Where</h3>
+              <p className="text-gray-400">
                 Food costs spike. Inventory disappears. You're working 80-hour weeks but your bank account says something different. The numbers don't add up, but you can't figure out why.
               </p>
             </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="text-4xl mb-4">🤔</div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">You Can't Scale Without Losing Quality</h3>
-              <p className="text-gray-600">
+
+            {/* Problem Card 2 */}
+            <div className="card-space rounded-2xl p-8">
+              <div className="text-5xl mb-4">🤔</div>
+              <h3 className="text-2xl font-bold text-white mb-4">You Can't Scale Without Losing Quality</h3>
+              <p className="text-gray-400">
                 When you're at the restaurant, everything runs smoothly. The moment you leave, costs explode, quality drops, and staff takes advantage. You're trapped.
               </p>
             </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="text-4xl mb-4">📊</div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Spreadsheets and Guesswork Aren't Working</h3>
-              <p className="text-gray-600">
+
+            {/* Problem Card 3 */}
+            <div className="card-space rounded-2xl p-8">
+              <div className="text-5xl mb-4">📊</div>
+              <h3 className="text-2xl font-bold text-white mb-4">Spreadsheets and Guesswork Aren't Working</h3>
+              <p className="text-gray-400">
                 You spend hours updating spreadsheets that are outdated the moment you save them. You're making decisions based on gut feeling instead of data, and it's killing your margins.
               </p>
             </div>
@@ -67,222 +118,200 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The Solution Section */}
-      <section className="bg-white">
-        <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-6 text-gray-900">OwnerClone Shows You the Problems Before They Kill Your Business</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              After experiencing the restaurant industry firsthand, we spent two years building the system every independent owner needs. OwnerClone integrates with your POS system (Toast, Skytab, or manual uploads) to automatically track everything that matters. No more spreadsheets. No more guessing. No more surprises.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="border-2 border-primary-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <FaDollarSign className="text-4xl text-primary-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">Automated Food Cost Management</h3>
-                  <p className="text-gray-600">
-                    Food costs can bleed money silently until you're already in trouble. OwnerClone tracks ingredient costs in real-time, calculates recipe profitability down to the gram, and alerts you when costs spike before they destroy your margins. Automatic recipe building gets you started in minutes - no more spending weeks building an inventory system from scratch.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-2 border-primary-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <FaClock className="text-4xl text-primary-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">Smart Labor Cost Tracking</h3>
-                  <p className="text-gray-600">
-                    When owners can't be at the restaurant daily, labor costs often explode. Overtime happens. Theft occurs. OwnerClone monitors labor patterns, flags anomalies, and helps you optimize schedules even when you're not physically present. Maintain control without being there 80 hours a week.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-2 border-primary-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <FaShieldAlt className="text-4xl text-primary-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">Theft Detection That Actually Works</h3>
-                  <p className="text-gray-600">
-                    Industry data shows manager void scams average $40,000 before they're discovered. OwnerClone's Theft Shield monitors every void, comp, and discount in real-time, flagging patterns that indicate theft before it becomes a five-figure problem.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-2 border-primary-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <FaBrain className="text-4xl text-primary-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">Demand Forecasting</h3>
-                  <p className="text-gray-600">
-                    Being understaffed kills service. Being overstaffed kills profits. OwnerClone predicts your traffic seven days out using weather data, local events, and historical patterns, so you can schedule perfectly and prep precisely.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link href="/features" className="btn-primary text-lg px-8 py-4">
-              See All Features
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="bg-gray-50">
-        <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-6 text-gray-900">Get Started in Minutes, Not Months</h2>
-            <p className="text-lg text-gray-700">
-              No complicated setup. No training required. Just connect your POS system and start making better decisions.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">Connect Your POS</h3>
-              <p className="text-gray-600">Toast, Skytab, or manual report uploads. Takes 5 minutes.</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">We Import Your Data</h3>
-              <p className="text-gray-600">All your sales, inventory, and labor data automatically syncs.</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">Get Instant Insights</h3>
-              <p className="text-gray-600">See exactly where you're making and losing money.</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">Make Better Decisions</h3>
-              <p className="text-gray-600">Data-driven decisions that increase profits immediately.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Honesty Advantage Section */}
-      <section className="bg-gradient-to-br from-green-50 to-green-100">
-        <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-6 text-gray-900">The OwnerClone Honesty Advantage</h2>
-            <p className="text-xl text-gray-700 font-semibold mb-8">
-              We don't get paid if you're not saving more or making more than we cost.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8 md:p-12">
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center text-xl font-bold">✓</div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">We Track Your ROI Continuously</h3>
-                  <p className="text-gray-700">
-                    OwnerClone doesn't just show you where you're saving money - we calculate and display your exact return on investment in real-time. You'll always know if the platform is worth what you're paying.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center text-xl font-bold">✓</div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">150% ROI Guarantee</h3>
-                  <p className="text-gray-700">
-                    If your return on investment falls below 150% of what you're paying us, we schedule a meeting with you immediately. We'll review your operations together, identify where the value isn't showing up, and work with you to get back on track.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center text-xl font-bold">✓</div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">Consultant Built In for Your Protection</h3>
-                  <p className="text-gray-700">
-                    You're not just buying software - you're getting an operational consultant who is financially incentivized to make sure you succeed. When your ROI drops, we work directly with you to solve the problem. Your success is our success.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 p-6 bg-green-50 rounded-lg border-2 border-green-200">
-              <p className="text-center text-lg text-gray-800 font-semibold">
-                This means you can try OwnerClone with confidence, knowing that if it's not delivering 150% of what you're paying, we'll fix it together.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Teaser */}
-      <section className="bg-white">
-        <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="mb-6 text-gray-900">Pricing Built for Independent Restaurants</h2>
-            <p className="text-lg text-gray-700 mb-8">
-              I spent tens of thousands on consultants, software, and systems that didn't work. OwnerClone costs less than one part-time manager and actually solves your problems.
-            </p>
-            
-            <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-lg p-8 mb-8">
-              <div className="text-5xl font-bold text-primary-600 mb-2">$0.20</div>
-              <div className="text-xl text-gray-700 mb-4">per customer visit per month</div>
-              <p className="text-gray-600 mb-6">
-                For a restaurant serving 1,000 customers per month: Only $200/month
-              </p>
-              <Link href="/pricing" className="btn-primary text-lg px-8 py-4">
-                See Full Pricing Details
-              </Link>
-            </div>
-
-            <p className="text-gray-600">
-              All features included • No hidden fees • No setup costs • Cancel anytime
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="section-container text-center">
-          <h2 className="mb-6">Stop Guessing. Start Knowing.</h2>
-          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Join independent restaurant owners who are finally running their businesses with real data instead of gut feelings.
+      {/* OwnerClone Shows You Section */}
+      <section className="relative py-20 px-4 bg-gradient-to-b from-[#0f1419] to-transparent">
+        <div className="max-w-6xl mx-auto text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
+            OwnerClone Shows You the <span className="gradient-text-blue-silver">Problems Before They Become Disasters</span>
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            After experiencing the restaurant industry firsthand, we spent two years building the system every independent owner needs. OwnerClone integrates with your POS system (Toast, Skytab, or manual uploads) to automatically track everything that matters. No more spreadsheets. No more guessing. No more surprises.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/pricing" className="px-8 py-4 bg-white text-primary-600 font-bold rounded-lg hover:bg-primary-50 transition-colors duration-200 shadow-lg hover:shadow-xl text-lg">
-              Get Started Today
-            </Link>
-            <Link href="/contact" className="px-8 py-4 bg-primary-700 text-white font-bold rounded-lg border-2 border-white hover:bg-primary-600 transition-colors duration-200 text-lg">
-              Schedule a Demo
-            </Link>
+        </div>
+
+        {/* Feature Cards Grid */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Feature 1 */}
+          <div className="card-space rounded-2xl p-8">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-lg bg-gradient-blue flex items-center justify-center flex-shrink-0">
+                <span className="text-2xl">💰</span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">Automated Food Cost Management</h3>
+                <p className="text-gray-400">
+                  Food costs can bleed money silently until you're already in trouble. OwnerClone tracks ingredient costs in real-time, calculates recipe profitability down to the gram, and alerts you when costs spike before they destroy your margins. Automatic recipe building gets you started in minutes - no more spending weeks building an inventory system from scratch.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="card-space rounded-2xl p-8">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-lg bg-gradient-blue flex items-center justify-center flex-shrink-0">
+                <span className="text-2xl">⏰</span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">Smart Labor Cost Tracking</h3>
+                <p className="text-gray-400">
+                  When owners can't be at the restaurant daily, labor costs often explode. Overtime happens. Theft occurs. OwnerClone monitors labor patterns, flags anomalies, and helps you optimize schedules even when you're not physically present. Maintain control without being there 80 hours a week.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="card-space rounded-2xl p-8">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-lg bg-gradient-blue flex items-center justify-center flex-shrink-0">
+                <span className="text-2xl">🛡️</span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">Theft Detection That Actually Works</h3>
+                <p className="text-gray-400">
+                  Industry data shows manager void scams average $40,000 before they're discovered. OwnerClone's Theft Shield monitors every void, comp, and discount in real-time, flagging patterns that indicate theft before it becomes a five-figure problem.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature 4 */}
+          <div className="card-space rounded-2xl p-8">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-lg bg-gradient-blue flex items-center justify-center flex-shrink-0">
+                <span className="text-2xl">🧠</span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">Demand Forecasting</h3>
+                <p className="text-gray-400">
+                  Being understaffed kills service. Being overstaffed kills profits. OwnerClone predicts your traffic seven days out using weather data, local events, and historical patterns, so you can schedule perfectly and prep precisely.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-    </>
-  )
+
+      {/* Get Started Section */}
+      <section className="relative py-20 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
+            Get Started in Minutes, <span className="gradient-text-blue-silver">Not Months</span>
+          </h2>
+          <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+            No complicated setup. No training required. Just connect your POS system and start making better decisions.
+          </p>
+
+          {/* Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-blue flex items-center justify-center text-3xl font-black text-white mx-auto mb-4">
+                1
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Connect Your POS</h3>
+              <p className="text-gray-400">Toast, Skytab, or manual report uploads. Takes 5 minutes.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-blue flex items-center justify-center text-3xl font-black text-white mx-auto mb-4">
+                2
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">We Import Your Data</h3>
+              <p className="text-gray-400">All your sales, inventory, and labor data automatically syncs.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-blue flex items-center justify-center text-3xl font-black text-white mx-auto mb-4">
+                3
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Get Instant Insights</h3>
+              <p className="text-gray-400">See exactly where you're making and losing money.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-blue flex items-center justify-center text-3xl font-black text-white mx-auto mb-4">
+                4
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Make Better Decisions</h3>
+              <p className="text-gray-400">Data-driven decisions that increase profits immediately.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="relative py-32 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-block px-6 py-2 rounded-full glass-effect text-cyan-400 font-semibold mb-8">
+            ✨ The OwnerClone Advantage
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+            We don't get paid if you're not saving more or making more than we cost.
+          </h2>
+
+          <div className="space-y-6 text-left max-w-2xl mx-auto mb-12">
+            <div className="flex items-start gap-4 card-space rounded-xl p-6">
+              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">We Track Your ROI Continuously</h3>
+                <p className="text-gray-400">OwnerClone doesn't just show you where you're saving money - we calculate and display your exact return on investment in real-time. You'll always know if the platform is worth what you're paying.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 card-space rounded-xl p-6">
+              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">150% ROI Guarantee</h3>
+                <p className="text-gray-400">If your return on investment falls below 150% of what you're paying us, we schedule a meeting with you immediately. We'll review your operations together, identify where the value isn't showing up, and work with you to get back on track.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 card-space rounded-xl p-6">
+              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">Consultant Built In for Your Protection</h3>
+                <p className="text-gray-400">You're not just buying software - you're getting an operational consultant who is financially incentivized to make sure you succeed. When your ROI drops, we work directly with you to solve the problem. Your success is our success.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass-effect rounded-2xl p-8 max-w-2xl mx-auto mb-12">
+            <p className="text-xl text-white font-semibold">
+              This means you can try OwnerClone with confidence, knowing that if it's not delivering 150% of what you're paying, we'll fix it together.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a 
+              href="#demo" 
+              className="group relative px-12 py-5 bg-gradient-blue-silver text-white font-bold text-xl rounded-lg overflow-hidden transition-all duration-300 glow-blue-hover"
+            >
+              <span className="relative z-10">Get Started Today</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            
+            <a 
+              href="#pricing" 
+              className="px-12 py-5 glass-effect text-white font-bold text-xl rounded-lg border border-blue-400/30 hover:border-blue-400/60 transition-all duration-300"
+            >
+              See Pricing
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }
