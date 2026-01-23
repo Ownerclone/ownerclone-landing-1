@@ -95,33 +95,35 @@ export default function Features() {
             Introducing <span className="text-cyan-bright">OwnerClone MVP</span>
           </h2>
           <p className="text-xl text-gray-300">
-            Six powerful modules that work together to give you complete control over your operations, costs, and profitability. No more spreadsheets. No more guessing. Just real data and actionable insights.
+            Four powerful modules that work together to give you complete control over your operations, costs, and profitability. No more spreadsheets. No more guessing. Just real data and actionable insights.
           </p>
         </div>
       </section>
 
       {/* Modules Grid */}
-      <section className="section-container">
-        <div className="space-y-16">
-          {modules.map((module, index) => {
+      <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto space-y-20">
+          {modules.map((module) => {
             const Icon = module.icon
             
             return (
-              <div key={module.name} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                <div>
-                  <div className="card-space rounded-2xl p-8 text-center h-full">
-                    <Icon className="text-6xl text-cyan-bright mx-auto mb-4" />
+              <div key={module.name} className="space-y-8">
+                {/* Centered Description Paragraph */}
+                <p className="text-lg text-gray-300 leading-relaxed text-center max-w-4xl mx-auto">
+                  {module.description}
+                </p>
+                
+                {/* Two Cards Side by Side */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Left Card - Module Name & Tagline */}
+                  <div className="card-space rounded-2xl p-8 text-center flex flex-col items-center justify-center">
+                    <Icon className="text-6xl text-cyan-bright mb-4" />
                     <h2 className="text-2xl font-bold text-white mb-2">{module.name}</h2>
                     <p className="text-lg text-cyan-400 font-semibold">{module.tagline}</p>
                   </div>
-                </div>
-                
-                <div>
-                  <p className="text-lg text-gray-300 mb-6 leading-relaxed text-center">
-                    {module.description}
-                  </p>
                   
-                  <div className="glass-effect rounded-lg p-6 border border-blue-400/30">
+                  {/* Right Card - Key Features */}
+                  <div className="glass-effect rounded-2xl p-8 border border-blue-400/30">
                     <h3 className="text-lg font-bold text-white mb-4">Key Features:</h3>
                     <ul className="space-y-2">
                       {module.features.map((feature, idx) => (
