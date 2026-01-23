@@ -23,9 +23,12 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo - Now links to home */}
           <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <img src="/ownerclone-logo.jpg" alt="OwnerClone" className="h-10 md:h-12" />
-            <span className="text-2xl font-bold text-[#38bdf8]">OwnerClone</span>
-          </Link>
+  <svg viewBox="0 0 100 60" className="h-10 md:h-12 w-auto">
+    <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="4"/>
+    <path d="M 60 12 A 18 18 0 1 1 60 48" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round"/>
+  </svg>
+  <span className="text-2xl font-bold text-[#38bdf8]">OwnerClone</span>
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
