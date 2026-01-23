@@ -13,10 +13,10 @@ export default function Home() {
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
           {/* Main Headline - Smaller, Better Layout */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-            <span className="text-white block mb-2">Restaurant Management Software</span>
+          <h1 className="font-black mb-6 leading-tight">
+            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white block mb-2">Restaurant Management Software</span>
             <span className="text-lg sm:text-xl md:text-2xl text-gray-400 font-normal block mb-4">Built by</span>
-            <span className="gradient-text-steel block">Restaurant Owners for Restaurant Owners!</span>
+            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl gradient-text-blue-to-steel block">Restaurant Owners for Restaurant Owners!</span>
           </h1>
           
           {/* Subheadline */}
