@@ -26,10 +26,10 @@ export default function Home() {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            {/* Primary Button - Blue to Silver Gradient */}
+            {/* Primary Button - Glass Effect */}
             <a 
               href="#demo" 
-                className="group relative px-8 py-4 bg-[#38bdf8] hover:bg-[#0ea5e9] text-black font-bold text-lg rounded-lg transition-all duration-300"
+                className="group relative px-8 py-4 bg-[#38bdf8] hover:bg-[#0ea5e9] text-grey font-bold text-lg rounded-lg transition-all duration-300"
             >
               <span className="relative z-10">Get Started Today</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
