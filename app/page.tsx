@@ -11,12 +11,12 @@ export default function Home() {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-blue" style={{ animationDelay: '1s' }}></div>
         
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8 text-center">
           {/* Main Headline - Smaller, Better Layout */}
           <h1 className="font-black mb-6 leading-tight">
             <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white block mb-2">Restaurant Management Software</span>
             <span className="text-lg sm:text-xl md:text-2xl text-gray-400 font-normal block mb-4">Built by</span>
-            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl gradient-text-blue-to-steel block">Restaurant Owners</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl gradient-text-blue-to-steel block">Restaurant Owners & Chefs</span>
           </h1>
           
           {/* Subheadline */}
