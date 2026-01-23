@@ -41,6 +41,9 @@
     filter: contrast(1.1) brightness(1.05);
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
   }
+    .text-cyan-bright {
+    color: #38bdf8;
+  }
   
   .gradient-text-steel {
     background: linear-gradient(135deg, 
