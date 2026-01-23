@@ -107,12 +107,19 @@ export default function Features() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="mb-6">
-            Everything You Need to Run a Profitable Restaurant
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
+        
+        {/* Gradient Orbs */}
+        <div className="absolute top-10 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse-blue"></div>
+        <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-blue" style={{ animationDelay: '1s' }}></div>
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
+            Everything You Need to Run a <span className="text-cyan-bright">Profitable Restaurant</span>
           </h1>
-          <p className="text-xl text-primary-100">
+          <p className="text-xl text-gray-300">
             Six powerful modules that work together to give you complete control over your operations, costs, and profitability. No more spreadsheets. No more guessing. Just real data and actionable insights.
           </p>
         </div>
@@ -126,27 +133,27 @@ export default function Features() {
             const isEven = index % 2 === 0
             
             return (
-              <div key={module.name} className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}>
+             <div key={module.name} className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}>
                 <div className="lg:w-1/3">
-                  <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-8 text-center shadow-lg">
-                    <Icon className="text-6xl text-primary-600 mx-auto mb-4" />
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">{module.name}</h2>
-                    <p className="text-lg text-primary-700 font-semibold">{module.tagline}</p>
+                  <div className="card-space rounded-2xl p-8 text-center">
+                    <Icon className="text-6xl text-cyan-bright mx-auto mb-4" />
+                    <h2 className="text-2xl font-bold text-white mb-2">{module.name}</h2>
+                    <p className="text-lg text-cyan-400 font-semibold">{module.tagline}</p>
                   </div>
                 </div>
                 
                 <div className="lg:w-2/3">
-                  <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                     {module.description}
                   </p>
                   
-                  <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">Key Features:</h3>
+                  <div className="glass-effect rounded-lg p-6 border border-blue-400/30">
+                    <h3 className="text-lg font-bold text-white mb-4">Key Features:</h3>
                     <ul className="space-y-2">
                       {module.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-primary-600 mr-3 mt-1">✓</span>
-                          <span className="text-gray-700">{feature}</span>
+                          <span className="text-cyan-400 mr-3 mt-1">✓</span>
+                          <span className="text-gray-300">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -159,96 +166,102 @@ export default function Features() {
       </section>
 
       {/* Integration Section */}
-      <section className="bg-gray-50">
-        <div className="section-container">
+      <section className="relative py-20 px-4 bg-gradient-to-b from-[#0f1419] to-transparent">
+        <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-6 text-gray-900">Works With Your POS System</h2>
-            <p className="text-lg text-gray-700">
+            <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
+              Works With Your <span className="text-cyan-bright">POS System</span>
+            </h2>
+            <p className="text-lg text-gray-300">
               OwnerClone integrates seamlessly with Toast and Skytab POS systems. Already using a different system? No problem. You can upload daily or weekly reports manually, and we'll extract all the data automatically.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Toast POS</h3>
-              <p className="text-gray-600">Full API integration for real-time data sync</p>
+            <div className="card-space p-6 rounded-lg text-center">
+              <h3 className="text-xl font-bold mb-2 text-white">Toast POS</h3>
+              <p className="text-gray-400">Full API integration for real-time data sync</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Skytab POS</h3>
-              <p className="text-gray-600">Complete integration with all features</p>
+            <div className="card-space p-6 rounded-lg text-center">
+              <h3 className="text-xl font-bold mb-2 text-white">Skytab POS</h3>
+              <p className="text-gray-400">Complete integration with all features</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Any POS</h3>
-              <p className="text-gray-600">Manual report uploads processed automatically</p>
+            <div className="card-space p-6 rounded-lg text-center">
+              <h3 className="text-xl font-bold mb-2 text-white">Any POS</h3>
+              <p className="text-gray-400">Manual report uploads processed automatically</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-white">
-        <div className="section-container">
+      <section className="relative py-20 px-4">
+        <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-6 text-gray-900">Built by Restaurant Owners Who Get It</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
+              Built by Restaurant Owners <span className="text-cyan-bright">Who Get It</span>
+            </h2>
+            <p className="text-lg text-gray-300 leading-relaxed">
               I closed three restaurant concepts because I couldn't see the problems until it was too late. OwnerClone is the system I wish I'd had when I was bleeding money on food costs I didn't know were spiking, labor costs I couldn't control, and theft I couldn't detect. Every feature solves a real problem that cost me real money.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center">
+            <div className="card-space rounded-xl p-6 text-center">
               <div className="text-4xl mb-3">💰</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Reduce Food Costs</h3>
-              <p className="text-gray-600">Catch ingredient price spikes before they destroy your margins</p>
+              <h3 className="text-xl font-bold mb-2 text-white">Reduce Food Costs</h3>
+              <p className="text-gray-400">Catch ingredient price spikes before they destroy your margins</p>
             </div>
 
-            <div className="text-center">
+            <div className="card-space rounded-xl p-6 text-center">
               <div className="text-4xl mb-3">⏰</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Optimize Labor</h3>
-              <p className="text-gray-600">Schedule based on actual demand, not guesswork</p>
+              <h3 className="text-xl font-bold mb-2 text-white">Optimize Labor</h3>
+              <p className="text-gray-400">Schedule based on actual demand, not guesswork</p>
             </div>
 
-            <div className="text-center">
+            <div className="card-space rounded-xl p-6 text-center">
               <div className="text-4xl mb-3">🛡️</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Prevent Theft</h3>
-              <p className="text-gray-600">Detect manager scams and employee theft in real-time</p>
+              <h3 className="text-xl font-bold mb-2 text-white">Prevent Theft</h3>
+              <p className="text-gray-400">Detect manager scams and employee theft in real-time</p>
             </div>
 
-            <div className="text-center">
+            <div className="card-space rounded-xl p-6 text-center">
               <div className="text-4xl mb-3">📊</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Real-Time Insights</h3>
-              <p className="text-gray-600">Know exactly where you stand at any moment</p>
+              <h3 className="text-xl font-bold mb-2 text-white">Real-Time Insights</h3>
+              <p className="text-gray-400">Know exactly where you stand at any moment</p>
             </div>
 
-            <div className="text-center">
+            <div className="card-space rounded-xl p-6 text-center">
               <div className="text-4xl mb-3">🎯</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Smart Marketing</h3>
-              <p className="text-gray-600">Fill seats automatically with targeted campaigns</p>
+              <h3 className="text-xl font-bold mb-2 text-white">Smart Marketing</h3>
+              <p className="text-gray-400">Fill seats automatically with targeted campaigns</p>
             </div>
 
-            <div className="text-center">
+            <div className="card-space rounded-xl p-6 text-center">
               <div className="text-4xl mb-3">🚀</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Scale Confidently</h3>
-              <p className="text-gray-600">Maintain quality even when you're not there</p>
+              <h3 className="text-xl font-bold mb-2 text-white">Scale Confidently</h3>
+              <p className="text-gray-400">Maintain quality even when you're not there</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="section-container text-center">
-          <h2 className="mb-6">Ready to Take Control of Your Restaurant?</h2>
-          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+      <section className="relative py-32 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
+            Ready to Take Control of Your <span className="text-cyan-bright">Restaurant</span>?
+          </h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             See how OwnerClone can transform your operations and increase your profits. All features included. No hidden fees.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/pricing" className="px-8 py-4 bg-white text-primary-600 font-bold rounded-lg hover:bg-primary-50 transition-colors duration-200 shadow-lg hover:shadow-xl text-lg">
+            <Link href="/pricing" className="px-8 py-4 bg-transparent text-[#38bdf8] font-bold rounded-lg border-2 border-[#0ea5e9] hover:border-[#38bdf8] hover:bg-[#38bdf8]/10 transition-all duration-300 text-lg">
               View Pricing
             </Link>
-            <Link href="/contact" className="px-8 py-4 bg-primary-700 text-white font-bold rounded-lg border-2 border-white hover:bg-primary-600 transition-colors duration-200 text-lg">
+            <Link href="/contact" className="px-8 py-4 glass-effect text-white font-bold rounded-lg border border-blue-400/30 hover:border-blue-400/60 transition-all duration-300 text-lg">
               Schedule a Demo
             </Link>
           </div>
