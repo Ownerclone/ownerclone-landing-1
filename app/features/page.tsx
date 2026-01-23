@@ -104,7 +104,7 @@ export default function Features() {
         </div>
         
         {/* Blue separator line at bottom of hero */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-[#38bdf8]"></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-0.5 bg-[#38bdf8]"></div>
 
       {/* Modules Grid */}
       <section className="py-20 px-4">
