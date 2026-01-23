@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { FaUtensils, FaUsers, FaCog, FaCookie, FaGlassWhiskey, FaUserTie } from 'react-icons/fa'
+import { FaUtensils, FaUsers, FaCookie, FaGlassWhiskey } from 'react-icons/fa'
 
 export const metadata: Metadata = {
   title: 'Features - Restaurant Management Modules | OwnerClone',
@@ -14,92 +14,64 @@ export default function Features() {
       icon: FaUtensils,
       name: 'Food Module',
       tagline: 'Track Everything Down to the Gram',
-      description: 'Stop guessing at your food costs. Upload supplier invoices and OwnerClone automatically extracts pricing and builds your recipes for you - no more spending weeks building an inventory system from scratch. Track every ingredient down to the gram, not just by ounce or cup. Calculate per-plate costs with prep items and finished plates. Get alerts when ingredient prices spike. Finally understand which menu items are making you money and which ones are bleeding you dry. Automatic recipe building gets you started - all you have to do is tweak.',
+      description: 'Stop guessing at your food costs. Upload supplier invoices from Sysco, US Foods, or any vendor and OwnerClone automatically extracts pricing using GPT-4 Vision. Our AI generates professional recipes for your entire menu, calculates per-plate costs down to the gram, and alerts you when ingredient prices spike before they destroy your margins. The average restaurant saves $1,800/month by catching price increases, optimizing portions, and identifying which menu items are profitable vs. which ones are bleeding you dry.',
       features: [
-        'AI-powered invoice parsing (just upload PDFs)',
-        'Automatic recipe building to get you started fast',
-        'Track ingredients down to the gram',
-        'Recipe costing with prep items and plate items',
+        'AI-powered invoice parsing with GPT-4 Vision',
+        'Automatic recipe generation for your entire menu',
+        'Per-plate costing down to the gram',
         'Real-time ingredient price tracking',
+        'Supplier price comparison across vendors',
         'Menu profitability analysis',
-        'Price optimization recommendations',
-        'Supplier price comparison',
+        'Price spike alerts before they hurt margins',
+        'Works with ANY supplier invoice format',
       ]
     },
     {
       icon: FaUsers,
-      name: 'Teams Module',
-      tagline: 'Schedule Smarter, Not Harder',
-      description: 'Labor costs are your second-biggest expense, and being off by even one person can destroy your margins. The Teams module uses demand forecasting to recommend optimal staffing levels, tracks time clock data from your POS, flags overtime before it happens, and gives you complete visibility into who worked when and what it cost you.',
+      name: 'Labor Module',
+      tagline: 'Schedule Smarter, Save More',
+      description: 'Labor is your second-biggest cost, and being off by even one person destroys margins. The Labor module integrates with your POS time clock data to track actual vs. scheduled hours, flags overtime before it happens, and uses Prophet forecasting to recommend optimal staffing levels for each shift. Stop paying people to stand around on slow days and stop getting slammed short-handed on busy nights. Track labor cost percentage in real-time and get alerts when costs exceed targets.',
       features: [
-        'Smart scheduling based on predicted traffic',
-        'POS time clock integration',
+        'POS time clock integration (Toast, Skytab, any POS)',
+        'Real-time labor cost percentage tracking',
         'Overtime alerts and prevention',
-        'Labor cost percentage tracking',
-        'Team messaging and task management',
-        'Employee performance tracking',
-        'Schedule templates for recurring shifts',
-      ]
-    },
-    {
-      icon: FaCog,
-      name: 'Operations Module',
-      tagline: 'Run Your Business, Not Chase Papers',
-      description: 'Invoices pile up. Bills get paid late. Tax time is a nightmare. The Operations module automatically processes emailed invoices, tracks what you owe and when, categorizes expenses for bookkeeping, and generates P&L reports that actually make sense. Stop digging through papers and start understanding your business.',
-      features: [
-        'Automated invoice processing from email',
-        'Bill payment tracking and reminders',
-        'Expense categorization for taxes',
-        'P&L and cash flow reports',
-        'Inventory ordering and par level management',
-        'Equipment maintenance tracking',
-        'Vendor management and payment history',
+        'Prophet-powered staffing recommendations',
+        'Actual vs. scheduled hours comparison',
+        'Labor cost targets and threshold alerts',
+        'Schedule optimization based on predicted demand',
+        'Historical pattern analysis for better planning',
       ]
     },
     {
       icon: FaCookie,
-      name: 'Chef Module',
-      tagline: 'Digital Kitchen Management',
-      description: 'Keep your scratch kitchen consistent whether you are there or not. Digital recipe cards with photos, ingredient substitution suggestions when suppliers are out, prep lists that auto-generate based on predicted demand, and special recommendations based on what ingredients you need to use before they spoil.',
+      name: 'Theft Shield',
+      tagline: 'Catch Theft Before It Costs You $40K',
+      description: 'Manager void scams average $40,000 before they\'re discovered - that\'s exactly what happened at my restaurant. Theft Shield monitors every POS transaction for fraud patterns: excessive voids, after-hours activity, voiding other employees\' transactions, suspicious comps, and under-ringing schemes. Our AI analyzes your data against patterns from 1,000+ restaurants and sends real-time alerts with timestamps, employee names, and evidence. Stop watching hours of security footage hoping to find something - Theft Shield tells you exactly which transactions to investigate.',
       features: [
-        'Digital recipe cards with photos and videos',
-        'Prep list auto-generation from forecasts',
-        'Ingredient substitution suggestions',
-        'Waste tracking and reduction tips',
-        'Menu engineering recommendations',
-        'Seasonal menu planning',
-        'Kitchen tablet interface for cooks',
+        'Manager void scam detection (the $40K case)',
+        'Excessive voids and comps flagging',
+        'After-hours transaction alerts',
+        'Under-ringing pattern detection',
+        'Cross-employee void analysis',
+        'Network pattern comparison across restaurants',
+        'Real-time SMS/email fraud alerts',
+        'Evidence collection with timestamps',
       ]
     },
     {
       icon: FaGlassWhiskey,
-      name: 'Bartender Module',
-      tagline: 'Control Your Pour Costs',
-      description: 'Bar costs are notoriously hard to track because everyone pours differently and over-pouring kills margins. Track your liquor inventory separately from food, monitor beer with our dedicated beer tracker, get alerts when bottles should be empty but are not, monitor pour costs by bartender, and finally understand if your bar is profitable or just busy.',
+      name: 'Prophet',
+      tagline: 'Predict Demand 7 Days Out with 90% Accuracy',
+      description: 'Stop guessing on staffing and food orders. Prophet predicts your customer traffic 7 days in advance with 90%+ accuracy by analyzing your sales history, weather forecasts, local events (concerts, sports, festivals), holidays, school calendars, and paydays. Know exactly when to staff up for a busy Friday or when to send people home early on a slow Tuesday. Get specific staffing recommendations ("add 2 servers and 1 line cook") and prep quantities ("order 200 lbs wings vs your usual 80 lbs"). The average restaurant saves $900/month by eliminating waste and preventing lost revenue from understaffing.',
       features: [
-        'Cocktail recipe costing',
-        'Beer tracker for draft and bottle inventory',
-        'Pour cost tracking by bartender',
-        'Liquor inventory management',
-        'Over-pouring detection',
-        'Popular drink analysis',
-        'Bar menu profitability',
-        'Happy hour performance tracking',
-      ]
-    },
-    {
-      icon: FaUserTie,
-      name: 'Server Module',
-      tagline: 'Better Service, Higher Tips',
-      description: 'Your servers are the face of your restaurant, but they often lack the information they need to provide great service. The Server module gives them instant access to customer preferences, allergy information, previous orders, and special occasion notes. Provide personalized service that turns first-timers into regulars.',
-      features: [
-        'Customer preference tracking',
-        'Allergy and dietary restriction notes',
-        'Order history for returning guests',
-        'Birthday and anniversary alerts',
-        'Table management and section optimization',
-        'Tip tracking and performance metrics',
-        'Mobile app for servers',
+        '7-day demand forecast with 90%+ accuracy',
+        'Weather impact analysis (rain = slow, sun = busy patio)',
+        'Local event detection (concerts, sports, festivals)',
+        'Holiday and payday pattern recognition',
+        'School calendar impact analysis',
+        'Specific staffing recommendations per shift',
+        'Prep quantity calculations by ingredient',
+        'Real-time adjustments if day is busier/slower',
       ]
     },
   ]
@@ -116,9 +88,12 @@ export default function Features() {
         <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-blue" style={{ animationDelay: '1s' }}></div>
         
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4">
             Everything You Need to Run a <span className="text-cyan-bright">Profitable Restaurant</span>
           </h1>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-400 mb-6">
+            Introducing <span className="text-cyan-bright">OwnerClone MVP</span>
+          </h2>
           <p className="text-xl text-gray-300">
             Six powerful modules that work together to give you complete control over your operations, costs, and profitability. No more spreadsheets. No more guessing. Just real data and actionable insights.
           </p>
@@ -130,20 +105,19 @@ export default function Features() {
         <div className="space-y-16">
           {modules.map((module, index) => {
             const Icon = module.icon
-            const isEven = index % 2 === 0
             
             return (
-             <div key={module.name} className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}>
-                <div className="lg:w-1/3">
-                  <div className="card-space rounded-2xl p-8 text-center">
+              <div key={module.name} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div>
+                  <div className="card-space rounded-2xl p-8 text-center h-full">
                     <Icon className="text-6xl text-cyan-bright mx-auto mb-4" />
                     <h2 className="text-2xl font-bold text-white mb-2">{module.name}</h2>
                     <p className="text-lg text-cyan-400 font-semibold">{module.tagline}</p>
                   </div>
                 </div>
                 
-                <div className="lg:w-2/3">
-                  <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                <div>
+                  <p className="text-lg text-gray-300 mb-6 leading-relaxed text-center">
                     {module.description}
                   </p>
                   
@@ -234,9 +208,9 @@ export default function Features() {
             </div>
 
             <div className="card-space rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">🎯</div>
-              <h3 className="text-xl font-bold mb-2 text-white">Smart Marketing</h3>
-              <p className="text-gray-400">Fill seats automatically with targeted campaigns</p>
+              <div className="text-4xl mb-3">🔮</div>
+              <h3 className="text-xl font-bold mb-2 text-white">Predict Rushes & Slow Times</h3>
+              <p className="text-gray-400">Know exactly when to staff up and when to send people home</p>
             </div>
 
             <div className="card-space rounded-xl p-6 text-center">
@@ -249,7 +223,7 @@ export default function Features() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-32 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
+      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
             Ready to Take Control of Your <span className="text-cyan-bright">Restaurant</span>?
