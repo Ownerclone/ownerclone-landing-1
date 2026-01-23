@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { FaUtensils, FaUsers, FaShieldAlt, FaCrystalBall } from 'react-icons/fa'
+import { FaUtensils, FaUsers, FaShieldAlt, FaEye } from 'react-icons/fa'
 
 export const metadata: Metadata = {
   title: 'Features - Restaurant Management Modules | OwnerClone',
@@ -62,7 +62,7 @@ export default function Features() {
       ]
     },
     {
-      icon: FaCrystalBall,
+      icon: FaEye,
       name: 'Prophet',
       tagline: 'Predict Demand 7 Days Out with 90% Accuracy',
       wittyHeadline: 'Know Next Friday Will Be Slammed Before Your Competition Does',
@@ -112,10 +112,13 @@ export default function Features() {
             
             return (
               <div key={module.name} className="space-y-8">
-                {/* Witty H3 Tagline - Centered and Blue */}
-                <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center">
-                  {module.wittyHeadline}
-                </h3>
+                {/* Witty H3 Tagline - Centered and Blue with underline */}
+                <div className="flex flex-col items-center">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center mb-3">
+                    {module.wittyHeadline}
+                  </h3>
+                  <div className="w-24 h-0.5 bg-cyan-bright"></div>
+                </div>
                 
                 {/* Centered Description Paragraph */}
                 <p className="text-lg text-gray-300 leading-relaxed text-center max-w-4xl mx-auto">
