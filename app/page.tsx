@@ -16,7 +16,7 @@ export default function Home() {
           <h1 className="font-black mb-6 leading-tight">
             <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white block mb-2">Restaurant Management Software</span>
             <span className="text-lg sm:text-xl md:text-2xl text-gray-400 font-normal block mb-4">Built by</span>
-            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl gradient-text-blue-to-steel block">Restaurant Owners & Chefs</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-cyan-bright block">Restaurant Owners for Restaurant Owners!</span>
           </h1>
           
           {/* Subheadline */}
@@ -29,7 +29,7 @@ export default function Home() {
             {/* Primary Button - Blue to Silver Gradient */}
             <a 
               href="#demo" 
-              className="group relative px-8 py-4 bg-gradient-blue-silver text-white font-bold text-lg rounded-lg overflow-hidden transition-all duration-300 glow-blue-hover"
+              className="group relative px-8 py-4 bg-[#38bdf8] hover:bg-[#0ea5e9] text-white font-bold text-lg rounded-lg transition-all duration-300 glow-blue-hover"
             >
               <span className="relative z-10">Get Started Today</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -72,7 +72,7 @@ export default function Home() {
       <section className="relative pt-0 pb-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
-            Built by Someone Who's <span className="gradient-text-blue">Been in Your Shoes</span>
+            Built by Someone Who's <span className="text-cyan-bright">Been in Your Shoes</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
             Our founder spent two decades building a successful film equipment rental business with locations across multiple cities and international operations. After achieving that success, he decided to enter the restaurant industry and opened three concepts: an Italian restaurant, a BBQ smokehouse, and a sports bar. Despite having entrepreneurial experience, the restaurant industry was different - operational chaos that couldn't be seen until it was too late. Those experiences led to the creation of OwnerClone: a system that shows you the problems before they become disasters.
@@ -118,7 +118,7 @@ export default function Home() {
       <section className="relative py-20 px-4 bg-gradient-to-b from-[#0f1419] to-transparent">
         <div className="max-w-6xl mx-auto text-center mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
-            OwnerClone Shows You the <span className="gradient-text-blue-silver">Problems Before They Become Disasters</span>
+            OwnerClone Shows You the <span className="text-cyan-bright">Problems Before They Become Disasters</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             After experiencing the restaurant industry firsthand, we spent two years building the system every independent owner needs. OwnerClone integrates with your POS system (Toast, Skytab, or manual uploads) to automatically track everything that matters. No more spreadsheets. No more guessing. No more surprises.
@@ -193,7 +193,7 @@ export default function Home() {
       <section className="relative py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
-            Get Started in Minutes, <span className="gradient-text-blue-silver">Not Months</span>
+            Get Started in Minutes, <span className="text-cyan-bright">Not Months</span>
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
             No complicated setup. No training required. Just connect your POS system and start making better decisions.
@@ -293,7 +293,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
               href="#demo" 
-              className="group relative px-12 py-5 bg-gradient-blue-silver text-white font-bold text-xl rounded-lg overflow-hidden transition-all duration-300 glow-blue-hover"
+              className="group relative px-12 py-5 bg-[#38bdf8] hover:bg-[#0ea5e9] text-white font-bold text-xl rounded-lg transition-all duration-300 glow-blue-hover"
             >
               <span className="relative z-10">Get Started Today</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
