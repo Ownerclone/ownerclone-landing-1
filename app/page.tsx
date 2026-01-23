@@ -238,12 +238,12 @@ export default function Home() {
       {/* Final CTA Section */}
       <section className="relative py-32 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-block px-6 py-2 rounded-full glass-effect text-cyan-400 font-semibold mb-8">
-            ✨ The OwnerClone Advantage
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
-            We don't get paid if you're not saving more or making more than we cost.
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight">
+            The <span className="text-cyan-bright">OwnerClone</span> Advantage
           </h2>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-gray-300 mb-12 leading-relaxed">
+            We don't get paid if you're not saving more or making more than we cost.
+          </h3>
 
           <div className="space-y-6 text-left max-w-2xl mx-auto mb-12">
             <div className="flex items-start gap-4 card-space rounded-xl p-6">
