@@ -16,12 +16,12 @@ export default function Home() {
           <h1 className="font-black mb-6 leading-tight">
             <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white block mb-2">Restaurant Management Software</span>
             <span className="text-lg sm:text-xl md:text-2xl text-gray-400 font-normal block mb-4">Built by</span>
-            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl gradient-text-blue-to-steel block">Restaurant Owners for Restaurant Owners!</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl gradient-text-blue-to-steel block">Owners for Owners</span>
           </h1>
           
           {/* Subheadline */}
           <p className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-            Stop drowning in spreadsheets. Start making money. Automate your operations. Real-time analytics with AI-driven insights.
+            No more spreadsheets. Profit first. Automated operations. Real-time analytics with AI-driven insights.
           </p>
           
           {/* CTA Buttons */}
