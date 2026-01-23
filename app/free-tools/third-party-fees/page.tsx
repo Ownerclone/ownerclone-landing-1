@@ -12,28 +12,28 @@ interface PlatformFees {
   color: string;
 }
 
-const platforms: { [key: string]: PlatformFees } = {
+const defaultPlatforms: { [key: string]: PlatformFees } = {
   doordash: {
     name: 'DoorDash',
-    commission: 25, // 15-30% typical
+    commission: 30,
     serviceFee: 3.5,
-    marketingFee: 15, // per order for promotions
+    marketingFee: 15,
     paymentProcessing: { percent: 2.9, fixed: 0.30 },
     color: 'red'
   },
   ubereats: {
     name: 'Uber Eats',
-    commission: 30, // Can be 15-30%
-    serviceFee: 0, // Built into commission
-    marketingFee: 5, // Uber Eats Plus, ads
+    commission: 30,
+    serviceFee: 0,
+    marketingFee: 5,
     paymentProcessing: { percent: 2.9, fixed: 0.30 },
     color: 'green'
   },
   grubhub: {
     name: 'GrubHub',
-    commission: 20, // 10-30% depending on tier
-    serviceFee: 10, // Percentage or flat fee
-    marketingFee: 20, // Promotions, placements
+    commission: 30,
+    serviceFee: 10,
+    marketingFee: 20,
     paymentProcessing: { percent: 3.05, fixed: 0.30 },
     color: 'orange'
   }
@@ -45,31 +45,39 @@ export default function ThirdPartyFeesCalculator() {
   const [ordersPerMonth, setOrdersPerMonth] = useState<string>('300');
   const [showResults, setShowResults] = useState(false);
   const [compareAll, setCompareAll] = useState(false);
+  
+  // Custom commission rates for each platform
+  const [doordashCommission, setDoordashCommission] = useState<string>('30');
+  const [ubereatsCommission, setUbereatsCommission] = useState<string>('30');
+  const [grubhubCommission, setGrubhubCommission] = useState<string>('30');
+
+  const getPlatformWithCustomCommission = (platformKey: string): PlatformFees => {
+    const platform = { ...defaultPlatforms[platformKey] };
+    
+    switch(platformKey) {
+      case 'doordash':
+        platform.commission = parseFloat(doordashCommission) || 30;
+        break;
+      case 'ubereats':
+        platform.commission = parseFloat(ubereatsCommission) || 30;
+        break;
+      case 'grubhub':
+        platform.commission = parseFloat(grubhubCommission) || 30;
+        break;
+    }
+    
+    return platform;
+  };
 
   const calculateFees = (platformKey: string, orderValue: number) => {
-    const platform = platforms[platformKey];
+    const platform = getPlatformWithCustomCommission(platformKey);
     
-    // Commission
     const commissionFee = (orderValue * platform.commission) / 100;
-    
-    // Service fee (if applicable)
-    const serviceFee = platform.serviceFee > 0 
-      ? platform.serviceFee 
-      : 0;
-    
-    // Marketing fee
+    const serviceFee = platform.serviceFee > 0 ? platform.serviceFee : 0;
     const marketingFee = platform.marketingFee;
-    
-    // Payment processing
     const paymentProcessingFee = (orderValue * platform.paymentProcessing.percent / 100) + platform.paymentProcessing.fixed;
-    
-    // Total fees
     const totalFees = commissionFee + serviceFee + marketingFee + paymentProcessingFee;
-    
-    // What you actually receive
     const netRevenue = orderValue - totalFees;
-    
-    // Effective fee percentage
     const effectiveFeePercent = (totalFees / orderValue) * 100;
     
     return {
@@ -80,7 +88,8 @@ export default function ThirdPartyFeesCalculator() {
       paymentProcessingFee,
       totalFees,
       netRevenue,
-      effectiveFeePercent
+      effectiveFeePercent,
+      commissionPercent: platform.commission
     };
   };
 
@@ -105,18 +114,17 @@ export default function ThirdPartyFeesCalculator() {
   const monthlyNet = singlePlatformResult.netRevenue * orders;
   const annualNet = monthlyNet * 12;
   
-  // Calculate what you'd make with direct ordering (assume 2.9% + $0.30 processing only)
   const directOrderProcessingFee = (orderValue * 2.9 / 100) + 0.30;
   const directOrderNet = orderValue - directOrderProcessingFee;
   const directMonthlyNet = directOrderNet * orders;
   const directAnnualNet = directMonthlyNet * 12;
   
   const savingsVsDirect = annualNet > 0 ? directAnnualNet - annualNet : 0;
+  const monthsToPayback = savingsVsDirect > 0 ? Math.ceil((4000 / savingsVsDirect) * 12) : 0;
 
-  // All platforms comparison
-  const allPlatformsComparison = Object.keys(platforms).map(key => ({
+  const allPlatformsComparison = Object.keys(defaultPlatforms).map(key => ({
     key,
-    ...platforms[key],
+    ...getPlatformWithCustomCommission(key),
     calculation: calculateFees(key, orderValue)
   }));
 
@@ -143,41 +151,92 @@ export default function ThirdPartyFeesCalculator() {
             <h2 className="text-3xl font-semibold text-orange-600 mb-6">📊 Your Numbers</h2>
 
             <div className="space-y-6">
-              {/* Platform Selection */}
+              {/* Platform Selection with Commission Input */}
               <div>
-                <label className="block font-semibold text-gray-700 mb-3">Select Delivery Platform</label>
+                <label className="block font-semibold text-gray-700 mb-3">Select Delivery Platform & Enter Your Commission Rate</label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <button
+                  {/* DoorDash */}
+                  <div
                     onClick={() => setSelectedPlatform('doordash')}
-                    className={`p-4 rounded-xl border-2 font-semibold transition ${
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition ${
                       selectedPlatform === 'doordash'
-                        ? 'border-red-500 bg-red-50 text-red-700'
+                        ? 'border-red-500 bg-red-50'
                         : 'border-gray-300 hover:border-red-300'
                     }`}
                   >
-                    🔴 DoorDash
-                  </button>
-                  <button
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-lg">🔴 DoorDash</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        value={doordashCommission}
+                        onChange={(e) => setDoordashCommission(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-20 px-2 py-1 border-2 border-gray-300 rounded text-center focus:border-red-500 focus:outline-none"
+                      />
+                      <span className="text-gray-600">% commission</span>
+                    </div>
+                  </div>
+
+                  {/* Uber Eats */}
+                  <div
                     onClick={() => setSelectedPlatform('ubereats')}
-                    className={`p-4 rounded-xl border-2 font-semibold transition ${
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition ${
                       selectedPlatform === 'ubereats'
-                        ? 'border-green-500 bg-green-50 text-green-700'
+                        ? 'border-green-500 bg-green-50'
                         : 'border-gray-300 hover:border-green-300'
                     }`}
                   >
-                    🟢 Uber Eats
-                  </button>
-                  <button
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-lg">🟢 Uber Eats</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        value={ubereatsCommission}
+                        onChange={(e) => setUbereatsCommission(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-20 px-2 py-1 border-2 border-gray-300 rounded text-center focus:border-green-500 focus:outline-none"
+                      />
+                      <span className="text-gray-600">% commission</span>
+                    </div>
+                  </div>
+
+                  {/* GrubHub */}
+                  <div
                     onClick={() => setSelectedPlatform('grubhub')}
-                    className={`p-4 rounded-xl border-2 font-semibold transition ${
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition ${
                       selectedPlatform === 'grubhub'
-                        ? 'border-orange-500 bg-orange-50 text-orange-700'
+                        ? 'border-orange-500 bg-orange-50'
                         : 'border-gray-300 hover:border-orange-300'
                     }`}
                   >
-                    🟠 GrubHub
-                  </button>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-lg">🟠 GrubHub</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        value={grubhubCommission}
+                        onChange={(e) => setGrubhubCommission(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-20 px-2 py-1 border-2 border-gray-300 rounded text-center focus:border-orange-500 focus:outline-none"
+                      />
+                      <span className="text-gray-600">% commission</span>
+                    </div>
+                  </div>
                 </div>
+                <p className="text-sm text-gray-500 mt-3">💡 Tip: Enter your actual negotiated commission rate. Default is 30% for all platforms.</p>
               </div>
 
               {/* Average Order Value */}
@@ -240,7 +299,7 @@ export default function ThirdPartyFeesCalculator() {
                   {/* Fee Breakdown */}
                   <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8">
                     <h3 className="text-2xl font-bold text-orange-700 mb-6">
-                      💸 {platforms[selectedPlatform].name} Fee Breakdown (Per Order)
+                      💸 {getPlatformWithCustomCommission(selectedPlatform).name} Fee Breakdown (Per Order)
                     </h3>
 
                     <div className="space-y-4">
@@ -250,7 +309,7 @@ export default function ThirdPartyFeesCalculator() {
                       </div>
 
                       <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600">Commission ({platforms[selectedPlatform].commission}%)</span>
+                        <span className="text-gray-600">Commission ({singlePlatformResult.commissionPercent}%)</span>
                         <span className="text-red-600 font-semibold">-${singlePlatformResult.commissionFee.toFixed(2)}</span>
                       </div>
 
@@ -350,18 +409,20 @@ export default function ThirdPartyFeesCalculator() {
                       <div className="bg-white rounded-xl p-6 text-center">
                         <div className="text-sm text-gray-600 mb-2">Annual Savings</div>
                         <div className="text-3xl font-bold text-green-600">${savingsVsDirect.toLocaleString()}</div>
-                        <div className="text-xs text-gray-500 mt-1">vs {platforms[selectedPlatform].name}</div>
+                        <div className="text-xs text-gray-500 mt-1">vs {getPlatformWithCustomCommission(selectedPlatform).name}</div>
                       </div>
                     </div>
 
                     <div className="bg-white rounded-xl p-6">
                       <h4 className="font-bold text-gray-900 mb-3">💡 ROI Analysis</h4>
                       <div className="space-y-2 text-gray-700">
-                        <p>• <strong>Custom website with ordering:</strong> $3,000-5,000 one-time</p>
-                        <p>• <strong>Your annual savings:</strong> ${savingsVsDirect.toLocaleString()}</p>
-                        <p>• <strong>Payback period:</strong> {savingsVsDirect > 0 ? Math.ceil((4000 / savingsVsDirect) * 12) : 0} months</p>
+                        <p>• <strong>Have OwnerClone create a custom website with integrated ordering.</strong> With your numbers, this pays for itself in {monthsToPayback} {monthsToPayback === 1 ? 'month' : 'months'}.</p>
+                        <p>• Keep 97%+ of every order (vs 50-60% on third-party)</p>
+                        <p>• Build your own customer database</p>
+                        <p>• Control the entire customer experience</p>
+                        <p>• No commission increases or surprise fees</p>
                         <p className="pt-3 border-t mt-3 font-semibold text-green-700">
-                          After payback, you keep an extra ${savingsVsDirect.toLocaleString()} EVERY YEAR
+                          You'd save ${savingsVsDirect.toLocaleString()} EVERY YEAR with direct ordering
                         </p>
                       </div>
                     </div>
@@ -385,9 +446,9 @@ export default function ThirdPartyFeesCalculator() {
                       <tbody className="bg-white">
                         <tr className="border-b">
                           <td className="p-3 font-semibold">Commission</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.commissionFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.commissionFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.commissionFee.toFixed(2)}</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[0].calculation.commissionPercent}%)</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[1].calculation.commissionPercent}%)</td>
+                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[2].calculation.commissionPercent}%)</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-3 font-semibold">Service Fee</td>
@@ -452,7 +513,7 @@ export default function ThirdPartyFeesCalculator() {
                   <div className="bg-white border-l-4 border-green-500 p-6 rounded-xl">
                     <h4 className="text-xl font-semibold text-gray-900 mb-3">1. Build Your Own Online Ordering</h4>
                     <p className="text-gray-700 mb-3">
-                      Invest $3,000-5,000 in a custom website with integrated ordering. With your numbers, this pays for itself in {savingsVsDirect > 0 ? Math.ceil((4000 / savingsVsDirect) * 12) : 'N/A'} months.
+                      Have OwnerClone create a custom website with integrated ordering. With your numbers, this pays for itself in {monthsToPayback} {monthsToPayback === 1 ? 'month' : 'months'}.
                     </p>
                     <ul className="space-y-2 text-gray-600 text-sm">
                       <li>• Keep 97%+ of every order (vs 50-60% on third-party)</li>
