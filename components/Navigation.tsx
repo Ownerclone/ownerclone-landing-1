@@ -22,7 +22,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo - Now links to home */}
-          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+         <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
   <svg viewBox="0 0 80 60" className="h-10 md:h-12 w-auto">
     {/* O - Circle */}
     <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6"/>
