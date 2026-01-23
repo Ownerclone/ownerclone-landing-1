@@ -74,8 +74,7 @@ export default function Home() {
             Built by Someone Who's <span className="text-cyan-bright">Been in Your Shoes</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            Our founder spent two decades building a successful film equipment rental business with locations across multiple cities and international operations. After achieving that success, he decided to enter the restaurant industry and opened three concepts: an Italian restaurant, a BBQ smokehouse, and a sports bar. Despite having entrepreneurial experience, the restaurant industry was different - operational chaos that couldn't be seen until it was too late. Those experiences led to the creation of OwnerClone: a system that shows you the problems before they become disasters.
-          </p>
+            From ten years in the kitchen working his way through college to 20 years building and growing a film rental company across the country, our founder's path has been defined by hard work, determination, creativity, and systems that inspire growth. After returning to restaurants as an owner for the past ten years, he has come face to face with the hidden challenges that owners like him see every day.  From that experiance came OwnerClone - a groundbreaking restaurant management system that turns chaos into clarity.           </p>
         </div>
       </section>
 
