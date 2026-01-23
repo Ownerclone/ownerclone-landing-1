@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/lib/theme-context';
 import Navigation from '@/components/Navigation';
-// import Footer from '@/components/Footer'; // TEMPORARILY COMMENTED OUT
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,7 +25,7 @@ export default function RootLayout({
           <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
             <Navigation />
             <main>{children}</main>
-            {/* <Footer /> */}
+            <Footer />
           </div>
         </ThemeProvider>
       </body>
