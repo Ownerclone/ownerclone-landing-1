@@ -23,11 +23,11 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo - Now links to home */}
           <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-  <svg viewBox="0 0 50 60" className="h-10 md:h-12 w-auto">
+  <svg viewBox="0 0 80 60" className="h-10 md:h-12 w-auto">
     {/* O - Circle */}
-    <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="4"/>
-    {/* C - Flipped and overlapping */}
-    <path d="M 32 12 A 18 18 0 1 0 32 48" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round"/>
+    <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6"/>
+    {/* C - Flipped, slight overlap, thicker */}
+    <path d="M 44 12 A 18 18 0 1 0 44 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
   </svg>
   <span className="text-2xl font-bold text-[#38bdf8]">OwnerClone</span>
 </Link>
