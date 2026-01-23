@@ -104,7 +104,8 @@ export default function Features() {
         </div>
         
         {/* Blue separator line at bottom of hero */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-0.5 bg-[#38bdf8]"></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-[#38bdf8]"></div>
+      </section>
 
       {/* Modules Grid */}
       <section className="py-20 px-4">
@@ -114,11 +115,6 @@ export default function Features() {
             
             return (
               <div key={module.name} className="space-y-6">
-                {/* Witty H3 Tagline - Centered and Blue */}
-                <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center">
-                  {module.wittyHeadline}
-                </h3>
-                
                 {/* Witty H3 Tagline with underline */}
                 <div className="flex flex-col items-center mb-4">
                   <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center border-b-2 border-[#38bdf8] pb-3">
