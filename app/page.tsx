@@ -16,7 +16,7 @@ export default function Home() {
           <h1 className="font-black mb-6 leading-tight">
             <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white block mb-2">Restaurant Management Software</span>
             <span className="text-lg sm:text-xl md:text-2xl text-gray-400 font-normal block mb-4">Built by</span>
-            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-cyan-bright block">Restaurant Owners for Restaurant Owners!</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-cyan-bright block">Restaurant Owners & Chefs</span>
           </h1>
           
           {/* Subheadline */}
