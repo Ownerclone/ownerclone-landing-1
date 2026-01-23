@@ -21,7 +21,7 @@ export default function Home() {
           
           {/* Subheadline */}
           <p className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-            Stop drowning in spreadsheets. Start making money. Automate your restaurant operations with seamless POS integration, real-time analytics, and AI-driven insights.
+            Stop drowning in spreadsheets. Start making money. Automate your operations. Real-time analytics with AI-driven insights.
           </p>
           
           {/* CTA Buttons */}
