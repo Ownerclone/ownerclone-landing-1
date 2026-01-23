@@ -155,7 +155,7 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 7. Per Plate Pricing Calculator - NEW! */}
+            {/* 7. Per Plate Pricing Calculator - WORKING */}
             <a href="/free-tools/per-plate-pricing" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300">
               <div className="text-5xl mb-4">🍴</div>
               <h3 className="text-2xl font-bold mb-3">Per Plate Pricing Calculator</h3>
@@ -170,7 +170,23 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 8. Revenue Projections Calculator - COMING SOON */}
+            {/* 8. Google Review Calculator - NEW! */}
+            <a href="/free-tools/google-review" className="block bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-pointer hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 relative">
+              <div className="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
+              <div className="text-5xl mb-4">⭐</div>
+              <h3 className="text-2xl font-bold mb-3">Google Review Calculator</h3>
+              <p className="text-gray-400 mb-6">
+                Calculate review impact, plan recovery from bad reviews, and set rating goals with proven strategies.
+              </p>
+              <div className="flex items-center text-purple-400 font-semibold">
+                <span>Try Calculator</span>
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+
+            {/* 9. Revenue Projections Calculator - COMING SOON */}
             <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
               <div className="text-5xl mb-4">📈</div>
               <h3 className="text-2xl font-bold mb-3">Revenue Projections</h3>
@@ -185,7 +201,7 @@ export default function FreeToolsPage() {
               </div>
             </div>
 
-            {/* 9. Inventory Valuation Calculator - COMING SOON */}
+            {/* 10. Inventory Valuation Calculator - COMING SOON */}
             <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 cursor-not-allowed opacity-75">
               <div className="text-5xl mb-4">📦</div>
               <h3 className="text-2xl font-bold mb-3">Inventory Valuation</h3>
@@ -325,6 +341,7 @@ export default function FreeToolsPage() {
                 <li><a href="/free-tools/food-cost" className="hover:text-blue-400 transition">Food Cost Calculator</a></li>
                 <li><a href="/free-tools/prime-cost" className="hover:text-blue-400 transition">Prime Cost Calculator</a></li>
                 <li><a href="/free-tools/labor-cost" className="hover:text-blue-400 transition">Labor Cost Calculator</a></li>
+                <li><a href="/free-tools/google-review" className="hover:text-purple-400 transition">Google Review Calculator</a></li>
               </ul>
             </div>
 
