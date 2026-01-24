@@ -17,7 +17,7 @@ export default function Home() {
             <div className="flex items-center justify-center gap-3 mb-8">
               <svg viewBox="-2 0 80 60" className="h-16 md:h-20 w-auto">
                 <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6"/>
-                <path d="M 52 12 A 18 18 0 1 0 52 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
+                <path d="M 48 12 A 18 18 0 1 0 48 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
               </svg>
               <h1 className="text-5xl md:text-7xl font-black text-white">OwnerClone</h1>
             </div>
