@@ -39,27 +39,27 @@ export default function Contact() {
                 <form action="https://formspree.io/f/meeeeevo" method="POST" className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
-                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="John Smith" />
+                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="John Smith" />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
-                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="john@restaurant.com" />
+                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="john@restaurant.com" />
                   </div>
 
                   <div>
                     <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 mb-2">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="(555) 123-4567" />
+                    <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="(555) 123-4567" />
                   </div>
 
                   <div>
                     <label htmlFor="restaurant" className="block text-sm font-semibold text-gray-300 mb-2">Restaurant Name</label>
-                    <input type="text" id="restaurant" name="restaurant" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="Your Restaurant Name" />
+                    <input type="text" id="restaurant" name="restaurant" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="Your Restaurant Name" />
                   </div>
 
                   <div>
                     <label htmlFor="inquiry-type" className="block text-sm font-semibold text-gray-300 mb-2">What can we help you with?</label>
-                    <select id="inquiry-type" name="inquiry-type" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors">
+                    <select id="inquiry-type" name="inquiry-type" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors">
                       <option value="">Select an option</option>
                       <option value="POS Upgrade">POS Upgrade - Get OwnerClone FREE</option>
                       <option value="Schedule a Demo">Schedule a Demo</option>
@@ -72,7 +72,7 @@ export default function Contact() {
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-2">Message</label>
-                    <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors resize-none" placeholder="Tell us about your restaurant and how we can help"></textarea>
+                    <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors resize-none" placeholder="Tell us about your restaurant and how we can help"></textarea>
                   </div>
 
                   <button type="submit" className="w-full bg-[#38bdf8] text-black px-6 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]">Send Message</button>
