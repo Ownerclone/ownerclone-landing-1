@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Navigation from '../components/Navigation'
 import { FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Contact Us - Schedule a Demo | OwnerClone',
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <>
+    <React.Fragment>
       <div className="min-h-screen bg-[#0a0a0a] text-white">
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#10b981] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
@@ -40,69 +41,28 @@ export default function Contact() {
                 
                 <form action="https://formspree.io/f/meeeeevo" method="POST" className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
-                      placeholder="John Smith"
-                    />
+                    <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
+                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="John Smith" />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
-                      placeholder="john@restaurant.com"
-                    />
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
+                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="john@restaurant.com" />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
-                      placeholder="(555) 123-4567"
-                    />
+                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 mb-2">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="(555) 123-4567" />
                   </div>
 
                   <div>
-                    <label htmlFor="restaurant" className="block text-sm font-semibold text-gray-300 mb-2">
-                      Restaurant Name
-                    </label>
-                    <input
-                      type="text"
-                      id="restaurant"
-                      name="restaurant"
-                      className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
-                      placeholder="Your Restaurant Name"
-                    />
+                    <label htmlFor="restaurant" className="block text-sm font-semibold text-gray-300 mb-2">Restaurant Name</label>
+                    <input type="text" id="restaurant" name="restaurant" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors" placeholder="Your Restaurant Name" />
                   </div>
 
                   <div>
-                    <label htmlFor="inquiry-type" className="block text-sm font-semibold text-gray-300 mb-2">
-                      What can we help you with?
-                    </label>
-                    <select
-                      id="inquiry-type"
-                      name="inquiry-type"
-                      required
-                      className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
-                    >
+                    <label htmlFor="inquiry-type" className="block text-sm font-semibold text-gray-300 mb-2">What can we help you with?</label>
+                    <select id="inquiry-type" name="inquiry-type" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors">
                       <option value="">Select an option</option>
                       <option value="POS Upgrade">POS Upgrade - Get OwnerClone FREE</option>
                       <option value="Schedule a Demo">Schedule a Demo</option>
@@ -114,73 +74,39 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors resize-none"
-                      placeholder="Tell us about your restaurant and how we can help"
-                    ></textarea>
+                    <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-2">Message</label>
+                    <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors resize-none" placeholder="Tell us about your restaurant and how we can help"></textarea>
                   </div>
 
-                  <button
-                    type="submit"
-                    className="w-full bg-[#38bdf8] text-black px-6 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]"
-                  >
-                    Send Message
-                  </button>
+                  <button type="submit" className="w-full bg-[#38bdf8] text-black px-6 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]">Send Message</button>
                 </form>
 
-                <p className="text-sm text-gray-400 mt-4">
-                  We typically respond within 24 hours
-                </p>
+                <p className="text-sm text-gray-400 mt-4">We typically respond within 24 hours</p>
               </div>
 
               <div className="space-y-8">
                 <div className="bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/5 border-2 border-[#10b981] rounded-2xl p-6 shadow-[0_0_60px_rgba(16,185,129,0.2)]">
-                  <h3 className="text-2xl font-bold mb-4">
-                    Get OwnerClone <span className="text-[#10b981]">FREE</span>
-                  </h3>
-                  <p className="text-gray-300 mb-4">
-                    Upgrade your POS system and get OwnerClone included at no cost. We partner with leading POS providers to make this happen.
-                  </p>
-                  <p className="text-gray-300 mb-6">
-                    Select POS Upgrade in the form, or email us directly:
-                  </p>
-                  
-                    href="mailto:info@ownerclone.com?subject=POS%20Upgrade%20Inquiry"
-                    className="block w-full text-center px-6 py-4 bg-[#10b981] text-black font-bold rounded-lg hover:bg-[#059669] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(16,185,129,0.3)]"
-                  >
-                    Email Us About POS Upgrade
-                  </a>
+                  <h3 className="text-2xl font-bold mb-4">Get OwnerClone <span className="text-[#10b981]">FREE</span></h3>
+                  <p className="text-gray-300 mb-4">Upgrade your POS system and get OwnerClone included at no cost. We partner with leading POS providers to make this happen.</p>
+                  <p className="text-gray-300 mb-6">Select POS Upgrade in the form, or email us directly:</p>
+                  <a href="mailto:info@ownerclone.com?subject=POS%20Upgrade%20Inquiry" className="block w-full text-center px-6 py-4 bg-[#10b981] text-black font-bold rounded-lg hover:bg-[#059669] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(16,185,129,0.3)]">Email Us About POS Upgrade</a>
                 </div>
 
                 <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-6">
                   <h3 className="text-xl font-bold mb-4">Contact Information</h3>
-                  
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
                       <FaEnvelope className="text-[#38bdf8] text-xl mt-1" />
                       <div>
                         <p className="font-semibold text-white">Email</p>
-                        <a href="mailto:info@ownerclone.com" className="text-[#38bdf8] hover:text-[#0ea5e9] transition-colors">
-                          info@ownerclone.com
-                        </a>
+                        <a href="mailto:info@ownerclone.com" className="text-[#38bdf8] hover:text-[#0ea5e9] transition-colors">info@ownerclone.com</a>
                       </div>
                     </div>
-
                     <div className="flex items-start space-x-3">
                       <FaMapMarkerAlt className="text-[#38bdf8] text-xl mt-1" />
                       <div>
                         <p className="font-semibold text-white">Location</p>
-                        <p className="text-gray-400">
-                          Atlanta, Georgia<br />
-                          Serving restaurants nationwide
-                        </p>
+                        <p className="text-gray-400">Atlanta, Georgia<br />Serving restaurants nationwide</p>
                       </div>
                     </div>
                   </div>
@@ -189,18 +115,10 @@ export default function Contact() {
                 <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-6">
                   <h3 className="text-xl font-bold mb-4">Quick Links</h3>
                   <div className="space-y-3">
-                    <Link href="/pricing" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">
-                      → View Pricing & Early Adopter Rates
-                    </Link>
-                    <Link href="/features" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">
-                      → Explore All Features
-                    </Link>
-                    <Link href="/roadmap" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">
-                      → See Our Product Roadmap
-                    </Link>
-                    <Link href="/blog" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">
-                      → Read Restaurant Owner Insights
-                    </Link>
+                    <Link href="/pricing" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ View Pricing & Early Adopter Rates</Link>
+                    <Link href="/features" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ Explore All Features</Link>
+                    <Link href="/roadmap" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ See Our Product Roadmap</Link>
+                    <Link href="/blog" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ Read Restaurant Owner Insights</Link>
                   </div>
                 </div>
               </div>
@@ -210,18 +128,12 @@ export default function Contact() {
 
         <section className="relative py-16 px-4 bg-[#0f1419]/30">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">
-              We're Here to <span className="text-[#38bdf8]">Help</span>
-            </h2>
-            <p className="text-lg text-gray-300 mb-4">
-              OwnerClone was built by restaurant owners who understand your challenges. When you reach out, you're talking to people who've been in your shoes.
-            </p>
-            <p className="text-lg text-gray-300">
-              We typically respond within 24 hours. For POS upgrade inquiries, we'll get back to you even faster - usually within a few hours.
-            </p>
+            <h2 className="text-4xl font-bold mb-6">We're Here to <span className="text-[#38bdf8]">Help</span></h2>
+            <p className="text-lg text-gray-300 mb-4">OwnerClone was built by restaurant owners who understand your challenges. When you reach out, you're talking to people who've been in your shoes.</p>
+            <p className="text-lg text-gray-300">We typically respond within 24 hours. For POS upgrade inquiries, we'll get back to you even faster - usually within a few hours.</p>
           </div>
         </section>
       </div>
-    </>
+    </React.Fragment>
   )
 }
