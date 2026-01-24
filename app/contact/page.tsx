@@ -1,192 +1,207 @@
-'use client';
-
-import { Metadata } from 'next'
 import Link from 'next/link'
-import { FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
-import React, { useState } from 'react'
 
-export default function Contact() {
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch('https://formspree.io/f/meeeeevo', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setShowSuccess(true);
-        form.reset();
-        
-        // Auto-close after 5 seconds
-        setTimeout(() => {
-          setShowSuccess(false);
-        }, 5000);
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
+export default function Home() {
   return (
-    <React.Fragment>
-      <div className="min-h-screen bg-[#0a0a0a] text-white">
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#10b981] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        </div>
-
-        <section className="relative pt-32 pb-16 px-4">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
-          <div className="relative max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-black mb-6">
-              Let's Talk About <span className="text-[#38bdf8]">Your Restaurant</span>
-            </h1>
-            <p className="text-xl text-gray-300">
-              Schedule a demo, ask about getting OwnerClone free with a POS upgrade, or just say hello.
-            </p>
-          </div>
-        </section>
-
-        <section className="relative py-16 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12">
-              <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-8">
-                <h2 className="text-3xl font-bold mb-6">Send Us a <span className="text-[#38bdf8]">Message</span></h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
-                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="John Smith" />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
-                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="john@restaurant.com" />
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 mb-2">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="(555) 123-4567" />
-                  </div>
-
-                  <div>
-                    <label htmlFor="restaurant" className="block text-sm font-semibold text-gray-300 mb-2">Restaurant Name</label>
-                    <input type="text" id="restaurant" name="restaurant" className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="Your Restaurant Name" />
-                  </div>
-
-                  <div>
-                    <label htmlFor="inquiry-type" className="block text-sm font-semibold text-gray-300 mb-2">What can we help you with?</label>
-                    <select id="inquiry-type" name="inquiry-type" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors">
-                      <option value="">Select an option</option>
-                      <option value="POS Upgrade">POS Upgrade - Get OwnerClone FREE</option>
-                      <option value="Schedule a Demo">Schedule a Demo</option>
-                      <option value="Join Waitlist">Join Waitlist</option>
-                      <option value="Pricing Questions">Questions About Pricing</option>
-                      <option value="Feature Questions">Questions About Features</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-2">Message</label>
-                    <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors resize-none" placeholder="Tell us about your restaurant and how we can help"></textarea>
-                  </div>
-
-                  <button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="w-full bg-[#38bdf8] text-black px-6 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </button>
-                </form>
-
-                <p className="text-sm text-gray-400 mt-4">We typically respond within 24 hours</p>
-              </div>
-
-              <div className="space-y-8">
-                <div className="bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/5 border-2 border-[#10b981] rounded-2xl p-6 shadow-[0_0_60px_rgba(16,185,129,0.2)]">
-                  <h3 className="text-2xl font-bold mb-4">Get OwnerClone <span className="text-[#10b981]">FREE</span></h3>
-                  <p className="text-gray-300 mb-4">Upgrade your POS system and get OwnerClone included at no cost. We partner with leading POS providers to make this happen.</p>
-                  <p className="text-gray-300 mb-6">Select POS Upgrade in the form, or email us directly:</p>
-                  <a href="mailto:info@ownerclone.com?subject=POS%20Upgrade%20Inquiry" className="block w-full text-center px-6 py-4 bg-[#10b981] text-black font-bold rounded-lg hover:bg-[#059669] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(16,185,129,0.3)]">Email Us About POS Upgrade</a>
-                </div>
-
-                <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-6">
-                  <h3 className="text-xl font-bold mb-4">Contact Information</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <FaEnvelope className="text-[#38bdf8] text-xl mt-1" />
-                      <div>
-                        <p className="font-semibold text-white">Email</p>
-                        <a href="mailto:info@ownerclone.com" className="text-[#38bdf8] hover:text-[#0ea5e9] transition-colors">info@ownerclone.com</a>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <FaMapMarkerAlt className="text-[#38bdf8] text-xl mt-1" />
-                      <div>
-                        <p className="font-semibold text-white">Location</p>
-                        <p className="text-gray-400">Atlanta, Georgia<br />Serving restaurants nationwide</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-6">
-                  <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-                  <div className="space-y-3">
-                    <Link href="/pricing" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ View Pricing & Early Adopter Rates</Link>
-                    <Link href="/features" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ Explore All Features</Link>
-                    <Link href="/roadmap" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ See Our Product Roadmap</Link>
-                    <Link href="/blog" className="block text-[#38bdf8] hover:text-[#0ea5e9] font-semibold transition-colors">→ Read Restaurant Owner Insights</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="relative py-16 px-4 bg-[#0f1419]/30">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">We're Here to <span className="text-[#38bdf8]">Help</span></h2>
-            <p className="text-lg text-gray-300 mb-4">OwnerClone was built by restaurant owners who understand your challenges. When you reach out, you're talking to people who've been in your shoes.</p>
-            <p className="text-lg text-gray-300">We typically respond within 24 hours. For POS upgrade inquiries, we'll get back to you even faster - usually within a few hours.</p>
-          </div>
-        </section>
+    <main className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
+      {/* Animated Background Orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
 
-      {/* Success Modal */}
-      {showSuccess && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowSuccess(false)}>
-          <div className="bg-[#0a0a0a] border-2 border-[#10b981] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(16,185,129,0.3)]" onClick={(e) => e.stopPropagation()}>
-            <div className="text-center">
-              <div className="mb-4">
-                <svg className="w-16 h-16 mx-auto text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold mb-2">Message <span className="text-[#10b981]">Sent!</span></h2>
-              <p className="text-gray-300">
-                Thanks for reaching out! We'll get back to you within 24 hours.
+      {/* Hero Section with Logo + OwnerClone */}
+      <section className="relative pt-32 pb-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            {/* Logo + OwnerClone Name */}
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <svg viewBox="-2 0 80 60" className="h-16 md:h-20 w-auto">
+                <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6"/>
+                <path d="M 52 12 A 18 18 0 1 0 52 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
+              </svg>
+              <h1 className="text-5xl md:text-7xl font-black text-white">OwnerClone</h1>
+            </div>
+
+            {/* Main Hero Headline */}
+            <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
+              Stop Losing Money<br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                While You Sleep
+              </span>
+            </h2>
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+              Your restaurant is bleeding cash from theft, waste, and bad forecasting. 
+              OwnerClone's AI catches it all—so you don't have to watch the cameras at 2 AM.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+              <button 
+                onClick={() => document.querySelector('[data-login-button]')?.click()}
+                className="bg-cyan-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300"
+              >
+                Start Free Trial
+              </button>
+              <Link 
+                href="/demo"
+                className="bg-[#1a1a1a] text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-[#2a2a2a] hover:border-cyan-500/50 transition-all duration-300"
+              >
+                See Live Demo
+              </Link>
+            </div>
+
+            <p className="text-sm text-gray-500">
+              No credit card required • 30-day money-back guarantee
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Stats Banner */}
+      <section className="relative py-12 bg-[#0f1419]/50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">75%</div>
+              <div className="text-gray-400">of restaurants experience employee theft</div>
+              <div className="text-xs text-gray-500 mt-1">— National Restaurant Association</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">4-10%</div>
+              <div className="text-gray-400">of revenue lost to food waste annually</div>
+              <div className="text-xs text-gray-500 mt-1">— USDA</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">$2,400</div>
+              <div className="text-gray-400">average monthly savings with OwnerClone</div>
+              <div className="text-xs text-gray-500 mt-1">— Customer data</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Pain - Sound Familiar? */}
+      <section className="relative py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-black text-center mb-12">
+            Sound <span className="text-red-400">Familiar?</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-[#0a0a0a] md:bg-[#0a0a0a]/60 md:backdrop-blur-xl border-2 border-red-500/50 hover:border-red-500 rounded-2xl p-8 transition-all duration-300">
+              <div className="text-5xl mb-4">🚨</div>
+              <h3 className="text-2xl font-bold mb-3">Employee Theft</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Your night manager is running voids. Your bartender is giving free drinks. Your server is pocketing cash. You suspect it, but you can't prove it.
+              </p>
+            </div>
+
+            <div className="bg-[#0a0a0a] md:bg-[#0a0a0a]/60 md:backdrop-blur-xl border-2 border-yellow-500/50 hover:border-yellow-500 rounded-2xl p-8 transition-all duration-300">
+              <div className="text-5xl mb-4">📊</div>
+              <h3 className="text-2xl font-bold mb-3">Food Costs Are a Mystery</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Vendors raise prices without telling you. Portions are inconsistent. You have no idea which menu items are actually profitable. Your "30% food cost" is really 38%.
+              </p>
+            </div>
+
+            <div className="bg-[#0a0a0a] md:bg-[#0a0a0a]/60 md:backdrop-blur-xl border-2 border-purple-500/50 hover:border-purple-500 rounded-2xl p-8 transition-all duration-300">
+              <div className="text-5xl mb-4">📉</div>
+              <h3 className="text-2xl font-bold mb-3">Bad Forecasting Kills Profits</h3>
+              <p className="text-gray-400 leading-relaxed">
+                You over-order and waste product. You under-order and disappoint customers. Your gut isn't good enough when margins are this tight.
               </p>
             </div>
           </div>
         </div>
-      )}
-    </React.Fragment>
+      </section>
+
+      {/* Built by Someone Who's Been There */}
+      <section className="relative py-20 px-4 bg-[#0f1419]/30">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-black mb-6">
+            Built by Someone Who's <span className="text-[#38bdf8]">Been in Your Shoes</span>
+          </h2>
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+            From ten years in the kitchen working through college to 20 years building and growing a film rental company across the country, our founder's path has been defined by hard work, determination, creativity, and systems that inspire growth.
+          </p>
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            OwnerClone was born from watching a trusted employee steal $18,000 over 18 months. Not anymore. This software catches what you miss—so you can focus on running your restaurant, not playing detective.
+          </p>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="relative py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-black text-center mb-16">
+            Three Steps to <span className="text-[#38bdf8]">Take Control</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cyan-400/20 flex items-center justify-center text-3xl font-black text-cyan-400">
+                1
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Connect Your POS</h3>
+              <p className="text-gray-400">
+                5-minute setup with Toast, Square, Clover, or 50+ other systems. Just click, authorize, done.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-purple-400/20 flex items-center justify-center text-3xl font-black text-purple-400">
+                2
+              </div>
+              <h3 className="text-2xl font-bold mb-3">AI Analyzes Everything</h3>
+              <p className="text-gray-400">
+                Our AI tracks every transaction, monitors food costs in real-time, and spots theft patterns instantly.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-400/20 flex items-center justify-center text-3xl font-black text-green-400">
+                3
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Get Actionable Alerts</h3>
+              <p className="text-gray-400">
+                Receive instant notifications when something's wrong. No more guessing—just clear data you can act on.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-black mb-6">
+            Stop Losing Money. <span className="text-[#38bdf8]">Start Today.</span>
+          </h2>
+          <p className="text-xl text-gray-300 mb-8">
+            Join hundreds of restaurant owners saving $2,400+ per month with OwnerClone.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={() => document.querySelector('[data-login-button]')?.click()}
+              className="bg-cyan-400 text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300 shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.4)]"
+            >
+              Start Free Trial
+            </button>
+            
+            <Link 
+              href="/contact" 
+              className="px-10 py-4 bg-transparent border-2 border-[#38bdf8] text-[#38bdf8] font-bold text-lg rounded-lg hover:bg-[#38bdf8]/10 transition-all duration-300"
+            >
+              Talk to Us
+            </Link>
+          </div>
+
+          <p className="text-sm text-gray-500 mt-6">
+            $0.10 per customer per month • No setup fees • Cancel anytime
+          </p>
+        </div>
+      </section>
+    </main>
   )
 }
