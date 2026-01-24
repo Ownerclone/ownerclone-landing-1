@@ -13,6 +13,10 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
+            <svg viewBox="-2 0 80 60" className="h-10 md:h-12 w-auto">
+              <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6"/>
+              <path d="M 52 12 A 18 18 0 1 0 52 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
+            </svg>
             <span className="text-2xl font-black text-white">OwnerClone</span>
           </Link>
 
@@ -52,6 +56,9 @@ export default function Navigation() {
             </Link>
             <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
               Blog
+            </Link>
+            <Link href="/roadmap" className="text-gray-300 hover:text-white transition-colors">
+              Roadmap
             </Link>
             <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
               About
@@ -103,6 +110,9 @@ export default function Navigation() {
             </Link>
             <Link href="/blog" className="block text-gray-300 hover:text-white">
               Blog
+            </Link>
+            <Link href="/roadmap" className="block text-gray-300 hover:text-white">
+              Roadmap
             </Link>
             <Link href="/about" className="block text-gray-300 hover:text-white">
               About
