@@ -17,7 +17,7 @@ export default function Home() {
             <div className="flex items-center justify-center gap-3 mb-8">
               <svg viewBox="-2 0 80 60" className="h-16 md:h-20 w-auto">
                 <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10"/>
-                <circle cx="38" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10" strokeDasharray="70 113"/>
+                <circle cx="38" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6" strokeDasharray="70 113" transform="rotate(0, 38, 30)"/>
               </svg>
               <h1 className="text-5xl md:text-7xl font-black text-white">OwnerClone</h1>
             </div>
