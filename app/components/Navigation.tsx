@@ -5,6 +5,18 @@ import { useState } from 'react'
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [loginOpen, setLoginOpen] = useState(false)
+  const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false)
+
+  const handleForgotPassword = (e) => {
+    e.preventDefault()
+    setLoginOpen(false)
+    setForgotPasswordOpen(true)
+  }
+
+  const handleBackToLogin = () => {
+    setForgotPasswordOpen(false)
+    setLoginOpen(true)
+  }
 
   return (
     <>
@@ -16,7 +28,7 @@ export default function Navigation() {
               <a href="/" className="flex items-center space-x-3">
                 <svg viewBox="0 0 60 60" className="w-12 h-12">
                   <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="5"/>
-                  <circle cx="38" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="5"/>
+                  <path d="M 56 30 A 18 18 0 0 0 38 12 A 18 18 0 0 0 38 48 A 18 18 0 0 0 56 30" fill="none" stroke="#38bdf8" strokeWidth="5" strokeLinecap="round"/>
                 </svg>
                 <span className="text-2xl font-bold">OwnerClone</span>
               </a>
@@ -216,6 +228,16 @@ export default function Navigation() {
                 />
               </div>
               
+              <div className="text-right">
+                <button 
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-sm text-[#38bdf8] hover:text-[#0ea5e9] transition"
+                >
+                  Forgot password/username?
+                </button>
+              </div>
+              
               <button type="submit" className="w-full bg-[#38bdf8] text-black px-6 py-3 rounded-lg font-bold hover:bg-[#0ea5e9] transition">
                 Sign In
               </button>
@@ -225,6 +247,50 @@ export default function Navigation() {
               <p className="text-sm text-gray-400">
                 Don't have an account? <a href="/pricing" className="text-[#38bdf8] hover:text-[#0ea5e9] font-semibold">Join Early Access</a>
               </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Forgot Password Modal */}
+      {forgotPasswordOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setForgotPasswordOpen(false)}>
+          <div className="bg-[#0a0a0a] border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold">Reset <span className="text-[#38bdf8]">Password</span></h2>
+              <button onClick={() => setForgotPasswordOpen(false)} className="text-gray-400 hover:text-white transition">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            
+            <p className="text-gray-300 mb-6">
+              Enter your email address and we'll send you a link to reset your password along with your username.
+            </p>
+            
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
+              
+              <button type="submit" className="w-full bg-[#38bdf8] text-black px-6 py-3 rounded-lg font-bold hover:bg-[#0ea5e9] transition">
+                Send Recovery Email
+              </button>
+            </form>
+            
+            <div className="mt-6 text-center">
+              <button 
+                onClick={handleBackToLogin}
+                className="text-sm text-[#38bdf8] hover:text-[#0ea5e9] transition"
+              >
+                ← Back to Login
+              </button>
             </div>
           </div>
         </div>
