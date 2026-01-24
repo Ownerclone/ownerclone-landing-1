@@ -79,7 +79,7 @@ export default function AboutPage() {
                 👨‍💼
               </div>
               <div className="text-center md:text-left">
-                <h3 className="text-3xl font-bold mb-2">Matt McKinney</h3>
+                <h3 className="text-3xl font-bold mb-2">Mateo Monti</h3>
                 <p className="text-xl text-cyan-400 mb-1">Founder & CEO, OwnerClone</p>
                 <p className="text-gray-400">30 years building businesses | 10 years as restaurant owner</p>
               </div>
