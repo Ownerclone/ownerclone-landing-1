@@ -16,15 +16,12 @@ export default function BackgroundOrbs() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // No orbs on mobile - return nothing
   if (isMobile) {
-    return (
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 -left-20 w-64 h-64 bg-cyan-500/10 rounded-full"></div>
-        <div className="absolute bottom-20 right-10 w-64 h-64 bg-purple-500/10 rounded-full"></div>
-      </div>
-    );
+    return null;
   }
 
+  // Full version for desktop only
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
       <div className="absolute top-20 -left-20 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-screen filter blur-[128px] animate-pulse"></div>
