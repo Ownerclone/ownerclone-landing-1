@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from './context/ThemeContext';
+import Navigation from './components/Navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,18 +17,13 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mateo Monti' }],
   creator: 'Mateo Monti',
   publisher: 'OwnerClone',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://ownerclone.com',
     siteName: 'OwnerClone',
     title: 'OwnerClone | Restaurant Management Software',
-    description: 'AI-powered restaurant management that catches theft, tracks food costs, and predicts demand. Built by restaurant owners for restaurant owners.',
+    description: 'AI-powered restaurant management that catches theft, tracks food costs, and predicts demand.',
     images: [
       {
         url: 'https://ownerclone.com/og-image.png',
@@ -47,13 +43,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
 };
 
@@ -69,6 +58,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider>
+          <Navigation />
           {children}
         </ThemeProvider>
       </body>
