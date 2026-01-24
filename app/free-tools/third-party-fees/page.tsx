@@ -129,39 +129,52 @@ export default function ThirdPartyFeesCalculator() {
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-600 via-orange-600 to-yellow-600 py-12 px-4">
-      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">💰 Third Party Delivery True Cost Calculator</h1>
-          <p className="text-xl opacity-95">See the REAL fees you're paying DoorDash, Uber Eats & GrubHub</p>
-        </div>
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {/* Animated Background Orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#6366f1] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#8b5cf6] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
 
-        <div className="p-8">
+      {/* Hero */}
+      <section className="relative pt-32 pb-16 px-4">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-black mb-6">
+            Third Party Delivery <span className="text-[#6366f1]">True Cost Calculator</span>
+          </h1>
+          <p className="text-xl text-gray-300">
+            See the REAL fees you're paying DoorDash, Uber Eats & GrubHub
+          </p>
+        </div>
+      </section>
+
+      <section className="relative py-16 px-4">
+        <div className="max-w-5xl mx-auto">
           {/* Warning Box */}
-          <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-xl mb-8">
-            <h3 className="text-red-900 font-bold text-lg mb-2">⚠️ Most Restaurant Owners Are Shocked By These Numbers</h3>
-            <p className="text-red-800">
-              Third-party platforms advertise "15-20% commission" but the TRUE cost is often <strong>40-50% of your order value</strong> after all fees, marketing, and promotions are added up. This calculator shows you the complete picture.
+          <div className="bg-[#ef4444]/10 border-l-4 border-[#ef4444] p-6 rounded-xl mb-8 backdrop-blur-xl">
+            <h3 className="text-[#ef4444] font-bold text-lg mb-2">⚠️ Most Restaurant Owners Are Shocked By These Numbers</h3>
+            <p className="text-gray-300">
+              Third-party platforms advertise "15-20% commission" but the TRUE cost is often <strong className="text-[#ef4444]">40-50% of your order value</strong> after all fees, marketing, and promotions are added up. This calculator shows you the complete picture.
             </p>
           </div>
 
           {/* Calculator Inputs */}
-          <div className="mb-10 pb-10 border-b-2 border-gray-200">
-            <h2 className="text-3xl font-semibold text-orange-600 mb-6">📊 Your Numbers</h2>
+          <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#6366f1]/20 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(99,102,241,0.1)]">
+            <h2 className="text-2xl font-bold text-[#6366f1] mb-6">Your Numbers</h2>
 
             <div className="space-y-6">
               {/* Platform Selection with Commission Input */}
               <div>
-                <label className="block font-semibold text-gray-700 mb-3">Select Delivery Platform & Enter Your Commission Rate</label>
+                <label className="block font-semibold text-gray-300 mb-3">Select Delivery Platform & Enter Your Commission Rate</label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* DoorDash */}
                   <div
                     onClick={() => setSelectedPlatform('doordash')}
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition ${
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition backdrop-blur-xl ${
                       selectedPlatform === 'doordash'
-                        ? 'border-red-500 bg-red-50'
-                        : 'border-gray-300 hover:border-red-300'
+                        ? 'border-[#ef4444] bg-[#ef4444]/10'
+                        : 'border-[#2a2a2a] bg-[#0a0a0a]/60 hover:border-[#ef4444]/50'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-3">
@@ -176,19 +189,19 @@ export default function ThirdPartyFeesCalculator() {
                         value={doordashCommission}
                         onChange={(e) => setDoordashCommission(e.target.value)}
                         onClick={(e) => e.stopPropagation()}
-                        className="w-20 px-2 py-1 border-2 border-gray-300 rounded text-center focus:border-red-500 focus:outline-none"
+                        className="w-20 px-2 py-1 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded text-center text-white focus:border-[#ef4444] focus:outline-none transition-colors"
                       />
-                      <span className="text-gray-600">% commission</span>
+                      <span className="text-gray-400">% commission</span>
                     </div>
                   </div>
 
                   {/* Uber Eats */}
                   <div
                     onClick={() => setSelectedPlatform('ubereats')}
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition ${
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition backdrop-blur-xl ${
                       selectedPlatform === 'ubereats'
-                        ? 'border-green-500 bg-green-50'
-                        : 'border-gray-300 hover:border-green-300'
+                        ? 'border-[#10b981] bg-[#10b981]/10'
+                        : 'border-[#2a2a2a] bg-[#0a0a0a]/60 hover:border-[#10b981]/50'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-3">
@@ -203,19 +216,19 @@ export default function ThirdPartyFeesCalculator() {
                         value={ubereatsCommission}
                         onChange={(e) => setUbereatsCommission(e.target.value)}
                         onClick={(e) => e.stopPropagation()}
-                        className="w-20 px-2 py-1 border-2 border-gray-300 rounded text-center focus:border-green-500 focus:outline-none"
+                        className="w-20 px-2 py-1 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded text-center text-white focus:border-[#10b981] focus:outline-none transition-colors"
                       />
-                      <span className="text-gray-600">% commission</span>
+                      <span className="text-gray-400">% commission</span>
                     </div>
                   </div>
 
                   {/* GrubHub */}
                   <div
                     onClick={() => setSelectedPlatform('grubhub')}
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition ${
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition backdrop-blur-xl ${
                       selectedPlatform === 'grubhub'
-                        ? 'border-orange-500 bg-orange-50'
-                        : 'border-gray-300 hover:border-orange-300'
+                        ? 'border-[#fb923c] bg-[#fb923c]/10'
+                        : 'border-[#2a2a2a] bg-[#0a0a0a]/60 hover:border-[#fb923c]/50'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-3">
@@ -230,9 +243,9 @@ export default function ThirdPartyFeesCalculator() {
                         value={grubhubCommission}
                         onChange={(e) => setGrubhubCommission(e.target.value)}
                         onClick={(e) => e.stopPropagation()}
-                        className="w-20 px-2 py-1 border-2 border-gray-300 rounded text-center focus:border-orange-500 focus:outline-none"
+                        className="w-20 px-2 py-1 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded text-center text-white focus:border-[#fb923c] focus:outline-none transition-colors"
                       />
-                      <span className="text-gray-600">% commission</span>
+                      <span className="text-gray-400">% commission</span>
                     </div>
                   </div>
                 </div>
@@ -241,7 +254,7 @@ export default function ThirdPartyFeesCalculator() {
 
               {/* Average Order Value */}
               <div>
-                <label className="block font-semibold text-gray-700 mb-2">Average Order Value ($)</label>
+                <label className="block font-semibold text-gray-300 mb-2">Average Order Value ($)</label>
                 <input
                   type="number"
                   min="1"
@@ -249,34 +262,34 @@ export default function ThirdPartyFeesCalculator() {
                   placeholder="e.g., 45.00"
                   value={averageOrderValue}
                   onChange={(e) => setAverageOrderValue(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200 transition"
+                  className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg text-white text-lg focus:border-[#6366f1] focus:outline-none transition-colors"
                 />
                 <p className="text-sm text-gray-500 mt-2">💡 Tip: Check your POS reports for average delivery order size</p>
               </div>
 
               {/* Orders Per Month */}
               <div>
-                <label className="block font-semibold text-gray-700 mb-2">Orders Per Month</label>
+                <label className="block font-semibold text-gray-300 mb-2">Orders Per Month</label>
                 <input
                   type="number"
                   min="1"
                   placeholder="e.g., 300"
                   value={ordersPerMonth}
                   onChange={(e) => setOrdersPerMonth(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200 transition"
+                  className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg text-white text-lg focus:border-[#6366f1] focus:outline-none transition-colors"
                 />
               </div>
 
               {/* Compare All Toggle */}
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 p-4 bg-[#0a0a0a]/60 border border-[#2a2a2a] rounded-lg">
                 <input
                   type="checkbox"
                   id="compareAll"
                   checked={compareAll}
                   onChange={(e) => setCompareAll(e.target.checked)}
-                  className="w-5 h-5 text-orange-600 rounded focus:ring-orange-500"
+                  className="w-5 h-5 text-[#6366f1] bg-[#0a0a0a] border-[#2a2a2a] rounded focus:ring-[#6366f1]"
                 />
-                <label htmlFor="compareAll" className="font-semibold text-gray-700">
+                <label htmlFor="compareAll" className="font-semibold text-gray-300 cursor-pointer">
                   Compare all platforms side-by-side
                 </label>
               </div>
@@ -284,7 +297,7 @@ export default function ThirdPartyFeesCalculator() {
 
             <button
               onClick={handleCalculate}
-              className="w-full mt-8 bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 rounded-xl text-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition"
+              className="w-full mt-8 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white py-4 rounded-lg text-lg font-semibold hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all"
             >
               Calculate True Cost
             </button>
@@ -297,51 +310,51 @@ export default function ThirdPartyFeesCalculator() {
                 // Single Platform Results
                 <>
                   {/* Fee Breakdown */}
-                  <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8">
-                    <h3 className="text-2xl font-bold text-orange-700 mb-6">
+                  <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#6366f1]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(99,102,241,0.1)]">
+                    <h3 className="text-2xl font-bold text-[#6366f1] mb-6">
                       💸 {getPlatformWithCustomCommission(selectedPlatform).name} Fee Breakdown (Per Order)
                     </h3>
 
                     <div className="space-y-4">
-                      <div className="flex justify-between items-center py-3 border-b border-orange-200">
-                        <span className="text-gray-700 font-medium">Order Subtotal</span>
-                        <span className="text-2xl font-bold text-gray-900">${orderValue.toFixed(2)}</span>
+                      <div className="flex justify-between items-center py-3 border-b border-[#2a2a2a]">
+                        <span className="text-gray-300 font-medium">Order Subtotal</span>
+                        <span className="text-2xl font-bold text-white">${orderValue.toFixed(2)}</span>
                       </div>
 
                       <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600">Commission ({singlePlatformResult.commissionPercent}%)</span>
-                        <span className="text-red-600 font-semibold">-${singlePlatformResult.commissionFee.toFixed(2)}</span>
+                        <span className="text-gray-400">Commission ({singlePlatformResult.commissionPercent}%)</span>
+                        <span className="text-[#ef4444] font-semibold">-${singlePlatformResult.commissionFee.toFixed(2)}</span>
                       </div>
 
                       {singlePlatformResult.serviceFee > 0 && (
                         <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600">Service Fee</span>
-                          <span className="text-red-600 font-semibold">-${singlePlatformResult.serviceFee.toFixed(2)}</span>
+                          <span className="text-gray-400">Service Fee</span>
+                          <span className="text-[#ef4444] font-semibold">-${singlePlatformResult.serviceFee.toFixed(2)}</span>
                         </div>
                       )}
 
                       <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600">Marketing/Promotions</span>
-                        <span className="text-red-600 font-semibold">-${singlePlatformResult.marketingFee.toFixed(2)}</span>
+                        <span className="text-gray-400">Marketing/Promotions</span>
+                        <span className="text-[#ef4444] font-semibold">-${singlePlatformResult.marketingFee.toFixed(2)}</span>
                       </div>
 
                       <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600">Payment Processing</span>
-                        <span className="text-red-600 font-semibold">-${singlePlatformResult.paymentProcessingFee.toFixed(2)}</span>
+                        <span className="text-gray-400">Payment Processing</span>
+                        <span className="text-[#ef4444] font-semibold">-${singlePlatformResult.paymentProcessingFee.toFixed(2)}</span>
                       </div>
 
-                      <div className="flex justify-between items-center py-3 border-t-2 border-orange-300 mt-4">
-                        <span className="text-gray-700 font-bold">Total Fees</span>
-                        <span className="text-2xl font-bold text-red-600">-${singlePlatformResult.totalFees.toFixed(2)}</span>
+                      <div className="flex justify-between items-center py-3 border-t-2 border-[#6366f1] mt-4">
+                        <span className="text-gray-300 font-bold">Total Fees</span>
+                        <span className="text-2xl font-bold text-[#ef4444]">-${singlePlatformResult.totalFees.toFixed(2)}</span>
                       </div>
 
-                      <div className="flex justify-between items-center py-3 bg-white rounded-xl px-4 border-2 border-green-500">
-                        <span className="text-gray-700 font-bold">You Actually Receive</span>
-                        <span className="text-3xl font-bold text-green-600">${singlePlatformResult.netRevenue.toFixed(2)}</span>
+                      <div className="flex justify-between items-center py-3 bg-[#10b981]/10 rounded-xl px-4 border-2 border-[#10b981]">
+                        <span className="text-gray-300 font-bold">You Actually Receive</span>
+                        <span className="text-3xl font-bold text-[#10b981]">${singlePlatformResult.netRevenue.toFixed(2)}</span>
                       </div>
 
-                      <div className="bg-red-100 border border-red-300 rounded-xl p-4 mt-4">
-                        <p className="text-red-900 font-bold text-center">
+                      <div className="bg-[#ef4444]/10 border border-[#ef4444]/30 rounded-xl p-4 mt-4">
+                        <p className="text-[#ef4444] font-bold text-center">
                           Effective Fee Rate: {singlePlatformResult.effectiveFeePercent.toFixed(1)}% of order value
                         </p>
                       </div>
@@ -350,78 +363,78 @@ export default function ThirdPartyFeesCalculator() {
 
                   {/* Monthly/Annual Impact */}
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-xl">
-                      <h4 className="text-lg font-bold text-orange-700 mb-3">📅 Monthly Impact</h4>
+                    <div className="bg-[#fb923c]/10 border-l-4 border-[#fb923c] p-6 rounded-xl backdrop-blur-xl">
+                      <h4 className="text-lg font-bold text-[#fb923c] mb-3">📅 Monthly Impact</h4>
                       <div className="space-y-2">
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Gross Revenue</span>
-                          <span className="font-semibold">${(orderValue * orders).toLocaleString()}</span>
+                          <span className="text-gray-400">Gross Revenue</span>
+                          <span className="font-semibold text-white">${(orderValue * orders).toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Total Fees Paid</span>
-                          <span className="font-semibold text-red-600">-${monthlyLoss.toLocaleString()}</span>
+                          <span className="text-gray-400">Total Fees Paid</span>
+                          <span className="font-semibold text-[#ef4444]">-${monthlyLoss.toLocaleString()}</span>
                         </div>
-                        <div className="flex justify-between pt-2 border-t">
-                          <span className="text-gray-700 font-bold">Net Revenue</span>
-                          <span className="font-bold text-green-600">${monthlyNet.toLocaleString()}</span>
+                        <div className="flex justify-between pt-2 border-t border-[#2a2a2a]">
+                          <span className="text-gray-300 font-bold">Net Revenue</span>
+                          <span className="font-bold text-[#10b981]">${monthlyNet.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-xl">
-                      <h4 className="text-lg font-bold text-red-700 mb-3">📆 Annual Impact</h4>
+                    <div className="bg-[#ef4444]/10 border-l-4 border-[#ef4444] p-6 rounded-xl backdrop-blur-xl">
+                      <h4 className="text-lg font-bold text-[#ef4444] mb-3">📆 Annual Impact</h4>
                       <div className="space-y-2">
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Gross Revenue</span>
-                          <span className="font-semibold">${(orderValue * orders * 12).toLocaleString()}</span>
+                          <span className="text-gray-400">Gross Revenue</span>
+                          <span className="font-semibold text-white">${(orderValue * orders * 12).toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Total Fees Paid</span>
-                          <span className="font-semibold text-red-600">-${annualLoss.toLocaleString()}</span>
+                          <span className="text-gray-400">Total Fees Paid</span>
+                          <span className="font-semibold text-[#ef4444]">-${annualLoss.toLocaleString()}</span>
                         </div>
-                        <div className="flex justify-between pt-2 border-t">
-                          <span className="text-gray-700 font-bold">Net Revenue</span>
-                          <span className="font-bold text-green-600">${annualNet.toLocaleString()}</span>
+                        <div className="flex justify-between pt-2 border-t border-[#2a2a2a]">
+                          <span className="text-gray-300 font-bold">Net Revenue</span>
+                          <span className="font-bold text-[#10b981]">${annualNet.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Direct Ordering Comparison */}
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-500">
-                    <h3 className="text-2xl font-bold text-green-700 mb-6">
+                  <div className="bg-gradient-to-br from-[#10b981]/20 to-[#059669]/20 border-2 border-[#10b981] rounded-2xl p-8 backdrop-blur-xl shadow-[0_0_80px_rgba(16,185,129,0.15)]">
+                    <h3 className="text-2xl font-bold text-[#10b981] mb-6">
                       🎯 What If You Had Direct Online Ordering?
                     </h3>
 
                     <div className="grid md:grid-cols-3 gap-6 mb-6">
-                      <div className="bg-white rounded-xl p-6 text-center">
-                        <div className="text-sm text-gray-600 mb-2">Processing Fee Only</div>
-                        <div className="text-3xl font-bold text-gray-900">${directOrderProcessingFee.toFixed(2)}</div>
+                      <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 text-center">
+                        <div className="text-sm text-gray-400 mb-2">Processing Fee Only</div>
+                        <div className="text-3xl font-bold text-white">${directOrderProcessingFee.toFixed(2)}</div>
                         <div className="text-xs text-gray-500 mt-1">per order</div>
                       </div>
 
-                      <div className="bg-white rounded-xl p-6 text-center">
-                        <div className="text-sm text-gray-600 mb-2">You'd Receive</div>
-                        <div className="text-3xl font-bold text-green-600">${directOrderNet.toFixed(2)}</div>
+                      <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 text-center">
+                        <div className="text-sm text-gray-400 mb-2">You'd Receive</div>
+                        <div className="text-3xl font-bold text-[#10b981]">${directOrderNet.toFixed(2)}</div>
                         <div className="text-xs text-gray-500 mt-1">per order</div>
                       </div>
 
-                      <div className="bg-white rounded-xl p-6 text-center">
-                        <div className="text-sm text-gray-600 mb-2">Annual Savings</div>
-                        <div className="text-3xl font-bold text-green-600">${savingsVsDirect.toLocaleString()}</div>
+                      <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 text-center">
+                        <div className="text-sm text-gray-400 mb-2">Annual Savings</div>
+                        <div className="text-3xl font-bold text-[#10b981]">${savingsVsDirect.toLocaleString()}</div>
                         <div className="text-xs text-gray-500 mt-1">vs {getPlatformWithCustomCommission(selectedPlatform).name}</div>
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-xl p-6">
-                      <h4 className="font-bold text-gray-900 mb-3">💡 ROI Analysis</h4>
-                      <div className="space-y-2 text-gray-700">
-                        <p>• <strong>Have OwnerClone create a custom website with integrated ordering.</strong> With your numbers, this pays for itself in {monthsToPayback} {monthsToPayback === 1 ? 'month' : 'months'}.</p>
+                    <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#10b981]/30 rounded-xl p-6">
+                      <h4 className="font-bold text-white mb-3">💡 ROI Analysis</h4>
+                      <div className="space-y-2 text-gray-300">
+                        <p>• <strong className="text-[#10b981]">Have OwnerClone create a custom website with integrated ordering.</strong> With your numbers, this pays for itself in {monthsToPayback} {monthsToPayback === 1 ? 'month' : 'months'}.</p>
                         <p>• Keep 97%+ of every order (vs 50-60% on third-party)</p>
                         <p>• Build your own customer database</p>
                         <p>• Control the entire customer experience</p>
                         <p>• No commission increases or surprise fees</p>
-                        <p className="pt-3 border-t mt-3 font-semibold text-green-700">
+                        <p className="pt-3 border-t border-[#2a2a2a] mt-3 font-semibold text-[#10b981]">
                           You'd save ${savingsVsDirect.toLocaleString()} EVERY YEAR with direct ordering
                         </p>
                       </div>
@@ -430,61 +443,61 @@ export default function ThirdPartyFeesCalculator() {
                 </>
               ) : (
                 // All Platforms Comparison
-                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">📊 Platform Comparison</h3>
+                <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#6366f1]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(99,102,241,0.1)]">
+                  <h3 className="text-2xl font-bold text-white mb-6">📊 Platform Comparison</h3>
                   
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse">
                       <thead>
-                        <tr className="bg-gray-200">
-                          <th className="p-3 text-left font-bold">Fee Type</th>
-                          <th className="p-3 text-center font-bold text-red-700">DoorDash</th>
-                          <th className="p-3 text-center font-bold text-green-700">Uber Eats</th>
-                          <th className="p-3 text-center font-bold text-orange-700">GrubHub</th>
+                        <tr className="bg-[#0a0a0a]/60">
+                          <th className="p-3 text-left font-bold text-gray-300">Fee Type</th>
+                          <th className="p-3 text-center font-bold text-[#ef4444]">DoorDash</th>
+                          <th className="p-3 text-center font-bold text-[#10b981]">Uber Eats</th>
+                          <th className="p-3 text-center font-bold text-[#fb923c]">GrubHub</th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white">
-                        <tr className="border-b">
-                          <td className="p-3 font-semibold">Commission</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[0].calculation.commissionPercent}%)</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[1].calculation.commissionPercent}%)</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[2].calculation.commissionPercent}%)</td>
+                      <tbody className="bg-[#0a0a0a]/40">
+                        <tr className="border-b border-[#2a2a2a]">
+                          <td className="p-3 font-semibold text-gray-300">Commission</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[0].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[0].calculation.commissionPercent}%)</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[1].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[1].calculation.commissionPercent}%)</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[2].calculation.commissionFee.toFixed(2)} ({allPlatformsComparison[2].calculation.commissionPercent}%)</td>
                         </tr>
-                        <tr className="border-b">
-                          <td className="p-3 font-semibold">Service Fee</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.serviceFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.serviceFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.serviceFee.toFixed(2)}</td>
+                        <tr className="border-b border-[#2a2a2a]">
+                          <td className="p-3 font-semibold text-gray-300">Service Fee</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[0].calculation.serviceFee.toFixed(2)}</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[1].calculation.serviceFee.toFixed(2)}</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[2].calculation.serviceFee.toFixed(2)}</td>
                         </tr>
-                        <tr className="border-b">
-                          <td className="p-3 font-semibold">Marketing</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.marketingFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.marketingFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.marketingFee.toFixed(2)}</td>
+                        <tr className="border-b border-[#2a2a2a]">
+                          <td className="p-3 font-semibold text-gray-300">Marketing</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[0].calculation.marketingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[1].calculation.marketingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[2].calculation.marketingFee.toFixed(2)}</td>
                         </tr>
-                        <tr className="border-b">
-                          <td className="p-3 font-semibold">Processing</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[0].calculation.paymentProcessingFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[1].calculation.paymentProcessingFee.toFixed(2)}</td>
-                          <td className="p-3 text-center">${allPlatformsComparison[2].calculation.paymentProcessingFee.toFixed(2)}</td>
+                        <tr className="border-b border-[#2a2a2a]">
+                          <td className="p-3 font-semibold text-gray-300">Processing</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[0].calculation.paymentProcessingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[1].calculation.paymentProcessingFee.toFixed(2)}</td>
+                          <td className="p-3 text-center text-gray-300">${allPlatformsComparison[2].calculation.paymentProcessingFee.toFixed(2)}</td>
                         </tr>
-                        <tr className="bg-red-50 font-bold">
-                          <td className="p-3">Total Fees</td>
-                          <td className="p-3 text-center text-red-600">${allPlatformsComparison[0].calculation.totalFees.toFixed(2)}</td>
-                          <td className="p-3 text-center text-red-600">${allPlatformsComparison[1].calculation.totalFees.toFixed(2)}</td>
-                          <td className="p-3 text-center text-red-600">${allPlatformsComparison[2].calculation.totalFees.toFixed(2)}</td>
+                        <tr className="bg-[#ef4444]/10 font-bold border-b border-[#2a2a2a]">
+                          <td className="p-3 text-gray-300">Total Fees</td>
+                          <td className="p-3 text-center text-[#ef4444]">${allPlatformsComparison[0].calculation.totalFees.toFixed(2)}</td>
+                          <td className="p-3 text-center text-[#ef4444]">${allPlatformsComparison[1].calculation.totalFees.toFixed(2)}</td>
+                          <td className="p-3 text-center text-[#ef4444]">${allPlatformsComparison[2].calculation.totalFees.toFixed(2)}</td>
                         </tr>
-                        <tr className="bg-green-50 font-bold">
-                          <td className="p-3">You Receive</td>
-                          <td className="p-3 text-center text-green-600">${allPlatformsComparison[0].calculation.netRevenue.toFixed(2)}</td>
-                          <td className="p-3 text-center text-green-600">${allPlatformsComparison[1].calculation.netRevenue.toFixed(2)}</td>
-                          <td className="p-3 text-center text-green-600">${allPlatformsComparison[2].calculation.netRevenue.toFixed(2)}</td>
+                        <tr className="bg-[#10b981]/10 font-bold border-b border-[#2a2a2a]">
+                          <td className="p-3 text-gray-300">You Receive</td>
+                          <td className="p-3 text-center text-[#10b981]">${allPlatformsComparison[0].calculation.netRevenue.toFixed(2)}</td>
+                          <td className="p-3 text-center text-[#10b981]">${allPlatformsComparison[1].calculation.netRevenue.toFixed(2)}</td>
+                          <td className="p-3 text-center text-[#10b981]">${allPlatformsComparison[2].calculation.netRevenue.toFixed(2)}</td>
                         </tr>
-                        <tr className="bg-orange-50 font-bold">
-                          <td className="p-3">Effective Rate</td>
-                          <td className="p-3 text-center text-orange-600">{allPlatformsComparison[0].calculation.effectiveFeePercent.toFixed(1)}%</td>
-                          <td className="p-3 text-center text-orange-600">{allPlatformsComparison[1].calculation.effectiveFeePercent.toFixed(1)}%</td>
-                          <td className="p-3 text-center text-orange-600">{allPlatformsComparison[2].calculation.effectiveFeePercent.toFixed(1)}%</td>
+                        <tr className="bg-[#fb923c]/10 font-bold">
+                          <td className="p-3 text-gray-300">Effective Rate</td>
+                          <td className="p-3 text-center text-[#fb923c]">{allPlatformsComparison[0].calculation.effectiveFeePercent.toFixed(1)}%</td>
+                          <td className="p-3 text-center text-[#fb923c]">{allPlatformsComparison[1].calculation.effectiveFeePercent.toFixed(1)}%</td>
+                          <td className="p-3 text-center text-[#fb923c]">{allPlatformsComparison[2].calculation.effectiveFeePercent.toFixed(1)}%</td>
                         </tr>
                       </tbody>
                     </table>
@@ -494,10 +507,10 @@ export default function ThirdPartyFeesCalculator() {
                     {allPlatformsComparison.map(platform => {
                       const annualFeesThisPlatform = platform.calculation.totalFees * orders * 12;
                       return (
-                        <div key={platform.key} className="bg-white rounded-xl p-4 text-center border-2 border-gray-200">
-                          <div className="font-bold text-gray-700 mb-2">{platform.name}</div>
-                          <div className="text-sm text-gray-600 mb-1">Annual Fees</div>
-                          <div className="text-2xl font-bold text-red-600">${annualFeesThisPlatform.toLocaleString()}</div>
+                        <div key={platform.key} className="bg-[#0a0a0a]/60 backdrop-blur-xl rounded-xl p-4 text-center border-2 border-[#2a2a2a]">
+                          <div className="font-bold text-gray-300 mb-2">{platform.name}</div>
+                          <div className="text-sm text-gray-400 mb-1">Annual Fees</div>
+                          <div className="text-2xl font-bold text-[#ef4444]">${annualFeesThisPlatform.toLocaleString()}</div>
                         </div>
                       );
                     })}
@@ -506,16 +519,16 @@ export default function ThirdPartyFeesCalculator() {
               )}
 
               {/* Action Items */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-indigo-700 mb-6">🎯 What You Can Do About This</h3>
+              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#6366f1]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(99,102,241,0.1)]">
+                <h3 className="text-2xl font-bold text-[#6366f1] mb-6">🎯 What You Can Do About This</h3>
                 
                 <div className="space-y-4">
-                  <div className="bg-white border-l-4 border-green-500 p-6 rounded-xl">
-                    <h4 className="text-xl font-semibold text-gray-900 mb-3">1. Build Your Own Online Ordering</h4>
-                    <p className="text-gray-700 mb-3">
+                  <div className="bg-[#0a0a0a]/60 border-l-4 border-[#10b981] p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-white mb-3">1. Build Your Own Online Ordering</h4>
+                    <p className="text-gray-300 mb-3">
                       Have OwnerClone create a custom website with integrated ordering. With your numbers, this pays for itself in {monthsToPayback} {monthsToPayback === 1 ? 'month' : 'months'}.
                     </p>
-                    <ul className="space-y-2 text-gray-600 text-sm">
+                    <ul className="space-y-2 text-gray-400 text-sm">
                       <li>• Keep 97%+ of every order (vs 50-60% on third-party)</li>
                       <li>• Build your own customer database</li>
                       <li>• Control the entire customer experience</li>
@@ -523,12 +536,12 @@ export default function ThirdPartyFeesCalculator() {
                     </ul>
                   </div>
 
-                  <div className="bg-white border-l-4 border-blue-500 p-6 rounded-xl">
-                    <h4 className="text-xl font-semibold text-gray-900 mb-3">2. Renegotiate Your Rates</h4>
-                    <p className="text-gray-700 mb-3">
+                  <div className="bg-[#0a0a0a]/60 border-l-4 border-[#38bdf8] p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-white mb-3">2. Renegotiate Your Rates</h4>
+                    <p className="text-gray-300 mb-3">
                       Many restaurants don't realize commission rates are negotiable. If you do high volume:
                     </p>
-                    <ul className="space-y-2 text-gray-600 text-sm">
+                    <ul className="space-y-2 text-gray-400 text-sm">
                       <li>• Request a lower commission tier (can drop from 30% to 15%)</li>
                       <li>• Opt out of paid promotions/marketing</li>
                       <li>• Use "self-delivery" to avoid delivery fees</li>
@@ -536,12 +549,12 @@ export default function ThirdPartyFeesCalculator() {
                     </ul>
                   </div>
 
-                  <div className="bg-white border-l-4 border-purple-500 p-6 rounded-xl">
-                    <h4 className="text-xl font-semibold text-gray-900 mb-3">3. Increase Delivery Menu Prices</h4>
-                    <p className="text-gray-700 mb-3">
+                  <div className="bg-[#0a0a0a]/60 border-l-4 border-[#a855f7] p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-white mb-3">3. Increase Delivery Menu Prices</h4>
+                    <p className="text-gray-300 mb-3">
                       Most successful restaurants have separate pricing for delivery:
                     </p>
-                    <ul className="space-y-2 text-gray-600 text-sm">
+                    <ul className="space-y-2 text-gray-400 text-sm">
                       <li>• Add 20-30% to delivery menu prices to cover fees</li>
                       <li>• Customers expect delivery to cost more</li>
                       <li>• Protects your margins on unavoidable third-party orders</li>
@@ -549,12 +562,12 @@ export default function ThirdPartyFeesCalculator() {
                     </ul>
                   </div>
 
-                  <div className="bg-white border-l-4 border-orange-500 p-6 rounded-xl">
-                    <h4 className="text-xl font-semibold text-gray-900 mb-3">4. Promote Direct Ordering Heavily</h4>
-                    <p className="text-gray-700 mb-3">
+                  <div className="bg-[#0a0a0a]/60 border-l-4 border-[#fb923c] p-6 rounded-xl">
+                    <h4 className="text-xl font-semibold text-white mb-3">4. Promote Direct Ordering Heavily</h4>
+                    <p className="text-gray-300 mb-3">
                       Train your team and market aggressively to shift customers to direct:
                     </p>
-                    <ul className="space-y-2 text-gray-600 text-sm">
+                    <ul className="space-y-2 text-gray-400 text-sm">
                       <li>• QR codes on tables linking to your ordering site</li>
                       <li>• Offer 10% off for direct orders (still more profitable than third-party)</li>
                       <li>• Receipt inserts with direct ordering info</li>
@@ -567,47 +580,42 @@ export default function ThirdPartyFeesCalculator() {
           )}
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-10 text-center mt-10">
-            <h2 className="text-3xl font-bold mb-4">Stop Giving Away Half Your Revenue</h2>
-            <p className="text-xl mb-6 opacity-95">
+          <div className="mt-12 bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#6366f1] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(99,102,241,0.15)]">
+            <h2 className="text-2xl font-bold mb-4">Stop Giving Away <span className="text-[#6366f1]">Half Your Revenue</span></h2>
+            <p className="text-lg text-gray-300 mb-6">
               OwnerClone helps you build direct customer relationships and keep more of what you earn.
             </p>
-            <div className="bg-white/20 rounded-xl p-6 mb-6 max-w-2xl mx-auto">
+            <div className="bg-[#6366f1]/10 border border-[#6366f1]/30 rounded-xl p-6 mb-6 max-w-2xl mx-auto">
               <div className="grid grid-cols-2 gap-6 text-center">
                 <div>
                   <div className="text-3xl font-bold mb-1">✓</div>
-                  <div className="text-sm">Custom Online Ordering</div>
+                  <div className="text-sm text-gray-300">Custom Online Ordering</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold mb-1">✓</div>
-                  <div className="text-sm">Customer Database</div>
+                  <div className="text-sm text-gray-300">Customer Database</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold mb-1">✓</div>
-                  <div className="text-sm">Loyalty Programs</div>
+                  <div className="text-sm text-gray-300">Loyalty Programs</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold mb-1">✓</div>
-                  <div className="text-sm">SMS Marketing</div>
+                  <div className="text-sm text-gray-300">SMS Marketing</div>
                 </div>
               </div>
             </div>
-            <Link href="/" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-xl text-lg font-semibold hover:shadow-xl transform hover:-translate-y-0.5 transition">
-              Learn More About OwnerClone
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/pricing" className="bg-[#6366f1] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#4f46e5] transition-colors">
+                Join Early Access
+              </Link>
+              <Link href="/free-tools" className="border-2 border-[#6366f1] text-[#6366f1] px-8 py-3 rounded-lg font-bold hover:bg-[#6366f1]/10 transition-colors">
+                Try Other Calculators
+              </Link>
+            </div>
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="bg-gray-100 px-8 py-6 text-center text-gray-600">
-          <p>Made with ❤️ by <Link href="/" className="text-orange-600 hover:underline">OwnerClone</Link> - AI-Powered Restaurant Management</p>
-          <p className="mt-3">
-            <Link href="/free-tools" className="text-orange-600 hover:underline">← Back to All Calculators</Link> | 
-            <Link href="/features" className="text-orange-600 hover:underline ml-2">Explore Features</Link> | 
-            <Link href="/blog" className="text-orange-600 hover:underline ml-2">Restaurant Resources</Link>
-          </p>
-        </div>
-      </div>
+      </section>
 
       <style jsx>{`
         @keyframes fadeIn {
