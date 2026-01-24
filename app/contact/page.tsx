@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Navigation from '../components/Navigation'
 import { FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
 import React from 'react'
 
@@ -18,8 +17,6 @@ export default function Contact() {
           <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#10b981] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
           <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
         </div>
-
-        <Navigation />
 
         <section className="relative pt-32 pb-16 px-4">
           <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
