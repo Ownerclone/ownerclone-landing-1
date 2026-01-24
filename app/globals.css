@@ -60,3 +60,68 @@ body {
 .text-theme-secondary { color: var(--text-secondary); }
 .text-theme-tertiary { color: var(--text-tertiary); }
 .border-theme { border-color: var(--border); }
+
+/* Light mode utility class support */
+.light-mode\:bg-\[#38bdf8\] {
+  background-color: #38bdf8;
+}
+
+.light-mode\:bg-white {
+  background-color: #ffffff;
+}
+
+.light-mode\:bg-gray-100 {
+  background-color: #f3f4f6;
+}
+
+.light-mode\:text-black {
+  color: #000000;
+}
+
+.light-mode\:text-white {
+  color: #ffffff;
+}
+
+.light-mode\:text-gray-700 {
+  color: #374151;
+}
+
+.light-mode\:text-gray-500 {
+  color: #6b7280;
+}
+
+.light-mode\:text-gray-800 {
+  color: #1f2937;
+}
+
+.light-mode\:text-\[#0ea5e9\] {
+  color: #0ea5e9;
+}
+
+.light-mode\:border-\[#0ea5e9\] {
+  border-color: #0ea5e9;
+}
+
+.light-mode\:border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+.light-mode\:stroke-white {
+  stroke: #ffffff;
+}
+
+.light-mode\:hover\:bg-gray-100:hover {
+  background-color: #f3f4f6;
+}
+
+.light-mode\:hover\:bg-white\/10:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.light-mode\:hover\:text-black:hover {
+  color: #000000;
+}
+
+.light-mode\:hover\:text-gray-800:hover {
+  color: #1f2937;
+}
