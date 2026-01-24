@@ -22,7 +22,7 @@ export default function Navigation() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/#features" className="text-gray-400 hover:text-[#38bdf8] transition">Features</a>
+            <a href="/features" className="text-gray-400 hover:text-[#38bdf8] transition">Features</a>
             
             {/* Free Tools Dropdown */}
             <div className="relative group">
@@ -135,10 +135,12 @@ export default function Navigation() {
               </div>
             </div>
             
-            <a href="/#pricing" className="text-gray-400 hover:text-[#38bdf8] transition">Pricing</a>
-            <a href="/blog" className="text-gray-400 hover:text-[#38bdf8] transition">Blog</a>
-            <a href="/pricing" className="border-2 border-[#0ea5e9] text-[#0ea5e9] px-6 py-2 rounded-lg font-semibold hover:bg-[#0ea5e9]/10 transition">
-              Join Early Access
+            <a href="/pricing" className="text-gray-400 hover:text-[#38bdf8] transition">Pricing</a>
+            <a href="/roadmap" className="text-gray-400 hover:text-[#38bdf8] transition">Roadmap</a>
+            <a href="/about" className="text-gray-400 hover:text-[#38bdf8] transition">About</a>
+            <a href="/contact" className="text-gray-400 hover:text-[#38bdf8] transition">Contact</a>
+            <a href="/demo" className="border-2 border-[#0ea5e9] text-[#0ea5e9] px-6 py-2 rounded-lg font-semibold hover:bg-[#0ea5e9]/10 transition">
+              Request Demo
             </a>
           </div>
 
@@ -157,12 +159,14 @@ export default function Navigation() {
         {mobileMenuOpen && (
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-2">
-              <a href="/#features" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Features</a>
+              <a href="/features" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Features</a>
               <a href="/free-tools" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Free Tools</a>
-              <a href="/#pricing" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Pricing</a>
-              <a href="/blog" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Blog</a>
-              <a href="/pricing" className="border-2 border-[#0ea5e9] text-[#0ea5e9] px-6 py-2 rounded-lg font-semibold hover:bg-[#0ea5e9]/10 transition text-center mt-2">
-                Join Early Access
+              <a href="/pricing" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Pricing</a>
+              <a href="/roadmap" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Roadmap</a>
+              <a href="/about" className="text-gray-400 hover:text-[#38bdf8] transition py-2">About</a>
+              <a href="/contact" className="text-gray-400 hover:text-[#38bdf8] transition py-2">Contact</a>
+              <a href="/demo" className="border-2 border-[#0ea5e9] text-[#0ea5e9] px-6 py-2 rounded-lg font-semibold hover:bg-[#0ea5e9]/10 transition text-center mt-2">
+                Request Demo
               </a>
             </div>
           </div>
