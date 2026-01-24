@@ -1,5 +1,3 @@
-import Navigation from '../components/Navigation'
-
 export const metadata = {
   title: 'Free Restaurant Calculators | Food Cost, Prime Cost, Break-Even | OwnerClone',
   description: 'Professional restaurant financial calculators. Calculate food cost %, prime cost, break-even point, startup costs, labor costs, and menu pricing. Free tools used by thousands of restaurant owners.',
@@ -20,8 +18,6 @@ export default function FreeToolsPage() {
         <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#0ea5e9] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
         <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
-
-      <Navigation />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4">
