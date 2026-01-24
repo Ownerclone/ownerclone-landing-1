@@ -15,7 +15,7 @@ export default function Home() {
           <div className="text-center max-w-4xl mx-auto mb-16">
             {/* Logo + OwnerClone Name */}
             <div className="flex items-center justify-center gap-3 mb-8">
-              <svg viewBox="-2 0 80 60" className="h-16 md:h-20 w-auto">
+              <svg viewBox="-5 0 85 60" className="h-16 md:h-20 w-auto">
   <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10"/>
   <circle cx="48" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
 </svg>
