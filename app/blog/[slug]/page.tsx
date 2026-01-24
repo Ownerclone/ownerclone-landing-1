@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import Navigation from '../../components/Navigation'
+import Navigation from '@/components/Navigation'
 
 interface BlogPost {
   id: string
