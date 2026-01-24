@@ -36,15 +36,15 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-              <button 
-                onClick={() => document.querySelector('[data-login-button]')?.click()}
-                className="bg-cyan-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300"
+              <Link 
+                href="/app-login"
+                className="bg-cyan-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300 text-center"
               >
                 Start Free Trial
-              </button>
+              </Link>
               <Link 
                 href="/demo"
-                className="bg-[#1a1a1a] text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-[#2a2a2a] hover:border-cyan-500/50 transition-all duration-300"
+                className="bg-[#1a1a1a] text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-[#2a2a2a] hover:border-cyan-500/50 transition-all duration-300 text-center"
               >
                 See Live Demo
               </Link>
@@ -182,16 +182,16 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => document.querySelector('[data-login-button]')?.click()}
-              className="bg-cyan-400 text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300 shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.4)]"
+            <Link 
+              href="/app-login"
+              className="bg-cyan-400 text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300 shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.4)] text-center"
             >
               Start Free Trial
-            </button>
+            </Link>
             
             <Link 
               href="/contact" 
-              className="px-10 py-4 bg-transparent border-2 border-[#38bdf8] text-[#38bdf8] font-bold text-lg rounded-lg hover:bg-[#38bdf8]/10 transition-all duration-300"
+              className="px-10 py-4 bg-transparent border-2 border-[#38bdf8] text-[#38bdf8] font-bold text-lg rounded-lg hover:bg-[#38bdf8]/10 transition-all duration-300 text-center"
             >
               Talk to Us
             </Link>
