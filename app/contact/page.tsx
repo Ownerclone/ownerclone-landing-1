@@ -1,15 +1,46 @@
+'use client';
+
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
-import React from 'react'
-
-export const metadata: Metadata = {
-  title: 'Contact Us - Schedule a Demo | OwnerClone',
-  description: 'Get in touch with OwnerClone. Schedule a demo, ask about our POS upgrade program, or learn how we can help your independent restaurant succeed.',
-  keywords: ['contact OwnerClone', 'restaurant software demo', 'POS upgrade program', 'restaurant management consultation'],
-}
+import React, { useState } from 'react'
 
 export default function Contact() {
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formspree.io/f/meeeeevo', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setShowSuccess(true);
+        form.reset();
+        
+        // Auto-close after 5 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <React.Fragment>
       <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -36,7 +67,7 @@ export default function Contact() {
               <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-8">
                 <h2 className="text-3xl font-bold mb-6">Send Us a <span className="text-[#38bdf8]">Message</span></h2>
                 
-                <form action="https://formspree.io/f/meeeeevo" method="POST" className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
                     <input type="text" id="name" name="name" required className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors" placeholder="John Smith" />
@@ -75,7 +106,13 @@ export default function Contact() {
                     <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:bg-[#1a1a1a] focus:outline-none text-white transition-colors resize-none" placeholder="Tell us about your restaurant and how we can help"></textarea>
                   </div>
 
-                  <button type="submit" className="w-full bg-[#38bdf8] text-black px-6 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]">Send Message</button>
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full bg-[#38bdf8] text-black px-6 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
                 </form>
 
                 <p className="text-sm text-gray-400 mt-4">We typically respond within 24 hours</p>
@@ -131,6 +168,25 @@ export default function Contact() {
           </div>
         </section>
       </div>
+
+      {/* Success Modal */}
+      {showSuccess && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowSuccess(false)}>
+          <div className="bg-[#0a0a0a] border-2 border-[#10b981] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(16,185,129,0.3)]" onClick={(e) => e.stopPropagation()}>
+            <div className="text-center">
+              <div className="mb-4">
+                <svg className="w-16 h-16 mx-auto text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold mb-2">Message <span className="text-[#10b981]">Sent!</span></h2>
+              <p className="text-gray-300">
+                Thanks for reaching out! We'll get back to you within 24 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </React.Fragment>
   )
 }
