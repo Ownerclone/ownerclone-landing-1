@@ -16,7 +16,7 @@ export default function FreeToolsPage() {
       {/* Animated Background Orbs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#0ea5e9] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse animation-delay-2000"></div>
+        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
 
       {/* Navigation */}
@@ -67,13 +67,13 @@ export default function FreeToolsPage() {
         </div>
       </section>
 
-      {/* Calculator Grid */}
+      {/* Calculator Grid - 9 CALCULATORS TOTAL */}
       <section className="relative py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* 1. Startup Cost Calculator */}
-            <a href="/free-tools/startup-cost" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/20 transition-all duration-300 group">
+            {/* 1. Startup Cost Calculator - CYAN GLOW */}
+            <a href="/free-tools/startup-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">💰</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Startup Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -87,14 +87,14 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 2. Food Cost Calculator */}
-            <a href="/free-tools/food-cost" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/20 transition-all duration-300 group">
+            {/* 2. Food Cost Calculator - GREEN GLOW */}
+            <a href="/free-tools/food-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#10b981] hover:shadow-lg hover:shadow-[#10b981]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">🍽️</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Food Cost Calculator</h3>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#10b981] transition">Food Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
                 Calculate food cost percentage for any recipe. See if you're hitting industry benchmarks (28-35%).
               </p>
-              <div className="flex items-center text-[#38bdf8] font-semibold">
+              <div className="flex items-center text-[#10b981] font-semibold">
                 <span>Try Calculator</span>
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
@@ -102,88 +102,12 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 3. Prime Cost Calculator */}
-            <a href="/free-tools/prime-cost" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/20 transition-all duration-300 group">
+            {/* 3. Prime Cost Calculator - PURPLE GLOW */}
+            <a href="/free-tools/prime-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#a855f7] hover:shadow-lg hover:shadow-[#a855f7]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">📊</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Prime Cost Calculator</h3>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#a855f7] transition">Prime Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
                 Track your most important profitability metric: COGS + Labor. Target is 60% or less.
-              </p>
-              <div className="flex items-center text-[#38bdf8] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
-
-            {/* 4. Labor Cost Calculator */}
-            <a href="/free-tools/labor-cost" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/20 transition-all duration-300 group">
-              <div className="text-5xl mb-4">👥</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Labor Cost Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate true labor costs including wages, tip taxes, benefits, and payroll fees.
-              </p>
-              <div className="flex items-center text-[#38bdf8] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
-
-            {/* 5. Break-Even Calculator */}
-            <a href="/free-tools/break-even" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/20 transition-all duration-300 group">
-              <div className="text-5xl mb-4">🎯</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Break-Even Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Find out exactly how many customers you need per day to break even and start making profit.
-              </p>
-              <div className="flex items-center text-[#38bdf8] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
-
-            {/* 6. Menu Pricing Calculator */}
-            <a href="/free-tools/menu-pricing" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/20 transition-all duration-300 group">
-              <div className="text-5xl mb-4">💵</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Menu Pricing Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Price your menu items for maximum profit using multiple pricing strategies and methods.
-              </p>
-              <div className="flex items-center text-[#38bdf8] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
-
-            {/* 7. Per Plate Pricing Calculator */}
-            <a href="/free-tools/per-plate-pricing" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/20 transition-all duration-300 group">
-              <div className="text-5xl mb-4">🍴</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Per Plate Pricing Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate ingredient costs and see how portion control impacts your profitability and annual savings.
-              </p>
-              <div className="flex items-center text-[#38bdf8] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
-
-            {/* 8. Google Review Calculator */}
-            <a href="/free-tools/google-review" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#a855f7] hover:shadow-lg hover:shadow-[#a855f7]/20 transition-all duration-300 group relative">
-              <div className="absolute top-4 right-4 bg-[#a855f7] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
-              <div className="text-5xl mb-4">⭐</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#a855f7] transition">Google Review Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate review impact, plan recovery from bad reviews, and set rating goals with proven strategies.
               </p>
               <div className="flex items-center text-[#a855f7] font-semibold">
                 <span>Try Calculator</span>
@@ -193,15 +117,91 @@ export default function FreeToolsPage() {
               </div>
             </a>
 
-            {/* 9. Third Party Fees Calculator */}
-            <a href="/free-tools/third-party-fees" className="block bg-[#0a0a0a] border border-[#1a1a1a] rounded-2xl p-8 hover:border-[#f97316] hover:shadow-lg hover:shadow-[#f97316]/20 transition-all duration-300 group relative">
-              <div className="absolute top-4 right-4 bg-[#f97316] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
+            {/* 4. Labor Cost Calculator - BLUE GLOW */}
+            <a href="/free-tools/labor-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#3b82f6] hover:shadow-lg hover:shadow-[#3b82f6]/50 transition-all duration-300 group">
+              <div className="text-5xl mb-4">👥</div>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#3b82f6] transition">Labor Cost Calculator</h3>
+              <p className="text-gray-400 mb-6">
+                Calculate true labor costs including wages, tip taxes, benefits, and payroll fees.
+              </p>
+              <div className="flex items-center text-[#3b82f6] font-semibold">
+                <span>Try Calculator</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+
+            {/* 5. Break-Even Calculator - YELLOW GLOW */}
+            <a href="/free-tools/break-even" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#fbbf24] hover:shadow-lg hover:shadow-[#fbbf24]/50 transition-all duration-300 group">
+              <div className="text-5xl mb-4">🎯</div>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#fbbf24] transition">Break-Even Calculator</h3>
+              <p className="text-gray-400 mb-6">
+                Find out exactly how many customers you need per day to break even and start making profit.
+              </p>
+              <div className="flex items-center text-[#fbbf24] font-semibold">
+                <span>Try Calculator</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+
+            {/* 6. Menu Pricing Calculator - ORANGE GLOW */}
+            <a href="/free-tools/menu-pricing" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#f97316] hover:shadow-lg hover:shadow-[#f97316]/50 transition-all duration-300 group">
+              <div className="text-5xl mb-4">💵</div>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#f97316] transition">Menu Pricing Calculator</h3>
+              <p className="text-gray-400 mb-6">
+                Price your menu items for maximum profit using multiple pricing strategies and methods.
+              </p>
+              <div className="flex items-center text-[#f97316] font-semibold">
+                <span>Try Calculator</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+
+            {/* 7. Per Plate Pricing Calculator - PINK GLOW */}
+            <a href="/free-tools/per-plate-pricing" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ec4899] hover:shadow-lg hover:shadow-[#ec4899]/50 transition-all duration-300 group">
+              <div className="text-5xl mb-4">🍴</div>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#ec4899] transition">Per Plate Pricing Calculator</h3>
+              <p className="text-gray-400 mb-6">
+                Calculate ingredient costs and see how portion control impacts your profitability and annual savings.
+              </p>
+              <div className="flex items-center text-[#ec4899] font-semibold">
+                <span>Try Calculator</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+
+            {/* 8. Google Review Calculator - PURPLE GLOW (different shade) */}
+            <a href="/free-tools/google-review" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#8b5cf6] hover:shadow-lg hover:shadow-[#8b5cf6]/50 transition-all duration-300 group relative">
+              <div className="absolute top-4 right-4 bg-[#8b5cf6] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
+              <div className="text-5xl mb-4">⭐</div>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#8b5cf6] transition">Google Review Calculator</h3>
+              <p className="text-gray-400 mb-6">
+                Calculate review impact, plan recovery from bad reviews, and set rating goals with proven strategies.
+              </p>
+              <div className="flex items-center text-[#8b5cf6] font-semibold">
+                <span>Try Calculator</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+
+            {/* 9. Third Party Fees Calculator - RED GLOW */}
+            <a href="/free-tools/third-party-fees" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ef4444] hover:shadow-lg hover:shadow-[#ef4444]/50 transition-all duration-300 group relative">
+              <div className="absolute top-4 right-4 bg-[#ef4444] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
               <div className="text-5xl mb-4">💸</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#f97316] transition">Third Party True Fees</h3>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#ef4444] transition">Third Party True Fees</h3>
               <p className="text-gray-400 mb-6">
                 See the REAL cost of DoorDash, Uber Eats, and GrubHub. Calculate annual losses and ROI for direct ordering.
               </p>
-              <div className="flex items-center text-[#f97316] font-semibold">
+              <div className="flex items-center text-[#ef4444] font-semibold">
                 <span>Try Calculator</span>
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
@@ -338,10 +338,10 @@ export default function FreeToolsPage() {
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li><a href="/free-tools" className="hover:text-[#38bdf8] transition">All Calculators</a></li>
                 <li><a href="/free-tools/startup-cost" className="hover:text-[#38bdf8] transition">Startup Cost Calculator</a></li>
-                <li><a href="/free-tools/food-cost" className="hover:text-[#38bdf8] transition">Food Cost Calculator</a></li>
-                <li><a href="/free-tools/prime-cost" className="hover:text-[#38bdf8] transition">Prime Cost Calculator</a></li>
-                <li><a href="/free-tools/google-review" className="hover:text-[#a855f7] transition">Google Review Calculator</a></li>
-                <li><a href="/free-tools/third-party-fees" className="hover:text-[#f97316] transition">Third Party Fees Calculator</a></li>
+                <li><a href="/free-tools/food-cost" className="hover:text-[#10b981] transition">Food Cost Calculator</a></li>
+                <li><a href="/free-tools/prime-cost" className="hover:text-[#a855f7] transition">Prime Cost Calculator</a></li>
+                <li><a href="/free-tools/google-review" className="hover:text-[#8b5cf6] transition">Google Review Calculator</a></li>
+                <li><a href="/free-tools/third-party-fees" className="hover:text-[#ef4444] transition">Third Party Fees Calculator</a></li>
               </ul>
             </div>
 
