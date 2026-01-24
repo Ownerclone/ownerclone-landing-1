@@ -28,7 +28,7 @@ export default function Navigation() {
               <a href="/" className="flex items-center space-x-3">
                 <svg viewBox="0 0 60 60" className="w-12 h-12">
   <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="5"/>
-  <circle cx="38" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="5" strokeDasharray="85 113" transform="rotate (20, 42, 30)"/>
+  <circle cx="38" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="5" strokeDasharray="85 113" transform="rotate (40, 48, 30)"/>
 </svg>
                 <span className="text-2xl font-bold">OwnerClone</span>
               </a>
