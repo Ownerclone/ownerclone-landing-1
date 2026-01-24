@@ -3,53 +3,45 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
-export default function PrimeCostCalculator() {
-  const [beginningInventory, setBeginningInventory] = useState('')
-  const [purchases, setPurchases] = useState('')
-  const [endingInventory, setEndingInventory] = useState('')
-  const [totalLabor, setTotalLabor] = useState('')
+export default function LaborCostCalculator() {
+  const [grossWages, setGrossWages] = useState('')
+  const [tips, setTips] = useState('')
+  const [payrollTaxRate, setPayrollTaxRate] = useState('12')
+  const [benefits, setBenefits] = useState('')
+  const [payrollProcessing, setPayrollProcessing] = useState('')
   const [totalSales, setTotalSales] = useState('')
 
-  // Calculate COGS
-  const cogs = beginningInventory && purchases && endingInventory
-    ? parseFloat(beginningInventory) + parseFloat(purchases) - parseFloat(endingInventory)
-    : 0
-
-  // Calculate Prime Cost
-  const primeCost = cogs && totalLabor
-    ? cogs + parseFloat(totalLabor || '0')
-    : 0
-
-  // Calculate Percentages
-  const foodCostPercentage = totalSales && cogs
-    ? (cogs / parseFloat(totalSales)) * 100
-    : 0
+  const wages = parseFloat(grossWages || '0')
+  const tipsAmount = parseFloat(tips || '0')
+  const taxRate = parseFloat(payrollTaxRate) / 100
+  const wagesTax = wages * taxRate
+  const tipsTax = tipsAmount * taxRate
+  const benefitsCost = parseFloat(benefits || '0')
+  const processingFees = parseFloat(payrollProcessing || '0')
+  
+  // Total labor = wages + tax on wages + tax on tips (NOT the tips themselves) + benefits + processing
+  const totalLabor = wages + wagesTax + tipsTax + benefitsCost + processingFees
 
   const laborCostPercentage = totalSales && totalLabor
-    ? (parseFloat(totalLabor) / parseFloat(totalSales)) * 100
+    ? (totalLabor / parseFloat(totalSales)) * 100
     : 0
 
-  const primeCostPercentage = totalSales && primeCost
-    ? (primeCost / parseFloat(totalSales)) * 100
-    : 0
-
-  // Determine status color and message
-  const getStatus = (percentage: number) => {
+  const getStatus = (percentage) => {
     if (percentage === 0) return { color: 'text-gray-500', bg: 'bg-[#1a1a1a]', border: 'border-[#2a2a2a]', message: 'Enter your numbers above' }
-    if (percentage < 55) return { color: 'text-[#10b981]', bg: 'bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Excellent! You\'re running very efficiently.' }
-    if (percentage < 60) return { color: 'text-[#10b981]', bg: 'bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Great! You\'re in the optimal range.' }
-    if (percentage < 65) return { color: 'text-[#fbbf24]', bg: 'bg-[#fbbf24]/10', border: 'border-[#fbbf24]', message: 'Caution - You\'re in the acceptable range but watch closely.' }
-    return { color: 'text-[#ef4444]', bg: 'bg-[#ef4444]/10', border: 'border-[#ef4444]', message: 'Alert! Your prime cost is too high - immediate action needed.' }
+    if (percentage < 25) return { color: 'text-[#10b981]', bg: 'bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Excellent! Very efficient labor management.' }
+    if (percentage < 30) return { color: 'text-[#10b981]', bg: 'bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Great! You\'re in the optimal range.' }
+    if (percentage < 35) return { color: 'text-[#fbbf24]', bg: 'bg-[#fbbf24]/10', border: 'border-[#fbbf24]', message: 'Acceptable, but look for efficiency improvements.' }
+    return { color: 'text-[#ef4444]', bg: 'bg-[#ef4444]/10', border: 'border-[#ef4444]', message: 'Too high! Your labor costs are hurting profitability.' }
   }
 
-  const status = getStatus(primeCostPercentage)
+  const status = getStatus(laborCostPercentage)
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Animated Background Orbs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#ef4444] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#f97316] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#06b6d4] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#0891b2] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
 
       {/* Hero */}
@@ -57,10 +49,10 @@ export default function PrimeCostCalculator() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
-            Prime Cost <span className="text-[#ef4444]">Calculator</span>
+            Labor Cost <span className="text-[#06b6d4]">Calculator</span>
           </h1>
           <p className="text-xl text-gray-300">
-            Calculate your restaurant's prime cost in seconds. The single most important metric for profitability.
+            Calculate your TRUE labor costs - wages, taxes on tips, benefits, and processing fees.
           </p>
         </div>
       </section>
@@ -70,64 +62,78 @@ export default function PrimeCostCalculator() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Calculator Input */}
             <div>
-              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ef4444]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(239,68,68,0.1)]">
+              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                 <h2 className="text-2xl font-bold mb-6">Enter Your Numbers</h2>
                 
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-300 mb-2">
-                      Beginning Inventory ($)
+                      Gross Wages ($)
                     </label>
                     <input
                       type="number"
-                      value={beginningInventory}
-                      onChange={(e) => setBeginningInventory(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#ef4444] focus:outline-none text-lg text-white transition-colors"
-                      placeholder="5,000"
+                      value={grossWages}
+                      onChange={(e) => setGrossWages(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      placeholder="8,500"
                     />
-                    <p className="text-sm text-gray-500 mt-1">Value of inventory at start of period</p>
+                    <p className="text-sm text-gray-500 mt-1">Total wages before taxes</p>
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-300 mb-2">
-                      Purchases ($)
+                      Employee Tips ($)
                     </label>
                     <input
                       type="number"
-                      value={purchases}
-                      onChange={(e) => setPurchases(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#ef4444] focus:outline-none text-lg text-white transition-colors"
-                      placeholder="8,000"
+                      value={tips}
+                      onChange={(e) => setTips(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      placeholder="2,200"
                     />
-                    <p className="text-sm text-gray-500 mt-1">Total purchases during the period</p>
+                    <p className="text-sm text-gray-500 mt-1">You pay payroll tax on tips too!</p>
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-300 mb-2">
-                      Ending Inventory ($)
+                      Payroll Tax Rate (%)
                     </label>
                     <input
                       type="number"
-                      value={endingInventory}
-                      onChange={(e) => setEndingInventory(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#ef4444] focus:outline-none text-lg text-white transition-colors"
-                      placeholder="4,500"
+                      value={payrollTaxRate}
+                      onChange={(e) => setPayrollTaxRate(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      placeholder="12"
                     />
-                    <p className="text-sm text-gray-500 mt-1">Value of inventory at end of period</p>
+                    <p className="text-sm text-gray-500 mt-1">Usually 12-15% (FICA + unemployment)</p>
                   </div>
 
-                  <div className="pt-4 border-t-2 border-[#2a2a2a]">
+                  <div>
                     <label className="block text-sm font-semibold text-gray-300 mb-2">
-                      Total Labor Cost ($)
+                      Benefits ($)
                     </label>
                     <input
                       type="number"
-                      value={totalLabor}
-                      onChange={(e) => setTotalLabor(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#ef4444] focus:outline-none text-lg text-white transition-colors"
-                      placeholder="8,800"
+                      value={benefits}
+                      onChange={(e) => setBenefits(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      placeholder="450"
                     />
-                    <p className="text-sm text-gray-500 mt-1">Wages + payroll taxes + benefits</p>
+                    <p className="text-sm text-gray-500 mt-1">Health insurance, 401k contributions, etc.</p>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">
+                      Payroll Processing Fees ($)
+                    </label>
+                    <input
+                      type="number"
+                      value={payrollProcessing}
+                      onChange={(e) => setPayrollProcessing(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      placeholder="150"
+                    />
+                    <p className="text-sm text-gray-500 mt-1">Gusto, ADP, Paychex fees</p>
                   </div>
 
                   <div className="pt-4 border-t-2 border-[#2a2a2a]">
@@ -138,8 +144,8 @@ export default function PrimeCostCalculator() {
                       type="number"
                       value={totalSales}
                       onChange={(e) => setTotalSales(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#ef4444] focus:outline-none text-lg text-white transition-colors"
-                      placeholder="30,000"
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      placeholder="32,000"
                     />
                     <p className="text-sm text-gray-500 mt-1">Total revenue for the same period</p>
                   </div>
@@ -153,46 +159,57 @@ export default function PrimeCostCalculator() {
                 <h2 className="text-2xl font-bold mb-4">Your Results</h2>
                 
                 <div className="space-y-6">
-                  <div>
-                    <div className="text-sm font-semibold text-gray-400 mb-1">Cost of Goods Sold (COGS)</div>
-                    <div className="text-3xl font-bold text-white">
-                      ${cogs.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </div>
-                    {foodCostPercentage > 0 && (
-                      <div className="text-lg text-gray-400 mt-1">
-                        {foodCostPercentage.toFixed(1)}% of sales
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-sm font-semibold text-gray-400 mb-1">Gross Wages</div>
+                      <div className="text-2xl font-bold text-white">
+                        ${wages.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </div>
-                    )}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-gray-400 mb-1">Employee Tips</div>
+                      <div className="text-2xl font-bold text-white">
+                        ${tipsAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <div className="text-sm font-semibold text-gray-400 mb-1">Total Labor Cost</div>
-                    <div className="text-3xl font-bold text-white">
-                      ${parseFloat(totalLabor || '0').toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  <div className="bg-[#0a0a0a]/40 rounded-lg p-4 space-y-2">
+                    <h3 className="text-lg font-bold text-[#06b6d4] mb-3">What You Actually Pay</h3>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Tax on Wages</span>
+                      <span className="font-semibold">${wagesTax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Tax on Tips</span>
+                      <span className="font-semibold">${tipsTax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Benefits</span>
+                      <span className="font-semibold">${benefitsCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Processing Fees</span>
+                      <span className="font-semibold">${processingFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-6 border-t-4 border-[#06b6d4]">
+                    <div className="text-sm font-semibold text-gray-400 mb-1">TOTAL LABOR COST</div>
+                    <div className="text-5xl font-bold text-white">
+                      ${totalLabor.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                     {laborCostPercentage > 0 && (
-                      <div className="text-lg text-gray-400 mt-1">
-                        {laborCostPercentage.toFixed(1)}% of sales
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="pt-6 border-t-4 border-[#ef4444]">
-                    <div className="text-sm font-semibold text-gray-400 mb-1">PRIME COST</div>
-                    <div className="text-5xl font-bold text-white">
-                      ${primeCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </div>
-                    {primeCostPercentage > 0 && (
                       <div className={`text-3xl font-bold ${status.color} mt-2`}>
-                        {primeCostPercentage.toFixed(1)}%
+                        {laborCostPercentage.toFixed(1)}%
                       </div>
                     )}
                   </div>
 
-                  {primeCostPercentage > 0 && (
+                  {laborCostPercentage > 0 && (
                     <div className={`mt-4 p-4 rounded-lg ${status.bg} border-2 ${status.border}`}>
                       <div className={`font-bold ${status.color} mb-2`}>
-                        {primeCostPercentage < 55 ? '✓ Excellent!' : primeCostPercentage < 60 ? '✓ Great!' : primeCostPercentage < 65 ? '⚠ Caution' : '⚠ Alert!'}
+                        {laborCostPercentage < 25 ? '✓ Excellent!' : laborCostPercentage < 30 ? '✓ Great!' : laborCostPercentage < 35 ? '⚠ Caution' : '⚠ Alert!'}
                       </div>
                       <div className="text-gray-300">{status.message}</div>
                     </div>
@@ -201,24 +218,24 @@ export default function PrimeCostCalculator() {
               </div>
 
               {/* Understanding Your Results */}
-              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ef4444]/20 rounded-2xl p-6 shadow-[0_0_50px_rgba(239,68,68,0.1)]">
+              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-2xl p-6 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                 <h3 className="text-lg font-bold mb-3">Understanding Your Results</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-start">
-                    <span className="text-[#10b981] font-bold mr-2">Below 55%:</span>
-                    <span className="text-gray-300">Exceptional efficiency - you're doing great!</span>
+                    <span className="text-[#10b981] font-bold mr-2">Below 25%:</span>
+                    <span className="text-gray-300">Exceptional efficiency - very well managed!</span>
                   </div>
                   <div className="flex items-start">
-                    <span className="text-[#10b981] font-bold mr-2">55-60%:</span>
-                    <span className="text-gray-300">Optimal range - keep it here for sustainable profits</span>
+                    <span className="text-[#10b981] font-bold mr-2">25-30%:</span>
+                    <span className="text-gray-300">Optimal range - industry standard for most concepts</span>
                   </div>
                   <div className="flex items-start">
-                    <span className="text-[#fbbf24] font-bold mr-2">60-65%:</span>
+                    <span className="text-[#fbbf24] font-bold mr-2">30-35%:</span>
                     <span className="text-gray-300">Acceptable but tight - watch for increases</span>
                   </div>
                   <div className="flex items-start">
-                    <span className="text-[#ef4444] font-bold mr-2">Above 65%:</span>
-                    <span className="text-gray-300">Crisis mode - you need immediate changes</span>
+                    <span className="text-[#ef4444] font-bold mr-2">Above 35%:</span>
+                    <span className="text-gray-300">Too high - you need to optimize scheduling or pricing</span>
                   </div>
                 </div>
               </div>
@@ -227,39 +244,39 @@ export default function PrimeCostCalculator() {
 
           {/* Educational Content */}
           <div className="mt-12 grid md:grid-cols-3 gap-8">
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ef4444]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(239,68,68,0.1)]">
-              <h3 className="text-lg font-bold text-[#ef4444] mb-3">What is Prime Cost?</h3>
+            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+              <h3 className="text-lg font-bold text-[#06b6d4] mb-3">The Hidden Costs</h3>
               <p className="text-gray-300">
-                Prime cost is your two largest controllable expenses: Cost of Goods Sold (food and beverage) plus Total Labor Cost. These typically represent 55-65% of your sales.
+                Most restaurant owners forget to include payroll taxes on TIPS. If your staff makes $2,000 in tips and you pay 12% payroll tax, that's $240 you're paying out of pocket.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ef4444]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(239,68,68,0.1)]">
-              <h3 className="text-lg font-bold text-[#ef4444] mb-3">Why It Matters</h3>
+            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+              <h3 className="text-lg font-bold text-[#06b6d4] mb-3">Don't Forget Processing</h3>
               <p className="text-gray-300">
-                Prime cost tells you if your fundamental business model works. If it's too high, you won't have enough money left to cover rent, utilities, and profit.
+                Payroll processing fees (Gusto, ADP, Paychex) typically run $100-300/month. Over a year, that's $1,200-3,600 that many owners don't include in labor calculations.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ef4444]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(239,68,68,0.1)]">
-              <h3 className="text-lg font-bold text-[#ef4444] mb-3">How to Improve It</h3>
+            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+              <h3 className="text-lg font-bold text-[#06b6d4] mb-3">Industry Benchmarks</h3>
               <p className="text-gray-300">
-                Focus on menu engineering, portion control, waste reduction, efficient scheduling, and vendor negotiations. Small improvements in either area compound quickly.
+                Quick service should be 25-30%, casual dining 30-35%, fine dining can run 35-40%. Labor + food cost (prime cost) should NEVER exceed 65%.
               </p>
             </div>
           </div>
 
           {/* CTA */}
-          <div className="mt-12 bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#ef4444] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(239,68,68,0.15)]">
-            <h2 className="text-2xl font-bold mb-4">Want Automatic <span className="text-[#ef4444]">Prime Cost Tracking</span>?</h2>
+          <div className="mt-12 bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#06b6d4] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(6,182,212,0.15)]">
+            <h2 className="text-2xl font-bold mb-4">Want Automatic <span className="text-[#06b6d4]">Labor Tracking</span>?</h2>
             <p className="text-lg text-gray-300 mb-6">
-              OwnerClone calculates your prime cost automatically from your POS data. No more manual calculations or spreadsheets.
+              OwnerClone integrates with your payroll system to automatically track labor costs in real-time. No more manual calculations.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/pricing" className="bg-[#ef4444] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#dc2626] transition-colors">
+              <Link href="/pricing" className="bg-[#06b6d4] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#0891b2] transition-colors">
                 Join Early Access
               </Link>
-              <Link href="/blog" className="border-2 border-[#ef4444] text-[#ef4444] px-8 py-3 rounded-lg font-bold hover:bg-[#ef4444]/10 transition-colors">
+              <Link href="/blog" className="border-2 border-[#06b6d4] text-[#06b6d4] px-8 py-3 rounded-lg font-bold hover:bg-[#06b6d4]/10 transition-colors">
                 Read Complete Guide
               </Link>
             </div>
