@@ -1,5 +1,3 @@
-import BackgroundOrbs from '../components/BackgroundOrbs';
-// OR for homepage:
 import BackgroundOrbs from './components/BackgroundOrbs';
 import Navigation from './components/Navigation'
 
