@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Navigation from '../components/Navigation'
 import { FaClock, FaUser } from 'react-icons/fa'
 
 export const metadata: Metadata = {
@@ -38,49 +39,70 @@ export default async function Blog() {
   })
 
   return (
-    <>
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="mb-6 text-4xl font-bold">Restaurant Owner Insights</h1>
-          <p className="text-xl text-primary-100">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {/* Animated Background Orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
+
+      <Navigation />
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-16 px-4">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-black mb-6">
+            Restaurant Owner <span className="text-[#38bdf8]">Insights</span>
+          </h1>
+          <p className="text-xl text-gray-300">
             Real advice from real restaurant owners. No fluff, no theory - just hard-earned lessons from the trenches.
           </p>
         </div>
       </section>
 
-      <section className="section-container">
+      {/* Blog Posts */}
+      <section className="relative py-16 px-4">
         <div className="max-w-4xl mx-auto">
           {allPosts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-xl text-gray-600">No published posts yet. Check back soon!</p>
+              <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-12">
+                <p className="text-xl text-gray-400">No published posts yet. Check back soon!</p>
+              </div>
             </div>
           ) : (
             <div className="space-y-8">
               {allPosts.map((post: any) => (
-                <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200 border border-gray-200">
+                <article 
+                  key={post.id} 
+                  className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#38bdf8] hover:shadow-[0_0_40px_rgba(56,189,248,0.2)] transition-all duration-300"
+                >
                   <div className="p-8">
-                    <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                      <span className="bg-primary-100 text-primary-800 px-3 py-1 rounded-full font-semibold">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
+                      <span className="bg-[#38bdf8]/10 text-[#38bdf8] border border-[#38bdf8]/30 px-3 py-1 rounded-full font-semibold">
                         Restaurant Management
                       </span>
                       <div className="flex items-center gap-2">
-                        <FaClock className="text-gray-400" />
-                        <span>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
+                        <FaClock className="text-gray-500" />
+                        <span>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <FaUser className="text-gray-400" />
+                        <FaUser className="text-gray-500" />
                         <span>OwnerClone Team</span>
                       </div>
                     </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 hover:text-primary-600 transition-colors">
+
+                    <h2 className="text-3xl font-bold text-white mb-4 hover:text-[#38bdf8] transition-colors">
                       <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                     </h2>
+
                     {post.excerpt && (
-                      <p className="text-lg text-gray-700 mb-6 leading-relaxed">{post.excerpt}</p>
+                      <p className="text-lg text-gray-300 mb-6 leading-relaxed">{post.excerpt}</p>
                     )}
+
                     <Link 
                       href={`/blog/${post.slug}`}
-                      className="inline-block px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors duration-200"
+                      className="inline-block px-6 py-3 bg-[#38bdf8] text-black font-bold rounded-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]"
                     >
                       Read Full Article →
                     </Link>
@@ -91,6 +113,6 @@ export default async function Blog() {
           )}
         </div>
       </section>
-    </>
+    </div>
   )
 }
