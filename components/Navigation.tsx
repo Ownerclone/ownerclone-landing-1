@@ -27,10 +27,10 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <svg viewBox="-2 0 80 60" className="h-10 md:h-12 w-auto">
-                <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="6"/>
-                <path d="M 52 12 A 18 18 0 1 0 52 48" fill="none" stroke="#38bdf8" strokeWidth="6" strokeLinecap="round"/>
-              </svg>
+              <svg viewBox="-5 0 85 60" className="h-10 md:h-12 w-auto">
+  <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10"/>
+  <circle cx="48" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
+</svg>
               <span className="text-2xl font-black text-white">OwnerClone</span>
             </Link>
 
