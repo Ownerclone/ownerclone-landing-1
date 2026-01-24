@@ -1,7 +1,6 @@
 'use client';
 
 import BackgroundOrbs from './components/BackgroundOrbs';
-import Navigation from './components/Navigation';
 import SEO from './components/SEO';
 import Link from 'next/link';
 
@@ -86,7 +85,6 @@ export default function Home() {
       />
 
       <main className="min-h-screen bg-theme-primary text-theme-primary relative overflow-hidden">
-        <Navigation />
         
         <BackgroundOrbs />
 
