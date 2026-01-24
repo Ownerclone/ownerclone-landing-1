@@ -1,6 +1,11 @@
+import Navigation from '@/app/components/Navigation'
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-space">
+      {/* Navigation */}
+      <Navigation />
+
       {/* Hero Section - Space Age Design */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Animated Grid Background */}
