@@ -1,14 +1,13 @@
+import BackgroundOrbs from '../components/BackgroundOrbs';
+// OR for homepage:
+import BackgroundOrbs from './components/BackgroundOrbs';
 import Navigation from './components/Navigation'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#0ea5e9] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-[#10b981] rounded-full mix-blend-screen filter blur-[128px] opacity-10 animate-pulse" style={{animationDelay: '3s'}}></div>
-      </div>
+      <BackgroundOrbs />
 
       <Navigation />
 
