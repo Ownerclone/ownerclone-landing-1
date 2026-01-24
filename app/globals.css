@@ -130,3 +130,11 @@ body {
   background-color: var(--nav-bg);
   border-color: var(--nav-border);
 }
+/* Light mode logo outline */
+.light-mode-outline {
+  transition: opacity 0.3s ease;
+}
+
+:root.light-mode .light-mode-outline {
+  opacity: 1;
+}
