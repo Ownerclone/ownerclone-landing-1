@@ -7,7 +7,7 @@ export default function Navigation() {
   const [loginOpen, setLoginOpen] = useState(false)
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false)
 
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setLoginOpen(false)
     setForgotPasswordOpen(true)
