@@ -26,9 +26,9 @@ export default function Navigation() {
             {/* Logo */}
             <div className="flex items-center space-x-3">
               <a href="/" className="flex items-center space-x-3">
-                <svg viewBox="0 0 60 60" className="w-12 h-12">
+                <svg viewBox="-5 0 70 60" className="w-12 h-12">
   <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10"/>
-  <circle cx="38" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 38, 30)"/>
+  <circle cx="44" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 44, 30)"/>
 
 </svg>
                 <span className="text-2xl font-bold">OwnerClone</span>
