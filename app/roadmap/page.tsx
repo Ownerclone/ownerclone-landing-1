@@ -15,7 +15,6 @@ export default function Roadmap() {
       timeline: 'Available Now',
       status: 'live',
       color: '#10b981', // Green
-      glowColor: 'rgba(16, 185, 129, 0.5)',
       icon: FaRocket,
       headline: 'Complete Operations Suite',
       features: [
@@ -56,7 +55,6 @@ export default function Roadmap() {
       timeline: 'Q2 2026',
       status: 'coming',
       color: '#3b82f6', // Blue
-      glowColor: 'rgba(59, 130, 246, 0.5)',
       icon: FaBullhorn,
       headline: 'Fill Your Seats Automatically',
       features: [
@@ -98,7 +96,6 @@ export default function Roadmap() {
       timeline: 'Q2-Q3 2026',
       status: 'development',
       color: '#a855f7', // Purple
-      glowColor: 'rgba(168, 85, 247, 0.5)',
       icon: FaPhone,
       headline: 'Talk to Your Restaurant Like a Person',
       features: [
@@ -144,7 +141,6 @@ export default function Roadmap() {
       timeline: 'Q3 2026',
       status: 'development',
       color: '#f97316', // Orange
-      glowColor: 'rgba(249, 115, 22, 0.5)',
       icon: FaGraduationCap,
       headline: 'Train Your Team Like a Pro',
       features: [
@@ -186,7 +182,6 @@ export default function Roadmap() {
       timeline: 'Q3 2026',
       status: 'planned',
       color: '#fbbf24', // Yellow
-      glowColor: 'rgba(251, 191, 36, 0.5)',
       icon: FaBeer,
       headline: 'Complete Bar Profitability Control',
       features: [
@@ -229,7 +224,6 @@ export default function Roadmap() {
       timeline: 'Q4 2026',
       status: 'research',
       color: '#ec4899', // Pink
-      glowColor: 'rgba(236, 72, 153, 0.5)',
       icon: FaUsers,
       headline: 'Motivate Your Team and Streamline Operations',
       features: [
@@ -273,7 +267,6 @@ export default function Roadmap() {
       timeline: 'Q4 2026 - Q1 2027',
       status: 'research',
       color: '#8b5cf6', // Violet
-      glowColor: 'rgba(139, 92, 246, 0.5)',
       icon: FaBalanceScale,
       headline: 'Professional Bookkeeping and Compliance Made Easy',
       features: [
@@ -317,7 +310,6 @@ export default function Roadmap() {
       timeline: 'Q1 2027',
       status: 'research',
       color: '#06b6d4', // Cyan
-      glowColor: 'rgba(6, 182, 212, 0.5)',
       icon: FaGlobe,
       headline: 'Professional Websites and Catering Growth',
       features: [
@@ -380,16 +372,9 @@ export default function Roadmap() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             The OwnerClone <span className="text-[#38bdf8]">Roadmap</span>
@@ -411,10 +396,9 @@ export default function Roadmap() {
             return (
               <div 
                 key={idx} 
-                className="bg-[#0a0a0a]/40 backdrop-blur-xl border-2 rounded-3xl p-8 transition-all duration-300 hover:scale-[1.02]"
+                className="backdrop-blur-xl bg-white/5 border-2 rounded-3xl p-8 transition-all duration-300 hover:scale-[1.02]"
                 style={{ 
                   borderColor: phase.color,
-                  boxShadow: `0 0 60px ${phase.glowColor}`
                 }}
               >
                 {/* Phase Header */}
@@ -446,7 +430,7 @@ export default function Roadmap() {
                   {phase.features.map((feature, featureIdx) => (
                     <div 
                       key={featureIdx} 
-                      className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl p-6 hover:border-[#3a3a3a] transition-colors"
+                      className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-[#3a3a3a] transition-colors"
                     >
                       <h3 className="text-xl font-bold mb-2" style={{ color: phase.color }}>
                         {feature.name}
@@ -483,28 +467,28 @@ export default function Roadmap() {
           </h2>
           
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/5 border border-[#10b981]/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/5 border border-[#10b981]/30 rounded-xl p-6 backdrop-blur-xl">
               <h3 className="text-xl font-bold mb-3 text-[#10b981]">✓ No Price Increases</h3>
               <p className="text-gray-300">
                 When these features launch, you get them automatically at your current price. No upgrades, no add-ons, no surprises.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-[#3b82f6]/20 to-[#3b82f6]/5 border border-[#3b82f6]/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-[#3b82f6]/20 to-[#3b82f6]/5 border border-[#3b82f6]/30 rounded-xl p-6 backdrop-blur-xl">
               <h3 className="text-xl font-bold mb-3 text-[#3b82f6]">✓ Rapid Development</h3>
               <p className="text-gray-300">
                 We ship new features every quarter. Early customers get to influence what we build and when.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-[#a855f7]/20 to-[#a855f7]/5 border border-[#a855f7]/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-[#a855f7]/20 to-[#a855f7]/5 border border-[#a855f7]/30 rounded-xl p-6 backdrop-blur-xl">
               <h3 className="text-xl font-bold mb-3 text-[#a855f7]">✓ Battle-Tested</h3>
               <p className="text-gray-300">
                 Every feature is built from real restaurant experience and tested with actual owners before launch.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-[#f97316]/20 to-[#f97316]/5 border border-[#f97316]/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-[#f97316]/20 to-[#f97316]/5 border border-[#f97316]/30 rounded-xl p-6 backdrop-blur-xl">
               <h3 className="text-xl font-bold mb-3 text-[#f97316]">✓ Your Success First</h3>
               <p className="text-gray-300">
                 We only build features that deliver measurable ROI. If it doesn't make you money or save you time, we don't build it.
@@ -517,7 +501,7 @@ export default function Roadmap() {
       {/* CTA Section */}
       <section className="relative py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-[#38bdf8]/20 to-[#a855f7]/20 border-2 border-[#38bdf8] rounded-3xl p-12 text-center backdrop-blur-sm shadow-[0_0_80px_rgba(56,189,248,0.3)]">
+          <div className="bg-gradient-to-br from-[#38bdf8]/20 to-[#a855f7]/20 border-2 border-[#38bdf8] rounded-3xl p-12 text-center backdrop-blur-sm">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Get Started Now and <span className="text-[#38bdf8]">Grow With Us</span>
             </h2>
