@@ -62,10 +62,20 @@ textarea:-webkit-autofill:active {
 }
 
 /* Apply theme colors */
+/* Apply theme colors */
 body {
   background-color: var(--bg-primary);
+  background-image: url('/bg-glow.svg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Remove background image in light mode */
+:root.light-mode body {
+  background-image: none;
 }
 
 /* Utility classes */
