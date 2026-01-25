@@ -178,7 +178,7 @@ export default function StartupCostCalculator() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-6 items-start">
           {/* Input Section */}
           <div className="space-y-6">
             {/* Real Estate */}
@@ -355,10 +355,10 @@ export default function StartupCostCalculator() {
             </div>
           </div>
 
-          {/* Results Section */}
-          <div className="space-y-6">
+          {/* Results Section - Sticky */}
+          <div className="lg:sticky lg:top-24">
             {/* Total Investment */}
-            <div className="backdrop-blur-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-300/30 rounded-2xl p-6 sticky top-6">
+            <div className="backdrop-blur-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-300/30 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-white mb-2">Total Investment Required</h3>
               <div className="text-5xl font-bold text-white mb-4">
                 ${parseInt(results.total).toLocaleString()}
