@@ -62,15 +62,31 @@ textarea:-webkit-autofill:active {
 }
 
 /* Apply theme colors */
-/* Apply theme colors */
 body {
   background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Orb background - works on mobile */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-image: url('/bg-glow.svg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-repeat: no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Remove background in light mode */
+:root.light-mode body::before {
+  display: none;
 }
 
 /* Remove background image in light mode */
