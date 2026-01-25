@@ -32,9 +32,39 @@ export default function FoodCostCalculator() {
   const status = getStatus(foodCostPercentage)
 
   return (
-    <div className="min-h-screen text-white">
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 px-4">
+    return (
+  <div className="min-h-screen text-white">
+    {/* Header with glass title card */}
+    <div className="relative pt-12 px-4">
+      <div className="max-w-4xl mx-auto mb-8">
+        <Link 
+          href="/free-tools" 
+          className="inline-flex items-center gap-2 text-emerald-300 hover:text-emerald-100 transition-colors mb-6"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Free Tools
+        </Link>
+        
+        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
+          <div className="flex items-center gap-4">
+            <div className="p-3 backdrop-blur-xl bg-emerald-500/20 border border-emerald-300/30 rounded-xl">
+              <svg className="w-8 h-8 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-white">Food Cost Calculator</h1>
+              <p className="text-emerald-200 mt-1">Calculate your food cost percentage and optimize profitability</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Hero */}
+    <section className="relative pt-16 pb-16 px-4">
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Food Cost <span className="text-[#10b981]">Calculator</span>
