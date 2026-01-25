@@ -26,8 +26,8 @@ export default function LaborCostCalculator() {
     ? (totalLabor / parseFloat(totalSales)) * 100
     : 0
 
-  const getStatus = (percentage) => {
-    if (percentage === 0) return { color: 'text-gray-500', bg: 'backdrop-blur-xl bg-white/5', border: 'border-[#2a2a2a]', message: 'Enter your numbers above' }
+  const getStatus = (percentage: number) => {
+    if (percentage === 0) return { color: 'text-gray-500', bg: 'backdrop-blur-xl bg-white/5', border: 'border-white/10', message: 'Enter your numbers above' }
     if (percentage < 25) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Excellent! Very efficient labor management.' }
     if (percentage < 30) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Great! You\'re in the optimal range.' }
     if (percentage < 35) return { color: 'text-[#fbbf24]', bg: 'backdrop-blur-xl bg-[#fbbf24]/10', border: 'border-[#fbbf24]', message: 'Acceptable, but look for efficiency improvements.' }
@@ -55,7 +55,7 @@ export default function LaborCostCalculator() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Calculator Input */}
             <div>
-              <div className="backdrop-blur-xl bg-white/5 border border-[#06b6d4]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                 <h2 className="text-2xl font-bold mb-6">Enter Your Numbers</h2>
                 
                 <div className="space-y-6">
@@ -129,7 +129,7 @@ export default function LaborCostCalculator() {
                     <p className="text-sm text-gray-500 mt-1">Gusto, ADP, Paychex fees</p>
                   </div>
 
-                  <div className="pt-4 border-t-2 border-[#2a2a2a]">
+                  <div className="pt-4 border-t-2 border-white/10">
                     <label className="block text-sm font-semibold text-gray-300 mb-2">
                       Total Sales ($)
                     </label>
