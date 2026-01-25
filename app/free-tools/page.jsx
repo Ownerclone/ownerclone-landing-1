@@ -115,35 +115,35 @@ export default function ThirdPartyFeesCalculator() {
 
   return (
     <div className="min-h-screen relative">
-  <div 
-    className="fixed inset-0 z-0"
-    style={{
-      backgroundImage: 'url(/bg-glow.svg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}
-  />
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/bg-glow.svg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
 
-  <div className="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
+      <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
           <Link 
             href="/free-tools" 
-            className="inline-flex items-center gap-2 text-rose-300 hover:text-rose-100 transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-100 transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Free Tools
           </Link>
           
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 backdrop-blur-xl bg-rose-500/20 border border-rose-300/30 rounded-xl">
-                <TrendingDown className="w-8 h-8 text-rose-300" />
+            <div className="flex items-center gap-4">
+              <div className="p-3 backdrop-blur-xl bg-purple-500/20 border border-purple-300/30 rounded-xl">
+                <TrendingDown className="w-8 h-8 text-purple-300" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-white">Third Party Delivery Fees Calculator</h1>
-                <p className="text-rose-200 mt-1">Calculate the true cost of DoorDash, Uber Eats & Grubhub</p>
+                <p className="text-purple-200 mt-1">Calculate the true cost of DoorDash, Uber Eats & Grubhub</p>
               </div>
             </div>
           </div>
@@ -155,24 +155,24 @@ export default function ThirdPartyFeesCalculator() {
             {/* Order Volume */}
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <Calculator className="w-5 h-5 text-rose-400" />
+                <Calculator className="w-5 h-5 text-purple-400" />
                 Order Volume
               </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-rose-200 mb-2">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
                     Monthly Delivery Orders
                   </label>
                   <input
                     type="number"
                     value={inputs.monthlyOrders}
                     onChange={(e) => setInputs({ ...inputs, monthlyOrders: e.target.value })}
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                     placeholder="500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-rose-200 mb-2">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
                     Average Order Value ($)
                   </label>
                   <input
@@ -180,7 +180,7 @@ export default function ThirdPartyFeesCalculator() {
                     step="0.01"
                     value={inputs.averageOrderValue}
                     onChange={(e) => setInputs({ ...inputs, averageOrderValue: e.target.value })}
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                     placeholder="35.00"
                   />
                 </div>
@@ -190,14 +190,14 @@ export default function ThirdPartyFeesCalculator() {
             {/* Platform Distribution */}
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <Percent className="w-5 h-5 text-rose-400" />
+                <Percent className="w-5 h-5 text-purple-400" />
                 Platform Distribution (must total 100%)
               </h3>
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium text-rose-200">Uber Eats %</label>
-                    <span className="text-rose-300 text-sm">{inputs.uberEatsPercent}%</span>
+                    <label className="text-sm font-medium text-purple-200">Uber Eats %</label>
+                    <span className="text-purple-300 text-sm">{inputs.uberEatsPercent}%</span>
                   </div>
                   <input
                     type="range"
@@ -210,8 +210,8 @@ export default function ThirdPartyFeesCalculator() {
                 </div>
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium text-rose-200">DoorDash %</label>
-                    <span className="text-rose-300 text-sm">{inputs.doordashPercent}%</span>
+                    <label className="text-sm font-medium text-purple-200">DoorDash %</label>
+                    <span className="text-purple-300 text-sm">{inputs.doordashPercent}%</span>
                   </div>
                   <input
                     type="range"
@@ -224,8 +224,8 @@ export default function ThirdPartyFeesCalculator() {
                 </div>
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium text-rose-200">Grubhub %</label>
-                    <span className="text-rose-300 text-sm">{inputs.grubhubPercent}%</span>
+                    <label className="text-sm font-medium text-purple-200">Grubhub %</label>
+                    <span className="text-purple-300 text-sm">{inputs.grubhubPercent}%</span>
                   </div>
                   <input
                     type="range"
@@ -236,7 +236,7 @@ export default function ThirdPartyFeesCalculator() {
                     className="w-full"
                   />
                 </div>
-                <div className="text-xs text-rose-300 bg-rose-500/10 border border-rose-300/20 rounded-lg p-2">
+                <div className="text-xs text-purple-300 bg-rose-500/10 border border-rose-300/20 rounded-lg p-2">
                   Total: {(parseFloat(inputs.uberEatsPercent) + parseFloat(inputs.doordashPercent) + parseFloat(inputs.grubhubPercent)).toFixed(0)}%
                 </div>
               </div>
@@ -245,12 +245,12 @@ export default function ThirdPartyFeesCalculator() {
             {/* Commission Rates */}
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <DollarSign className="w-5 h-5 text-rose-400" />
+                <DollarSign className="w-5 h-5 text-purple-400" />
                 Commission Rates (%)
               </h3>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-rose-200 mb-2">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
                     Uber Eats Commission %
                   </label>
                   <input
@@ -258,11 +258,11 @@ export default function ThirdPartyFeesCalculator() {
                     step="0.1"
                     value={inputs.uberEatsCommission}
                     onChange={(e) => setInputs({ ...inputs, uberEatsCommission: e.target.value })}
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-rose-200 mb-2">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
                     DoorDash Commission %
                   </label>
                   <input
@@ -270,11 +270,11 @@ export default function ThirdPartyFeesCalculator() {
                     step="0.1"
                     value={inputs.doordashCommission}
                     onChange={(e) => setInputs({ ...inputs, doordashCommission: e.target.value })}
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-rose-200 mb-2">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
                     Grubhub Commission %
                   </label>
                   <input
@@ -282,7 +282,7 @@ export default function ThirdPartyFeesCalculator() {
                     step="0.1"
                     value={inputs.grubhubCommission}
                     onChange={(e) => setInputs({ ...inputs, grubhubCommission: e.target.value })}
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   />
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function ThirdPartyFeesCalculator() {
               <h3 className="text-lg font-semibold text-white mb-4">Additional Fees (%)</h3>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-rose-200 mb-2">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
                     Marketing/Advertising Fees %
                   </label>
                   <input
@@ -301,11 +301,11 @@ export default function ThirdPartyFeesCalculator() {
                     step="0.1"
                     value={inputs.marketingFee}
                     onChange={(e) => setInputs({ ...inputs, marketingFee: e.target.value })}
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-rose-200 mb-2">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
                     Delivery Fee % (if you pay)
                   </label>
                   <input
@@ -313,7 +313,7 @@ export default function ThirdPartyFeesCalculator() {
                     step="0.1"
                     value={inputs.deliveryFee}
                     onChange={(e) => setInputs({ ...inputs, deliveryFee: e.target.value })}
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   />
                 </div>
               </div>
@@ -323,11 +323,11 @@ export default function ThirdPartyFeesCalculator() {
           {/* Results Section */}
           <div className="space-y-6">
             {/* Impact Summary */}
-            <div className="backdrop-blur-xl bg-gradient-to-br from-rose-500/20 to-pink-500/20 border border-rose-300/30 rounded-2xl p-6">
+            <div className="backdrop-blur-xl bg-gradient-to-br from-purple-500/20 to-purple-500/20 border border-rose-300/30 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-white mb-4">Fee Impact</h3>
               
               <div className="mb-6">
-                <div className="text-sm text-rose-200 mb-1">Effective Commission Rate</div>
+                <div className="text-sm text-purple-200 mb-1">Effective Commission Rate</div>
                 <div className="text-5xl font-bold text-white mb-2">{results.effectiveRate}%</div>
                 <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${status.color} ${status.bg}`}>
                   {status.text}
@@ -336,15 +336,15 @@ export default function ThirdPartyFeesCalculator() {
 
               <div className="space-y-3">
                 <div className="backdrop-blur-xl bg-white/10 border border-white/10 rounded-lg p-3">
-                  <div className="text-rose-200 text-sm mb-1">Monthly Revenue</div>
+                  <div className="text-purple-200 text-sm mb-1">Monthly Revenue</div>
                   <div className="text-2xl font-bold text-white">${parseFloat(results.monthlyRevenue).toLocaleString()}</div>
                 </div>
                 <div className="backdrop-blur-xl bg-red-500/20 border border-red-300/20 rounded-lg p-3">
-                  <div className="text-rose-200 text-sm mb-1">Monthly Fees</div>
+                  <div className="text-purple-200 text-sm mb-1">Monthly Fees</div>
                   <div className="text-2xl font-bold text-red-400">-${parseFloat(results.totalFees).toLocaleString()}</div>
                 </div>
                 <div className="backdrop-blur-xl bg-green-500/20 border border-green-300/20 rounded-lg p-3">
-                  <div className="text-rose-200 text-sm mb-1">Net Revenue</div>
+                  <div className="text-purple-200 text-sm mb-1">Net Revenue</div>
                   <div className="text-2xl font-bold text-green-400">${parseFloat(results.netRevenue).toLocaleString()}</div>
                 </div>
               </div>
@@ -357,30 +357,30 @@ export default function ThirdPartyFeesCalculator() {
               <div className="space-y-3">
                 <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-3">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-rose-200 text-sm">Uber Eats</span>
+                    <span className="text-purple-200 text-sm">Uber Eats</span>
                     <span className="text-white font-bold">${parseFloat(results.uberCommission).toLocaleString()}</span>
                   </div>
-                  <div className="text-xs text-rose-300">
+                  <div className="text-xs text-purple-300">
                     ${parseFloat(results.uberRevenue).toLocaleString()} × {inputs.uberEatsCommission}%
                   </div>
                 </div>
 
                 <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-3">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-rose-200 text-sm">DoorDash</span>
+                    <span className="text-purple-200 text-sm">DoorDash</span>
                     <span className="text-white font-bold">${parseFloat(results.doorCommission).toLocaleString()}</span>
                   </div>
-                  <div className="text-xs text-rose-300">
+                  <div className="text-xs text-purple-300">
                     ${parseFloat(results.doorRevenue).toLocaleString()} × {inputs.doordashCommission}%
                   </div>
                 </div>
 
                 <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-3">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-rose-200 text-sm">Grubhub</span>
+                    <span className="text-purple-200 text-sm">Grubhub</span>
                     <span className="text-white font-bold">${parseFloat(results.grubCommission).toLocaleString()}</span>
                   </div>
-                  <div className="text-xs text-rose-300">
+                  <div className="text-xs text-purple-300">
                     ${parseFloat(results.grubRevenue).toLocaleString()} × {inputs.grubhubPercent}%
                   </div>
                 </div>
@@ -390,13 +390,13 @@ export default function ThirdPartyFeesCalculator() {
                     <div className="border-t border-white/10 pt-3 mt-3">
                       {parseFloat(results.marketingCost) > 0 && (
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-rose-200 text-sm">Marketing Fees</span>
+                          <span className="text-purple-200 text-sm">Marketing Fees</span>
                           <span className="text-white font-bold">${parseFloat(results.marketingCost).toLocaleString()}</span>
                         </div>
                       )}
                       {parseFloat(results.deliveryCost) > 0 && (
                         <div className="flex justify-between items-center">
-                          <span className="text-rose-200 text-sm">Delivery Fees</span>
+                          <span className="text-purple-200 text-sm">Delivery Fees</span>
                           <span className="text-white font-bold">${parseFloat(results.deliveryCost).toLocaleString()}</span>
                         </div>
                       )}
@@ -412,15 +412,15 @@ export default function ThirdPartyFeesCalculator() {
               
               <div className="space-y-3">
                 <div className="flex justify-between items-center py-2 border-b border-white/10">
-                  <span className="text-rose-200">Annual Revenue:</span>
+                  <span className="text-purple-200">Annual Revenue:</span>
                   <span className="text-xl font-bold text-white">${parseFloat(results.annualRevenue).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-white/10">
-                  <span className="text-rose-200">Annual Fees:</span>
+                  <span className="text-purple-200">Annual Fees:</span>
                   <span className="text-xl font-bold text-red-400">-${parseFloat(results.annualFees).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between items-center py-2">
-                  <span className="text-rose-200 font-semibold">Annual Net:</span>
+                  <span className="text-purple-200 font-semibold">Annual Net:</span>
                   <span className="text-2xl font-bold text-green-400">${parseFloat(results.annualNet).toLocaleString()}</span>
                 </div>
               </div>
@@ -433,7 +433,7 @@ export default function ThirdPartyFeesCalculator() {
                   <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-red-400 mb-1">High Fee Warning</p>
-                    <p className="text-sm text-rose-200">
+                    <p className="text-sm text-purple-200">
                       Fees above 30% significantly impact profitability. Consider negotiating rates, raising menu prices, or building your own delivery channel.
                     </p>
                   </div>
@@ -448,8 +448,8 @@ export default function ThirdPartyFeesCalculator() {
           <h3 className="text-xl font-semibold text-white mb-4">Strategies to Reduce Third Party Fees</h3>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="backdrop-blur-xl bg-rose-500/10 border border-rose-300/20 rounded-xl p-4">
-              <h4 className="font-semibold text-rose-300 mb-2">Direct Ordering</h4>
-              <p className="text-sm text-rose-200">
+              <h4 className="font-semibold text-purple-300 mb-2">Direct Ordering</h4>
+              <p className="text-sm text-purple-200">
                 Build your own online ordering system to eliminate commission fees on direct orders.
               </p>
             </div>
@@ -469,14 +469,14 @@ export default function ThirdPartyFeesCalculator() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-8 backdrop-blur-xl bg-gradient-to-r from-rose-500/20 to-pink-500/20 border border-rose-300/30 rounded-2xl p-8 text-center">
+        <div className="mt-8 backdrop-blur-xl bg-gradient-to-r from-purple-500/20 to-purple-500/20 border border-rose-300/30 rounded-2xl p-8 text-center">
           <h3 className="text-2xl font-bold text-white mb-3">Track Every Dollar with OwnerClone</h3>
-          <p className="text-rose-200 mb-6 max-w-2xl mx-auto">
+          <p className="text-purple-200 mb-6 max-w-2xl mx-auto">
             OwnerClone automatically tracks third party fees, calculates true profitability per platform, and helps you optimize your delivery channel mix.
           </p>
           <Link
             href="/demo"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-rose-500/25"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-purple-500 hover:to-purple-500 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-purple-500/25"
           >
             See OwnerClone Demo
             <TrendingDown className="w-5 h-5" />
