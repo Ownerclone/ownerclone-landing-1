@@ -4,21 +4,21 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function GoogleReviewCalculator() {
-  const [currentRating, setCurrentRating] = useState<string>('');
-  const [totalReviews, setTotalReviews] = useState<string>('');
-  const [activeScenario, setActiveScenario] = useState<'negative' | 'recovery' | 'goal'>('negative');
+  const [currentRating, setCurrentRating] = useState('');
+  const [totalReviews, setTotalReviews] = useState('');
+  const [activeScenario, setActiveScenario] = useState('negative');
   
   // Negative impact states
-  const [oneStarCount, setOneStarCount] = useState<string>('1');
-  const [negativeResults, setNegativeResults] = useState<any>(null);
+  const [oneStarCount, setOneStarCount] = useState('1');
+  const [negativeResults, setNegativeResults] = useState(null);
   
   // Recovery states
-  const [recoveryOneStars, setRecoveryOneStars] = useState<string>('1');
-  const [recoveryResults, setRecoveryResults] = useState<any>(null);
+  const [recoveryOneStars, setRecoveryOneStars] = useState('1');
+  const [recoveryResults, setRecoveryResults] = useState(null);
   
   // Goal states
-  const [goalRating, setGoalRating] = useState<string>('4.8');
-  const [goalResults, setGoalResults] = useState<any>(null);
+  const [goalRating, setGoalRating] = useState('4.8');
+  const [goalResults, setGoalResults] = useState(null);
 
   const calculateNegativeImpact = () => {
     const current = parseFloat(currentRating);
@@ -427,44 +427,6 @@ export default function GoogleReviewCalculator() {
                   )}
                 </div>
               )}
-            </div>
-          </div>
-
-          {/* Strategies Section */}
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
-            <h3 className="text-2xl font-bold text-[#ec4899] mb-6">Proven Strategies to Get More 5-Star Reviews</h3>
-
-            <div className="space-y-4">
-              <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#10b981] p-6 rounded-lg relative">
-                <span className="absolute top-4 right-4 bg-[#10b981] text-white px-4 py-1 rounded-full text-sm font-semibold">⭐ TOP RATED</span>
-                <h4 className="text-xl font-semibold text-white mb-3 pr-32">Server Selection Method with QR Code Cards</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  <strong>How it works:</strong> Train servers to identify their happiest, most satisfied guests during the meal. At the end of service, give these specific guests a branded card with a QR code that links directly to your Google review page. Personal touch + easy access = 70%+ conversion rate.
-                </p>
-                <p className="text-gray-300 leading-relaxed mt-3">
-                  <strong>Pro tip:</strong> Print cards with: "We noticed you had a great experience tonight! Would you mind sharing it with others?" Include QR code and handwritten note from server.
-                </p>
-              </div>
-
-              <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#ec4899] p-6 rounded-lg">
-                <h4 className="text-xl font-semibold text-white mb-3">📱 Text Message Follow-Up (24-Hour Window)</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  <strong>Timing is everything:</strong> Send a text within 24 hours of visit: "Hi [Name]! Thanks for dining with us last night. If you enjoyed your experience, we'd love a quick review: [link]." Studies show 24-hour follow-ups get 3x more responses than emails sent days later.
-                </p>
-              </div>
-
-              <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#ec4899] p-6 rounded-lg">
-                <h4 className="text-xl font-semibold text-white mb-3">🎁 Thank You Card with Every Check</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  <strong>The simple approach:</strong> Include a small card with every check: "Thank you for dining with us! Share your experience:" with QR code. This passive method generates consistent reviews without being pushy. Place it facing up so guests see it immediately.
-                </p>
-              </div>
-
-              <div className="backdrop-blur-xl bg-[#10b981]/10 border-l-4 border-[#10b981] p-4 rounded-lg mt-6">
-                <p className="text-gray-300">
-                  <strong className="text-[#10b981]">⚠️ Google's Guidelines:</strong> Never offer incentives (discounts, free items) for reviews. Google will remove incentivized reviews and may penalize your listing. Focus on making the review process easy and asking at the right moment.
-                </p>
-              </div>
             </div>
           </div>
 
