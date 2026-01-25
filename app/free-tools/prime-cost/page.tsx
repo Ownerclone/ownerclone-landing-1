@@ -35,26 +35,19 @@ export default function PrimeCostCalculator() {
 
   // Determine status color and message
   const getStatus = (percentage: number) => {
-    if (percentage === 0) return { color: 'text-gray-500', bg: 'bg-[#1a1a1a]', border: 'border-[#2a2a2a]', message: 'Enter your numbers above' }
-    if (percentage < 55) return { color: 'text-[#a855f7]', bg: 'bg-[#a855f7]/10', border: 'border-[#a855f7]', message: 'Excellent! You\'re running very efficiently.' }
-    if (percentage < 60) return { color: 'text-[#a855f7]', bg: 'bg-[#a855f7]/10', border: 'border-[#a855f7]', message: 'Great! You\'re in the optimal range.' }
-    if (percentage < 65) return { color: 'text-[#fbbf24]', bg: 'bg-[#fbbf24]/10', border: 'border-[#fbbf24]', message: 'Caution - You\'re in the acceptable range but watch closely.' }
-    return { color: 'text-[#ef4444]', bg: 'bg-[#ef4444]/10', border: 'border-[#ef4444]', message: 'Alert! Your prime cost is too high - immediate action needed.' }
+    if (percentage === 0) return { color: 'text-gray-500', bg: 'backdrop-blur-xl bg-white/5', border: 'border-white/10', message: 'Enter your numbers above' }
+    if (percentage < 55) return { color: 'text-[#a855f7]', bg: 'backdrop-blur-xl bg-[#a855f7]/10', border: 'border-[#a855f7]', message: 'Excellent! You\'re running very efficiently.' }
+    if (percentage < 60) return { color: 'text-[#a855f7]', bg: 'backdrop-blur-xl bg-[#a855f7]/10', border: 'border-[#a855f7]', message: 'Great! You\'re in the optimal range.' }
+    if (percentage < 65) return { color: 'text-[#fbbf24]', bg: 'backdrop-blur-xl bg-[#fbbf24]/10', border: 'border-[#fbbf24]', message: 'Caution - You\'re in the acceptable range but watch closely.' }
+    return { color: 'text-[#ef4444]', bg: 'backdrop-blur-xl bg-[#ef4444]/10', border: 'border-[#ef4444]', message: 'Alert! Your prime cost is too high - immediate action needed.' }
   }
 
   const status = getStatus(primeCostPercentage)
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#c084fc] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Prime Cost <span className="text-[#a855f7]">Calculator</span>
@@ -70,7 +63,7 @@ export default function PrimeCostCalculator() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Calculator Input */}
             <div>
-              <div className="bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(168,85,247,0.1)]">
                 <h2 className="text-2xl font-bold mb-6">Enter Your Numbers</h2>
                 
                 <div className="space-y-6">
@@ -82,7 +75,7 @@ export default function PrimeCostCalculator() {
                       type="number"
                       value={beginningInventory}
                       onChange={(e) => setBeginningInventory(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white transition-colors"
                       placeholder="5,000"
                     />
                     <p className="text-sm text-gray-500 mt-1">Value of inventory at start of period</p>
@@ -96,7 +89,7 @@ export default function PrimeCostCalculator() {
                       type="number"
                       value={purchases}
                       onChange={(e) => setPurchases(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white transition-colors"
                       placeholder="8,000"
                     />
                     <p className="text-sm text-gray-500 mt-1">Total purchases during the period</p>
@@ -110,13 +103,13 @@ export default function PrimeCostCalculator() {
                       type="number"
                       value={endingInventory}
                       onChange={(e) => setEndingInventory(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white transition-colors"
                       placeholder="4,500"
                     />
                     <p className="text-sm text-gray-500 mt-1">Value of inventory at end of period</p>
                   </div>
 
-                  <div className="pt-4 border-t-2 border-[#2a2a2a]">
+                  <div className="pt-4 border-t-2 border-white/10">
                     <label className="block text-sm font-semibold text-gray-300 mb-2">
                       Total Labor Cost ($)
                     </label>
@@ -124,13 +117,13 @@ export default function PrimeCostCalculator() {
                       type="number"
                       value={totalLabor}
                       onChange={(e) => setTotalLabor(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white transition-colors"
                       placeholder="8,800"
                     />
                     <p className="text-sm text-gray-500 mt-1">Wages + payroll taxes + benefits</p>
                   </div>
 
-                  <div className="pt-4 border-t-2 border-[#2a2a2a]">
+                  <div className="pt-4 border-t-2 border-white/10">
                     <label className="block text-sm font-semibold text-gray-300 mb-2">
                       Total Sales ($)
                     </label>
@@ -138,7 +131,7 @@ export default function PrimeCostCalculator() {
                       type="number"
                       value={totalSales}
                       onChange={(e) => setTotalSales(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-lg text-white transition-colors"
                       placeholder="30,000"
                     />
                     <p className="text-sm text-gray-500 mt-1">Total revenue for the same period</p>
@@ -201,7 +194,7 @@ export default function PrimeCostCalculator() {
               </div>
 
               {/* Understanding Your Results */}
-              <div className="bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-6">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
                 <h3 className="text-lg font-bold mb-3">Understanding Your Results</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-start">
@@ -227,21 +220,21 @@ export default function PrimeCostCalculator() {
 
           {/* Educational Content */}
           <div className="mt-12 grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
               <h3 className="text-lg font-bold text-[#a855f7] mb-3">What is Prime Cost?</h3>
               <p className="text-gray-300">
                 Prime cost is your two largest controllable expenses: Cost of Goods Sold (food and beverage) plus Total Labor Cost. These typically represent 55-65% of your sales.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
               <h3 className="text-lg font-bold text-[#a855f7] mb-3">Why It Matters</h3>
               <p className="text-gray-300">
                 Prime cost tells you if your fundamental business model works. If it's too high, you won't have enough money left to cover rent, utilities, and profit.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
               <h3 className="text-lg font-bold text-[#a855f7] mb-3">How to Improve It</h3>
               <p className="text-gray-300">
                 Focus on menu engineering, portion control, waste reduction, efficient scheduling, and vendor negotiations. Small improvements in either area compound quickly.
@@ -250,16 +243,16 @@ export default function PrimeCostCalculator() {
           </div>
 
           {/* CTA */}
-          <div className="mt-12 bg-gradient-to-br from-[#a855f7]/20 to-[#c084fc]/20 border border-[#a855f7] rounded-3xl p-8 text-center backdrop-blur-sm">
+          <div className="mt-12 backdrop-blur-xl bg-gradient-to-br from-[#a855f7]/20 to-[#c084fc]/20 border-2 border-[#a855f7] rounded-3xl p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">Want Automatic <span className="text-[#a855f7]">Prime Cost Tracking</span>?</h2>
             <p className="text-lg text-gray-300 mb-6">
               OwnerClone calculates your prime cost automatically from your POS data. No more manual calculations or spreadsheets.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/pricing" className="bg-[#a855f7] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#9333ea] transition">
+              <Link href="/pricing" className="bg-[#a855f7] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#9333ea] transition-colors">
                 Join Early Access
               </Link>
-              <Link href="/blog" className="border-2 border-[#a855f7] text-[#a855f7] px-8 py-3 rounded-lg font-bold hover:bg-[#a855f7]/10 transition">
+              <Link href="/blog" className="border-2 border-[#a855f7] text-[#a855f7] px-8 py-3 rounded-lg font-bold hover:bg-[#a855f7]/10 transition-colors">
                 Read Complete Guide
               </Link>
             </div>
