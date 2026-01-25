@@ -12,7 +12,7 @@ import {
   DollarSign,      // Transparent Pricing
   Clock,           // Speed Matters
   GraduationCap,   // Education
-  Handshake        // Partnership
+  UserCheck        // Partnership
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -237,7 +237,7 @@ export default function About() {
 
               {/* Partnership */}
               <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
-                <Handshake className="w-8 h-8 text-orange-400 mb-3" />
+                <UserCheck className="w-8 h-8 text-orange-400 mb-3" />
                 <h4 className="text-lg font-bold text-white mb-2">
                   We&apos;re Partners
                 </h4>
