@@ -38,16 +38,9 @@ export default async function Blog() {
   })
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Restaurant Owner <span className="text-[#38bdf8]">Insights</span>
@@ -63,7 +56,7 @@ export default async function Blog() {
         <div className="max-w-4xl mx-auto">
           {allPosts.length === 0 ? (
             <div className="text-center py-12">
-              <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-12">
+              <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-2xl p-12">
                 <p className="text-xl text-gray-400">No published posts yet. Check back soon!</p>
               </div>
             </div>
@@ -72,7 +65,7 @@ export default async function Blog() {
               {allPosts.map((post: any) => (
                 <article 
                   key={post.id} 
-                  className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#38bdf8] hover:shadow-[0_0_40px_rgba(56,189,248,0.2)] transition-all duration-300"
+                  className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#38bdf8] hover:shadow-[0_0_40px_rgba(56,189,248,0.2)] transition-all duration-300"
                 >
                   <div className="p-8">
                     <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
