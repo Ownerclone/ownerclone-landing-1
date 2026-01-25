@@ -34,7 +34,7 @@ export default function FoodCostCalculator() {
   return (
   <div className="min-h-screen text-white">
     {/* Header with glass title card */}
-    <div className="relative pt-12 px-4">
+    <div className="relative pt-24 px-4">
       <div className="max-w-4xl mx-auto mb-8">
         <Link 
           href="/free-tools" 
