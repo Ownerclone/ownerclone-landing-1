@@ -40,13 +40,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       <Navigation />
 
       <article className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
@@ -70,7 +64,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
           </div>
         </header>
 
-        <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-8 md:p-12">
+        <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-2xl p-8 md:p-12">
           <div 
             className="prose prose-lg prose-invert max-w-none
               prose-headings:text-white prose-headings:font-bold
