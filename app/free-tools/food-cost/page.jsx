@@ -62,18 +62,6 @@ export default function FoodCostCalculator() {
       </div>
     </div>
 
-    {/* Hero */}
-    <section className="relative pt-16 pb-16 px-4">
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-black mb-6">
-            Food Cost <span className="text-[#10b981]">Calculator</span>
-          </h1>
-          <p className="text-xl text-gray-300">
-            Calculate your food cost percentage and optimize menu pricing
-          </p>
-        </div>
-      </section>
-
       <section className="relative py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
