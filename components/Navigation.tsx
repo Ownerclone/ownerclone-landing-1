@@ -3,12 +3,89 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
+import { 
+  UtensilsCrossed, // Food Cost
+  TrendingUp,      // Prime Cost  
+  Users,           // Labor Cost
+  Scale,           // Break-Even
+  Calculator,      // Menu Pricing
+  PieChart,        // Per Plate Pricing
+  Rocket,          // Startup Cost
+  Star,            // Google Review
+  CreditCard       // Third Party Fees
+} from 'lucide-react';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+
+  const calculators = [
+    {
+      name: 'Food Cost Calculator',
+      href: '/free-tools/food-cost',
+      icon: UtensilsCrossed,
+      description: 'Calculate recipe costs',
+      color: 'text-cyan-400'
+    },
+    {
+      name: 'Prime Cost Calculator',
+      href: '/free-tools/prime-cost',
+      icon: TrendingUp,
+      description: 'Food + labor costs',
+      color: 'text-green-400'
+    },
+    {
+      name: 'Labor Cost Calculator',
+      href: '/free-tools/labor-cost',
+      icon: Users,
+      description: 'Staff cost analysis',
+      color: 'text-indigo-400'
+    },
+    {
+      name: 'Break-Even Calculator',
+      href: '/free-tools/break-even',
+      icon: Scale,
+      description: 'Find your break-even point',
+      color: 'text-purple-400'
+    },
+    {
+      name: 'Menu Pricing Calculator',
+      href: '/free-tools/menu-pricing',
+      icon: Calculator,
+      description: 'Optimize menu prices',
+      color: 'text-blue-400'
+    },
+    {
+      name: 'Per Plate Pricing',
+      href: '/free-tools/per-plate-pricing',
+      icon: PieChart,
+      description: 'Price per serving',
+      color: 'text-orange-400'
+    },
+    {
+      name: 'Startup Cost Calculator',
+      href: '/free-tools/startup-cost',
+      icon: Rocket,
+      description: 'Launch budget planner',
+      color: 'text-yellow-400'
+    },
+    {
+      name: 'Google Review Calculator',
+      href: '/free-tools/google-review',
+      icon: Star,
+      description: 'Review impact analysis',
+      color: 'text-pink-400'
+    },
+    {
+      name: 'Third Party Fees',
+      href: '/free-tools/third-party-fees',
+      icon: CreditCard,
+      description: 'Delivery app costs',
+      color: 'text-red-400'
+    }
+  ];
 
   const handleForgotPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -61,69 +138,22 @@ export default function Navigation() {
                 <div className="absolute top-full left-0 pt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="backdrop-blur-xl bg-black/60 border border-white/10 rounded-lg shadow-xl">
                     <div className="p-2">
-                      <Link href="/free-tools/food-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">🥗</span>
-                        <div>
-                          <div className="font-semibold text-white">Food Cost Calculator</div>
-                          <div className="text-xs text-gray-400">Calculate recipe costs</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/prime-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">📊</span>
-                        <div>
-                          <div className="font-semibold text-white">Prime Cost Calculator</div>
-                          <div className="text-xs text-gray-400">Food + labor costs</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/labor-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">👥</span>
-                        <div>
-                          <div className="font-semibold text-white">Labor Cost Calculator</div>
-                          <div className="text-xs text-gray-400">Staff cost analysis</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/break-even" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">⚖️</span>
-                        <div>
-                          <div className="font-semibold text-white">Break-Even Calculator</div>
-                          <div className="text-xs text-gray-400">Find your break-even point</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/menu-pricing" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">🍽️</span>
-                        <div>
-                          <div className="font-semibold text-white">Menu Pricing Calculator</div>
-                          <div className="text-xs text-gray-400">Optimize menu prices</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/per-plate-pricing" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">🍱</span>
-                        <div>
-                          <div className="font-semibold text-white">Per Plate Pricing</div>
-                          <div className="text-xs text-gray-400">Price per serving</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/startup-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">🚀</span>
-                        <div>
-                          <div className="font-semibold text-white">Startup Cost Calculator</div>
-                          <div className="text-xs text-gray-400">Launch budget planner</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/google-review" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">⭐</span>
-                        <div>
-                          <div className="font-semibold text-white">Google Review Calculator</div>
-                          <div className="text-xs text-gray-400">Review impact analysis</div>
-                        </div>
-                      </Link>
-                      <Link href="/free-tools/third-party-fees" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
-                        <span className="text-2xl">💳</span>
-                        <div>
-                          <div className="font-semibold text-white">Third Party Fees</div>
-                          <div className="text-xs text-gray-400">Delivery app costs</div>
-                        </div>
-                      </Link>
+                      {calculators.map((calc) => {
+                        const Icon = calc.icon;
+                        return (
+                          <Link 
+                            key={calc.href}
+                            href={calc.href} 
+                            className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors"
+                          >
+                            <Icon className={`w-5 h-5 ${calc.color}`} />
+                            <div>
+                              <div className="font-semibold text-white">{calc.name}</div>
+                              <div className="text-xs text-gray-400">{calc.description}</div>
+                            </div>
+                          </Link>
+                        );
+                      })}
                       <Link href="/free-tools" className="block px-4 py-3 text-cyan-400 hover:bg-white/10 border-t border-white/10 rounded-lg mt-1">
                         View All Tools →
                       </Link>
@@ -204,33 +234,20 @@ export default function Navigation() {
                 {/* Mobile dropdown items */}
                 {mobileDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-2 border-l-2 border-cyan-400 pl-4">
-                    <Link href="/free-tools/food-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      🥗 Food Cost Calculator
-                    </Link>
-                    <Link href="/free-tools/prime-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      📊 Prime Cost Calculator
-                    </Link>
-                    <Link href="/free-tools/labor-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      👥 Labor Cost Calculator
-                    </Link>
-                    <Link href="/free-tools/break-even" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      ⚖️ Break-Even Calculator
-                    </Link>
-                    <Link href="/free-tools/menu-pricing" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      🍽️ Menu Pricing Calculator
-                    </Link>
-                    <Link href="/free-tools/per-plate-pricing" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      🍱 Per Plate Pricing
-                    </Link>
-                    <Link href="/free-tools/startup-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      🚀 Startup Cost Calculator
-                    </Link>
-                    <Link href="/free-tools/google-review" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      ⭐ Google Review Calculator
-                    </Link>
-                    <Link href="/free-tools/third-party-fees" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
-                      💳 Third Party Fees
-                    </Link>
+                    {calculators.map((calc) => {
+                      const Icon = calc.icon;
+                      return (
+                        <Link 
+                          key={calc.href}
+                          href={calc.href} 
+                          className="flex items-center gap-2 text-sm nav-text py-1" 
+                          onClick={closeMobileMenu}
+                        >
+                          <Icon className={`w-4 h-4 ${calc.color}`} />
+                          <span>{calc.name}</span>
+                        </Link>
+                      );
+                    })}
                     <Link href="/free-tools" className="block text-sm text-cyan-400 py-1 font-semibold" onClick={closeMobileMenu}>
                       View All Tools →
                     </Link>
@@ -318,7 +335,7 @@ export default function Navigation() {
             
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-400">
-                Don't have an account? <Link href="/pricing" className="text-[#38bdf8] hover:text-[#0ea5e9] font-semibold">Join Early Access</Link>
+                Don&apos;t have an account? <Link href="/pricing" className="text-[#38bdf8] hover:text-[#0ea5e9] font-semibold">Join Early Access</Link>
               </p>
             </div>
           </div>
@@ -339,7 +356,7 @@ export default function Navigation() {
             </div>
             
             <p className="text-gray-300 mb-6">
-              Enter your email address and we'll send you a link to reset your password along with your username.
+              Enter your email address and we&apos;ll send you a link to reset your password along with your username.
             </p>
             
             <form className="space-y-4">
