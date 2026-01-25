@@ -38,7 +38,7 @@ export default function Home() {
               </Link>
               <Link 
                 href="/demo"
-                className="bg-[#1a1a1a] text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-[#2a2a2a] hover:border-cyan-500/50 transition-all duration-300 text-center"
+                className="backdrop-blur-xl bg-white/5 text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-white/10 hover:border-cyan-500/50 transition-all duration-300 text-center"
               >
                 See Live Demo
               </Link>
@@ -82,7 +82,7 @@ export default function Home() {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-red-500/50 hover:border-red-500 rounded-2xl p-8 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-black/20 border-2 border-red-500/50 hover:border-red-500 rounded-2xl p-8 transition-all duration-300">
               <div className="text-5xl mb-4">🚨</div>
               <h3 className="text-2xl font-bold mb-3">Employee Theft</h3>
               <p className="text-gray-400 leading-relaxed">
@@ -90,7 +90,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-yellow-500/50 hover:border-yellow-500 rounded-2xl p-8 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-black/20 border-2 border-yellow-500/50 hover:border-yellow-500 rounded-2xl p-8 transition-all duration-300">
               <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold mb-3">Food Costs Are a Mystery</h3>
               <p className="text-gray-400 leading-relaxed">
@@ -98,7 +98,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-purple-500/50 hover:border-purple-500 rounded-2xl p-8 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-black/20 border-2 border-purple-500/50 hover:border-purple-500 rounded-2xl p-8 transition-all duration-300">
               <div className="text-5xl mb-4">📉</div>
               <h3 className="text-2xl font-bold mb-3">Bad Forecasting Kills Profits</h3>
               <p className="text-gray-400 leading-relaxed">
