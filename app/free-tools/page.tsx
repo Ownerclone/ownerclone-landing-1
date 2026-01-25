@@ -1,335 +1,373 @@
-export const metadata = {
-  title: 'Free Restaurant Calculators | Food Cost, Prime Cost, Break-Even | OwnerClone',
-  description: 'Professional restaurant financial calculators. Calculate food cost %, prime cost, break-even point, startup costs, labor costs, and menu pricing. Free tools used by thousands of restaurant owners.',
-  keywords: ['restaurant calculator', 'food cost calculator', 'prime cost calculator', 'restaurant startup cost calculator', 'break even calculator restaurant', 'menu pricing calculator', 'labor cost calculator'],
-  openGraph: {
-    title: 'Free Restaurant Calculators | OwnerClone',
-    description: 'Professional restaurant financial calculators. Calculate food cost, prime cost, break-even, and more.',
-    type: 'website',
-    url: 'https://ownerclone.com/free-tools',
-  },
-};
+'use client'
 
-export default function FreeToolsPage() {
+import { useState } from 'react'
+import Link from 'next/link'
+
+export default function ThirdPartyFeesCalculator() {
+  const [platform, setPlatform] = useState<'doordash' | 'ubereats' | 'grubhub'>('doordash')
+  const [avgOrderValue, setAvgOrderValue] = useState('')
+  const [monthlyOrders, setMonthlyOrders] = useState('')
+  const [currentMargin, setCurrentMargin] = useState('15')
+
+  // Platform commission rates (these are typical - can vary by market/contract)
+  const platformRates = {
+    doordash: { commission: 30, marketing: 3, total: 33 },
+    ubereats: { commission: 30, marketing: 5, total: 35 },
+    grubhub: { commission: 25, marketing: 5, total: 30 }
+  }
+
+  const rate = platformRates[platform]
+  const orderValue = parseFloat(avgOrderValue) || 0
+  const orders = parseFloat(monthlyOrders) || 0
+  const margin = parseFloat(currentMargin) || 0
+
+  // Calculate actual costs
+  const monthlyRevenue = orderValue * orders
+  const yearlyRevenue = monthlyRevenue * 12
+  
+  const commissionCost = monthlyRevenue * (rate.commission / 100)
+  const marketingCost = monthlyRevenue * (rate.marketing / 100)
+  const totalMonthlyCost = monthlyRevenue * (rate.total / 100)
+  const totalYearlyCost = totalMonthlyCost * 12
+
+  // Profitability analysis
+  const grossProfit = monthlyRevenue * (margin / 100)
+  const netProfitAfterFees = grossProfit - totalMonthlyCost
+  const netMargin = monthlyRevenue > 0 ? (netProfitAfterFees / monthlyRevenue) * 100 : 0
+  
+  const isLosing = netProfitAfterFees < 0
+
+  // Direct ordering comparison
+  const directOrderingCost = monthlyRevenue * 0.03 // 3% for credit card processing + website
+  const monthlySavings = totalMonthlyCost - directOrderingCost
+  const yearlySavings = monthlySavings * 12
+
+  // ROI for building direct ordering
+  const directOrderingSetup = 500 // One-time website cost
+  const monthsToROI = directOrderingSetup / monthlySavings
+
+  const getMarginStatus = () => {
+    if (netMargin < 0) return { 
+      color: 'text-[#ef4444]', 
+      bg: 'backdrop-blur-xl bg-[#ef4444]/10', 
+      border: 'border-[#ef4444]',
+      message: 'You are LOSING MONEY on third-party orders!' 
+    }
+    if (netMargin < 5) return { 
+      color: 'text-[#fbbf24]', 
+      bg: 'backdrop-blur-xl bg-[#fbbf24]/10', 
+      border: 'border-[#fbbf24]',
+      message: 'Extremely thin margins - barely breaking even' 
+    }
+    if (netMargin < 10) return { 
+      color: 'text-[#38bdf8]', 
+      bg: 'backdrop-blur-xl bg-[#38bdf8]/10', 
+      border: 'border-[#38bdf8]',
+      message: 'Acceptable but could be much better with direct ordering' 
+    }
+    return { 
+      color: 'text-[#10b981]', 
+      bg: 'backdrop-blur-xl bg-[#10b981]/10', 
+      border: 'border-[#10b981]',
+      message: 'Good margins - you negotiated well or have high-margin items' 
+    }
+  }
+
+  const status = getMarginStatus()
+
   return (
     <div className="min-h-screen text-white">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="relative max-w-7xl mx-auto text-center">
+        <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
-            Free Restaurant <span className="text-[#38bdf8]">Calculators</span>
+            Third Party <span className="text-[#ef4444]">True Cost</span> Calculator
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Professional financial tools to help you start, manage, and optimize your restaurant. 
-            No signup required. 100% free.
+          <p className="text-xl text-gray-300">
+            See the REAL cost of DoorDash, Uber Eats, and GrubHub
           </p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
-            <span>✓ Used by 10,000+ restaurant owners</span>
-            <span>✓ Instant results</span>
-            <span>✓ No email required</span>
-          </div>
         </div>
       </section>
 
-      {/* Calculator Grid - 9 CALCULATORS TOTAL */}
       <section className="relative py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12">
             
-            {/* 1. Startup Cost Calculator - CYAN GLOW */}
-            <a href="/free-tools/startup-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/50 transition-all duration-300 group">
-              <div className="text-5xl mb-4">💰</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Startup Cost Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Estimate total costs to open your restaurant including build-out, equipment, inventory, and working capital.
-              </p>
-              <div className="flex items-center text-[#38bdf8] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+            {/* Input Section */}
+            <div>
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(239,68,68,0.1)]">
+                <h2 className="text-2xl font-bold mb-6">Your Numbers</h2>
 
-            {/* 2. Food Cost Calculator - GREEN GLOW */}
-            <a href="/free-tools/food-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#10b981] hover:shadow-lg hover:shadow-[#10b981]/50 transition-all duration-300 group">
-              <div className="text-5xl mb-4">🍽️</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#10b981] transition">Food Cost Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate food cost percentage for any recipe. See if you're hitting industry benchmarks (28-35%).
-              </p>
-              <div className="flex items-center text-[#10b981] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+                {/* Platform Selection */}
+                <div className="mb-6">
+                  <label className="block text-sm font-semibold text-gray-300 mb-3">Platform</label>
+                  <div className="grid grid-cols-3 gap-3">
+                    <button
+                      onClick={() => setPlatform('doordash')}
+                      className={`py-3 px-4 rounded-lg font-semibold transition-all ${
+                        platform === 'doordash'
+                          ? 'bg-[#ef4444] text-white'
+                          : 'backdrop-blur-xl bg-black/40 border border-white/10 text-gray-300 hover:border-[#ef4444]/50'
+                      }`}
+                    >
+                      DoorDash
+                    </button>
+                    <button
+                      onClick={() => setPlatform('ubereats')}
+                      className={`py-3 px-4 rounded-lg font-semibold transition-all ${
+                        platform === 'ubereats'
+                          ? 'bg-[#ef4444] text-white'
+                          : 'backdrop-blur-xl bg-black/40 border border-white/10 text-gray-300 hover:border-[#ef4444]/50'
+                      }`}
+                    >
+                      Uber Eats
+                    </button>
+                    <button
+                      onClick={() => setPlatform('grubhub')}
+                      className={`py-3 px-4 rounded-lg font-semibold transition-all ${
+                        platform === 'grubhub'
+                          ? 'bg-[#ef4444] text-white'
+                          : 'backdrop-blur-xl bg-black/40 border border-white/10 text-gray-300 hover:border-[#ef4444]/50'
+                      }`}
+                    >
+                      GrubHub
+                    </button>
+                  </div>
+                </div>
 
-            {/* 3. Prime Cost Calculator - PURPLE GLOW */}
-            <a href="/free-tools/prime-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#a855f7] hover:shadow-lg hover:shadow-[#a855f7]/50 transition-all duration-300 group">
-              <div className="text-5xl mb-4">📊</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#a855f7] transition">Prime Cost Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Track your most important profitability metric: COGS + Labor. Target is 60% or less.
-              </p>
-              <div className="flex items-center text-[#a855f7] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+                {/* Average Order Value */}
+                <div className="mb-6">
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">
+                    Average Order Value
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                    <input
+                      type="number"
+                      value={avgOrderValue}
+                      onChange={(e) => setAvgOrderValue(e.target.value)}
+                      placeholder="35.00"
+                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#ef4444] focus:outline-none text-white transition-colors"
+                      step="0.01"
+                    />
+                  </div>
+                  <p className="text-sm text-gray-500 mt-1">Before fees and delivery charges</p>
+                </div>
 
-            {/* 4. Labor Cost Calculator - BLUE GLOW */}
-            <a href="/free-tools/labor-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#3b82f6] hover:shadow-lg hover:shadow-[#3b82f6]/50 transition-all duration-300 group">
-              <div className="text-5xl mb-4">👥</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#3b82f6] transition">Labor Cost Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate true labor costs including wages, tip taxes, benefits, and payroll fees.
-              </p>
-              <div className="flex items-center text-[#3b82f6] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+                {/* Monthly Orders */}
+                <div className="mb-6">
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">
+                    Orders Per Month
+                  </label>
+                  <input
+                    type="number"
+                    value={monthlyOrders}
+                    onChange={(e) => setMonthlyOrders(e.target.value)}
+                    placeholder="300"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#ef4444] focus:outline-none text-white transition-colors"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">Check your platform dashboard</p>
+                </div>
 
-            {/* 5. Break-Even Calculator - YELLOW GLOW */}
-            <a href="/free-tools/break-even" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#fbbf24] hover:shadow-lg hover:shadow-[#fbbf24]/50 transition-all duration-300 group">
-              <div className="text-5xl mb-4">🎯</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#fbbf24] transition">Break-Even Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Find out exactly how many customers you need per day to break even and start making profit.
-              </p>
-              <div className="flex items-center text-[#fbbf24] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+                {/* Current Margin */}
+                <div className="mb-6">
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">
+                    Your Profit Margin (%)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={currentMargin}
+                      onChange={(e) => setCurrentMargin(e.target.value)}
+                      placeholder="15"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#ef4444] focus:outline-none text-white transition-colors"
+                      min="0"
+                      max="100"
+                      step="0.5"
+                    />
+                    <span className="absolute right-4 top-3.5 text-gray-500">%</span>
+                  </div>
+                  <p className="text-sm text-gray-500 mt-1">Before platform fees (typically 10-20%)</p>
+                </div>
 
-            {/* 6. Menu Pricing Calculator - ORANGE GLOW */}
-            <a href="/free-tools/menu-pricing" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#f97316] hover:shadow-lg hover:shadow-[#f97316]/50 transition-all duration-300 group">
-              <div className="text-5xl mb-4">💵</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#f97316] transition">Menu Pricing Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Price your menu items for maximum profit using multiple pricing strategies and methods.
-              </p>
-              <div className="flex items-center text-[#f97316] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
+                {/* Platform Fee Breakdown */}
+                <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-4">
+                  <h3 className="text-sm font-semibold text-gray-300 mb-3">
+                    {platform === 'doordash' ? 'DoorDash' : platform === 'ubereats' ? 'Uber Eats' : 'GrubHub'} Fee Breakdown
+                  </h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Commission:</span>
+                      <span className="font-semibold text-white">{rate.commission}%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Marketing Fee:</span>
+                      <span className="font-semibold text-white">{rate.marketing}%</span>
+                    </div>
+                    <div className="flex justify-between pt-2 border-t border-white/10">
+                      <span className="text-gray-300 font-semibold">Total Fee:</span>
+                      <span className="font-bold text-[#ef4444]">{rate.total}%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </a>
+            </div>
 
-            {/* 7. Per Plate Pricing Calculator - PINK GLOW */}
-            <a href="/free-tools/per-plate-pricing" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ec4899] hover:shadow-lg hover:shadow-[#ec4899]/50 transition-all duration-300 group">
-              <div className="text-5xl mb-4">🍴</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#ec4899] transition">Per Plate Pricing Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate ingredient costs and see how portion control impacts your profitability and annual savings.
-              </p>
-              <div className="flex items-center text-[#ec4899] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+            {/* Results Section */}
+            <div>
+              {monthlyRevenue > 0 && (
+                <div className="space-y-6">
+                  {/* Revenue Overview */}
+                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
+                    <h2 className="text-2xl font-bold mb-4">Revenue Overview</h2>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="text-sm text-gray-400 mb-1">Monthly Revenue</div>
+                        <div className="text-3xl font-bold text-white">
+                          ${monthlyRevenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-gray-400 mb-1">Annual Revenue</div>
+                        <div className="text-2xl font-bold text-gray-300">
+                          ${yearlyRevenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-            {/* 8. Google Review Calculator - PURPLE GLOW (different shade) */}
-            <a href="/free-tools/google-review" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#8b5cf6] hover:shadow-lg hover:shadow-[#8b5cf6]/50 transition-all duration-300 group relative">
-              <div className="absolute top-4 right-4 bg-[#8b5cf6] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
-              <div className="text-5xl mb-4">⭐</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#8b5cf6] transition">Google Review Calculator</h3>
-              <p className="text-gray-400 mb-6">
-                Calculate review impact, plan recovery from bad reviews, and set rating goals with proven strategies.
-              </p>
-              <div className="flex items-center text-[#8b5cf6] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+                  {/* Platform Costs */}
+                  <div className="backdrop-blur-xl bg-[#ef4444]/10 border-2 border-[#ef4444] rounded-2xl p-6">
+                    <h2 className="text-2xl font-bold mb-4 text-white">What You're Paying</h2>
+                    <div className="space-y-4">
+                      <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-4">
+                        <div className="text-sm text-gray-400 mb-1">Commission ({rate.commission}%)</div>
+                        <div className="text-2xl font-bold text-white">
+                          ${commissionCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/mo
+                        </div>
+                      </div>
+                      <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-4">
+                        <div className="text-sm text-gray-400 mb-1">Marketing Fee ({rate.marketing}%)</div>
+                        <div className="text-2xl font-bold text-white">
+                          ${marketingCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/mo
+                        </div>
+                      </div>
+                      <div className="pt-4 border-t-4 border-[#ef4444]">
+                        <div className="text-sm text-gray-400 mb-1">TOTAL FEES</div>
+                        <div className="text-4xl font-bold text-[#ef4444]">
+                          ${totalMonthlyCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/mo
+                        </div>
+                        <div className="text-xl font-bold text-gray-400 mt-2">
+                          ${totalYearlyCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/year
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-            {/* 9. Third Party Fees Calculator - RED GLOW */}
-            <a href="/free-tools/third-party-fees" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ef4444] hover:shadow-lg hover:shadow-[#ef4444]/50 transition-all duration-300 group relative">
-              <div className="absolute top-4 right-4 bg-[#ef4444] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
-              <div className="text-5xl mb-4">💸</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#ef4444] transition">Third Party True Fees</h3>
-              <p className="text-gray-400 mb-6">
-                See the REAL cost of DoorDash, Uber Eats, and GrubHub. Calculate annual losses and ROI for direct ordering.
-              </p>
-              <div className="flex items-center text-[#ef4444] font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </a>
+                  {/* Profitability Analysis */}
+                  <div className={`${status.bg} border-2 ${status.border} rounded-2xl p-6`}>
+                    <h2 className="text-2xl font-bold mb-4 text-white">Your Real Profit</h2>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="text-sm text-gray-400 mb-1">Gross Profit (before fees)</div>
+                        <div className="text-2xl font-bold text-white">
+                          ${grossProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </div>
+                        <div className="text-sm text-gray-400">{margin}% margin</div>
+                      </div>
+                      <div className="pt-4 border-t-2 border-white/10">
+                        <div className="text-sm text-gray-400 mb-1">Net Profit (after fees)</div>
+                        <div className={`text-4xl font-bold ${status.color}`}>
+                          ${netProfitAfterFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </div>
+                        <div className={`text-xl font-bold ${status.color} mt-2`}>
+                          {netMargin.toFixed(1)}% net margin
+                        </div>
+                      </div>
+                      <div className={`mt-4 p-4 rounded-lg ${status.bg} border-2 ${status.border}`}>
+                        <div className={`font-bold ${status.color} mb-2`}>
+                          {isLosing ? '⚠️ WARNING!' : netMargin < 5 ? '⚠️ Caution' : netMargin < 10 ? '📊 Moderate' : '✓ Good'}
+                        </div>
+                        <div className="text-gray-300">{status.message}</div>
+                      </div>
+                    </div>
+                  </div>
 
+                  {/* Direct Ordering Comparison */}
+                  <div className="backdrop-blur-xl bg-[#10b981]/10 border-2 border-[#10b981] rounded-2xl p-6">
+                    <h2 className="text-2xl font-bold mb-4 text-white">Direct Ordering Alternative</h2>
+                    <div className="space-y-4">
+                      <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-4">
+                        <div className="text-sm text-gray-400 mb-1">Direct Ordering Cost (3% processing)</div>
+                        <div className="text-2xl font-bold text-white">
+                          ${directOrderingCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/mo
+                        </div>
+                      </div>
+                      <div className="backdrop-blur-xl bg-[#10b981]/20 border-2 border-[#10b981] rounded-lg p-4">
+                        <div className="text-sm text-gray-300 mb-1">YOU WOULD SAVE</div>
+                        <div className="text-4xl font-bold text-[#10b981]">
+                          ${monthlySavings.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/mo
+                        </div>
+                        <div className="text-xl font-bold text-[#10b981] mt-2">
+                          ${yearlySavings.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/year
+                        </div>
+                      </div>
+                      <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-4">
+                        <div className="text-sm text-gray-400 mb-2">ROI Timeline</div>
+                        <p className="text-gray-300 text-sm">
+                          <strong>Setup cost:</strong> ~${directOrderingSetup.toLocaleString()} (one-time)<br />
+                          <strong>Pays for itself in:</strong> {monthsToROI.toFixed(1)} months<br />
+                          <strong>Year 1 net savings:</strong> ${(yearlySavings - directOrderingSetup).toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Why These Calculators Section */}
-      <section className="relative py-16 px-4">
-        <div className="relative max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-            Why Restaurant Owners Love <span className="text-[#38bdf8]">These Tools</span>
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
-              <div className="text-3xl mb-3">✅</div>
-              <h3 className="text-xl font-bold mb-2">Industry-Standard Formulas</h3>
-              <p className="text-gray-400">Built using benchmarks from the National Restaurant Association and Restaurant365. The same formulas used by successful operators.</p>
+          {/* Educational Content */}
+          <div className="mt-12 grid md:grid-cols-3 gap-8">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-[#ef4444] mb-3">The Hidden Math</h3>
+              <p className="text-gray-300">
+                If you have 15% margins before fees, and pay 30% in fees, you're actually LOSING 15% on every order. You need 50%+ margins to stay profitable on third-party platforms.
+              </p>
             </div>
 
-            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
-              <div className="text-3xl mb-3">⚡</div>
-              <h3 className="text-xl font-bold mb-2">Instant Results</h3>
-              <p className="text-gray-400">No waiting, no processing. Get your calculations immediately. Make decisions faster.</p>
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-[#ef4444] mb-3">Volume Trap</h3>
+              <p className="text-gray-300">
+                "But we get so many orders!" More volume at a loss just means losing money faster. If you're losing $5 per order, 1,000 orders = -$5,000/month.
+              </p>
             </div>
 
-            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
-              <div className="text-3xl mb-3">🔒</div>
-              <h3 className="text-xl font-bold mb-2">100% Private</h3>
-              <p className="text-gray-400">All calculations happen in your browser. We don't store or see your numbers. Your financial data stays yours.</p>
-            </div>
-
-            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
-              <div className="text-3xl mb-3">📱</div>
-              <h3 className="text-xl font-bold mb-2">Mobile Friendly</h3>
-              <p className="text-gray-400">Use these calculators on any device. Calculate costs while talking to vendors or visiting potential locations.</p>
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-[#ef4444] mb-3">The Solution</h3>
+              <p className="text-gray-300">
+                Direct ordering through your own website costs 3-5% (just credit card fees) vs 30-35% for third-party. The ROI is immediate and massive.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Perfect For Section */}
-      <section className="relative py-16 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Perfect For <span className="text-[#38bdf8]">Every Stage</span>
-          </h2>
-          
-          <div className="space-y-6">
-            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#38bdf8]">
-              <h3 className="text-2xl font-bold mb-3">🚀 Pre-Launch</h3>
-              <p className="text-gray-300 mb-4">Planning to open a restaurant? Use our calculators to:</p>
-              <ul className="space-y-2 text-gray-400">
-                <li>• Estimate total startup costs for your business plan</li>
-                <li>• Calculate break-even point before signing a lease</li>
-                <li>• Price your menu items for profitability from day one</li>
-              </ul>
-            </div>
-
-            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#a855f7]">
-              <h3 className="text-2xl font-bold mb-3">🏃 New Operators</h3>
-              <p className="text-gray-300 mb-4">First year of operations? These tools help you:</p>
-              <ul className="space-y-2 text-gray-400">
-                <li>• Track food cost % on every recipe you create</li>
-                <li>• Monitor prime cost weekly to stay profitable</li>
-                <li>• Adjust pricing based on actual costs vs projections</li>
-              </ul>
-            </div>
-
-            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#10b981]">
-              <h3 className="text-2xl font-bold mb-3">💪 Established Owners</h3>
-              <p className="text-gray-300 mb-4">Running successfully? Optimize further with:</p>
-              <ul className="space-y-2 text-gray-400">
-                <li>• Quick menu pricing analysis for seasonal changes</li>
-                <li>• Prime cost tracking across multiple locations</li>
-                <li>• Break-even analysis for new concept validation</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-[#0ea5e9]/20 to-[#a855f7]/20 border border-[#38bdf8] rounded-3xl p-12 text-center backdrop-blur-sm">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to <span className="text-[#38bdf8]">Automate</span> These Calculations?
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              These calculators are great for one-time analysis. But what if you could track all these metrics automatically, every single day?
-            </p>
-            <p className="text-lg text-gray-400 mb-8">
-              OwnerClone integrates with your POS system to automatically calculate food cost %, prime cost, detect theft, and forecast demand—without any manual data entry.
+          {/* CTA */}
+          <div className="mt-12 backdrop-blur-xl bg-gradient-to-br from-[#ef4444]/20 to-[#dc2626]/20 border-2 border-[#ef4444] rounded-3xl p-8 text-center">
+            <h2 className="text-2xl font-bold mb-4">Ready to Keep More of <span className="text-[#ef4444]">Your Money</span>?</h2>
+            <p className="text-lg text-gray-300 mb-6">
+              OwnerClone automatically tracks third-party fees and helps you build a direct ordering strategy that actually works.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/pricing" className="bg-[#38bdf8] text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition inline-block">
+              <Link href="/pricing" className="bg-[#ef4444] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#dc2626] transition-colors">
                 Join Early Access
-              </a>
-              <a href="/#features" className="border-2 border-[#38bdf8] text-[#38bdf8] px-10 py-4 rounded-lg font-bold text-lg hover:bg-[#38bdf8]/10 transition inline-block">
-                See How It Works
-              </a>
+              </Link>
+              <Link href="/free-tools" className="border-2 border-[#ef4444] text-[#ef4444] px-8 py-3 rounded-lg font-bold hover:bg-[#ef4444]/10 transition-colors">
+                Try Other Calculators
+              </Link>
             </div>
-            <p className="text-sm text-gray-400 mt-6">
-              ✓ 14-day free trial &nbsp;|&nbsp; ✓ No credit card required &nbsp;|&nbsp; ✓ Setup in 5 minutes
-            </p>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="backdrop-blur-xl bg-black/20 border-t border-[#1a1a1a] py-12 px-4 mt-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <svg viewBox="0 0 100 60" className="w-10 h-10">
-                  <circle cx="20" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="5"/>
-                  <circle cx="35" cy="30" r="18" fill="none" stroke="#38bdf8" strokeWidth="5"/>
-                </svg>
-                <span className="text-xl font-bold">OwnerClone</span>
-              </div>
-              <p className="text-gray-400 text-sm">AI-powered restaurant management for smarter operations.</p>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4">Free Tools</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="/free-tools" className="hover:text-[#38bdf8] transition">All Calculators</a></li>
-                <li><a href="/free-tools/startup-cost" className="hover:text-[#38bdf8] transition">Startup Cost Calculator</a></li>
-                <li><a href="/free-tools/food-cost" className="hover:text-[#10b981] transition">Food Cost Calculator</a></li>
-                <li><a href="/free-tools/prime-cost" className="hover:text-[#a855f7] transition">Prime Cost Calculator</a></li>
-                <li><a href="/free-tools/google-review" className="hover:text-[#8b5cf6] transition">Google Review Calculator</a></li>
-                <li><a href="/free-tools/third-party-fees" className="hover:text-[#ef4444] transition">Third Party Fees Calculator</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4">Resources</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="/blog" className="hover:text-[#38bdf8] transition">Blog</a></li>
-                <li><a href="/guides" className="hover:text-[#38bdf8] transition">Guides</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="/about" className="hover:text-[#38bdf8] transition">About</a></li>
-                <li><a href="/pricing" className="hover:text-[#38bdf8] transition">Request Demo</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-[#1a1a1a] pt-8 text-center text-sm text-gray-400">
-            © 2026 OwnerClone, Inc. All rights reserved.
-          </div>
-        </div>
-      </footer>
     </div>
-  );
+  )
 }
