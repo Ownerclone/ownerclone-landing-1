@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { FaUtensils, FaUsers, FaShieldAlt, FaEye } from 'react-icons/fa'
+import { Shield, DollarSign, TrendingUp, Users, Brain, Bell, Zap, BarChart3 } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Features - Restaurant Management Modules | OwnerClone',
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Features() {
   const modules = [
     {
-      icon: FaUtensils,
+      icon: DollarSign,
       name: 'Food Module',
       tagline: 'Track Everything Down to the Gram',
       wittyHeadline: 'Your Food Costs Are Lying to You',
@@ -28,7 +28,7 @@ export default function Features() {
       ]
     },
     {
-      icon: FaUsers,
+      icon: Users,
       name: 'Labor Module',
       tagline: 'Schedule Smarter, Save More',
       wittyHeadline: 'Stop Paying People to Stand Around (Or Getting Slammed Short-Handed)',
@@ -45,7 +45,7 @@ export default function Features() {
       ]
     },
     {
-      icon: FaShieldAlt,
+      icon: Shield,
       name: 'Theft Shield',
       tagline: 'Catch Theft Before It Costs You $40K',
       wittyHeadline: 'That Manager You Trust? They Might Be Stealing From You Right Now',
@@ -62,7 +62,7 @@ export default function Features() {
       ]
     },
     {
-      icon: FaEye,
+      icon: Brain,
       name: 'Prophet',
       tagline: 'Predict Demand 7 Days Out with 90% Accuracy',
       wittyHeadline: 'Know Next Friday Will Be Slammed Before Your Competition Does',
@@ -81,182 +81,211 @@ export default function Features() {
   ]
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 grid-pattern opacity-30"></div>
-        
-        {/* Gradient Orbs */}
-        <div className="absolute top-10 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse-blue"></div>
-        <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-blue" style={{ animationDelay: '1s' }}></div>
-        
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4">
-            Everything You Need to Run a <span className="text-cyan-bright">Profitable Restaurant</span>
-          </h1>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-400 mb-6">
-            Introducing <span className="text-cyan-bright">OwnerClone MVP</span>
-          </h2>
-          <p className="text-xl text-gray-300">
-            Four powerful modules that work together to give you complete control over your operations, costs, and profitability. No more spreadsheets. No more guessing. Just real data and actionable insights.
-          </p>
-        </div>
-        
-        {/* Blue separator line at bottom of hero */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-[#38bdf8]"></div>
-      </section>
+    <main className="min-h-screen relative">
+      {/* Fixed SVG Background */}
+      <div className="fixed inset-0 z-0" style={{
+        backgroundImage: 'url(/bg-glow.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }} />
 
-      {/* Modules Grid */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto space-y-20">
-          {modules.map((module) => {
-            const Icon = module.icon
-            
-            return (
-              <div key={module.name} className="space-y-6">
-                {/* Witty H3 Tagline with underline */}
-                <div className="flex flex-col items-center mb-4">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-cyan-bright text-center border-b-2 border-[#38bdf8] pb-3">
-                    {module.wittyHeadline}
-                  </h3>
-                </div>
-                
-                {/* Centered Description Paragraph */}
-                <p className="text-lg text-gray-300 leading-relaxed text-center max-w-4xl mx-auto">
-                  {module.description}
-                </p>
-                
-                {/* Two Cards Side by Side */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {/* Left Card - Module Name & Tagline */}
-                  <div className="card-space rounded-2xl p-8 text-center flex flex-col items-center justify-center">
-                    <Icon className="text-6xl text-cyan-bright mb-4" />
-                    <h2 className="text-2xl font-bold text-white mb-2">{module.name}</h2>
-                    <p className="text-lg text-cyan-400 font-semibold">{module.tagline}</p>
+      {/* All content with relative z-10 */}
+      <div className="relative z-10">
+
+        {/* Hero Section */}
+        <section className="pt-32 pb-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 text-center">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 text-gray-200">
+                Everything You Need to Run a <span className="text-cyan-400">Profitable Restaurant</span>
+              </h1>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-300 mb-6">
+                Introducing <span className="text-cyan-400">OwnerClone MVP</span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Four powerful modules that work together to give you complete control over your operations, costs, and profitability. No more spreadsheets. No more guessing. Just real data and actionable insights.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Modules Grid */}
+        <section className="py-20 px-4">
+          <div className="max-w-6xl mx-auto space-y-20">
+            {modules.map((module) => {
+              const Icon = module.icon
+              
+              return (
+                <div key={module.name} className="space-y-6">
+                  {/* Witty Headline */}
+                  <div className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-cyan-400 text-center">
+                      {module.wittyHeadline}
+                    </h3>
                   </div>
                   
-                  {/* Right Card - Key Features */}
-                  <div className="glass-effect rounded-2xl p-8 border border-blue-400/30">
-                    <h3 className="text-lg font-bold text-white mb-4">Key Features:</h3>
-                    <ul className="space-y-2">
-                      {module.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <span className="text-cyan-400 mr-3 mt-1">✓</span>
-                          <span className="text-gray-300">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Description */}
+                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
+                    <p className="text-lg text-gray-300 leading-relaxed text-center">
+                      {module.description}
+                    </p>
+                  </div>
+                  
+                  {/* Two Cards Side by Side */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Left Card - Module Name & Tagline */}
+                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 text-center flex flex-col items-center justify-center">
+                      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-cyan-400/20 mb-4">
+                        <Icon className="w-8 h-8 text-cyan-400" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-200 mb-2">{module.name}</h2>
+                      <p className="text-lg text-cyan-400 font-semibold">{module.tagline}</p>
+                    </div>
+                    
+                    {/* Right Card - Key Features */}
+                    <div className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-8">
+                      <h3 className="text-lg font-bold text-gray-200 mb-4">Key Features:</h3>
+                      <ul className="space-y-2">
+                        {module.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-cyan-400 mr-3 mt-1">✓</span>
+                            <span className="text-gray-300">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* Integration Section */}
+        <section className="py-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-12 mb-12">
+              <h2 className="text-4xl sm:text-5xl font-black text-center mb-6 text-cyan-400">
+                Works With Your POS System
+              </h2>
+              <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto">
+                OwnerClone integrates seamlessly with Toast and Skytab POS systems. Already using a different system? No problem. You can upload daily or weekly reports manually, and we&apos;ll extract all the data automatically.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 text-center hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Toast POS</h3>
+                <p className="text-gray-400">Full API integration for real-time data sync</p>
               </div>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Integration Section - GRADIENT REMOVED */}
-      <section className="relative py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
-              Works With Your <span className="text-cyan-bright">POS System</span>
-            </h2>
-            <p className="text-lg text-gray-300">
-              OwnerClone integrates seamlessly with Toast and Skytab POS systems. Already using a different system? No problem. You can upload daily or weekly reports manually, and we'll extract all the data automatically.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="card-space p-6 rounded-lg text-center">
-              <h3 className="text-xl font-bold mb-2 text-white">Toast POS</h3>
-              <p className="text-gray-400">Full API integration for real-time data sync</p>
-            </div>
-            
-            <div className="card-space p-6 rounded-lg text-center">
-              <h3 className="text-xl font-bold mb-2 text-white">Skytab POS</h3>
-              <p className="text-gray-400">Complete integration with all features</p>
-            </div>
-            
-            <div className="card-space p-6 rounded-lg text-center">
-              <h3 className="text-xl font-bold mb-2 text-white">Any POS</h3>
-              <p className="text-gray-400">Manual report uploads processed automatically</p>
+              
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 text-center hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Skytab POS</h3>
+                <p className="text-gray-400">Complete integration with all features</p>
+              </div>
+              
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 text-center hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Any POS</h3>
+                <p className="text-gray-400">Manual report uploads processed automatically</p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Benefits Section */}
-      <section className="relative py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
-              Built by Restaurant Owners <span className="text-cyan-bright">Who Get It</span>
-            </h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              I closed three restaurant concepts because I couldn't see the problems until it was too late. OwnerClone is the system I wish I'd had when I was bleeding money on food costs I didn't know were spiking, labor costs I couldn't control, and theft I couldn't detect. Every feature solves a real problem that cost me real money.
-            </p>
+        {/* Benefits Section */}
+        <section className="py-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-12 mb-12">
+              <h2 className="text-4xl sm:text-5xl font-black text-center mb-6 text-cyan-400">
+                Built by Restaurant Owners Who Get It
+              </h2>
+              <p className="text-lg text-gray-300 leading-relaxed text-center max-w-3xl mx-auto">
+                I closed three restaurant concepts because I couldn&apos;t see the problems until it was too late. OwnerClone is the system I wish I&apos;d had when I was bleeding money on food costs I didn&apos;t know were spiking, labor costs I couldn&apos;t control, and theft I couldn&apos;t detect. Every feature solves a real problem that cost me real money.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="backdrop-blur-xl bg-white/5 border border-green-400/30 rounded-2xl p-6 text-center hover:border-green-400 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-green-400/20 mb-4">
+                  <DollarSign className="w-8 h-8 text-green-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Reduce Food Costs</h3>
+                <p className="text-gray-400">Catch ingredient price spikes before they destroy your margins</p>
+              </div>
+
+              <div className="backdrop-blur-xl bg-white/5 border border-purple-400/30 rounded-2xl p-6 text-center hover:border-purple-400 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-purple-400/20 mb-4">
+                  <Users className="w-8 h-8 text-purple-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Optimize Labor</h3>
+                <p className="text-gray-400">Schedule based on actual demand, not guesswork</p>
+              </div>
+
+              <div className="backdrop-blur-xl bg-white/5 border border-red-400/30 rounded-2xl p-6 text-center hover:border-red-400 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-red-400/20 mb-4">
+                  <Shield className="w-8 h-8 text-red-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Prevent Theft</h3>
+                <p className="text-gray-400">Detect manager scams and employee theft in real-time</p>
+              </div>
+
+              <div className="backdrop-blur-xl bg-white/5 border border-cyan-400/30 rounded-2xl p-6 text-center hover:border-cyan-400 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-cyan-400/20 mb-4">
+                  <BarChart3 className="w-8 h-8 text-cyan-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Real-Time Insights</h3>
+                <p className="text-gray-400">Know exactly where you stand at any moment</p>
+              </div>
+
+              <div className="backdrop-blur-xl bg-white/5 border border-orange-400/30 rounded-2xl p-6 text-center hover:border-orange-400 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-orange-400/20 mb-4">
+                  <TrendingUp className="w-8 h-8 text-orange-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Predict Rushes & Slow Times</h3>
+                <p className="text-gray-400">Know exactly when to staff up and when to send people home</p>
+              </div>
+
+              <div className="backdrop-blur-xl bg-white/5 border border-blue-400/30 rounded-2xl p-6 text-center hover:border-blue-400 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-blue-400/20 mb-4">
+                  <Zap className="w-8 h-8 text-blue-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-200">Scale Confidently</h3>
+                <p className="text-gray-400">Maintain quality even when you&apos;re not there</p>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="card-space rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">💰</div>
-              <h3 className="text-xl font-bold mb-2 text-white">Reduce Food Costs</h3>
-              <p className="text-gray-400">Catch ingredient price spikes before they destroy your margins</p>
-            </div>
-
-            <div className="card-space rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">⏰</div>
-              <h3 className="text-xl font-bold mb-2 text-white">Optimize Labor</h3>
-              <p className="text-gray-400">Schedule based on actual demand, not guesswork</p>
-            </div>
-
-            <div className="card-space rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">🛡️</div>
-              <h3 className="text-xl font-bold mb-2 text-white">Prevent Theft</h3>
-              <p className="text-gray-400">Detect manager scams and employee theft in real-time</p>
-            </div>
-
-            <div className="card-space rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">📊</div>
-              <h3 className="text-xl font-bold mb-2 text-white">Real-Time Insights</h3>
-              <p className="text-gray-400">Know exactly where you stand at any moment</p>
-            </div>
-
-            <div className="card-space rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">🔮</div>
-              <h3 className="text-xl font-bold mb-2 text-white">Predict Rushes & Slow Times</h3>
-              <p className="text-gray-400">Know exactly when to staff up and when to send people home</p>
-            </div>
-
-            <div className="card-space rounded-xl p-6 text-center">
-              <div className="text-4xl mb-3">🚀</div>
-              <h3 className="text-xl font-bold mb-2 text-white">Scale Confidently</h3>
-              <p className="text-gray-400">Maintain quality even when you're not there</p>
+        {/* CTA Section */}
+        <section className="py-20 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-12 text-center">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-cyan-400">
+                Ready to Take Control of Your Restaurant?
+              </h2>
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                See how OwnerClone can transform your operations and increase your profits. All features included. No hidden fees.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="/pricing" 
+                  className="backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-8 py-4 rounded-lg font-bold text-lg text-center"
+                >
+                  View Pricing
+                </Link>
+                <Link 
+                  href="/contact" 
+                  className="backdrop-blur-xl bg-white/5 border border-white/10 text-gray-300 hover:border-cyan-500/50 hover:text-white transition-all px-8 py-4 rounded-lg font-bold text-lg text-center"
+                >
+                  Schedule a Demo
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
-            Ready to Take Control of Your <span className="text-cyan-bright">Restaurant</span>?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            See how OwnerClone can transform your operations and increase your profits. All features included. No hidden fees.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/pricing" className="px-8 py-4 bg-transparent text-[#38bdf8] font-bold rounded-lg border-2 border-[#0ea5e9] hover:border-[#38bdf8] hover:bg-[#38bdf8]/10 transition-all duration-300 text-lg">
-              View Pricing
-            </Link>
-            <Link href="/contact" className="px-8 py-4 glass-effect text-white font-bold rounded-lg border border-blue-400/30 hover:border-blue-400/60 transition-all duration-300 text-lg">
-              Schedule a Demo
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </main>
   )
 }
