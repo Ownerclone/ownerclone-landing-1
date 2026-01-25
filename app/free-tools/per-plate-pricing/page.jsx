@@ -1,73 +1,109 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowLeft, DollarSign, TrendingUp, TrendingDown, AlertCircle, Calculator } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, DollarSign, Percent, Calculator, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 
-export default function PrimeCostCalculator() {
-  const [inputs, setInputs] = useState({
-    totalSales: '',
-    foodCost: '',
-    beverageCost: '',
-    laborCost: '',
-    benefits: ''
+export default function PerPlatePricingCalculator() {
+  const [ingredients, setIngredients] = useState([
+    { id: 1, name: '', quantity: '', unit: 'oz', cost: '' }
+  ])
+  
+  const [pricing, setPricing] = useState({
+    targetFoodCostPercent: '30',
+    laborCostPercent: '10',
+    overheadPercent: '5'
   })
 
-  const calculatePrimeCost = () => {
-    const sales = parseFloat(inputs.totalSales) || 0
-    const food = parseFloat(inputs.foodCost) || 0
-    const beverage = parseFloat(inputs.beverageCost) || 0
-    const labor = parseFloat(inputs.laborCost) || 0
-    const benefits = parseFloat(inputs.benefits) || 0
+  const addIngredient = () => {
+    setIngredients([
+      ...ingredients,
+      { id: Date.now(), name: '', quantity: '', unit: 'oz', cost: '' }
+    ])
+  }
 
-    const totalCOGS = food + beverage
-    const totalLabor = labor + benefits
-    const primeCost = totalCOGS + totalLabor
-    
-    const primeCostPercent = sales > 0 ? (primeCost / sales) * 100 : 0
-    const cogsPercent = sales > 0 ? (totalCOGS / sales) * 100 : 0
-    const laborPercent = sales > 0 ? (totalLabor / sales) * 100 : 0
-
-    return {
-      totalCOGS: totalCOGS.toFixed(2),
-      totalLabor: totalLabor.toFixed(2),
-      primeCost: primeCost.toFixed(2),
-      primeCostPercent: primeCostPercent.toFixed(1),
-      cogsPercent: cogsPercent.toFixed(1),
-      laborPercent: laborPercent.toFixed(1),
-      sales: sales.toFixed(2)
+  const removeIngredient = (id) => {
+    if (ingredients.length > 1) {
+      setIngredients(ingredients.filter(ing => ing.id !== id))
     }
   }
 
-  const results = calculatePrimeCost()
-
-  const getPrimeCostStatus = () => {
-    const percent = parseFloat(results.primeCostPercent)
-    if (percent === 0) return { text: 'Enter your costs to calculate', color: 'text-gray-400', icon: Calculator }
-    if (percent < 60) return { text: 'Excellent - Well controlled costs', color: 'text-green-400', icon: TrendingUp }
-    if (percent < 65) return { text: 'Good - Industry standard', color: 'text-blue-400', icon: TrendingUp }
-    if (percent < 70) return { text: 'Warning - Costs running high', color: 'text-yellow-400', icon: AlertCircle }
-    return { text: 'Critical - Immediate action needed', color: 'text-red-400', icon: TrendingDown }
+  const updateIngredient = (id, field, value) => {
+    setIngredients(ingredients.map(ing => 
+      ing.id === id ? { ...ing, [field]: value } : ing
+    ))
   }
 
-  const status = getPrimeCostStatus()
-  const StatusIcon = status.icon
+  const calculateResults = () => {
+    // Calculate total ingredient cost
+    const totalIngredientCost = ingredients.reduce((sum, ing) => {
+      const cost = parseFloat(ing.cost) || 0
+      const quantity = parseFloat(ing.quantity) || 0
+      return sum + (cost * quantity)
+    }, 0)
+
+    // Get percentages
+    const targetFoodCost = parseFloat(pricing.targetFoodCostPercent) || 30
+    const laborCost = parseFloat(pricing.laborCostPercent) || 10
+    const overhead = parseFloat(pricing.overheadPercent) || 5
+
+    // Calculate base price from food cost target
+    const basePrice = totalIngredientCost / (targetFoodCost / 100)
+    
+    // Calculate labor and overhead costs in dollars
+    const laborCostDollar = basePrice * (laborCost / 100)
+    const overheadCostDollar = basePrice * (overhead / 100)
+    
+    // Calculate total cost and recommended price
+    const totalCost = totalIngredientCost + laborCostDollar + overheadCostDollar
+    const totalCostPercent = targetFoodCost + laborCost + overhead
+    const recommendedPrice = totalCost / (totalCostPercent / 100)
+    
+    // Calculate profit margin
+    const grossProfit = recommendedPrice - totalCost
+    const profitMargin = ((grossProfit / recommendedPrice) * 100)
+
+    return {
+      ingredientCost: totalIngredientCost.toFixed(2),
+      basePrice: basePrice.toFixed(2),
+      laborCost: laborCostDollar.toFixed(2),
+      overheadCost: overheadCostDollar.toFixed(2),
+      totalCost: totalCost.toFixed(2),
+      recommendedPrice: recommendedPrice.toFixed(2),
+      grossProfit: grossProfit.toFixed(2),
+      profitMargin: profitMargin.toFixed(1)
+    }
+  }
+
+  const results = calculateResults()
+
+  const getProfitabilityStatus = () => {
+    const margin = parseFloat(results.profitMargin)
+    if (margin < 50) return { text: 'Low profitability', color: 'text-red-400', bg: 'bg-red-500/20' }
+    if (margin < 65) return { text: 'Moderate profitability', color: 'text-yellow-400', bg: 'bg-yellow-500/20' }
+    return { text: 'Strong profitability', color: 'text-green-400', bg: 'bg-green-500/20' }
+  }
+
+  const status = getProfitabilityStatus()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-slate-900 to-cyan-900">
-      {/* Animated background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-      </div>
+    <div className="min-h-screen relative">
+  <div 
+    className="fixed inset-0 z-0"
+    style={{
+      backgroundImage: 'url(/bg-glow.svg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}
+  />
 
-      <div className="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
+  <div className="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
           <Link 
             href="/free-tools" 
-            className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-100 transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-emerald-300 hover:text-emerald-100 transition-colors mb-4"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Free Tools
@@ -75,215 +111,252 @@ export default function PrimeCostCalculator() {
           
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
             <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 backdrop-blur-xl bg-blue-500/20 border border-blue-300/30 rounded-xl">
-                <DollarSign className="w-8 h-8 text-blue-300" />
+              <div className="p-3 backdrop-blur-xl bg-emerald-500/20 border border-emerald-300/30 rounded-xl">
+                <Calculator className="w-8 h-8 text-emerald-300" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white">Prime Cost Calculator</h1>
-                <p className="text-blue-200 mt-1">Calculate your most important restaurant profitability metric</p>
+                <h1 className="text-3xl font-bold text-white">Per Plate Pricing Calculator</h1>
+                <p className="text-emerald-200 mt-1">Calculate exact dish cost and optimal pricing from ingredients</p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Input Section */}
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
-            <h2 className="text-xl font-semibold text-white mb-6">Enter Your Costs</h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-blue-200 mb-2">
-                  Total Sales ($)
-                </label>
-                <input
-                  type="number"
-                  step="0.01"
-                  value={inputs.totalSales}
-                  onChange={(e) => setInputs({ ...inputs, totalSales: e.target.value })}
-                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
-                  placeholder="50000"
-                />
+          {/* Left Column - Ingredients */}
+          <div className="space-y-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-white flex items-center gap-2">
+                  <DollarSign className="w-5 h-5 text-emerald-400" />
+                  Ingredient Costs
+                </h2>
+                <button
+                  onClick={addIngredient}
+                  className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Ingredient
+                </button>
               </div>
 
-              <div className="pt-4 border-t border-white/10">
-                <h3 className="text-sm font-semibold text-blue-300 mb-3">Cost of Goods Sold (COGS)</h3>
-                
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm font-medium text-blue-200 mb-2">
-                      Food Cost ($)
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={inputs.foodCost}
-                      onChange={(e) => setInputs({ ...inputs, foodCost: e.target.value })}
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                      placeholder="15000"
-                    />
-                  </div>
+              <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                {ingredients.map((ingredient, index) => (
+                  <div key={ingredient.id} className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-emerald-300">Ingredient #{index + 1}</span>
+                      {ingredients.length > 1 && (
+                        <button
+                          onClick={() => removeIngredient(ingredient.id)}
+                          className="text-red-400 hover:text-red-300 transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-blue-200 mb-2">
-                      Beverage Cost ($)
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={inputs.beverageCost}
-                      onChange={(e) => setInputs({ ...inputs, beverageCost: e.target.value })}
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                      placeholder="3000"
-                    />
+                    <div className="space-y-3">
+                      <input
+                        type="text"
+                        value={ingredient.name}
+                        onChange={(e) => updateIngredient(ingredient.id, 'name', e.target.value)}
+                        placeholder="Ingredient name"
+                        className="w-full px-3 py-2 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                      />
+
+                      <div className="grid grid-cols-3 gap-2">
+                        <input
+                          type="number"
+                          step="0.01"
+                          value={ingredient.quantity}
+                          onChange={(e) => updateIngredient(ingredient.id, 'quantity', e.target.value)}
+                          placeholder="Qty"
+                          className="px-3 py-2 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                        />
+
+                        <select
+                          value={ingredient.unit}
+                          onChange={(e) => updateIngredient(ingredient.id, 'unit', e.target.value)}
+                          className="px-3 py-2 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                        >
+                          <option value="oz">oz</option>
+                          <option value="lb">lb</option>
+                          <option value="g">g</option>
+                          <option value="kg">kg</option>
+                          <option value="cup">cup</option>
+                          <option value="tbsp">tbsp</option>
+                          <option value="tsp">tsp</option>
+                          <option value="each">each</option>
+                        </select>
+
+                        <input
+                          type="number"
+                          step="0.01"
+                          value={ingredient.cost}
+                          onChange={(e) => updateIngredient(ingredient.id, 'cost', e.target.value)}
+                          placeholder="$/unit"
+                          className="px-3 py-2 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                        />
+                      </div>
+
+                      {ingredient.quantity && ingredient.cost && (
+                        <div className="text-right text-emerald-300 text-sm font-medium">
+                          = ${((parseFloat(ingredient.quantity) || 0) * (parseFloat(ingredient.cost) || 0)).toFixed(2)}
+                        </div>
+                      )}
+                    </div>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pricing Parameters */}
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Percent className="w-5 h-5 text-emerald-400" />
+                Pricing Parameters
+              </h3>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-emerald-200 mb-2">
+                    Target Food Cost % (Industry: 28-35%)
+                  </label>
+                  <input
+                    type="number"
+                    step="1"
+                    value={pricing.targetFoodCostPercent}
+                    onChange={(e) => setPricing({ ...pricing, targetFoodCostPercent: e.target.value })}
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  />
                 </div>
-              </div>
 
-              <div className="pt-4 border-t border-white/10">
-                <h3 className="text-sm font-semibold text-blue-300 mb-3">Labor Costs</h3>
-                
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm font-medium text-blue-200 mb-2">
-                      Total Labor Cost ($)
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={inputs.laborCost}
-                      onChange={(e) => setInputs({ ...inputs, laborCost: e.target.value })}
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                      placeholder="12000"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-emerald-200 mb-2">
+                    Labor Cost % (Industry: 25-35%)
+                  </label>
+                  <input
+                    type="number"
+                    step="1"
+                    value={pricing.laborCostPercent}
+                    onChange={(e) => setPricing({ ...pricing, laborCostPercent: e.target.value })}
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  />
+                </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-blue-200 mb-2">
-                      Benefits & Taxes ($)
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={inputs.benefits}
-                      onChange={(e) => setInputs({ ...inputs, benefits: e.target.value })}
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                      placeholder="2000"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-emerald-200 mb-2">
+                    Overhead % (Rent, utilities, etc.)
+                  </label>
+                  <input
+                    type="number"
+                    step="1"
+                    value={pricing.overheadPercent}
+                    onChange={(e) => setPricing({ ...pricing, overheadPercent: e.target.value })}
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Results Section */}
+          {/* Right Column - Results */}
           <div className="space-y-6">
-            {/* Prime Cost Result */}
-            <div className="backdrop-blur-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-300/30 rounded-2xl p-6">
+            {/* Recommended Price */}
+            <div className="backdrop-blur-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-300/30 rounded-2xl p-6">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-semibold text-white">Prime Cost</h3>
-                <StatusIcon className="w-5 h-5 text-blue-300" />
+                <h3 className="text-lg font-semibold text-white">Recommended Menu Price</h3>
+                <Calculator className="w-5 h-5 text-emerald-300" />
               </div>
-              <div className="text-5xl font-bold text-white mb-1">
-                {results.primeCostPercent}%
+              <div className="text-5xl font-bold text-white mb-2">
+                ${results.recommendedPrice}
               </div>
-              <div className="text-2xl text-blue-200 mb-3">
-                ${results.primeCost}
-              </div>
-              <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${status.color} bg-white/10`}>
-                <StatusIcon className="w-4 h-4" />
-                {status.text}
-              </div>
+              <p className="text-emerald-200 text-sm">
+                {results.profitMargin}% profit margin
+              </p>
             </div>
 
-            {/* Component Breakdown */}
+            {/* Cost Breakdown */}
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-white mb-4">Cost Breakdown</h3>
               
-              <div className="space-y-4">
-                <div className="backdrop-blur-xl bg-blue-500/10 border border-blue-300/20 rounded-xl p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-blue-200">COGS (Food + Beverage)</span>
-                    <span className="text-xl font-bold text-white">{results.cogsPercent}%</span>
-                  </div>
-                  <div className="text-right text-blue-300 text-sm">
-                    ${results.totalCOGS}
-                  </div>
-                </div>
-
-                <div className="backdrop-blur-xl bg-cyan-500/10 border border-cyan-300/20 rounded-xl p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-cyan-200">Labor (Wages + Benefits)</span>
-                    <span className="text-xl font-bold text-white">{results.laborPercent}%</span>
-                  </div>
-                  <div className="text-right text-cyan-300 text-sm">
-                    ${results.totalLabor}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Industry Benchmarks */}
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Industry Benchmarks</h3>
-              
               <div className="space-y-3">
                 <div className="flex justify-between items-center py-2 border-b border-white/10">
-                  <span className="text-blue-200">Excellent Prime Cost:</span>
-                  <span className="text-green-400 font-bold">&lt; 60%</span>
+                  <span className="text-emerald-200">Ingredient Cost:</span>
+                  <span className="text-xl font-bold text-white">${results.ingredientCost}</span>
                 </div>
+
                 <div className="flex justify-between items-center py-2 border-b border-white/10">
-                  <span className="text-blue-200">Good Prime Cost:</span>
-                  <span className="text-blue-400 font-bold">60-65%</span>
+                  <span className="text-emerald-200">Labor Cost ({pricing.laborCostPercent}%):</span>
+                  <span className="text-xl font-bold text-white">${results.laborCost}</span>
                 </div>
+
                 <div className="flex justify-between items-center py-2 border-b border-white/10">
-                  <span className="text-blue-200">Warning Zone:</span>
-                  <span className="text-yellow-400 font-bold">65-70%</span>
+                  <span className="text-emerald-200">Overhead ({pricing.overheadPercent}%):</span>
+                  <span className="text-xl font-bold text-white">${results.overheadCost}</span>
                 </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-blue-200">Critical:</span>
-                  <span className="text-red-400 font-bold">&gt; 70%</span>
+
+                <div className="flex justify-between items-center py-3 border-t-2 border-emerald-500/30 mt-2">
+                  <span className="text-emerald-300 font-semibold">Total Cost:</span>
+                  <span className="text-2xl font-bold text-emerald-400">${results.totalCost}</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Educational Content */}
-        <div className="mt-8 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="text-xl font-semibold text-white mb-4">Why Prime Cost Matters</h3>
-          <div className="grid md:grid-cols-2 gap-6 text-blue-200">
-            <div>
-              <h4 className="font-semibold text-blue-300 mb-2">What is Prime Cost?</h4>
-              <p className="text-sm">
-                Prime Cost is the sum of your Cost of Goods Sold (COGS) and total labor costs. It's the most important metric for restaurant profitability because these are your two largest controllable expenses.
-              </p>
+            {/* Profitability Analysis */}
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-4">Profitability</h3>
+              
+              <div className={`backdrop-blur-xl ${status.bg} border border-white/10 rounded-xl p-4 mb-4`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-emerald-200">Gross Profit per Dish:</span>
+                  <span className="text-2xl font-bold text-white">${results.grossProfit}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-emerald-200">Profit Margin:</span>
+                  <span className={`text-xl font-bold ${status.color}`}>{results.profitMargin}%</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 backdrop-blur-xl bg-emerald-500/10 border border-emerald-300/20 rounded-xl p-4">
+                <AlertCircle className={`w-5 h-5 ${status.color} flex-shrink-0 mt-0.5`} />
+                <div>
+                  <p className={`font-semibold ${status.color}`}>
+                    {status.text}
+                  </p>
+                  <p className="text-sm text-emerald-300 mt-1">
+                    Industry standard: 60-70% profit margin for sustainable operations
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 className="font-semibold text-blue-300 mb-2">How to Improve It</h4>
-              <ul className="text-sm space-y-1 list-disc list-inside">
-                <li>Negotiate better supplier prices</li>
-                <li>Reduce food waste through better inventory management</li>
-                <li>Optimize labor scheduling based on demand</li>
-                <li>Increase menu prices strategically</li>
-                <li>Engineer your menu to promote high-margin items</li>
-              </ul>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-4">
+                <div className="text-emerald-300 text-sm mb-1">Food Cost %</div>
+                <div className="text-2xl font-bold text-white">{pricing.targetFoodCostPercent}%</div>
+              </div>
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-4">
+                <div className="text-emerald-300 text-sm mb-1">Total Ingredients</div>
+                <div className="text-2xl font-bold text-white">{ingredients.length}</div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="mt-8 backdrop-blur-xl bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-300/30 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-3">Track Prime Cost Automatically</h3>
-          <p className="text-blue-200 mb-6 max-w-2xl mx-auto">
-            OwnerClone automatically calculates your prime cost daily by integrating with your POS and supplier invoices, alerting you immediately when costs spike.
+        <div className="mt-8 backdrop-blur-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-300/30 rounded-2xl p-8 text-center">
+          <h3 className="text-2xl font-bold text-white mb-3">Automate Your Recipe Costing</h3>
+          <p className="text-emerald-200 mb-6 max-w-2xl mx-auto">
+            OwnerClone automatically tracks ingredient prices from your invoices and updates your recipe costs in real-time, so you always know your true food cost.
           </p>
           <Link
             href="/demo"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-blue-500/25"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-emerald-500/25"
           >
             See OwnerClone Demo
-            <TrendingUp className="w-5 h-5" />
+            <Calculator className="w-5 h-5" />
           </Link>
         </div>
       </div>
