@@ -45,7 +45,7 @@ export default function LaborCostCalculator() {
     }}
   />
 
-  <div className="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
+  <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
           <Link 
