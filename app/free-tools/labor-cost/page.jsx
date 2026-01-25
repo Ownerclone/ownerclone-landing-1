@@ -27,26 +27,19 @@ export default function LaborCostCalculator() {
     : 0
 
   const getStatus = (percentage) => {
-    if (percentage === 0) return { color: 'text-gray-500', bg: 'bg-[#1a1a1a]', border: 'border-[#2a2a2a]', message: 'Enter your numbers above' }
-    if (percentage < 25) return { color: 'text-[#10b981]', bg: 'bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Excellent! Very efficient labor management.' }
-    if (percentage < 30) return { color: 'text-[#10b981]', bg: 'bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Great! You\'re in the optimal range.' }
-    if (percentage < 35) return { color: 'text-[#fbbf24]', bg: 'bg-[#fbbf24]/10', border: 'border-[#fbbf24]', message: 'Acceptable, but look for efficiency improvements.' }
-    return { color: 'text-[#ef4444]', bg: 'bg-[#ef4444]/10', border: 'border-[#ef4444]', message: 'Too high! Your labor costs are hurting profitability.' }
+    if (percentage === 0) return { color: 'text-gray-500', bg: 'backdrop-blur-xl bg-white/5', border: 'border-[#2a2a2a]', message: 'Enter your numbers above' }
+    if (percentage < 25) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Excellent! Very efficient labor management.' }
+    if (percentage < 30) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Great! You\'re in the optimal range.' }
+    if (percentage < 35) return { color: 'text-[#fbbf24]', bg: 'backdrop-blur-xl bg-[#fbbf24]/10', border: 'border-[#fbbf24]', message: 'Acceptable, but look for efficiency improvements.' }
+    return { color: 'text-[#ef4444]', bg: 'backdrop-blur-xl bg-[#ef4444]/10', border: 'border-[#ef4444]', message: 'Too high! Your labor costs are hurting profitability.' }
   }
 
   const status = getStatus(laborCostPercentage)
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#06b6d4] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#0891b2] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Labor Cost <span className="text-[#06b6d4]">Calculator</span>
@@ -62,7 +55,7 @@ export default function LaborCostCalculator() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Calculator Input */}
             <div>
-              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+              <div className="backdrop-blur-xl bg-white/5 border border-[#06b6d4]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                 <h2 className="text-2xl font-bold mb-6">Enter Your Numbers</h2>
                 
                 <div className="space-y-6">
@@ -74,7 +67,7 @@ export default function LaborCostCalculator() {
                       type="number"
                       value={grossWages}
                       onChange={(e) => setGrossWages(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
                       placeholder="8,500"
                     />
                     <p className="text-sm text-gray-500 mt-1">Total wages before taxes</p>
@@ -88,7 +81,7 @@ export default function LaborCostCalculator() {
                       type="number"
                       value={tips}
                       onChange={(e) => setTips(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
                       placeholder="2,200"
                     />
                     <p className="text-sm text-gray-500 mt-1">You pay payroll tax on tips too!</p>
@@ -102,7 +95,7 @@ export default function LaborCostCalculator() {
                       type="number"
                       value={payrollTaxRate}
                       onChange={(e) => setPayrollTaxRate(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
                       placeholder="12"
                     />
                     <p className="text-sm text-gray-500 mt-1">Usually 12-15% (FICA + unemployment)</p>
@@ -116,7 +109,7 @@ export default function LaborCostCalculator() {
                       type="number"
                       value={benefits}
                       onChange={(e) => setBenefits(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
                       placeholder="450"
                     />
                     <p className="text-sm text-gray-500 mt-1">Health insurance, 401k contributions, etc.</p>
@@ -130,7 +123,7 @@ export default function LaborCostCalculator() {
                       type="number"
                       value={payrollProcessing}
                       onChange={(e) => setPayrollProcessing(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
                       placeholder="150"
                     />
                     <p className="text-sm text-gray-500 mt-1">Gusto, ADP, Paychex fees</p>
@@ -144,7 +137,7 @@ export default function LaborCostCalculator() {
                       type="number"
                       value={totalSales}
                       onChange={(e) => setTotalSales(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-lg text-white transition-colors"
                       placeholder="32,000"
                     />
                     <p className="text-sm text-gray-500 mt-1">Total revenue for the same period</p>
@@ -155,7 +148,7 @@ export default function LaborCostCalculator() {
 
             {/* Results */}
             <div>
-              <div className={`${status.bg} border-2 ${status.border} rounded-2xl p-8 mb-6 backdrop-blur-xl`}>
+              <div className={`${status.bg} border-2 ${status.border} rounded-2xl p-8 mb-6`}>
                 <h2 className="text-2xl font-bold mb-4">Your Results</h2>
                 
                 <div className="space-y-6">
@@ -174,7 +167,7 @@ export default function LaborCostCalculator() {
                     </div>
                   </div>
 
-                  <div className="bg-[#0a0a0a]/40 rounded-lg p-4 space-y-2">
+                  <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg p-4 space-y-2">
                     <h3 className="text-lg font-bold text-[#06b6d4] mb-3">What You Actually Pay</h3>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Tax on Wages</span>
@@ -218,7 +211,7 @@ export default function LaborCostCalculator() {
               </div>
 
               {/* Understanding Your Results */}
-              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-2xl p-6 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
                 <h3 className="text-lg font-bold mb-3">Understanding Your Results</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-start">
@@ -244,21 +237,21 @@ export default function LaborCostCalculator() {
 
           {/* Educational Content */}
           <div className="mt-12 grid md:grid-cols-3 gap-8">
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
               <h3 className="text-lg font-bold text-[#06b6d4] mb-3">The Hidden Costs</h3>
               <p className="text-gray-300">
                 Most restaurant owners forget to include payroll taxes on TIPS. If your staff makes $2,000 in tips and you pay 12% payroll tax, that's $240 you're paying out of pocket.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
               <h3 className="text-lg font-bold text-[#06b6d4] mb-3">Don't Forget Processing</h3>
               <p className="text-gray-300">
                 Payroll processing fees (Gusto, ADP, Paychex) typically run $100-300/month. Over a year, that's $1,200-3,600 that many owners don't include in labor calculations.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#06b6d4]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
               <h3 className="text-lg font-bold text-[#06b6d4] mb-3">Industry Benchmarks</h3>
               <p className="text-gray-300">
                 Quick service should be 25-30%, casual dining 30-35%, fine dining can run 35-40%. Labor + food cost (prime cost) should NEVER exceed 65%.
@@ -267,7 +260,7 @@ export default function LaborCostCalculator() {
           </div>
 
           {/* CTA */}
-          <div className="mt-12 bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#06b6d4] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(6,182,212,0.15)]">
+          <div className="mt-12 backdrop-blur-xl bg-gradient-to-br from-[#06b6d4]/20 to-[#0891b2]/20 border-2 border-[#06b6d4] rounded-3xl p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">Want Automatic <span className="text-[#06b6d4]">Labor Tracking</span>?</h2>
             <p className="text-lg text-gray-300 mb-6">
               OwnerClone integrates with your payroll system to automatically track labor costs in real-time. No more manual calculations.
