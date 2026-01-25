@@ -20,6 +20,15 @@ textarea:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+/* Light mode autofill fix */
+:root.light-mode input:-webkit-autofill,
+:root.light-mode input:-webkit-autofill:hover,
+:root.light-mode input:-webkit-autofill:focus,
+:root.light-mode input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
 /* Root theme variables - Dark mode (default) */
 :root {
   --bg-primary: #000000;
@@ -137,11 +146,94 @@ body {
   background-color: var(--nav-bg);
   border-color: var(--nav-border);
 }
-/* Light mode logo outline */
-.light-mode-outline {
-  transition: opacity 0.3s ease;
+
+/* SITE-WIDE LIGHT MODE OVERRIDES */
+
+/* All white text becomes black in light mode (except specific elements) */
+:root.light-mode .text-white:not(.keep-white) {
+  color: #000000 !important;
 }
 
-:root.light-mode .light-mode-outline {
-  opacity: 1;
+/* All gray text stays readable in light mode */
+:root.light-mode .text-gray-300 {
+  color: #4b5563 !important;
+}
+
+:root.light-mode .text-gray-400 {
+  color: #6b7280 !important;
+}
+
+:root.light-mode .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+/* Cyan/blue text stays cyan/blue in both modes */
+/* No changes needed - already looks good */
+
+/* All buttons with cyan background get stainless grey in light mode */
+:root.light-mode .bg-cyan-400,
+:root.light-mode .bg-\[\#38bdf8\] {
+  background: linear-gradient(to bottom right, #1e1e1e, #2a2a2a, #1e1e1e) !important;
+  color: #ffffff !important;
+  border: 1px solid #3a3a3a;
+}
+
+:root.light-mode .bg-cyan-400:hover,
+:root.light-mode .bg-\[\#38bdf8\]:hover {
+  background: linear-gradient(to bottom right, #2a2a2a, #3a3a3a, #2a2a2a) !important;
+  border-color: #4a4a4a;
+}
+
+/* Gradient backgrounds become light in light mode */
+:root.light-mode .bg-gradient-to-r,
+:root.light-mode .bg-gradient-to-br,
+:root.light-mode .bg-gradient-to-b {
+  background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb) !important;
+}
+
+/* Dark backgrounds become light */
+:root.light-mode .bg-\[\#0a0a0a\],
+:root.light-mode .bg-\[\#1a1a1a\],
+:root.light-mode .bg-black,
+:root.light-mode .bg-gray-900 {
+  background-color: #ffffff !important;
+}
+
+:root.light-mode .bg-\[\#0f1419\] {
+  background-color: #f9fafb !important;
+}
+
+/* Border colors in light mode */
+:root.light-mode .border-\[\#1a1a1a\],
+:root.light-mode .border-\[\#2a2a2a\],
+:root.light-mode .border-\[\#3a3a3a\],
+:root.light-mode .border-gray-700,
+:root.light-mode .border-gray-800 {
+  border-color: #e5e7eb !important;
+}
+
+/* Animated orbs should be lighter/more subtle in light mode */
+:root.light-mode .bg-\[\#0ea5e9\],
+:root.light-mode .bg-\[\#38bdf8\] {
+  opacity: 0.1 !important;
+}
+
+/* Cards and sections */
+:root.light-mode .bg-\[\#1e1e1e\] {
+  background-color: #f9fafb !important;
+}
+
+:root.light-mode .bg-\[\#2a2a2a\] {
+  background-color: #f3f4f6 !important;
+}
+
+/* Hover states for cards in light mode */
+:root.light-mode .hover\:bg-\[\#2a2a2a\]:hover {
+  background-color: #e5e7eb !important;
+}
+
+/* Keep certain elements dark in light mode */
+.keep-dark {
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
