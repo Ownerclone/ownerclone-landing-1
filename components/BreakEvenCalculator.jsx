@@ -22,11 +22,11 @@ export default function BreakEvenCalculator() {
   const [hoursOpen, setHoursOpen] = useState('');
   const [daysOpen, setDaysOpen] = useState('');
 
-  const updateFixedCost = (key, value) => {
+  const updateFixedCost = (key: string, value: string) => {
     setFixedCosts({ ...fixedCosts, [key]: value });
   };
 
-  const updateVariableCost = (key, value) => {
+  const updateVariableCost = (key: string, value: string) => {
     setVariableCosts({ ...variableCosts, [key]: value });
   };
 
@@ -78,7 +78,7 @@ export default function BreakEvenCalculator() {
       <section className="relative py-16 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Main Calculator Card */}
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
             
             {/* Fixed Costs Section */}
             <div className="mb-8">
