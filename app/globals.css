@@ -110,19 +110,26 @@ body {
   color: var(--text-tertiary);
 }
 
-/* Login button - stays cyan with smart text color */
+/* Login button - cyan in dark mode, stainless grey in light mode */
 .login-btn {
   background-color: #22d3ee;
   color: #000000;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root.light-mode .login-btn {
+  background: linear-gradient(to bottom right, #1e1e1e, #2a2a2a, #1e1e1e);
   color: #ffffff;
+  border: 1px solid #3a3a3a;
 }
 
 .login-btn:hover {
   background-color: #06b6d4;
+}
+
+:root.light-mode .login-btn:hover {
+  background: linear-gradient(to bottom right, #2a2a2a, #3a3a3a, #2a2a2a);
+  border-color: #4a4a4a;
 }
 
 /* Mobile menu theming */
