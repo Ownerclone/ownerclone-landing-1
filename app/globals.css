@@ -291,3 +291,58 @@ body {
   background-color: #dbeafe;
   border-color: #7dd3fc;
 }
+css/* ============================================
+   PRICING PAGE HERO FIXES
+   ============================================ */
+
+/* Early Adopter badge - blue background with white text */
+:root.light-mode .bg-\[\#10b981\].px-6.py-3 {
+  background-color: #0ea5e9 !important;
+  color: #ffffff !important;
+}
+
+/* Hero section gradient background - remove gradient, make it solid light */
+:root.light-mode .bg-gradient-to-b.from-\[\#0f1419\] {
+  background: #f8fafc !important;
+}
+
+/* Main heading text colors */
+:root.light-mode h1 .text-\[\#38bdf8\] {
+  color: #0ea5e9 !important;
+}
+
+/* Subtitle text under main heading */
+:root.light-mode .text-xl.text-gray-300 {
+  color: #64748b !important;
+}
+
+/* Lock in pricing card - clean white background with blue border */
+:root.light-mode .bg-\[\#0a0a0a\]\/60.backdrop-blur-xl.border-2 {
+  background-color: #ffffff !important;
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+}
+
+/* Text inside the lock-in card */
+:root.light-mode .bg-\[\#0a0a0a\]\/60 .text-white {
+  color: #1e293b !important;
+}
+
+:root.light-mode .bg-\[\#0a0a0a\]\/60 .text-gray-300 {
+  color: #64748b !important;
+}
+
+/* Border separator in card */
+:root.light-mode .border-\[\#38bdf8\]\/30 {
+  border-color: #cbd5e1 !important;
+}
+
+/* "Ask Us How" button inside card */
+:root.light-mode .bg-\[\#38bdf8\].text-black {
+  background-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+:root.light-mode .bg-\[\#38bdf8\].text-black:hover {
+  background-color: #94a3b8 !important;
+}
