@@ -114,15 +114,18 @@ export default function ThirdPartyFeesCalculator() {
   const status = getImpactStatus()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-900 via-slate-900 to-pink-900">
-      {/* Animated background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-rose-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-      </div>
+    <div className="min-h-screen relative">
+  <div 
+    className="fixed inset-0 z-0"
+    style={{
+      backgroundImage: 'url(/bg-glow.svg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}
+  />
 
-      <div className="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
+  <div className="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
           <Link 
