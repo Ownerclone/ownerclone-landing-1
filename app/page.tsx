@@ -2,13 +2,7 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <main className="min-h-screen text-white relative overflow-hidden">
       {/* Hero Section with Logo + OwnerClone */}
       <section className="relative pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -58,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* Industry Stats Banner */}
-      <section className="relative py-12 bg-[#0f1419]/50">
+      <section className="relative py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
@@ -88,7 +82,7 @@ export default function Home() {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#0a0a0a] md:bg-[#0a0a0a]/60 md:backdrop-blur-xl border-2 border-red-500/50 hover:border-red-500 rounded-2xl p-8 transition-all duration-300">
+            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-red-500/50 hover:border-red-500 rounded-2xl p-8 transition-all duration-300">
               <div className="text-5xl mb-4">🚨</div>
               <h3 className="text-2xl font-bold mb-3">Employee Theft</h3>
               <p className="text-gray-400 leading-relaxed">
@@ -96,7 +90,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a] md:bg-[#0a0a0a]/60 md:backdrop-blur-xl border-2 border-yellow-500/50 hover:border-yellow-500 rounded-2xl p-8 transition-all duration-300">
+            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-yellow-500/50 hover:border-yellow-500 rounded-2xl p-8 transition-all duration-300">
               <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold mb-3">Food Costs Are a Mystery</h3>
               <p className="text-gray-400 leading-relaxed">
@@ -104,7 +98,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a] md:bg-[#0a0a0a]/60 md:backdrop-blur-xl border-2 border-purple-500/50 hover:border-purple-500 rounded-2xl p-8 transition-all duration-300">
+            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-purple-500/50 hover:border-purple-500 rounded-2xl p-8 transition-all duration-300">
               <div className="text-5xl mb-4">📉</div>
               <h3 className="text-2xl font-bold mb-3">Bad Forecasting Kills Profits</h3>
               <p className="text-gray-400 leading-relaxed">
@@ -116,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* Built by Someone Who's Been There */}
-      <section className="relative py-20 px-4 bg-[#0f1419]/30">
+      <section className="relative py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-6">
             Built by Someone Who's <span className="text-[#38bdf8]">Been in Your Shoes</span>
@@ -172,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent to-[#0f1419]/50">
+      <section className="relative py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-6">
             Stop Losing Money. <span className="text-[#38bdf8]">Start Today.</span>
