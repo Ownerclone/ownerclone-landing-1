@@ -26,7 +26,7 @@ textarea:-webkit-autofill:active {
 :root.light-mode input:-webkit-autofill:focus,
 :root.light-mode input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-  -webkit-text-fill-color: black !important;
+  -webkit-text-fill-color: #1f2937 !important;
 }
 
 /* Root theme variables - Dark mode (default) */
@@ -50,9 +50,9 @@ textarea:-webkit-autofill:active {
   --bg-primary: #ffffff;
   --bg-secondary: #f5f5f5;
   --bg-card: #fafafa;
-  --text-primary: #000000;
-  --text-secondary: #666666;
-  --text-tertiary: #999999;
+  --text-primary: #1f2937; /* Charcoal instead of black */
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
   --border: #e5e5e5;
   --nav-bg: #38bdf8;
   --nav-border: #0ea5e9;
@@ -119,7 +119,7 @@ body {
   color: var(--text-tertiary);
 }
 
-/* Login button - cyan in dark mode, stainless grey in light mode */
+/* Login button - cyan in dark mode, light grey in light mode */
 .login-btn {
   background-color: #22d3ee;
   color: #000000;
@@ -127,9 +127,9 @@ body {
 }
 
 :root.light-mode .login-btn {
-  background: linear-gradient(to bottom right, #1e1e1e, #2a2a2a, #1e1e1e);
-  color: #ffffff;
-  border: 1px solid #3a3a3a;
+  background: linear-gradient(to bottom right, #e5e7eb, #d1d5db, #e5e7eb);
+  color: #1f2937; /* Charcoal text */
+  border: 1px solid #9ca3af;
 }
 
 .login-btn:hover {
@@ -137,8 +137,8 @@ body {
 }
 
 :root.light-mode .login-btn:hover {
-  background: linear-gradient(to bottom right, #2a2a2a, #3a3a3a, #2a2a2a);
-  border-color: #4a4a4a;
+  background: linear-gradient(to bottom right, #d1d5db, #9ca3af, #d1d5db);
+  border-color: #6b7280;
 }
 
 /* Mobile menu theming */
@@ -149,12 +149,24 @@ body {
 
 /* SITE-WIDE LIGHT MODE OVERRIDES */
 
-/* All white text becomes black in light mode (except specific elements) */
-:root.light-mode .text-white:not(.keep-white) {
-  color: #000000 !important;
+/* All white text becomes charcoal in light mode (except in cards/banners) */
+:root.light-mode .text-white:not(.keep-white):not([class*="bg-"]):not([class*="border-"]) {
+  color: #1f2937 !important;
 }
 
-/* All gray text stays readable in light mode */
+/* Specific targeting for main content text */
+:root.light-mode body > * .text-white {
+  color: #1f2937 !important;
+}
+
+/* But keep white text in elements with dark backgrounds (cards, banners, sections) */
+:root.light-mode [class*="bg-[#"]:not([class*="bg-[#f"]):not([class*="bg-[#e"]) .text-white,
+:root.light-mode .bg-gradient-to-br .text-white,
+:root.light-mode .bg-gradient-to-r .text-white {
+  color: #ffffff !important;
+}
+
+/* All gray text becomes darker for readability in light mode */
 :root.light-mode .text-gray-300 {
   color: #4b5563 !important;
 }
@@ -170,45 +182,51 @@ body {
 /* Cyan/blue text stays cyan/blue in both modes */
 /* No changes needed - already looks good */
 
-/* All buttons with cyan background get stainless grey in light mode */
-:root.light-mode .bg-cyan-400,
-:root.light-mode .bg-\[\#38bdf8\] {
-  background: linear-gradient(to bottom right, #1e1e1e, #2a2a2a, #1e1e1e) !important;
-  color: #ffffff !important;
-  border: 1px solid #3a3a3a;
+/* All buttons with cyan background get light grey in light mode */
+:root.light-mode .bg-cyan-400:not([class*="border-"]),
+:root.light-mode .bg-\[\#38bdf8\]:not([class*="border-"]) {
+  background: linear-gradient(to bottom right, #e5e7eb, #d1d5db, #e5e7eb) !important;
+  color: #1f2937 !important; /* Charcoal text */
+  border: 1px solid #9ca3af;
 }
 
-:root.light-mode .bg-cyan-400:hover,
-:root.light-mode .bg-\[\#38bdf8\]:hover {
-  background: linear-gradient(to bottom right, #2a2a2a, #3a3a3a, #2a2a2a) !important;
-  border-color: #4a4a4a;
+:root.light-mode .bg-cyan-400:not([class*="border-"]):hover,
+:root.light-mode .bg-\[\#38bdf8\]:not([class*="border-"]):hover {
+  background: linear-gradient(to bottom right, #d1d5db, #9ca3af, #d1d5db) !important;
+  border-color: #6b7280;
 }
 
-/* Gradient backgrounds become light in light mode */
-:root.light-mode .bg-gradient-to-r,
-:root.light-mode .bg-gradient-to-br,
-:root.light-mode .bg-gradient-to-b {
-  background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb) !important;
-}
-
-/* Dark backgrounds become light */
-:root.light-mode .bg-\[\#0a0a0a\],
-:root.light-mode .bg-\[\#1a1a1a\],
-:root.light-mode .bg-black,
-:root.light-mode .bg-gray-900 {
+/* Main page backgrounds become light */
+:root.light-mode body,
+:root.light-mode .min-h-screen {
   background-color: #ffffff !important;
 }
 
-:root.light-mode .bg-\[\#0f1419\] {
-  background-color: #f9fafb !important;
+/* Keep cards and banners dark in light mode */
+:root.light-mode .bg-\[\#0a0a0a\],
+:root.light-mode .bg-\[\#1a1a1a\],
+:root.light-mode .bg-\[\#1e1e1e\],
+:root.light-mode .bg-\[\#2a2a2a\],
+:root.light-mode .bg-black {
+  /* Keep original dark colors - don't change */
+  background-color: inherit !important;
 }
 
-/* Border colors in light mode */
-:root.light-mode .border-\[\#1a1a1a\],
-:root.light-mode .border-\[\#2a2a2a\],
-:root.light-mode .border-\[\#3a3a3a\],
-:root.light-mode .border-gray-700,
-:root.light-mode .border-gray-800 {
+/* Gradient cards/sections stay dark */
+:root.light-mode .bg-gradient-to-br:has([class*="from-[#1"]),
+:root.light-mode .bg-gradient-to-br:has([class*="from-[#2"]) {
+  background: inherit !important;
+}
+
+/* Main background sections that should be light */
+:root.light-mode section:not(:has(.bg-gradient-to-br)):not(:has(.bg-\[\#1)):not(:has(.bg-\[\#2])) {
+  background-color: #ffffff;
+}
+
+/* Border colors in light mode - but not on dark cards */
+:root.light-mode .border-\[\#1a1a1a\]:not([class*="bg-[#1"]):not([class*="bg-[#2"]),
+:root.light-mode .border-\[\#2a2a2a\]:not([class*="bg-[#1"]):not([class*="bg-[#2"]),
+:root.light-mode .border-\[\#3a3a3a\]:not([class*="bg-[#1"]):not([class*="bg-[#2"]) {
   border-color: #e5e7eb !important;
 }
 
@@ -218,22 +236,12 @@ body {
   opacity: 0.1 !important;
 }
 
-/* Cards and sections */
-:root.light-mode .bg-\[\#1e1e1e\] {
-  background-color: #f9fafb !important;
+/* Outlined/bordered buttons stay visible in light mode */
+:root.light-mode .border-2:not(.bg-cyan-400):not(.bg-\[\#38bdf8\]) {
+  border-color: #9ca3af !important;
+  color: #1f2937 !important;
 }
 
-:root.light-mode .bg-\[\#2a2a2a\] {
+:root.light-mode .border-2:not(.bg-cyan-400):not(.bg-\[\#38bdf8\]):hover {
   background-color: #f3f4f6 !important;
-}
-
-/* Hover states for cards in light mode */
-:root.light-mode .hover\:bg-\[\#2a2a2a\]:hover {
-  background-color: #e5e7eb !important;
-}
-
-/* Keep certain elements dark in light mode */
-.keep-dark {
-  background-color: #000000 !important;
-  color: #ffffff !important;
 }
