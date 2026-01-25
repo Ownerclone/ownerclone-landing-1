@@ -291,58 +291,94 @@ body {
   background-color: #dbeafe;
   border-color: #7dd3fc;
 }
-css/* ============================================
-   PRICING PAGE HERO FIXES
+/* ============================================
+   FEATURES PAGE STYLING - COMPLETE
    ============================================ */
 
-/* Early Adopter badge - blue background with white text */
-:root.light-mode .bg-\[\#10b981\].px-6.py-3 {
-  background-color: #0ea5e9 !important;
+/* Remove gradient backgrounds from hero sections */
+:root.light-mode section .absolute.inset-0.bg-gradient-to-b {
+  display: none;
+}
+
+/* Hero section container - clean white background */
+:root.light-mode section.relative.pt-32 {
+  background-color: #ffffff;
+}
+
+/* Hero content wrapper - blue card with white text */
+:root.light-mode section.relative.pt-32 > div > .relative.max-w-7xl,
+:root.light-mode section.relative.pt-32 > div > .relative.max-w-4xl {
+  background: #0ea5e9;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* All text inside hero blue card becomes white */
+:root.light-mode section.relative.pt-32 h1 {
   color: #ffffff !important;
 }
 
-/* Hero section gradient background - remove gradient, make it solid light */
-:root.light-mode .bg-gradient-to-b.from-\[\#0f1419\] {
-  background: #f8fafc !important;
+:root.light-mode section.relative.pt-32 .text-5xl,
+:root.light-mode section.relative.pt-32 .text-6xl,
+:root.light-mode section.relative.pt-32 .text-7xl {
+  color: #ffffff !important;
 }
 
-/* Main heading text colors */
-:root.light-mode h1 .text-\[\#38bdf8\] {
+:root.light-mode section.relative.pt-32 .text-xl,
+:root.light-mode section.relative.pt-32 .text-2xl,
+:root.light-mode section.relative.pt-32 .text-gray-300 {
+  color: #ffffff !important;
+  opacity: 0.95;
+}
+
+:root.light-mode section.relative.pt-32 p {
+  color: #ffffff !important;
+}
+
+/* ALL section headings (h2, h3) become blue */
+:root.light-mode h2 {
   color: #0ea5e9 !important;
 }
 
-/* Subtitle text under main heading */
-:root.light-mode .text-xl.text-gray-300 {
-  color: #64748b !important;
+:root.light-mode h3 {
+  color: #0ea5e9 !important;
 }
 
-/* Lock in pricing card - clean white background with blue border */
-:root.light-mode .bg-\[\#0a0a0a\]\/60.backdrop-blur-xl.border-2 {
-  background-color: #ffffff !important;
-  border-color: #0ea5e9 !important;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+/* Specific heading classes that should be blue */
+:root.light-mode .text-3xl.font-bold,
+:root.light-mode .text-4xl.font-bold,
+:root.light-mode .text-2xl.font-bold {
+  color: #0ea5e9 !important;
 }
 
-/* Text inside the lock-in card */
-:root.light-mode .bg-\[\#0a0a0a\]\/60 .text-white {
-  color: #1e293b !important;
-}
-
-:root.light-mode .bg-\[\#0a0a0a\]\/60 .text-gray-300 {
-  color: #64748b !important;
-}
-
-/* Border separator in card */
-:root.light-mode .border-\[\#38bdf8\]\/30 {
-  border-color: #cbd5e1 !important;
-}
-
-/* "Ask Us How" button inside card */
-:root.light-mode .bg-\[\#38bdf8\].text-black {
-  background-color: #cbd5e1 !important;
+/* Override any remaining white headings outside hero */
+:root.light-mode section:not(.relative.pt-32) .text-white {
   color: #334155 !important;
 }
 
-:root.light-mode .bg-\[\#38bdf8\].text-black:hover {
-  background-color: #94a3b8 !important;
+/* But keep headings blue */
+:root.light-mode section:not(.relative.pt-32) h1,
+:root.light-mode section:not(.relative.pt-32) h2,
+:root.light-mode section:not(.relative.pt-32) h3 {
+  color: #0ea5e9 !important;
+}
+
+/* Body text stays graphite */
+:root.light-mode p:not(section.relative.pt-32 p) {
+  color: #64748b !important;
+}
+
+/* Section dividers/underlines - blue */
+:root.light-mode .border-b-4,
+:root.light-mode .border-b-2 {
+  border-color: #0ea5e9 !important;
+}
+
+/* Remove any cyan underlines and make them blue */
+:root.light-mode .border-cyan-400,
+:root.light-mode .border-\[\#38bdf8\] {
+  border-color: #0ea5e9 !important;
 }
