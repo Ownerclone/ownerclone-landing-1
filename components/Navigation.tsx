@@ -6,6 +6,7 @@ import ThemeToggle from './ThemeToggle';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
 
@@ -20,13 +21,19 @@ export default function Navigation() {
     setLoginOpen(true);
   };
 
+  // Close mobile menu when clicking a link
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileDropdownOpen(false);
+  };
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 nav-bg backdrop-blur-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2" onClick={closeMobileMenu}>
               <svg viewBox="-5 0 85 60" className="h-10 md:h-12 w-auto">
                 <circle cx="20" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10"/>
                 <circle cx="48" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
@@ -143,7 +150,7 @@ export default function Navigation() {
               {/* Theme Toggle */}
               <ThemeToggle />
 
-              {/* Login Button - UPDATED WITH STAINLESS GREY */}
+              {/* Login Button */}
               <button 
                 onClick={() => setLoginOpen(true)}
                 className="login-btn px-4 py-2 rounded-lg font-bold"
@@ -168,34 +175,89 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu - FIXED */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t mobile-menu">
             <div className="px-4 py-3 space-y-3">
-              <Link href="/features" className="block nav-text">
+              <Link href="/features" className="block nav-text" onClick={closeMobileMenu}>
                 Features
               </Link>
-              <Link href="/free-tools" className="block nav-text">
-                Free Tools
-              </Link>
-              <Link href="/pricing" className="block nav-text">
+              
+              {/* Mobile Free Tools Dropdown - NOW WORKING */}
+              <div>
+                <button 
+                  onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                  className="w-full flex items-center justify-between nav-text"
+                >
+                  <span>Free Tools</span>
+                  <svg 
+                    className={`w-4 h-4 transition-transform ${mobileDropdownOpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Mobile dropdown items */}
+                {mobileDropdownOpen && (
+                  <div className="mt-2 ml-4 space-y-2 border-l-2 border-theme pl-4">
+                    <Link href="/free-tools/food-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      🥗 Food Cost Calculator
+                    </Link>
+                    <Link href="/free-tools/prime-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      📊 Prime Cost Calculator
+                    </Link>
+                    <Link href="/free-tools/labor-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      👥 Labor Cost Calculator
+                    </Link>
+                    <Link href="/free-tools/break-even" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      ⚖️ Break-Even Calculator
+                    </Link>
+                    <Link href="/free-tools/menu-pricing" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      🍽️ Menu Pricing Calculator
+                    </Link>
+                    <Link href="/free-tools/per-plate-pricing" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      🍱 Per Plate Pricing
+                    </Link>
+                    <Link href="/free-tools/startup-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      🚀 Startup Cost Calculator
+                    </Link>
+                    <Link href="/free-tools/google-review" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      ⭐ Google Review Calculator
+                    </Link>
+                    <Link href="/free-tools/third-party-fees" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
+                      💳 Third Party Fees
+                    </Link>
+                    <Link href="/free-tools" className="block text-sm text-cyan-400 py-1 font-semibold" onClick={closeMobileMenu}>
+                      View All Tools →
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <Link href="/pricing" className="block nav-text" onClick={closeMobileMenu}>
                 Pricing
               </Link>
-              <Link href="/blog" className="block nav-text">
+              <Link href="/blog" className="block nav-text" onClick={closeMobileMenu}>
                 Blog
               </Link>
-              <Link href="/roadmap" className="block nav-text">
+              <Link href="/roadmap" className="block nav-text" onClick={closeMobileMenu}>
                 Roadmap
               </Link>
-              <Link href="/about" className="block nav-text">
+              <Link href="/about" className="block nav-text" onClick={closeMobileMenu}>
                 About
               </Link>
-              <Link href="/contact" className="block nav-text">
+              <Link href="/contact" className="block nav-text" onClick={closeMobileMenu}>
                 Contact
               </Link>
               <div className="pt-3 border-t border-theme">
                 <button 
-                  onClick={() => setLoginOpen(true)}
+                  onClick={() => {
+                    setLoginOpen(true);
+                    closeMobileMenu();
+                  }}
                   className="block w-full text-center login-btn px-4 py-2 rounded-lg font-bold"
                 >
                   Login
