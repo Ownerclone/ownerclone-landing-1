@@ -43,7 +43,7 @@ export default function FoodCostCalculator() {
         }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
           <Link 
