@@ -45,20 +45,30 @@ textarea:-webkit-autofill:active {
   --logo-color: #38bdf8;
 }
 
-/* Light mode overrides - CLEAN PALETTE */
+/* Light mode overrides - WHITE BACKGROUND ONLY */
 :root.light-mode {
   --bg-primary: #ffffff;
-  --bg-secondary: #f0f9ff;
-  --bg-card: #f8fafc;
-  --text-primary: #334155;
-  --text-secondary: #64748b;
-  --text-tertiary: #94a3b8;
-  --border: #cbd5e1;
-  --nav-bg: #38bdf8;
-  --nav-border: #0ea5e9;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --border: #e5e5e5;
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-border: rgba(0, 0, 0, 0.1);
   --nav-text: #000000;
-  --nav-text-hover: #1f2937;
-  --logo-color: #ffffff;
+  --nav-text-hover: #22d3ee;
+  --logo-color: #22d3ee;
+}
+
+/* Remove orb background in light mode */
+:root.light-mode body::before {
+  display: none;
+}
+
+/* Remove background image in light mode */
+:root.light-mode body {
+  background-image: none;
 }
 
 /* Apply theme colors */
