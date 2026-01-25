@@ -48,12 +48,12 @@ textarea:-webkit-autofill:active {
 /* Light mode overrides - CLEAN PALETTE */
 :root.light-mode {
   --bg-primary: #ffffff;
-  --bg-secondary: #f0f9ff; /* Light blue tint */
-  --bg-card: #f8fafc; /* Silver */
-  --text-primary: #334155; /* Graphite */
+  --bg-secondary: #f0f9ff;
+  --bg-card: #f8fafc;
+  --text-primary: #334155;
   --text-secondary: #64748b;
   --text-tertiary: #94a3b8;
-  --border: #cbd5e1; /* Silver border */
+  --border: #cbd5e1;
   --nav-bg: #38bdf8;
   --nav-border: #0ea5e9;
   --nav-text: #000000;
@@ -146,13 +146,37 @@ body {
 }
 
 /* ============================================
-   LIGHT MODE COMPLETE REDESIGN
+   PERFORMANCE OPTIMIZATIONS - NO ANIMATIONS
    ============================================ */
 
-/* Hide orbs in light mode */
-:root.light-mode .animate-pulse {
-  display: none;
+/* KILL ALL ORBS - Both modes */
+.animate-pulse,
+[class*="animate-"] {
+  display: none !important;
 }
+
+/* Remove all backdrop blur - massive performance drain */
+.backdrop-blur-xl,
+.backdrop-blur-lg,
+.backdrop-blur-md,
+.backdrop-blur-sm,
+.backdrop-blur {
+  backdrop-filter: none !important;
+}
+
+/* Remove ALL glowing shadows - static shadows only */
+[class*="shadow-[0_0_"] {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1) !important;
+}
+
+/* Simple hover shadows */
+[class*="hover:shadow-"]:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+}
+
+/* ============================================
+   LIGHT MODE COMPLETE REDESIGN
+   ============================================ */
 
 /* Page backgrounds - white with subtle blue gradient */
 :root.light-mode .min-h-screen {
@@ -199,24 +223,8 @@ body {
   border-color: #cbd5e1;
 }
 
-:root.light-mode .backdrop-blur-xl {
-  backdrop-filter: none;
-}
-
 :root.light-mode .border-\[\#2a2a2a\] {
   border-color: #cbd5e1;
-}
-
-/* Remove ALL glowing shadows */
-:root.light-mode .shadow-\[0_0_60px_rgba\(56\,189\,248\,0\.2\)\],
-:root.light-mode .shadow-\[0_0_80px_rgba\(56\,189\,248\,0\.3\)\],
-:root.light-mode .shadow-\[0_0_80px_rgba\(16\,185\,129\,0\.3\)\] {
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-}
-
-:root.light-mode .hover\:shadow-\[0_0_40px_rgba\(56\,189\,248\,0\.4\)\]:hover,
-:root.light-mode .hover\:shadow-\[0_0_40px_rgba\(16\,185\,129\,0\.4\)\]:hover {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
 /* Remove glowing borders */
@@ -291,6 +299,7 @@ body {
   background-color: #dbeafe;
   border-color: #7dd3fc;
 }
+
 /* ============================================
    FEATURES PAGE STYLING - COMPLETE
    ============================================ */
