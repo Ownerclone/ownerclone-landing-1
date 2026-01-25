@@ -143,9 +143,10 @@ export default function Navigation() {
                 <Link 
                   key={item.href}
                   href={item.href} 
-                  className={`relative nav-text transition-colors ${
-                    isActive(item.href) ? 'text-cyan-400' : ''
-                  }`}
+                  className="relative nav-text transition-colors"
+                  style={{
+                    color: isActive(item.href) ? '#22d3ee' : undefined
+                  }}
                 >
                   {item.label}
                   {isActive(item.href) && (
@@ -160,9 +161,12 @@ export default function Navigation() {
               
               {/* Free Tools Dropdown */}
               <div className="relative group">
-                <button className={`nav-text flex items-center gap-1 transition-colors ${
-                  isFreeToolsActive ? 'text-cyan-400' : ''
-                }`}>
+                <button 
+                  className="nav-text flex items-center gap-1 transition-colors"
+                  style={{
+                    color: isFreeToolsActive ? '#22d3ee' : undefined
+                  }}
+                >
                   Free Tools
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -208,9 +212,10 @@ export default function Navigation() {
                 <Link 
                   key={item.href}
                   href={item.href} 
-                  className={`relative nav-text transition-colors ${
-                    isActive(item.href) ? 'text-cyan-400' : ''
-                  }`}
+                  className="relative nav-text transition-colors"
+                  style={{
+                    color: isActive(item.href) ? '#22d3ee' : undefined
+                  }}
                 >
                   {item.label}
                   {isActive(item.href) && (
@@ -357,8 +362,8 @@ export default function Navigation() {
 
       {/* Login Modal - GLASS EFFECT */}
       {loginOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setLoginOpen(false)}>
-          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setLoginOpen(false)}>
+          <div className="backdrop-blur-xl bg-white/10 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Login to <span className="text-[#38bdf8]">OwnerClone</span></h2>
               <button onClick={() => setLoginOpen(false)} className="text-gray-400 hover:text-white transition">
@@ -413,8 +418,8 @@ export default function Navigation() {
 
       {/* Forgot Password Modal - GLASS EFFECT */}
       {forgotPasswordOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setForgotPasswordOpen(false)}>
-          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setForgotPasswordOpen(false)}>
+          <div className="backdrop-blur-xl bg-white/10 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Reset <span className="text-[#38bdf8]">Password</span></h2>
               <button onClick={() => setForgotPasswordOpen(false)} className="text-gray-400 hover:text-white transition">
