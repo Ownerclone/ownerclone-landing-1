@@ -36,14 +36,14 @@ export default function Navigation() {
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2" onClick={closeMobileMenu}>
               <svg viewBox="-5 0 85 60" className="h-10 md:h-12 w-auto">
-                <circle cx="20" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10"/>
-                <circle cx="48" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
+                <circle cx="20" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10"/>
+                <circle cx="48" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
               </svg>
               <span className="text-2xl font-black text-white">OwnerClone</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8">
               <Link href="/features" className="nav-text">
                 Features
               </Link>
@@ -151,10 +151,10 @@ export default function Navigation() {
               {/* Theme Toggle */}
               <ThemeToggle />
 
-              {/* Login Button */}
+              {/* Login Button - Glass Style */}
               <button 
                 onClick={() => setLoginOpen(true)}
-                className="login-btn px-4 py-2 rounded-lg font-bold"
+                className="backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-4 py-2 rounded-lg font-bold"
               >
                 Login
               </button>
@@ -163,7 +163,7 @@ export default function Navigation() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 nav-text"
+              className="lg:hidden p-2 nav-text"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileMenuOpen ? (
@@ -178,7 +178,7 @@ export default function Navigation() {
 
         {/* Mobile menu - GLASS EFFECT */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/10 backdrop-blur-xl bg-black/60">
+          <div className="lg:hidden border-t border-white/10 backdrop-blur-xl bg-black/60">
             <div className="px-4 py-3 space-y-3">
               <Link href="/features" className="block nav-text" onClick={closeMobileMenu}>
                 Features
@@ -259,7 +259,7 @@ export default function Navigation() {
                     setLoginOpen(true);
                     closeMobileMenu();
                   }}
-                  className="block w-full text-center login-btn px-4 py-2 rounded-lg font-bold"
+                  className="block w-full text-center backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-4 py-2 rounded-lg font-bold"
                 >
                   Login
                 </button>
