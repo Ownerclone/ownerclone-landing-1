@@ -164,9 +164,9 @@ export default function GoogleReviewCalculator() {
         }}
       />
 
-      <div className="relative z-10">
-        <div className="pt-24 px-4">
-          <div className="max-w-5xl mx-auto mb-8">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-4xl">
+        {/* Header */}
+        <div className="mb-8">
             <Link 
               href="/free-tools" 
               className="inline-flex items-center gap-2 text-amber-300 hover:text-amber-100 transition-colors mb-6"
@@ -190,12 +190,9 @@ export default function GoogleReviewCalculator() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
 
-        <section className="py-8 px-4">
-          <div className="max-w-5xl mx-auto">
-            {/* Current Rating Section */}
+        {/* Current Rating Section */}
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
               <h2 className="text-2xl font-bold text-[#ec4899] mb-6">Your Current Rating</h2>
               <div className="backdrop-blur-xl bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
@@ -473,10 +470,9 @@ export default function GoogleReviewCalculator() {
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
 
-      <style jsx>{`
+        <style jsx>{`
         @keyframes fadeIn {
           from {
             opacity: 0;
