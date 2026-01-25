@@ -470,7 +470,6 @@ export default function GoogleReviewCalculator() {
               </div>
             </div>
           </div>
-        </div>
 
         <style jsx>{`
         @keyframes fadeIn {
