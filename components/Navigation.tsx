@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 import { 
@@ -16,6 +17,7 @@ import {
 } from 'lucide-react';
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
@@ -87,6 +89,22 @@ export default function Navigation() {
     }
   ];
 
+  // Navigation items with their paths
+  const navItems = [
+    { label: 'Features', href: '/features' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Roadmap', href: '/roadmap' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' }
+  ];
+
+  // Check if current path matches
+  const isActive = (href: string) => pathname === href;
+  
+  // Check if Free Tools dropdown should be active
+  const isFreeToolsActive = pathname?.startsWith('/free-tools');
+
   const handleForgotPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setLoginOpen(false);
@@ -121,17 +139,41 @@ export default function Navigation() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link href="/features" className="nav-text">
-                Features
-              </Link>
+              {navItems.slice(0, 1).map((item) => (
+                <Link 
+                  key={item.href}
+                  href={item.href} 
+                  className={`relative nav-text transition-colors ${
+                    isActive(item.href) ? 'text-cyan-400' : ''
+                  }`}
+                >
+                  {item.label}
+                  {isActive(item.href) && (
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-cyan-400/70" 
+                      style={{
+                        filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))'
+                      }}
+                    />
+                  )}
+                </Link>
+              ))}
               
               {/* Free Tools Dropdown */}
               <div className="relative group">
-                <button className="nav-text flex items-center gap-1">
+                <button className={`nav-text flex items-center gap-1 transition-colors ${
+                  isFreeToolsActive ? 'text-cyan-400' : ''
+                }`}>
                   Free Tools
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
+                  {isFreeToolsActive && (
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-cyan-400/70" 
+                      style={{
+                        filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))'
+                      }}
+                    />
+                  )}
                 </button>
                 
                 {/* Glass Dropdown Menu */}
@@ -162,21 +204,24 @@ export default function Navigation() {
                 </div>
               </div>
 
-              <Link href="/pricing" className="nav-text">
-                Pricing
-              </Link>
-              <Link href="/blog" className="nav-text">
-                Blog
-              </Link>
-              <Link href="/roadmap" className="nav-text">
-                Roadmap
-              </Link>
-              <Link href="/about" className="nav-text">
-                About
-              </Link>
-              <Link href="/contact" className="nav-text">
-                Contact
-              </Link>
+              {navItems.slice(1).map((item) => (
+                <Link 
+                  key={item.href}
+                  href={item.href} 
+                  className={`relative nav-text transition-colors ${
+                    isActive(item.href) ? 'text-cyan-400' : ''
+                  }`}
+                >
+                  {item.label}
+                  {isActive(item.href) && (
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-cyan-400/70" 
+                      style={{
+                        filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))'
+                      }}
+                    />
+                  )}
+                </Link>
+              ))}
 
               {/* Theme Toggle */}
               <ThemeToggle />
@@ -210,7 +255,11 @@ export default function Navigation() {
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-white/10 backdrop-blur-xl bg-black/60">
             <div className="px-4 py-3 space-y-3">
-              <Link href="/features" className="block nav-text" onClick={closeMobileMenu}>
+              <Link 
+                href="/features" 
+                className={`block nav-text ${isActive('/features') ? 'text-cyan-400 font-semibold' : ''}`}
+                onClick={closeMobileMenu}
+              >
                 Features
               </Link>
               
@@ -218,7 +267,7 @@ export default function Navigation() {
               <div>
                 <button 
                   onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                  className="w-full flex items-center justify-between nav-text"
+                  className={`w-full flex items-center justify-between nav-text ${isFreeToolsActive ? 'text-cyan-400 font-semibold' : ''}`}
                 >
                   <span>Free Tools</span>
                   <svg 
@@ -255,19 +304,39 @@ export default function Navigation() {
                 )}
               </div>
 
-              <Link href="/pricing" className="block nav-text" onClick={closeMobileMenu}>
+              <Link 
+                href="/pricing" 
+                className={`block nav-text ${isActive('/pricing') ? 'text-cyan-400 font-semibold' : ''}`}
+                onClick={closeMobileMenu}
+              >
                 Pricing
               </Link>
-              <Link href="/blog" className="block nav-text" onClick={closeMobileMenu}>
+              <Link 
+                href="/blog" 
+                className={`block nav-text ${isActive('/blog') ? 'text-cyan-400 font-semibold' : ''}`}
+                onClick={closeMobileMenu}
+              >
                 Blog
               </Link>
-              <Link href="/roadmap" className="block nav-text" onClick={closeMobileMenu}>
+              <Link 
+                href="/roadmap" 
+                className={`block nav-text ${isActive('/roadmap') ? 'text-cyan-400 font-semibold' : ''}`}
+                onClick={closeMobileMenu}
+              >
                 Roadmap
               </Link>
-              <Link href="/about" className="block nav-text" onClick={closeMobileMenu}>
+              <Link 
+                href="/about" 
+                className={`block nav-text ${isActive('/about') ? 'text-cyan-400 font-semibold' : ''}`}
+                onClick={closeMobileMenu}
+              >
                 About
               </Link>
-              <Link href="/contact" className="block nav-text" onClick={closeMobileMenu}>
+              <Link 
+                href="/contact" 
+                className={`block nav-text ${isActive('/contact') ? 'text-cyan-400 font-semibold' : ''}`}
+                onClick={closeMobileMenu}
+              >
                 Contact
               </Link>
               <div className="pt-3 border-t border-white/10">
