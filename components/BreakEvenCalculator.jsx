@@ -53,25 +53,18 @@ export default function BreakEvenCalculator() {
 
   const getAchievability = () => {
     if (customersPerHour === 0) return { label: '', color: '', bg: '', border: '' };
-    if (customersPerHour < 5) return { label: 'Very Achievable', color: 'text-[#10b981]', bg: 'bg-[#10b981]/10', border: 'border-[#10b981]' };
-    if (customersPerHour < 10) return { label: 'Achievable', color: 'text-[#38bdf8]', bg: 'bg-[#38bdf8]/10', border: 'border-[#38bdf8]' };
-    if (customersPerHour < 15) return { label: 'Challenging', color: 'text-[#fbbf24]', bg: 'bg-[#fbbf24]/10', border: 'border-[#fbbf24]' };
-    return { label: 'Very Difficult', color: 'text-[#ef4444]', bg: 'bg-[#ef4444]/10', border: 'border-[#ef4444]' };
+    if (customersPerHour < 5) return { label: 'Very Achievable', color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]' };
+    if (customersPerHour < 10) return { label: 'Achievable', color: 'text-[#38bdf8]', bg: 'backdrop-blur-xl bg-[#38bdf8]/10', border: 'border-[#38bdf8]' };
+    if (customersPerHour < 15) return { label: 'Challenging', color: 'text-[#fbbf24]', bg: 'backdrop-blur-xl bg-[#fbbf24]/10', border: 'border-[#fbbf24]' };
+    return { label: 'Very Difficult', color: 'text-[#ef4444]', bg: 'backdrop-blur-xl bg-[#ef4444]/10', border: 'border-[#ef4444]' };
   };
 
   const achievability = getAchievability();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#10b981] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#34d399] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Break-Even <span className="text-[#10b981]">Calculator</span>
@@ -85,7 +78,7 @@ export default function BreakEvenCalculator() {
       <section className="relative py-16 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Main Calculator Card */}
-          <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#10b981]/20 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8">
             
             {/* Fixed Costs Section */}
             <div className="mb-8">
@@ -102,7 +95,7 @@ export default function BreakEvenCalculator() {
                       value={fixedCosts.rent}
                       onChange={(e) => updateFixedCost('rent', e.target.value)}
                       placeholder="5,000"
-                      className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                     />
                   </div>
                 </div>
@@ -116,7 +109,7 @@ export default function BreakEvenCalculator() {
                       value={fixedCosts.insurance}
                       onChange={(e) => updateFixedCost('insurance', e.target.value)}
                       placeholder="800"
-                      className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                     />
                   </div>
                 </div>
@@ -130,7 +123,7 @@ export default function BreakEvenCalculator() {
                       value={fixedCosts.utilities}
                       onChange={(e) => updateFixedCost('utilities', e.target.value)}
                       placeholder="1,200"
-                      className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                     />
                   </div>
                 </div>
@@ -144,7 +137,7 @@ export default function BreakEvenCalculator() {
                       value={fixedCosts.salaries}
                       onChange={(e) => updateFixedCost('salaries', e.target.value)}
                       placeholder="8,000"
-                      className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                     />
                   </div>
                 </div>
@@ -158,20 +151,20 @@ export default function BreakEvenCalculator() {
                       value={fixedCosts.other}
                       onChange={(e) => updateFixedCost('other', e.target.value)}
                       placeholder="2,000"
-                      className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg">
+              <div className="mt-6 p-4 backdrop-blur-xl bg-[#10b981]/10 border border-[#10b981] rounded-lg">
                 <p className="text-sm font-semibold text-gray-300">Total Fixed Costs:</p>
                 <p className="text-2xl font-bold text-[#10b981]">${totalFixedCosts.toLocaleString()}/month</p>
               </div>
             </div>
 
             {/* Variable Costs Section */}
-            <div className="mb-8 border-t-2 border-[#2a2a2a] pt-8">
+            <div className="mb-8 border-t-2 border-white/10 pt-8">
               <h2 className="text-2xl font-bold mb-2">Variable Costs (% of Sales)</h2>
               <p className="text-sm text-gray-400 mb-6">Costs that change based on your sales volume</p>
               
@@ -184,7 +177,7 @@ export default function BreakEvenCalculator() {
                       value={variableCosts.foodCost}
                       onChange={(e) => updateVariableCost('foodCost', e.target.value)}
                       placeholder="30"
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                       min="0"
                       max="100"
                     />
@@ -200,7 +193,7 @@ export default function BreakEvenCalculator() {
                       value={variableCosts.labor}
                       onChange={(e) => updateVariableCost('labor', e.target.value)}
                       placeholder="25"
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                       min="0"
                       max="100"
                     />
@@ -216,7 +209,7 @@ export default function BreakEvenCalculator() {
                       value={variableCosts.supplies}
                       onChange={(e) => updateVariableCost('supplies', e.target.value)}
                       placeholder="5"
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                       min="0"
                       max="100"
                     />
@@ -232,7 +225,7 @@ export default function BreakEvenCalculator() {
                       value={variableCosts.other}
                       onChange={(e) => updateVariableCost('other', e.target.value)}
                       placeholder="5"
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                       min="0"
                       max="100"
                     />
@@ -241,14 +234,14 @@ export default function BreakEvenCalculator() {
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-[#a855f7]/10 border border-[#a855f7]/30 rounded-lg">
+              <div className="mt-6 p-4 backdrop-blur-xl bg-[#a855f7]/10 border border-[#a855f7] rounded-lg">
                 <p className="text-sm font-semibold text-gray-300">Total Variable Costs:</p>
                 <p className="text-2xl font-bold text-[#a855f7]">{totalVariableCostPercent.toFixed(1)}% of sales</p>
               </div>
             </div>
 
             {/* Operations Section */}
-            <div className="mb-8 border-t-2 border-[#2a2a2a] pt-8">
+            <div className="mb-8 border-t-2 border-white/10 pt-8">
               <h2 className="text-2xl font-bold mb-6">Operations</h2>
               
               <div className="grid md:grid-cols-3 gap-4">
@@ -261,7 +254,7 @@ export default function BreakEvenCalculator() {
                       value={avgCheckSize}
                       onChange={(e) => setAvgCheckSize(e.target.value)}
                       placeholder="25"
-                      className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                     />
                   </div>
                 </div>
@@ -273,7 +266,7 @@ export default function BreakEvenCalculator() {
                     value={hoursOpen}
                     onChange={(e) => setHoursOpen(e.target.value)}
                     placeholder="12"
-                    className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                   />
                 </div>
 
@@ -284,14 +277,14 @@ export default function BreakEvenCalculator() {
                     value={daysOpen}
                     onChange={(e) => setDaysOpen(e.target.value)}
                     placeholder="26"
-                    className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                   />
                 </div>
               </div>
             </div>
 
             {/* Optional: Current Revenue */}
-            <div className="border-t-2 border-[#2a2a2a] pt-8">
+            <div className="border-t-2 border-white/10 pt-8">
               <h2 className="text-2xl font-bold mb-2">Current Performance (Optional)</h2>
               <p className="text-sm text-gray-400 mb-6">Enter your current monthly revenue to compare</p>
               
@@ -304,7 +297,7 @@ export default function BreakEvenCalculator() {
                     value={revenue}
                     onChange={(e) => setRevenue(e.target.value)}
                     placeholder="50,000"
-                    className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
+                    className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
                   />
                 </div>
               </div>
@@ -318,19 +311,19 @@ export default function BreakEvenCalculator() {
               
               {/* Key Metrics */}
               <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-[#10b981]/10 backdrop-blur-xl border border-[#10b981]/30 p-6 rounded-lg">
+                <div className="backdrop-blur-xl bg-[#10b981]/10 border border-[#10b981] p-6 rounded-lg">
                   <p className="text-sm text-gray-400 mb-1">Break-Even Revenue</p>
                   <p className="text-3xl font-bold text-white">${breakEvenRevenue.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">per month</p>
                 </div>
                 
-                <div className="bg-[#38bdf8]/10 backdrop-blur-xl border border-[#38bdf8]/30 p-6 rounded-lg">
+                <div className="backdrop-blur-xl bg-[#38bdf8]/10 border border-[#38bdf8] p-6 rounded-lg">
                   <p className="text-sm text-gray-400 mb-1">Customers Needed</p>
                   <p className="text-3xl font-bold text-white">{Math.ceil(breakEvenCustomers).toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">per month</p>
                 </div>
                 
-                <div className="bg-[#a855f7]/10 backdrop-blur-xl border border-[#a855f7]/30 p-6 rounded-lg">
+                <div className="backdrop-blur-xl bg-[#a855f7]/10 border border-[#a855f7] p-6 rounded-lg">
                   <p className="text-sm text-gray-400 mb-1">Contribution Margin</p>
                   <p className="text-3xl font-bold text-white">${contributionMargin.toFixed(2)}</p>
                   <p className="text-xs text-gray-500 mt-1">per customer</p>
@@ -338,7 +331,7 @@ export default function BreakEvenCalculator() {
               </div>
 
               {/* Daily/Hourly Breakdown */}
-              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#10b981]/20 rounded-xl p-6">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
                 <h4 className="font-bold text-xl mb-4">Daily & Hourly Breakdown</h4>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -354,7 +347,7 @@ export default function BreakEvenCalculator() {
 
               {/* Achievability Assessment */}
               {achievability.label && (
-                <div className={`${achievability.bg} border-2 ${achievability.border} p-6 rounded-xl backdrop-blur-xl`}>
+                <div className={`${achievability.bg} border-2 ${achievability.border} p-6 rounded-xl`}>
                   <h4 className="font-bold text-xl text-white mb-2">Achievability Assessment</h4>
                   <p className={`text-xl font-bold ${achievability.color} mb-3`}>{achievability.label}</p>
                   <p className="text-gray-300">
@@ -368,7 +361,7 @@ export default function BreakEvenCalculator() {
 
               {/* Current Performance (if revenue provided) */}
               {monthlyRevenue > 0 && (
-                <div className="bg-[#38bdf8]/10 backdrop-blur-xl border border-[#38bdf8]/30 p-6 rounded-xl">
+                <div className="backdrop-blur-xl bg-[#38bdf8]/10 border border-[#38bdf8] p-6 rounded-xl">
                   <h4 className="font-bold text-xl text-white mb-4">Your Current Performance</h4>
                   <div className="grid md:grid-cols-3 gap-6">
                     <div>
@@ -392,7 +385,7 @@ export default function BreakEvenCalculator() {
           )}
 
           {/* CTA Section */}
-          <div className="mt-12 bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#10b981] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(16,185,129,0.15)]">
+          <div className="mt-12 backdrop-blur-xl bg-gradient-to-br from-[#10b981]/20 to-[#34d399]/20 border-2 border-[#10b981] rounded-3xl p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">Want Real-Time <span className="text-[#10b981]">Break-Even Tracking</span>?</h2>
             <p className="text-lg text-gray-300 mb-6">
               OwnerClone automatically tracks your break-even point daily based on actual POS data
