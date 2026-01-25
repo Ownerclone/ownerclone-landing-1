@@ -23,46 +23,48 @@ export default function Pricing() {
       <div className="relative z-10">
 
         {/* Hero Section */}
-        <section className="pt-32 pb-16 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 text-center mb-8">
-              <div className="mb-6">
-                <span className="bg-green-500/20 border border-green-400/30 text-green-400 px-6 py-3 rounded-full text-lg font-bold uppercase tracking-wide inline-block">
-                  🚀 Early Adopter Pricing - Limited Time
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-6xl font-black mb-6 text-gray-200">
-                Pricing Built for <span className="text-cyan-400">Independent Owners</span>
-              </h1>
-              <p className="text-xl text-gray-300 mb-6">
-                No complicated tiers. No hidden fees. Just simple, transparent pricing that scales with your business.
-              </p>
-            </div>
+<section className="pt-32 pb-16 px-4">
+  <div className="max-w-4xl mx-auto">
+    {/* Main Heading Card - Matching Homepage */}
+    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 text-center mb-8">
+      <h1 className="text-5xl md:text-6xl font-black mb-6 text-gray-200">
+        Pricing Built for <span className="text-cyan-400">Independent Owners</span>
+      </h1>
+      <p className="text-xl text-gray-300 mb-6">
+        No complicated tiers. No hidden fees. Just simple, transparent pricing that scales with your business.
+      </p>
+    </div>
 
-            <div className="backdrop-blur-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border-2 border-cyan-400/30 rounded-2xl p-8">
-              <p className="text-xl text-cyan-400 font-bold mb-3 text-center">
-                ⚡ Lock in This Pricing Forever!
-              </p>
-              <p className="text-gray-300 mb-6 text-center">
-                These prices are for early adopters only. In the future, new customers will pay more - but you&apos;ll keep your early adopter rate forever. Join now and help us build your modules faster while locking in incredible pricing.
-              </p>
-              <div className="mt-6 pt-6 border-t border-cyan-400/30">
-                <p className="text-gray-200 font-bold mb-3 text-center">💰 Want OwnerClone for FREE?</p>
-                <p className="text-gray-300 text-sm mb-4 text-center">
-                  Upgrade your POS system and get OwnerClone included at no cost.
-                </p>
-                <div className="text-center">
-                  <Link 
-                    href="/contact" 
-                    className="inline-block backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-8 py-3 rounded-lg font-bold"
-                  >
-                    Ask Us How to Get Free Access
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+    {/* Early Adopter Badge & Info Card */}
+    <div className="backdrop-blur-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border-2 border-cyan-400/30 rounded-2xl p-8">
+      <div className="mb-6 text-center">
+        <span className="bg-green-500/20 border border-green-400/30 text-green-400 px-6 py-3 rounded-full text-lg font-bold uppercase tracking-wide inline-block">
+          🚀 Early Adopter Pricing - Limited Time
+        </span>
+      </div>
+      <p className="text-xl text-cyan-400 font-bold mb-3 text-center">
+        ⚡ Lock in This Pricing Forever!
+      </p>
+      <p className="text-gray-300 mb-6 text-center">
+        These prices are for early adopters only. In the future, new customers will pay more - but you&apos;ll keep your early adopter rate forever. Join now and help us build your modules faster while locking in incredible pricing.
+      </p>
+      <div className="mt-6 pt-6 border-t border-cyan-400/30">
+        <p className="text-gray-200 font-bold mb-3 text-center">💰 Want OwnerClone for FREE?</p>
+        <p className="text-gray-300 text-sm mb-4 text-center">
+          Upgrade your POS system and get OwnerClone included at no cost.
+        </p>
+        <div className="text-center">
+          <Link 
+            href="/contact" 
+            className="inline-block backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-8 py-3 rounded-lg font-bold"
+          >
+            Ask Us How to Get Free Access
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* Main Pricing Section */}
         <section className="py-16 px-4">
