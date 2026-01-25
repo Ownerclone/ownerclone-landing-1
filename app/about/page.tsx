@@ -5,15 +5,8 @@ import Link from 'next/link';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
+    <main className="min-h-screen text-white relative overflow-hidden">
       
-      {/* Animated background orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 -left-20 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-screen filter blur-[128px] animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen filter blur-[128px] animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute -bottom-20 left-1/2 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[128px] animate-pulse" style={{animationDelay: '4s'}}></div>
-      </div>
-
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
@@ -31,7 +24,7 @@ export default function AboutPage() {
       <section className="relative py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-green-500/50 rounded-2xl p-8 hover:border-green-500 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border-2 border-green-500/50 rounded-2xl p-8 hover:border-green-500 transition-all duration-300">
               <div className="text-5xl mb-4">🤝</div>
               <h3 className="text-2xl font-bold text-green-400 mb-3">Help First</h3>
               <p className="text-gray-300 leading-relaxed">
@@ -39,7 +32,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-cyan-500/50 rounded-2xl p-8 hover:border-cyan-500 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border-2 border-cyan-500/50 rounded-2xl p-8 hover:border-cyan-500 transition-all duration-300">
               <div className="text-5xl mb-4">💪</div>
               <h3 className="text-2xl font-bold text-cyan-400 mb-3">We've Been There</h3>
               <p className="text-gray-300 leading-relaxed">
@@ -47,7 +40,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-purple-500/50 rounded-2xl p-8 hover:border-purple-500 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border-2 border-purple-500/50 rounded-2xl p-8 hover:border-purple-500 transition-all duration-300">
               <div className="text-5xl mb-4">⚡</div>
               <h3 className="text-2xl font-bold text-purple-400 mb-3">Real Solutions</h3>
               <p className="text-gray-300 leading-relaxed">
@@ -70,7 +63,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-[#2a2a2a] rounded-3xl p-8 md:p-12">
+          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#2a2a2a] rounded-3xl p-8 md:p-12">
             {/* Founder Header */}
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8 pb-8 border-b border-[#2a2a2a]">
               <div className="w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-4xl flex-shrink-0">
@@ -171,7 +164,7 @@ export default function AboutPage() {
       <section className="relative py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-cyan-900/40 to-cyan-700/40 backdrop-blur-xl border-2 border-cyan-500/50 rounded-2xl p-8 hover:border-cyan-500 transition-all duration-300 hover:shadow-[0_0_50px_rgba(34,211,238,0.3)]">
+            <div className="bg-gradient-to-br from-cyan-900/40 to-cyan-700/40 backdrop-blur-xl border-2 border-cyan-500/50 rounded-2xl p-8 hover:border-cyan-500 transition-all duration-300">
               <div className="text-5xl mb-6">🎯</div>
               <h3 className="text-3xl font-bold text-white mb-4">Our Mission</h3>
               <p className="text-cyan-100 text-lg leading-relaxed">
@@ -179,7 +172,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-900/40 to-purple-700/40 backdrop-blur-xl border-2 border-purple-500/50 rounded-2xl p-8 hover:border-purple-500 transition-all duration-300 hover:shadow-[0_0_50px_rgba(168,85,247,0.3)]">
+            <div className="bg-gradient-to-br from-purple-900/40 to-purple-700/40 backdrop-blur-xl border-2 border-purple-500/50 rounded-2xl p-8 hover:border-purple-500 transition-all duration-300">
               <div className="text-5xl mb-6">🚀</div>
               <h3 className="text-3xl font-bold text-white mb-4">Our Vision</h3>
               <p className="text-purple-100 text-lg leading-relaxed">
@@ -191,14 +184,14 @@ export default function AboutPage() {
       </section>
 
       {/* Our Principles */}
-      <section className="relative py-20 px-4 bg-[#0a0a0a]/80">
+      <section className="relative py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-black text-center mb-12">
             How We <span className="text-cyan-400">Operate</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 hover:border-green-500/50 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-green-500/50 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="text-3xl">🔒</div>
                 <div>
@@ -210,7 +203,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="text-3xl">💬</div>
                 <div>
@@ -222,7 +215,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="text-3xl">📊</div>
                 <div>
@@ -234,7 +227,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="text-3xl">⚡</div>
                 <div>
@@ -246,7 +239,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 hover:border-yellow-500/50 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-yellow-500/50 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="text-3xl">🎓</div>
                 <div>
@@ -258,7 +251,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 hover:border-pink-500/50 transition-all duration-300">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-pink-500/50 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="text-3xl">🤝</div>
                 <div>
@@ -280,7 +273,7 @@ export default function AboutPage() {
             Why We're <span className="text-cyan-400">Different</span>
           </h2>
 
-          <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-[#2a2a2a] rounded-2xl p-8 md:p-12">
+          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#2a2a2a] rounded-2xl p-8 md:p-12">
             <div className="space-y-8">
               <div className="flex items-start gap-6">
                 <div className="text-4xl flex-shrink-0">❌</div>
@@ -319,7 +312,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="relative py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-xl border-2 border-cyan-500/50 rounded-3xl p-12 hover:shadow-[0_0_80px_rgba(34,211,238,0.3)] transition-all duration-300">
+          <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-xl border-2 border-cyan-500/50 rounded-3xl p-12 transition-all duration-300">
             <h2 className="text-4xl md:text-5xl font-black mb-6">
               Ready to <span className="text-cyan-400">Stop Losing Money?</span>
             </h2>
@@ -329,13 +322,13 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/app-login"
-                className="bg-cyan-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.5)]"
+                className="bg-cyan-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-cyan-300 transition-all duration-300"
               >
                 Start Free Trial
               </Link>
               <Link 
                 href="/contact"
-                className="bg-[#1a1a1a] text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-[#2a2a2a] hover:border-cyan-500/50 transition-all duration-300"
+                className="backdrop-blur-xl bg-white/5 text-white px-8 py-4 rounded-lg font-bold text-lg border-2 border-[#2a2a2a] hover:border-cyan-500/50 transition-all duration-300"
               >
                 Schedule a Call
               </Link>
