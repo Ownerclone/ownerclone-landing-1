@@ -32,7 +32,6 @@ export default function FoodCostCalculator() {
   const status = getStatus(foodCostPercentage)
 
   return (
-    return (
   <div className="min-h-screen text-white">
     {/* Header with glass title card */}
     <div className="relative pt-12 px-4">
