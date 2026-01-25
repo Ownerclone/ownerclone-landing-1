@@ -26,56 +26,13 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-<Link href="/" className="flex items-center space-x-2">
-  <svg viewBox="-5 0 85 60" className="h-10 md:h-12 w-auto">
-    {/* O circle */}
-    <circle 
-      cx="20" 
-      cy="30" 
-      r="18" 
-      fill="none" 
-      className="logo-color" 
-      strokeWidth="10"
-    />
-    {/* White outline for light mode only - O circle */}
-    <circle 
-      cx="20" 
-      cy="30" 
-      r="18" 
-      fill="none" 
-      stroke="white"
-      strokeWidth="3"
-      style={{ opacity: 0 }}
-      className="light-mode-outline"
-    />
-    
-    {/* C circle */}
-    <circle 
-      cx="48" 
-      cy="30" 
-      r="18" 
-      fill="none" 
-      className="logo-color" 
-      strokeWidth="10" 
-      strokeDasharray="85 113" 
-      transform="rotate(40, 48, 30)"
-    />
-    {/* White outline for light mode only - C circle */}
-    <circle 
-      cx="48" 
-      cy="30" 
-      r="18" 
-      fill="none" 
-      stroke="white"
-      strokeWidth="3"
-      strokeDasharray="85 113" 
-      transform="rotate(40, 48, 30)"
-      style={{ opacity: 0 }}
-      className="light-mode-outline"
-    />
-  </svg>
-  <span className="text-2xl font-black text-white">OwnerClone</span>
-</Link>
+            <Link href="/" className="flex items-center space-x-2">
+              <svg viewBox="-5 0 85 60" className="h-10 md:h-12 w-auto">
+                <circle cx="20" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10"/>
+                <circle cx="48" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
+              </svg>
+              <span className="text-2xl font-black text-white">OwnerClone</span>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
@@ -83,7 +40,7 @@ export default function Navigation() {
                 Features
               </Link>
               
-              {/* Free Tools Dropdown */}
+              {/* Free Tools Dropdown - FIXED GAP ISSUE */}
               <div className="relative group">
                 <button className="nav-text flex items-center gap-1">
                   Free Tools
@@ -92,74 +49,77 @@ export default function Navigation() {
                   </svg>
                 </button>
                 
-                <div className="absolute top-full left-0 mt-2 w-72 dropdown-menu border rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="p-2">
-                    <Link href="/free-tools/food-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">🥗</span>
-                      <div>
-                        <div className="font-semibold">Food Cost Calculator</div>
-                        <div className="text-xs dropdown-item-desc">Calculate recipe costs</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/prime-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">📊</span>
-                      <div>
-                        <div className="font-semibold">Prime Cost Calculator</div>
-                        <div className="text-xs dropdown-item-desc">Food + labor costs</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/labor-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">👥</span>
-                      <div>
-                        <div className="font-semibold">Labor Cost Calculator</div>
-                        <div className="text-xs dropdown-item-desc">Staff cost analysis</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/break-even" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">⚖️</span>
-                      <div>
-                        <div className="font-semibold">Break-Even Calculator</div>
-                        <div className="text-xs dropdown-item-desc">Find your break-even point</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/menu-pricing" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">🍽️</span>
-                      <div>
-                        <div className="font-semibold">Menu Pricing Calculator</div>
-                        <div className="text-xs dropdown-item-desc">Optimize menu prices</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/per-plate-pricing" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">🍱</span>
-                      <div>
-                        <div className="font-semibold">Per Plate Pricing</div>
-                        <div className="text-xs dropdown-item-desc">Price per serving</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/startup-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">🚀</span>
-                      <div>
-                        <div className="font-semibold">Startup Cost Calculator</div>
-                        <div className="text-xs dropdown-item-desc">Launch budget planner</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/google-review" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">⭐</span>
-                      <div>
-                        <div className="font-semibold">Google Review Calculator</div>
-                        <div className="text-xs dropdown-item-desc">Review impact analysis</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools/third-party-fees" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
-                      <span className="text-2xl">💳</span>
-                      <div>
-                        <div className="font-semibold">Third Party Fees</div>
-                        <div className="text-xs dropdown-item-desc">Delivery app costs</div>
-                      </div>
-                    </Link>
-                    <Link href="/free-tools" className="block px-4 py-3 text-cyan-400 hover:bg-[#2a2a2a] border-t border-theme rounded-lg mt-1">
-                      View All Tools →
-                    </Link>
+                {/* Added pb-2 to button area to bridge gap */}
+                <div className="absolute top-full left-0 pt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="dropdown-menu border rounded-lg shadow-xl">
+                    <div className="p-2">
+                      <Link href="/free-tools/food-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">🥗</span>
+                        <div>
+                          <div className="font-semibold">Food Cost Calculator</div>
+                          <div className="text-xs dropdown-item-desc">Calculate recipe costs</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/prime-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">📊</span>
+                        <div>
+                          <div className="font-semibold">Prime Cost Calculator</div>
+                          <div className="text-xs dropdown-item-desc">Food + labor costs</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/labor-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">👥</span>
+                        <div>
+                          <div className="font-semibold">Labor Cost Calculator</div>
+                          <div className="text-xs dropdown-item-desc">Staff cost analysis</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/break-even" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">⚖️</span>
+                        <div>
+                          <div className="font-semibold">Break-Even Calculator</div>
+                          <div className="text-xs dropdown-item-desc">Find your break-even point</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/menu-pricing" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">🍽️</span>
+                        <div>
+                          <div className="font-semibold">Menu Pricing Calculator</div>
+                          <div className="text-xs dropdown-item-desc">Optimize menu prices</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/per-plate-pricing" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">🍱</span>
+                        <div>
+                          <div className="font-semibold">Per Plate Pricing</div>
+                          <div className="text-xs dropdown-item-desc">Price per serving</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/startup-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">🚀</span>
+                        <div>
+                          <div className="font-semibold">Startup Cost Calculator</div>
+                          <div className="text-xs dropdown-item-desc">Launch budget planner</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/google-review" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">⭐</span>
+                        <div>
+                          <div className="font-semibold">Google Review Calculator</div>
+                          <div className="text-xs dropdown-item-desc">Review impact analysis</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools/third-party-fees" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                        <span className="text-2xl">💳</span>
+                        <div>
+                          <div className="font-semibold">Third Party Fees</div>
+                          <div className="text-xs dropdown-item-desc">Delivery app costs</div>
+                        </div>
+                      </Link>
+                      <Link href="/free-tools" className="block px-4 py-3 text-cyan-400 hover:bg-[#2a2a2a] border-t border-theme rounded-lg mt-1">
+                        View All Tools →
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -183,7 +143,7 @@ export default function Navigation() {
               {/* Theme Toggle */}
               <ThemeToggle />
 
-              {/* Login Button */}
+              {/* Login Button - UPDATED WITH STAINLESS GREY */}
               <button 
                 onClick={() => setLoginOpen(true)}
                 className="login-btn px-4 py-2 rounded-lg font-bold"
