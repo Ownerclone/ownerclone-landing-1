@@ -63,6 +63,47 @@ export default function BreakEvenCalculator() {
   const achievability = getAchievability();
 
   return (
+    <div className="min-h-screen relative text-white">
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/bg-glow.svg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+
+      <div className="relative z-10">
+        {/* Header with glass title card */}
+        <div className="pt-24 px-4">
+          <div className="max-w-4xl mx-auto mb-8">
+            <Link 
+              href="/free-tools" 
+              className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-100 transition-colors mb-6"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Free Tools
+            </Link>
+            
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
+              <div className="flex items-center gap-4">
+                <div className="p-3 backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 rounded-xl">
+                  <svg className="w-8 h-8 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold text-white">Break-Even Calculator</h1>
+                  <p className="text-cyan-200 mt-1">Calculate how much revenue you need to cover all costs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  return (
     <div className="min-h-screen text-white">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
