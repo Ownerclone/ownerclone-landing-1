@@ -336,46 +336,6 @@ export default function Home() {
           </div>
         </section>
 
-              {/* Product */}
-              <div>
-                <h3 className="font-bold text-white mb-4">Product</h3>
-                <ul className="space-y-2">
-                  <li><Link href="/features" className="text-gray-400 hover:text-cyan-400 transition">Features</Link></li>
-                  <li><Link href="/pricing" className="text-gray-400 hover:text-cyan-400 transition">Pricing</Link></li>
-                  <li><Link href="/roadmap" className="text-gray-400 hover:text-cyan-400 transition">Roadmap</Link></li>
-                  <li><Link href="/demo" className="text-gray-400 hover:text-cyan-400 transition">Demo</Link></li>
-                </ul>
-              </div>
-
-              {/* Resources */}
-              <div>
-                <h3 className="font-bold text-white mb-4">Resources</h3>
-                <ul className="space-y-2">
-                  <li><Link href="/blog" className="text-gray-400 hover:text-cyan-400 transition">Blog</Link></li>
-                  <li><Link href="/free-tools" className="text-gray-400 hover:text-cyan-400 transition">Free Tools</Link></li>
-                  <li><Link href="/about" className="text-gray-400 hover:text-cyan-400 transition">About</Link></li>
-                  <li><Link href="/contact" className="text-gray-400 hover:text-cyan-400 transition">Contact</Link></li>
-                </ul>
-              </div>
-
-              {/* Legal */}
-              <div>
-                <h3 className="font-bold text-white mb-4">Legal</h3>
-                <ul className="space-y-2">
-                  <li><Link href="/terms" className="text-gray-400 hover:text-cyan-400 transition">Terms</Link></li>
-                  <li><Link href="/privacy" className="text-gray-400 hover:text-cyan-400 transition">Privacy</Link></li>
-                  <li><Link href="/security" className="text-gray-400 hover:text-cyan-400 transition">Security</Link></li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="pt-8 border-t border-white/10 text-center text-sm text-gray-500">
-              <p>Built by restaurant owners, for restaurant owners. 🍽️</p>
-            </div>
-          </div>
-        </footer>
-
       </div>
     </main>
   )
