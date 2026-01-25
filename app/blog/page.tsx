@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { FaClock, FaUser } from 'react-icons/fa'
+import { Clock, User } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Restaurant Owner Insights & Tips | OwnerClone Blog',
@@ -38,71 +38,86 @@ export default async function Blog() {
   })
 
   return (
-    <div className="min-h-screen text-white">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-4">
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-black mb-6">
-            Restaurant Owner <span className="text-[#38bdf8]">Insights</span>
-          </h1>
-          <p className="text-xl text-gray-300">
-            Real advice from real restaurant owners. No fluff, no theory - just hard-earned lessons from the trenches.
-          </p>
-        </div>
-      </section>
+    <main className="min-h-screen relative">
+      {/* Fixed SVG Background */}
+      <div className="fixed inset-0 z-0" style={{
+        backgroundImage: 'url(/bg-glow.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }} />
 
-      {/* Blog Posts */}
-      <section className="relative py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          {allPosts.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-2xl p-12">
-                <p className="text-xl text-gray-400">No published posts yet. Check back soon!</p>
+      {/* All content with relative z-10 */}
+      <div className="relative z-10">
+
+        {/* Hero Section */}
+        <section className="pt-32 pb-16 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 text-center">
+              <h1 className="text-5xl md:text-6xl font-black mb-6 text-gray-200">
+                Restaurant Owner <span className="text-cyan-400">Insights</span>
+              </h1>
+              <p className="text-xl text-gray-300">
+                Real advice from real restaurant owners. No fluff, no theory - just hard-earned lessons from the trenches.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Blog Posts */}
+        <section className="py-16 px-4">
+          <div className="max-w-4xl mx-auto">
+            {allPosts.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-12">
+                  <p className="text-xl text-gray-400">No published posts yet. Check back soon!</p>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="space-y-8">
-              {allPosts.map((post: any) => (
-                <article 
-                  key={post.id} 
-                  className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#38bdf8] hover:shadow-[0_0_40px_rgba(56,189,248,0.2)] transition-all duration-300"
-                >
-                  <div className="p-8">
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
-                      <span className="bg-[#38bdf8]/10 text-[#38bdf8] border border-[#38bdf8]/30 px-3 py-1 rounded-full font-semibold">
-                        Restaurant Management
-                      </span>
-                      <div className="flex items-center gap-2">
-                        <FaClock className="text-gray-500" />
-                        <span>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+            ) : (
+              <div className="space-y-8">
+                {allPosts.map((post: any) => (
+                  <article 
+                    key={post.id} 
+                    className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-cyan-400/50 transition-all duration-300"
+                  >
+                    <div className="p-8">
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
+                        <span className="bg-cyan-500/10 text-cyan-400 border border-cyan-400/30 px-3 py-1 rounded-full font-semibold">
+                          Restaurant Management
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-4 h-4 text-gray-500" />
+                          <span>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <User className="w-4 h-4 text-gray-500" />
+                          <span>OwnerClone Team</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <FaUser className="text-gray-500" />
-                        <span>OwnerClone Team</span>
-                      </div>
+
+                      <h2 className="text-3xl font-bold text-gray-200 mb-4 hover:text-cyan-400 transition-colors">
+                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      </h2>
+
+                      {post.excerpt && (
+                        <p className="text-lg text-gray-300 mb-6 leading-relaxed">{post.excerpt}</p>
+                      )}
+
+                      <Link 
+                        href={`/blog/${post.slug}`}
+                        className="inline-block backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-6 py-3 rounded-lg font-bold"
+                      >
+                        Read Full Article →
+                      </Link>
                     </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
 
-                    <h2 className="text-3xl font-bold text-white mb-4 hover:text-[#38bdf8] transition-colors">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                    </h2>
-
-                    {post.excerpt && (
-                      <p className="text-lg text-gray-300 mb-6 leading-relaxed">{post.excerpt}</p>
-                    )}
-
-                    <Link 
-                      href={`/blog/${post.slug}`}
-                      className="inline-block px-6 py-3 bg-[#38bdf8] text-black font-bold rounded-lg hover:bg-[#0ea5e9] transition-colors shadow-lg hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]"
-                    >
-                      Read Full Article →
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-    </div>
+      </div>
+    </main>
   )
 }
