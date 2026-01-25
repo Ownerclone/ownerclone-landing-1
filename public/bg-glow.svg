@@ -1,20 +1,40 @@
 <svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
   <defs>
+    <!-- Top left glow - BRIGHTER -->
     <radialGradient id="g1" cx="20%" cy="30%">
-      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.18" />
+      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.25" />
       <stop offset="100%" style="stop-color:#000000;stop-opacity:0" />
     </radialGradient>
-    <radialGradient id="g2" cx="80%" cy="70%">
-      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.14" />
+    
+    <!-- Top right glow - NEW -->
+    <radialGradient id="g2" cx="80%" cy="25%">
+      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:0.22" />
       <stop offset="100%" style="stop-color:#000000;stop-opacity:0" />
     </radialGradient>
-    <radialGradient id="g3" cx="50%" cy="90%">
-      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:0.10" />
+    
+    <!-- Top center glow - NEW -->
+    <radialGradient id="g3" cx="50%" cy="15%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.18" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Bottom right glow - BRIGHTER -->
+    <radialGradient id="g4" cx="80%" cy="70%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.20" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Bottom center glow -->
+    <radialGradient id="g5" cx="50%" cy="90%">
+      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:0.14" />
       <stop offset="100%" style="stop-color:#000000;stop-opacity:0" />
     </radialGradient>
   </defs>
+  
   <rect width="1920" height="1080" fill="#000000"/>
   <rect width="1920" height="1080" fill="url(#g1)"/>
   <rect width="1920" height="1080" fill="url(#g2)"/>
   <rect width="1920" height="1080" fill="url(#g3)"/>
+  <rect width="1920" height="1080" fill="url(#g4)"/>
+  <rect width="1920" height="1080" fill="url(#g5)"/>
 </svg>
