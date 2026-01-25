@@ -155,8 +155,8 @@ export default function Features() {
         </div>
       </section>
 
-      {/* Integration Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-[#0f1419] to-transparent">
+      {/* Integration Section - GRADIENT REMOVED */}
+      <section className="relative py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
