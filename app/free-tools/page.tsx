@@ -12,16 +12,9 @@ export const metadata = {
 
 export default function FreeToolsPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#0ea5e9] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-7xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Free Restaurant <span className="text-[#38bdf8]">Calculators</span>
@@ -44,7 +37,7 @@ export default function FreeToolsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {/* 1. Startup Cost Calculator - CYAN GLOW */}
-            <a href="/free-tools/startup-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/50 transition-all duration-300 group">
+            <a href="/free-tools/startup-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">💰</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#38bdf8] transition">Startup Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -59,7 +52,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 2. Food Cost Calculator - GREEN GLOW */}
-            <a href="/free-tools/food-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#10b981] hover:shadow-lg hover:shadow-[#10b981]/50 transition-all duration-300 group">
+            <a href="/free-tools/food-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#10b981] hover:shadow-lg hover:shadow-[#10b981]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">🍽️</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#10b981] transition">Food Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -74,7 +67,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 3. Prime Cost Calculator - PURPLE GLOW */}
-            <a href="/free-tools/prime-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#a855f7] hover:shadow-lg hover:shadow-[#a855f7]/50 transition-all duration-300 group">
+            <a href="/free-tools/prime-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#a855f7] hover:shadow-lg hover:shadow-[#a855f7]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#a855f7] transition">Prime Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -89,7 +82,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 4. Labor Cost Calculator - BLUE GLOW */}
-            <a href="/free-tools/labor-cost" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#3b82f6] hover:shadow-lg hover:shadow-[#3b82f6]/50 transition-all duration-300 group">
+            <a href="/free-tools/labor-cost" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#3b82f6] hover:shadow-lg hover:shadow-[#3b82f6]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">👥</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#3b82f6] transition">Labor Cost Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -104,7 +97,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 5. Break-Even Calculator - YELLOW GLOW */}
-            <a href="/free-tools/break-even" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#fbbf24] hover:shadow-lg hover:shadow-[#fbbf24]/50 transition-all duration-300 group">
+            <a href="/free-tools/break-even" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#fbbf24] hover:shadow-lg hover:shadow-[#fbbf24]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">🎯</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#fbbf24] transition">Break-Even Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -119,7 +112,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 6. Menu Pricing Calculator - ORANGE GLOW */}
-            <a href="/free-tools/menu-pricing" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#f97316] hover:shadow-lg hover:shadow-[#f97316]/50 transition-all duration-300 group">
+            <a href="/free-tools/menu-pricing" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#f97316] hover:shadow-lg hover:shadow-[#f97316]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">💵</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#f97316] transition">Menu Pricing Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -134,7 +127,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 7. Per Plate Pricing Calculator - PINK GLOW */}
-            <a href="/free-tools/per-plate-pricing" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ec4899] hover:shadow-lg hover:shadow-[#ec4899]/50 transition-all duration-300 group">
+            <a href="/free-tools/per-plate-pricing" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ec4899] hover:shadow-lg hover:shadow-[#ec4899]/50 transition-all duration-300 group">
               <div className="text-5xl mb-4">🍴</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#ec4899] transition">Per Plate Pricing Calculator</h3>
               <p className="text-gray-400 mb-6">
@@ -149,7 +142,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 8. Google Review Calculator - PURPLE GLOW (different shade) */}
-            <a href="/free-tools/google-review" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#8b5cf6] hover:shadow-lg hover:shadow-[#8b5cf6]/50 transition-all duration-300 group relative">
+            <a href="/free-tools/google-review" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#8b5cf6] hover:shadow-lg hover:shadow-[#8b5cf6]/50 transition-all duration-300 group relative">
               <div className="absolute top-4 right-4 bg-[#8b5cf6] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
               <div className="text-5xl mb-4">⭐</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#8b5cf6] transition">Google Review Calculator</h3>
@@ -165,7 +158,7 @@ export default function FreeToolsPage() {
             </a>
 
             {/* 9. Third Party Fees Calculator - RED GLOW */}
-            <a href="/free-tools/third-party-fees" className="block bg-gradient-to-br from-[#1e1e1e] via-[#2a2a2a] to-[#1e1e1e] border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ef4444] hover:shadow-lg hover:shadow-[#ef4444]/50 transition-all duration-300 group relative">
+            <a href="/free-tools/third-party-fees" className="block backdrop-blur-xl bg-white/5 border border-[#3a3a3a] rounded-2xl p-8 hover:border-[#ef4444] hover:shadow-lg hover:shadow-[#ef4444]/50 transition-all duration-300 group relative">
               <div className="absolute top-4 right-4 bg-[#ef4444] text-white px-3 py-1 rounded-full text-xs font-bold">NEW</div>
               <div className="text-5xl mb-4">💸</div>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-[#ef4444] transition">Third Party True Fees</h3>
@@ -186,32 +179,31 @@ export default function FreeToolsPage() {
 
       {/* Why These Calculators Section */}
       <section className="relative py-16 px-4">
-        <div className="absolute inset-0 bg-[#0f1419]/30 pointer-events-none"></div>
         <div className="relative max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
             Why Restaurant Owners Love <span className="text-[#38bdf8]">These Tools</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
               <div className="text-3xl mb-3">✅</div>
               <h3 className="text-xl font-bold mb-2">Industry-Standard Formulas</h3>
               <p className="text-gray-400">Built using benchmarks from the National Restaurant Association and Restaurant365. The same formulas used by successful operators.</p>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
               <div className="text-3xl mb-3">⚡</div>
               <h3 className="text-xl font-bold mb-2">Instant Results</h3>
               <p className="text-gray-400">No waiting, no processing. Get your calculations immediately. Make decisions faster.</p>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
               <div className="text-3xl mb-3">🔒</div>
               <h3 className="text-xl font-bold mb-2">100% Private</h3>
               <p className="text-gray-400">All calculations happen in your browser. We don't store or see your numbers. Your financial data stays yours.</p>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-6">
               <div className="text-3xl mb-3">📱</div>
               <h3 className="text-xl font-bold mb-2">Mobile Friendly</h3>
               <p className="text-gray-400">Use these calculators on any device. Calculate costs while talking to vendors or visiting potential locations.</p>
@@ -228,7 +220,7 @@ export default function FreeToolsPage() {
           </h2>
           
           <div className="space-y-6">
-            <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#38bdf8]">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#38bdf8]">
               <h3 className="text-2xl font-bold mb-3">🚀 Pre-Launch</h3>
               <p className="text-gray-300 mb-4">Planning to open a restaurant? Use our calculators to:</p>
               <ul className="space-y-2 text-gray-400">
@@ -238,7 +230,7 @@ export default function FreeToolsPage() {
               </ul>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#a855f7]">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#a855f7]">
               <h3 className="text-2xl font-bold mb-3">🏃 New Operators</h3>
               <p className="text-gray-300 mb-4">First year of operations? These tools help you:</p>
               <ul className="space-y-2 text-gray-400">
@@ -248,7 +240,7 @@ export default function FreeToolsPage() {
               </ul>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#10b981]">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#1a1a1a] rounded-xl p-8 border-l-4 border-l-[#10b981]">
               <h3 className="text-2xl font-bold mb-3">💪 Established Owners</h3>
               <p className="text-gray-300 mb-4">Running successfully? Optimize further with:</p>
               <ul className="space-y-2 text-gray-400">
@@ -290,7 +282,7 @@ export default function FreeToolsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0a0a0a] border-t border-[#1a1a1a] py-12 px-4 mt-20">
+      <footer className="backdrop-blur-xl bg-black/20 border-t border-[#1a1a1a] py-12 px-4 mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
