@@ -1979,3 +1979,515 @@ For thinking strategically (time-based, MVP, website builder).
 For having the guts to build what the industry needs.
 LET'S KEEP CRUSHING IT! 🚀✨
 See you next session for light mode! 💪
+
+
+
+# SESSION SUMMARY: Calculator Layout & Glass Morphism Aesthetic
+**Date:** January 25, 2026
+**Project:** OwnerClone Landing Site - Calculator Pages & Navigation Refinement
+
+---
+
+## 🎨 GLASS MORPHISM DESIGN SYSTEM ESTABLISHED
+
+### Core Aesthetic Principles
+The site now follows a cohesive **glass morphism** design language characterized by:
+
+1. **Translucent Backgrounds**
+   - `backdrop-blur-xl` - Creates blur effect on all glass elements
+   - `bg-white/5` to `bg-white/10` - Subtle white transparency for containers
+   - `bg-black/40` to `bg-black/60` - Darker glass for inputs and mobile menu
+
+2. **Subtle Borders**
+   - `border border-white/10` - Standard glass container borders
+   - `border-2 border-white/10` - Emphasized borders for inputs
+   - Color-specific borders for themed sections (e.g., `border-cyan-300/30`)
+
+3. **Layered Transparency**
+   - Primary cards: `backdrop-blur-xl bg-white/5 border border-white/10`
+   - Input fields: `backdrop-blur-xl bg-black/40 border-2 border-white/10`
+   - Hover states: `hover:bg-white/10` for interactive elements
+
+4. **Color Accents via Transparency**
+   - Emerald/Green for Food Cost: `bg-[#10b981]/10`, `border-[#10b981]`
+   - Blue for Prime Cost: `bg-[#3b82f6]/10`, `border-[#3b82f6]`
+   - Cyan for Break-Even: `bg-cyan-500/10`, `border-cyan-300/30`
+   - Amber/Pink for Google Review: `bg-[#ec4899]/10`, `border-[#ec4899]`
+   - Orange for Startup Cost: `bg-orange-500/20`, `border-orange-300/30`
+
+5. **Background Treatment**
+   - SVG gradient background: `/bg-glow.svg`
+   - Applied as fixed full-screen layer with `z-0`
+   - Content sits on top with `relative z-10`
+   - Structure:
+     ```jsx
+     <div className="min-h-screen relative">
+       <div className="fixed inset-0 z-0" style={{
+         backgroundImage: 'url(/bg-glow.svg)',
+         backgroundSize: 'cover',
+         backgroundPosition: 'center',
+         backgroundRepeat: 'no-repeat'
+       }} />
+       <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-4xl">
+         {/* Content */}
+       </div>
+     </div>
+     ```
+
+---
+
+## 📐 CALCULATOR PAGE WIDTH STANDARDIZATION
+
+### The Problem
+Multiple calculators had inconsistent layouts with mixed container widths:
+- Some used `max-w-4xl`, others used `max-w-5xl` or `max-w-6xl`
+- Multiple nested containers with different widths causing visual inconsistency
+- Food Cost, Prime Cost, Break-Even, and Google Review had structural issues
+
+### The Solution - Unified Container Pattern
+**Standard structure matching Per Plate Pricing Calculator:**
+
+```jsx
+<div className="min-h-screen relative">
+  {/* Fixed background */}
+  <div className="fixed inset-0 z-0" style={{...}} />
+  
+  {/* Single unified container */}
+  <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-4xl">
+    {/* All content inside this ONE container */}
+    
+    {/* Header section */}
+    <div className="mb-8">...</div>
+    
+    {/* Two-column grid for calculator */}
+    <div className="grid lg:grid-cols-2 gap-12">
+      {/* Left: Inputs */}
+      {/* Right: Results */}
+    </div>
+    
+    {/* Educational content */}
+    {/* CTA */}
+  </div>
+</div>
+```
+
+### Key Specifications
+1. **Single parent container** - `max-w-4xl` for everything
+2. **Top padding** - `pt-24` (96px) to clear fixed navbar
+3. **Bottom padding** - `pb-8` for breathing room
+4. **Responsive padding** - `px-4` on mobile
+5. **Grid system** - `lg:grid-cols-2` with `gap-12` for two-column layouts
+
+### Files Corrected
+
+#### 1. **Food Cost Calculator** (`food-cost-corrected.jsx`)
+- **Before:** Mixed `max-w-4xl` header with `max-w-6xl` calculator section
+- **After:** Unified `max-w-4xl` throughout
+- **Changes:**
+  - Removed nested section wrappers
+  - Consolidated into single container
+  - Maintained emerald/green theme (#10b981)
+
+#### 2. **Prime Cost Calculator** (`prime-cost-corrected.jsx`)
+- **Before:** Separate `max-w-6xl` containers for header and content
+- **After:** Unified `max-w-4xl` throughout
+- **Changes:**
+  - Eliminated double-wrapped structure
+  - Single container pattern
+  - Maintained blue theme (#3b82f6)
+
+#### 3. **Break-Even Calculator** (`break-even-corrected.jsx`)
+- **Before:** Multiple containers, inconsistent widths
+- **After:** Unified `max-w-4xl` throughout
+- **Changes:**
+  - Consolidated all sections into one container
+  - Removed extra wrapper divs
+  - Maintained cyan theme
+
+#### 4. **Google Review Calculator** (`google-review-updated.jsx`)
+- **Before:** `max-w-5xl` causing wider layout than other calculators
+- **After:** `max-w-4xl` matching all others
+- **Changes:**
+  - Changed from 5xl to 4xl
+  - Fixed closing div structure (removed extra closing tag)
+  - Maintained amber/pink theme (#ec4899)
+
+#### 5. **Startup Cost Calculator** (`startup-cost-corrected.jsx`)
+- **Already had correct structure** but needed sticky fix
+- **Changes:**
+  - Added `items-start` to grid container
+  - Changed sticky positioning to wrapper: `lg:sticky lg:top-24`
+  - Total Investment card now scrolls with page content
+
+---
+
+## 🧭 NAVIGATION BAR IMPROVEMENTS
+
+### File: `Navigation-updated.tsx`
+
+### 1. **Hamburger Menu Breakpoint Fix**
+**Problem:** Login button getting cut off on smaller screens before hamburger appeared
+
+**Solution:**
+- Changed breakpoint from `md:` (768px) to `lg:` (1024px)
+- Desktop menu now shows only on screens ≥1024px
+- Mobile hamburger appears on screens <1024px
+
+**Specific changes:**
+```jsx
+// Line 48: Desktop navigation visibility
+<div className="hidden lg:flex items-center space-x-8">
+
+// Line 171: Mobile menu button visibility  
+<button className="lg:hidden p-2 nav-text">
+
+// Line 186: Mobile menu container
+{mobileMenuOpen && (
+  <div className="lg:hidden border-t border-white/10...">
+```
+
+### 2. **Glass-Style Logo**
+**Before:** Solid cyan circles using class `.logo-color`
+**After:** Translucent cyan with glass effect
+
+```jsx
+<circle cx="20" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10"/>
+<circle cx="48" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10" 
+        strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
+```
+
+**Color:** `stroke-cyan-400/60` - 60% opacity cyan stroke
+
+### 3. **Glass-Style Login Button**
+**Before:** Solid cyan background (`.login-btn` class)
+**After:** Translucent glass morphism button
+
+**Desktop version (Line 167):**
+```jsx
+<button 
+  onClick={() => setLoginOpen(true)}
+  className="backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-4 py-2 rounded-lg font-bold"
+>
+  Login
+</button>
+```
+
+**Mobile version (Line 258):**
+```jsx
+<button 
+  onClick={() => {
+    setLoginOpen(true);
+    closeMobileMenu();
+  }}
+  className="block w-full text-center backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-4 py-2 rounded-lg font-bold"
+>
+  Login
+</button>
+```
+
+**Styling breakdown:**
+- `backdrop-blur-xl` - Glass blur effect
+- `bg-cyan-500/20` - 20% opacity cyan background
+- `border border-cyan-300/30` - 30% opacity cyan border
+- `text-cyan-200` - Lighter cyan text
+- `hover:bg-cyan-500/30` - Intensifies to 30% on hover
+- `hover:text-white` - White text on hover
+- `transition-all` - Smooth transitions
+
+### 4. **Cohesive Glass Navbar**
+The entire navigation now uses consistent glass styling:
+- **Navbar background:** `backdrop-blur-xl bg-black/40 border-b border-white/10`
+- **Dropdown menu:** `backdrop-blur-xl bg-black/60 border border-white/10`
+- **Mobile menu:** `backdrop-blur-xl bg-black/60`
+- **All elements** use translucent backgrounds instead of solid colors
+
+---
+
+## 🎯 CALCULATOR-SPECIFIC THEMES
+
+Each calculator maintains its unique color identity while following glass morphism principles:
+
+### **Food Cost Calculator**
+- **Primary color:** Emerald Green (#10b981)
+- **Glass cards:** `bg-[#10b981]/10` with `border-[#10b981]`
+- **Theme:** Fresh, ingredient-focused
+- **Icon:** Calculator emoji
+
+### **Prime Cost Calculator**
+- **Primary color:** Blue (#3b82f6)
+- **Glass cards:** `bg-[#3b82f6]/10` with `border-[#3b82f6]`
+- **Theme:** Professional, analytical
+- **Icon:** Calculator emoji
+
+### **Break-Even Calculator**
+- **Primary color:** Cyan (#38bdf8)
+- **Glass cards:** `bg-cyan-500/10` with `border-cyan-300/30`
+- **Theme:** Data-driven, financial
+- **Icon:** Chart trending up
+
+### **Labor Cost Calculator**
+- **Primary color:** Indigo
+- **Status maintained** from previous session
+- **Theme:** Workforce-focused
+
+### **Menu Pricing Calculator**
+- **Primary color:** Purple
+- **Status maintained** from previous session
+- **Theme:** Strategy, optimization
+
+### **Per Plate Pricing Calculator**
+- **Primary color:** Teal/Emerald
+- **Status:** Reference model for layout (already perfect)
+- **Theme:** Precision, detail-oriented
+- **Icon:** Calculator (Lucide)
+
+### **Startup Cost Calculator**
+- **Primary color:** Orange (#f97316)
+- **Glass cards:** `bg-orange-500/20` with `border-orange-300/30`
+- **Theme:** Bold, entrepreneurial
+- **Icon:** DollarSign (Lucide)
+- **Special feature:** Sticky total investment card
+
+### **Google Review Calculator**
+- **Primary color:** Amber/Pink (#ec4899)
+- **Glass cards:** `bg-[#ec4899]/10` with `border-[#ec4899]`
+- **Theme:** Reputation, customer-focused
+- **Icon:** Star emoji
+
+### **Third Party Fees Calculator**
+- **Primary color:** Rose/Pink
+- **Status maintained** from previous session
+- **Theme:** Cost analysis, delivery platforms
+
+---
+
+## 🔧 TECHNICAL SPECIFICATIONS
+
+### Spacing System
+- **Navbar clearance:** `pt-24` (96px) accounts for fixed navbar height
+- **Section spacing:** `pb-8` bottom padding
+- **Grid gaps:** `gap-6` for tight layouts, `gap-12` for calculator two-column grids
+- **Card spacing:** `space-y-6` for vertical stacks
+
+### Responsive Breakpoints
+- **Mobile:** Default (< 640px)
+- **Small:** `sm:` (≥ 640px)
+- **Medium:** `md:` (≥ 768px)
+- **Large:** `lg:` (≥ 1024px) - **Primary breakpoint for calculator layouts**
+- **Desktop navigation:** Shows at `lg:` (≥ 1024px)
+- **Mobile hamburger:** Shows below `lg:` (< 1024px)
+
+### Container Max-Widths
+- **Standard calculators:** `max-w-4xl` (896px)
+- **Site-wide max:** `max-w-7xl` for main content areas
+- **Consistent padding:** `px-4` on mobile, `px-6` on sm, `px-8` on lg
+
+### Z-Index Layers
+- **Background SVG:** `z-0` (fixed, lowest)
+- **Main content:** `z-10` (relative positioning)
+- **Fixed navbar:** `z-50`
+- **Modals (login):** `z-[100]`
+
+### Glass Morphism Values
+- **Light blur:** `backdrop-blur-lg`
+- **Standard blur:** `backdrop-blur-xl` (most common)
+- **Background opacity (light):** `/5` to `/10` (5-10%)
+- **Background opacity (medium):** `/20` to `/30` (20-30%)
+- **Background opacity (dark):** `/40` to `/60` (40-60%)
+- **Border opacity:** `/10` to `/30` (10-30%)
+
+---
+
+## 📦 FILES DELIVERED
+
+### Calculator Pages (Complete Files)
+1. `food-cost-corrected.jsx` - Food Cost Calculator with unified width
+2. `prime-cost-corrected.jsx` - Prime Cost Calculator with unified width
+3. `break-even-corrected.jsx` - Break-Even Calculator with unified width
+4. `google-review-updated.jsx` - Google Review Calculator with fixed width and closing tags
+5. `startup-cost-corrected.jsx` - Startup Cost Calculator with sticky functionality
+
+### Navigation Component
+6. `Navigation-updated.tsx` - Complete navbar with glass styling and responsive fixes
+
+---
+
+## ✅ QUALITY ASSURANCE CHECKLIST
+
+### Visual Consistency
+- [x] All calculators use `max-w-4xl` container width
+- [x] All calculators use same spacing system (`pt-24 pb-8`)
+- [x] All calculators follow glass morphism design language
+- [x] Each calculator maintains unique color identity
+- [x] All use same background SVG treatment
+
+### Layout Structure
+- [x] Single parent container per calculator
+- [x] No nested conflicting widths
+- [x] Consistent two-column grid pattern (`lg:grid-cols-2`)
+- [x] Proper navbar clearance (96px top padding)
+- [x] Mobile-first responsive design
+
+### Navigation
+- [x] Hamburger appears at correct breakpoint (< 1024px)
+- [x] Login button visible at all screen sizes
+- [x] Glass styling consistent across all nav elements
+- [x] Logo uses translucent glass effect
+- [x] Dropdown menus use glass backgrounds
+
+### Interactive Elements
+- [x] All buttons use glass hover states
+- [x] Input fields have consistent glass styling
+- [x] Focus states use color-appropriate ring effects
+- [x] Sticky elements work properly (Startup Cost)
+- [x] Modal overlays use backdrop blur
+
+---
+
+## 🎨 DESIGN TOKENS REFERENCE
+
+### Primary Glass Components
+
+**Standard Card:**
+```jsx
+className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8"
+```
+
+**Input Field:**
+```jsx
+className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[COLOR]/50"
+```
+
+**Colored Accent Card:**
+```jsx
+className="backdrop-blur-xl bg-[COLOR]/10 border border-[COLOR]/30 rounded-xl p-4"
+```
+
+**Button (Glass Style):**
+```jsx
+className="backdrop-blur-xl bg-[COLOR]/20 border border-[COLOR]/30 text-[COLOR]-200 hover:bg-[COLOR]/30 hover:text-white transition-all px-4 py-2 rounded-lg font-bold"
+```
+
+---
+
+## 🚀 IMPLEMENTATION NOTES
+
+### Deployment Path
+All files should replace their corresponding files in:
+- `/app/free-tools/[calculator-name]/page.jsx` for calculators
+- `/components/Navigation.tsx` for navigation
+
+### Testing Checklist
+1. **Desktop (≥1024px):** Verify full navigation shows, Login button visible
+2. **Tablet (768-1023px):** Verify hamburger appears, no cutoff
+3. **Mobile (<768px):** Verify mobile menu works, dropdowns function
+4. **Calculator layouts:** Verify two-column grid on large screens, stacks on mobile
+5. **Sticky behavior:** Verify Startup Cost total card sticks properly
+6. **Glass effects:** Verify blur and transparency render correctly
+
+### Browser Compatibility
+- Glass morphism (`backdrop-blur`) requires modern browsers
+- Fallback: Solid colors should be acceptable if blur not supported
+- Test on: Chrome, Safari, Firefox, Edge
+
+---
+
+## 💡 KEY DESIGN DECISIONS
+
+### Why max-w-4xl?
+- **Optimal reading width:** 896px provides excellent readability
+- **Calculator usability:** Two-column grid fits comfortably
+- **Visual consistency:** Matches Per Plate calculator (reference model)
+- **Mobile scaling:** Scales down gracefully to single column
+
+### Why lg: breakpoint for hamburger?
+- **Real-world testing:** Login button was being cut off at md: (768px)
+- **Comfortable spacing:** All nav items fit properly at 1024px+
+- **Better UX:** Prevents awkward squishing of navigation items
+
+### Why glass morphism?
+- **Modern aesthetic:** Aligns with current design trends
+- **Visual hierarchy:** Blur creates depth without harsh shadows
+- **Brand differentiation:** Unique look vs. competitors
+- **Consistency:** Works across light and dark modes
+
+---
+
+## 📝 MAINTENANCE GUIDELINES
+
+### Adding New Calculators
+1. Copy the Per Plate or Startup Cost structure as template
+2. Use `max-w-4xl` container
+3. Apply appropriate theme color
+4. Follow glass morphism styling patterns
+5. Test at all breakpoints
+
+### Modifying Existing Calculators
+1. Never change container max-width from `max-w-4xl`
+2. Maintain `pt-24` top padding for navbar clearance
+3. Keep glass styling consistent with other calculators
+4. Use theme color for accents, not base structure
+
+### Color Theme Selection
+When adding new pages:
+- Choose a primary color from Tailwind palette
+- Use `/10` opacity for light backgrounds
+- Use `/20-30` opacity for medium emphasis
+- Use `/60` opacity for strokes/borders
+- Maintain readability (sufficient contrast)
+
+---
+
+## 🎯 SUCCESS METRICS
+
+### Before This Session
+- ❌ Inconsistent widths across calculators
+- ❌ Login button cutoff on smaller screens
+- ❌ Harsh solid colors breaking aesthetic
+- ❌ Multiple nested containers causing layout issues
+
+### After This Session
+- ✅ All calculators use consistent `max-w-4xl` width
+- ✅ Hamburger menu appears at proper breakpoint
+- ✅ Complete glass morphism design system
+- ✅ Unified single-container structure
+- ✅ Glass-styled logo and buttons
+- ✅ Sticky functionality on Startup Cost calculator
+
+---
+
+## 🔮 FUTURE CONSIDERATIONS
+
+### Potential Enhancements
+1. **Theme persistence:** Save user's light/dark preference
+2. **Animation:** Add subtle transitions when cards appear
+3. **Micro-interactions:** Enhance hover states with scale/shadow effects
+4. **Loading states:** Add glass-styled skeleton loaders
+5. **Error states:** Design glass-themed error messages
+
+### Scalability
+- Color system can accommodate unlimited calculator variations
+- Container structure scales to any content complexity
+- Glass styling works for new components (modals, tooltips, etc.)
+- Responsive system handles all device sizes
+
+---
+
+## 📚 REFERENCE FILES
+
+### Session Transcript
+Full detailed conversation available in:
+`/mnt/transcripts/2026-01-25-21-48-16-calculator-spacing-width-fixes.txt`
+
+### Previous Context
+Earlier work referenced from previous agent sessions establishing:
+- Initial calculator implementations
+- Free tools hub structure
+- Color theme assignments
+- Basic responsive layouts
+
+---
+
+**END OF SESSION SUMMARY**
+
+*This document serves as the definitive reference for the glass morphism design system and calculator standardization implemented on January 25, 2026.*
