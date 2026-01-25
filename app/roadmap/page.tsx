@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { FaRocket, FaPhone, FaBullhorn, FaGraduationCap, FaBeer, FaUsers, FaBalanceScale, FaGlobe } from 'react-icons/fa'
+import { Rocket, Phone, Megaphone, GraduationCap, Beer, Users, Scale, Globe } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Product Roadmap - Upcoming Features | OwnerClone',
@@ -15,7 +15,7 @@ export default function Roadmap() {
       timeline: 'Available Now',
       status: 'live',
       color: '#10b981', // Green
-      icon: FaRocket,
+      icon: Rocket,
       headline: 'Complete Operations Suite',
       features: [
         {
@@ -55,7 +55,7 @@ export default function Roadmap() {
       timeline: 'Q2 2026',
       status: 'coming',
       color: '#3b82f6', // Blue
-      icon: FaBullhorn,
+      icon: Megaphone,
       headline: 'Fill Your Seats Automatically',
       features: [
         {
@@ -96,7 +96,7 @@ export default function Roadmap() {
       timeline: 'Q2-Q3 2026',
       status: 'development',
       color: '#a855f7', // Purple
-      icon: FaPhone,
+      icon: Phone,
       headline: 'Talk to Your Restaurant Like a Person',
       features: [
         {
@@ -141,7 +141,7 @@ export default function Roadmap() {
       timeline: 'Q3 2026',
       status: 'development',
       color: '#f97316', // Orange
-      icon: FaGraduationCap,
+      icon: GraduationCap,
       headline: 'Train Your Team Like a Pro',
       features: [
         {
@@ -182,7 +182,7 @@ export default function Roadmap() {
       timeline: 'Q3 2026',
       status: 'planned',
       color: '#fbbf24', // Yellow
-      icon: FaBeer,
+      icon: Beer,
       headline: 'Complete Bar Profitability Control',
       features: [
         {
@@ -224,7 +224,7 @@ export default function Roadmap() {
       timeline: 'Q4 2026',
       status: 'research',
       color: '#ec4899', // Pink
-      icon: FaUsers,
+      icon: Users,
       headline: 'Motivate Your Team and Streamline Operations',
       features: [
         {
@@ -267,7 +267,7 @@ export default function Roadmap() {
       timeline: 'Q4 2026 - Q1 2027',
       status: 'research',
       color: '#8b5cf6', // Violet
-      icon: FaBalanceScale,
+      icon: Scale,
       headline: 'Professional Bookkeeping and Compliance Made Easy',
       features: [
         {
@@ -310,7 +310,7 @@ export default function Roadmap() {
       timeline: 'Q1 2027',
       status: 'research',
       color: '#06b6d4', // Cyan
-      icon: FaGlobe,
+      icon: Globe,
       headline: 'Professional Websites and Catering Growth',
       features: [
         {
@@ -372,153 +372,179 @@ export default function Roadmap() {
   }
 
   return (
-    <div className="min-h-screen text-white">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-4">
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-black mb-6">
-            The OwnerClone <span className="text-[#38bdf8]">Roadmap</span>
-          </h1>
-          <p className="text-xl text-gray-300 mb-6">
-            We're just getting started. Here's what's coming as we build the most comprehensive restaurant management platform for independent owners.
-          </p>
-          <p className="text-lg text-gray-400">
-            All features included in your subscription - no price increases, no add-on fees.
-          </p>
-        </div>
-      </section>
+    <main className="min-h-screen relative">
+      {/* Fixed SVG Background */}
+      <div className="fixed inset-0 z-0" style={{
+        backgroundImage: 'url(/bg-glow.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }} />
 
-      {/* Roadmap Phases */}
-      <section className="relative py-16 px-4">
-        <div className="max-w-7xl mx-auto space-y-12">
-          {phases.map((phase, idx) => {
-            const PhaseIcon = phase.icon
-            return (
-              <div 
-                key={idx} 
-                className="backdrop-blur-xl bg-white/5 border-2 rounded-3xl p-8 transition-all duration-300 hover:scale-[1.02]"
-                style={{ 
-                  borderColor: phase.color,
-                }}
-              >
-                {/* Phase Header */}
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
-                  <div className="flex items-center space-x-4">
-                    <PhaseIcon className="text-5xl" style={{ color: phase.color }} />
-                    <div>
-                      <h2 className="text-3xl font-bold mb-1">{phase.phase}</h2>
-                      <p className="text-lg text-gray-400">{phase.timeline}</p>
+      {/* All content with relative z-10 */}
+      <div className="relative z-10">
+
+        {/* Hero Section */}
+        <section className="pt-32 pb-16 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 text-center">
+              <h1 className="text-5xl md:text-6xl font-black mb-6 text-gray-200">
+                The OwnerClone <span className="text-cyan-400">Roadmap</span>
+              </h1>
+              <p className="text-xl text-gray-300 mb-6">
+                We&apos;re just getting started. Here&apos;s what&apos;s coming as we build the most comprehensive restaurant management platform for independent owners.
+              </p>
+              <p className="text-lg text-gray-400">
+                All features included in your subscription - no price increases, no add-on fees.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Roadmap Phases */}
+        <section className="py-16 px-4">
+          <div className="max-w-7xl mx-auto space-y-12">
+            {phases.map((phase, idx) => {
+              const PhaseIcon = phase.icon
+              return (
+                <div 
+                  key={idx} 
+                  className="backdrop-blur-xl bg-white/5 border-2 rounded-3xl p-8 transition-all duration-300 hover:scale-[1.01]"
+                  style={{ 
+                    borderColor: phase.color,
+                  }}
+                >
+                  {/* Phase Header */}
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
+                    <div className="flex items-center space-x-4">
+                      <PhaseIcon className="w-12 h-12" style={{ color: phase.color }} />
+                      <div>
+                        <h2 className="text-3xl font-bold mb-1 text-gray-200">{phase.phase}</h2>
+                        <p className="text-lg text-gray-400">{phase.timeline}</p>
+                      </div>
                     </div>
+                    {getStatusBadge(phase.status, phase.color)}
                   </div>
-                  {getStatusBadge(phase.status, phase.color)}
-                </div>
 
-                {phase.headline && (
-                  <div 
-                    className="mb-8 p-4 rounded-xl text-xl font-bold"
-                    style={{ 
-                      backgroundColor: `${phase.color}20`,
-                      color: phase.color
-                    }}
-                  >
-                    {phase.headline}
-                  </div>
-                )}
-
-                {/* Features Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {phase.features.map((feature, featureIdx) => (
+                  {phase.headline && (
                     <div 
-                      key={featureIdx} 
-                      className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 hover:border-[#3a3a3a] transition-colors"
+                      className="mb-8 p-4 rounded-xl text-xl font-bold backdrop-blur-xl"
+                      style={{ 
+                        backgroundColor: `${phase.color}20`,
+                        color: phase.color,
+                        borderWidth: '1px',
+                        borderStyle: 'solid',
+                        borderColor: `${phase.color}40`
+                      }}
                     >
-                      <h3 className="text-xl font-bold mb-2" style={{ color: phase.color }}>
-                        {feature.name}
-                      </h3>
-                      <p className="text-gray-400 text-sm mb-4">{feature.description}</p>
-                      
-                      <ul className="space-y-2">
-                        {feature.included.slice(0, 5).map((item, itemIdx) => (
-                          <li key={itemIdx} className="flex items-start text-sm text-gray-300">
-                            <span className="mr-2 mt-1" style={{ color: phase.color }}>•</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                        {feature.included.length > 5 && (
-                          <li className="text-sm text-gray-500 italic">
-                            + {feature.included.length - 5} more features
-                          </li>
-                        )}
-                      </ul>
+                      {phase.headline}
                     </div>
-                  ))}
+                  )}
+
+                  {/* Features Grid */}
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {phase.features.map((feature, featureIdx) => (
+                      <div 
+                        key={featureIdx} 
+                        className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors"
+                      >
+                        <h3 className="text-xl font-bold mb-2" style={{ color: phase.color }}>
+                          {feature.name}
+                        </h3>
+                        <p className="text-gray-400 text-sm mb-4">{feature.description}</p>
+                        
+                        <ul className="space-y-2">
+                          {feature.included.slice(0, 5).map((item, itemIdx) => (
+                            <li key={itemIdx} className="flex items-start text-sm text-gray-300">
+                              <span className="mr-2 mt-1" style={{ color: phase.color }}>•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                          {feature.included.length > 5 && (
+                            <li className="text-sm text-gray-500 italic">
+                              + {feature.included.length - 5} more features
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* Commitment Section */}
+        <section className="py-16 px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-12">
+              <h2 className="text-4xl font-bold text-center text-cyan-400">
+                Our Development Commitment
+              </h2>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-400/30 rounded-xl p-6">
+                <h3 className="text-xl font-bold mb-3 text-green-400">✓ No Price Increases</h3>
+                <p className="text-gray-300">
+                  When these features launch, you get them automatically at your current price. No upgrades, no add-ons, no surprises.
+                </p>
               </div>
-            )
-          })}
-        </div>
-      </section>
 
-      {/* Commitment Section */}
-      <section className="relative py-16 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">
-            Our Development <span className="text-[#38bdf8]">Commitment</span>
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/5 border border-[#10b981]/30 rounded-xl p-6 backdrop-blur-xl">
-              <h3 className="text-xl font-bold mb-3 text-[#10b981]">✓ No Price Increases</h3>
-              <p className="text-gray-300">
-                When these features launch, you get them automatically at your current price. No upgrades, no add-ons, no surprises.
-              </p>
-            </div>
+              <div className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-400/30 rounded-xl p-6">
+                <h3 className="text-xl font-bold mb-3 text-blue-400">✓ Rapid Development</h3>
+                <p className="text-gray-300">
+                  We ship new features every quarter. Early customers get to influence what we build and when.
+                </p>
+              </div>
 
-            <div className="bg-gradient-to-br from-[#3b82f6]/20 to-[#3b82f6]/5 border border-[#3b82f6]/30 rounded-xl p-6 backdrop-blur-xl">
-              <h3 className="text-xl font-bold mb-3 text-[#3b82f6]">✓ Rapid Development</h3>
-              <p className="text-gray-300">
-                We ship new features every quarter. Early customers get to influence what we build and when.
-              </p>
-            </div>
+              <div className="backdrop-blur-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-xl p-6">
+                <h3 className="text-xl font-bold mb-3 text-purple-400">✓ Battle-Tested</h3>
+                <p className="text-gray-300">
+                  Every feature is built from real restaurant experience and tested with actual owners before launch.
+                </p>
+              </div>
 
-            <div className="bg-gradient-to-br from-[#a855f7]/20 to-[#a855f7]/5 border border-[#a855f7]/30 rounded-xl p-6 backdrop-blur-xl">
-              <h3 className="text-xl font-bold mb-3 text-[#a855f7]">✓ Battle-Tested</h3>
-              <p className="text-gray-300">
-                Every feature is built from real restaurant experience and tested with actual owners before launch.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#f97316]/20 to-[#f97316]/5 border border-[#f97316]/30 rounded-xl p-6 backdrop-blur-xl">
-              <h3 className="text-xl font-bold mb-3 text-[#f97316]">✓ Your Success First</h3>
-              <p className="text-gray-300">
-                We only build features that deliver measurable ROI. If it doesn't make you money or save you time, we don't build it.
-              </p>
+              <div className="backdrop-blur-xl bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-400/30 rounded-xl p-6">
+                <h3 className="text-xl font-bold mb-3 text-orange-400">✓ Your Success First</h3>
+                <p className="text-gray-300">
+                  We only build features that deliver measurable ROI. If it doesn&apos;t make you money or save you time, we don&apos;t build it.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="relative py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-[#38bdf8]/20 to-[#a855f7]/20 border-2 border-[#38bdf8] rounded-3xl p-12 text-center backdrop-blur-sm">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Get Started Now and <span className="text-[#38bdf8]">Grow With Us</span>
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Join OwnerClone today at $0.20 per customer. Lock in your pricing and get all future features automatically as they launch.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/pricing" className="bg-[#38bdf8] text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-[#0ea5e9] transition inline-block">
-                See Pricing
-              </Link>
-              <Link href="/contact" className="border-2 border-[#38bdf8] text-[#38bdf8] px-10 py-4 rounded-lg font-bold text-lg hover:bg-[#38bdf8]/10 transition inline-block">
-                Schedule a Demo
-              </Link>
+        {/* CTA Section */}
+        <section className="py-20 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="backdrop-blur-xl bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-400/50 rounded-3xl p-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-cyan-400">
+                Get Started Now and Grow With Us
+              </h2>
+              <p className="text-xl text-gray-300 mb-8">
+                Join OwnerClone today at $0.20 per customer. Lock in your pricing and get all future features automatically as they launch.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="/pricing" 
+                  className="backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-10 py-4 rounded-lg font-bold text-lg text-center"
+                >
+                  See Pricing
+                </Link>
+                <Link 
+                  href="/contact" 
+                  className="backdrop-blur-xl bg-white/5 border border-white/10 text-gray-300 hover:border-cyan-500/50 hover:text-white transition-all px-10 py-4 rounded-lg font-bold text-lg text-center"
+                >
+                  Schedule a Demo
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+      </div>
+    </main>
   )
 }
