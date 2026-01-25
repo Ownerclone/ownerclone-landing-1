@@ -29,7 +29,8 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 nav-bg backdrop-blur-sm border-b">
+      {/* GLASS NAVIGATION BAR */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -47,7 +48,7 @@ export default function Navigation() {
                 Features
               </Link>
               
-              {/* Free Tools Dropdown - FIXED GAP ISSUE */}
+              {/* Free Tools Dropdown */}
               <div className="relative group">
                 <button className="nav-text flex items-center gap-1">
                   Free Tools
@@ -56,74 +57,74 @@ export default function Navigation() {
                   </svg>
                 </button>
                 
-                {/* Added pb-2 to button area to bridge gap */}
+                {/* Glass Dropdown Menu */}
                 <div className="absolute top-full left-0 pt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="dropdown-menu border rounded-lg shadow-xl">
+                  <div className="backdrop-blur-xl bg-black/60 border border-white/10 rounded-lg shadow-xl">
                     <div className="p-2">
-                      <Link href="/free-tools/food-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/food-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">🥗</span>
                         <div>
-                          <div className="font-semibold">Food Cost Calculator</div>
-                          <div className="text-xs dropdown-item-desc">Calculate recipe costs</div>
+                          <div className="font-semibold text-white">Food Cost Calculator</div>
+                          <div className="text-xs text-gray-400">Calculate recipe costs</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/prime-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/prime-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">📊</span>
                         <div>
-                          <div className="font-semibold">Prime Cost Calculator</div>
-                          <div className="text-xs dropdown-item-desc">Food + labor costs</div>
+                          <div className="font-semibold text-white">Prime Cost Calculator</div>
+                          <div className="text-xs text-gray-400">Food + labor costs</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/labor-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/labor-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">👥</span>
                         <div>
-                          <div className="font-semibold">Labor Cost Calculator</div>
-                          <div className="text-xs dropdown-item-desc">Staff cost analysis</div>
+                          <div className="font-semibold text-white">Labor Cost Calculator</div>
+                          <div className="text-xs text-gray-400">Staff cost analysis</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/break-even" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/break-even" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">⚖️</span>
                         <div>
-                          <div className="font-semibold">Break-Even Calculator</div>
-                          <div className="text-xs dropdown-item-desc">Find your break-even point</div>
+                          <div className="font-semibold text-white">Break-Even Calculator</div>
+                          <div className="text-xs text-gray-400">Find your break-even point</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/menu-pricing" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/menu-pricing" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">🍽️</span>
                         <div>
-                          <div className="font-semibold">Menu Pricing Calculator</div>
-                          <div className="text-xs dropdown-item-desc">Optimize menu prices</div>
+                          <div className="font-semibold text-white">Menu Pricing Calculator</div>
+                          <div className="text-xs text-gray-400">Optimize menu prices</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/per-plate-pricing" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/per-plate-pricing" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">🍱</span>
                         <div>
-                          <div className="font-semibold">Per Plate Pricing</div>
-                          <div className="text-xs dropdown-item-desc">Price per serving</div>
+                          <div className="font-semibold text-white">Per Plate Pricing</div>
+                          <div className="text-xs text-gray-400">Price per serving</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/startup-cost" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/startup-cost" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">🚀</span>
                         <div>
-                          <div className="font-semibold">Startup Cost Calculator</div>
-                          <div className="text-xs dropdown-item-desc">Launch budget planner</div>
+                          <div className="font-semibold text-white">Startup Cost Calculator</div>
+                          <div className="text-xs text-gray-400">Launch budget planner</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/google-review" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/google-review" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">⭐</span>
                         <div>
-                          <div className="font-semibold">Google Review Calculator</div>
-                          <div className="text-xs dropdown-item-desc">Review impact analysis</div>
+                          <div className="font-semibold text-white">Google Review Calculator</div>
+                          <div className="text-xs text-gray-400">Review impact analysis</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools/third-party-fees" className="flex items-center gap-3 px-4 py-3 dropdown-item rounded-lg">
+                      <Link href="/free-tools/third-party-fees" className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors">
                         <span className="text-2xl">💳</span>
                         <div>
-                          <div className="font-semibold">Third Party Fees</div>
-                          <div className="text-xs dropdown-item-desc">Delivery app costs</div>
+                          <div className="font-semibold text-white">Third Party Fees</div>
+                          <div className="text-xs text-gray-400">Delivery app costs</div>
                         </div>
                       </Link>
-                      <Link href="/free-tools" className="block px-4 py-3 text-cyan-400 hover:bg-[#2a2a2a] border-t border-theme rounded-lg mt-1">
+                      <Link href="/free-tools" className="block px-4 py-3 text-cyan-400 hover:bg-white/10 border-t border-white/10 rounded-lg mt-1">
                         View All Tools →
                       </Link>
                     </div>
@@ -175,15 +176,15 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Mobile menu - FIXED */}
+        {/* Mobile menu - GLASS EFFECT */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t mobile-menu">
+          <div className="md:hidden border-t border-white/10 backdrop-blur-xl bg-black/60">
             <div className="px-4 py-3 space-y-3">
               <Link href="/features" className="block nav-text" onClick={closeMobileMenu}>
                 Features
               </Link>
               
-              {/* Mobile Free Tools Dropdown - NOW WORKING */}
+              {/* Mobile Free Tools Dropdown */}
               <div>
                 <button 
                   onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
@@ -202,7 +203,7 @@ export default function Navigation() {
                 
                 {/* Mobile dropdown items */}
                 {mobileDropdownOpen && (
-                  <div className="mt-2 ml-4 space-y-2 border-l-2 border-theme pl-4">
+                  <div className="mt-2 ml-4 space-y-2 border-l-2 border-cyan-400 pl-4">
                     <Link href="/free-tools/food-cost" className="block text-sm nav-text py-1" onClick={closeMobileMenu}>
                       🥗 Food Cost Calculator
                     </Link>
@@ -252,7 +253,7 @@ export default function Navigation() {
               <Link href="/contact" className="block nav-text" onClick={closeMobileMenu}>
                 Contact
               </Link>
-              <div className="pt-3 border-t border-theme">
+              <div className="pt-3 border-t border-white/10">
                 <button 
                   onClick={() => {
                     setLoginOpen(true);
@@ -268,10 +269,10 @@ export default function Navigation() {
         )}
       </nav>
 
-      {/* Login Modal */}
+      {/* Login Modal - GLASS EFFECT */}
       {loginOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setLoginOpen(false)}>
-          <div className="bg-[#0a0a0a] border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
+          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Login to <span className="text-[#38bdf8]">OwnerClone</span></h2>
               <button onClick={() => setLoginOpen(false)} className="text-gray-400 hover:text-white transition">
@@ -286,7 +287,7 @@ export default function Navigation() {
                 <label className="block text-sm font-semibold text-gray-300 mb-2">Email</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
@@ -295,7 +296,7 @@ export default function Navigation() {
                 <label className="block text-sm font-semibold text-gray-300 mb-2">Password</label>
                 <input
                   type="password"
-                  className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
                   placeholder="••••••••"
                 />
               </div>
@@ -324,10 +325,10 @@ export default function Navigation() {
         </div>
       )}
 
-      {/* Forgot Password Modal */}
+      {/* Forgot Password Modal - GLASS EFFECT */}
       {forgotPasswordOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setForgotPasswordOpen(false)}>
-          <div className="bg-[#0a0a0a] border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
+          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Reset <span className="text-[#38bdf8]">Password</span></h2>
               <button onClick={() => setForgotPasswordOpen(false)} className="text-gray-400 hover:text-white transition">
@@ -346,7 +347,7 @@ export default function Navigation() {
                 <label className="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
