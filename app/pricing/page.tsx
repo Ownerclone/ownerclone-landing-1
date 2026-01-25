@@ -10,16 +10,9 @@ export const metadata: Metadata = {
 
 export default function Pricing() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#10b981] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="mb-6">
             <span className="bg-[#10b981] text-white px-6 py-3 rounded-full text-lg font-bold uppercase tracking-wide inline-block">
@@ -32,7 +25,7 @@ export default function Pricing() {
           <p className="text-xl text-gray-300 mb-6">
             No complicated tiers. No hidden fees. Just simple, transparent pricing that scales with your business.
           </p>
-          <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-[#38bdf8]/30 rounded-2xl p-8 max-w-2xl mx-auto shadow-[0_0_60px_rgba(56,189,248,0.2)]">
+          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#38bdf8]/30 rounded-2xl p-8 max-w-2xl mx-auto">
             <p className="text-xl text-white font-bold mb-3">
               ⚡ Lock in This Pricing Forever!
             </p>
@@ -59,7 +52,7 @@ export default function Pricing() {
       <section className="relative py-16 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Pricing Card */}
-          <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border-4 border-[#10b981] rounded-3xl shadow-[0_0_80px_rgba(16,185,129,0.3)] p-8 md:p-12 mb-12">
+          <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 border-4 border-[#10b981] rounded-3xl p-8 md:p-12 mb-12">
             <div className="text-center mb-8">
               <div className="text-6xl md:text-7xl font-bold text-[#10b981] mb-2">$0.20</div>
               <div className="text-2xl text-gray-300 mb-4">per customer visit per month</div>
@@ -69,7 +62,7 @@ export default function Pricing() {
             </div>
 
             {/* Pricing Examples */}
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6 mb-8">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6 mb-8">
               <h3 className="text-xl font-bold mb-6 text-center">What You'll Pay Based on Your Traffic</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center border-b border-[#2a2a2a] pb-3">
@@ -135,7 +128,7 @@ export default function Pricing() {
           </div>
 
           {/* Why This Pricing Makes Sense */}
-          <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#2a2a2a] rounded-2xl p-8 mb-12">
+          <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-2xl p-8 mb-12">
             <h2 className="text-3xl font-bold mb-6">Why Per-Customer Pricing?</h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-4">
               Most restaurant software charges flat monthly fees that don't scale with your business. A small pizzeria with 500 customers pays the same as a bustling sports bar with 2,000 customers. That's not fair, and it doesn't make sense.
@@ -151,13 +144,13 @@ export default function Pricing() {
       </section>
 
       {/* ROI Section */}
-      <section className="relative py-16 px-4 bg-[#0f1419]/30">
+      <section className="relative py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-center">
             The Math That Makes This a <span className="text-[#10b981]">No-Brainer</span>
           </h2>
           
-          <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border-2 border-[#10b981]/30 rounded-2xl p-8 mb-8 shadow-[0_0_60px_rgba(16,185,129,0.2)]">
+          <div className="backdrop-blur-xl bg-white/5 border-2 border-[#10b981]/30 rounded-2xl p-8 mb-8">
             <h3 className="text-2xl font-bold mb-6">Average Restaurant Serving 1,000 Customers/Month</h3>
             
             <div className="space-y-6">
@@ -219,10 +212,10 @@ export default function Pricing() {
             How We <span className="text-[#38bdf8]">Compare</span>
           </h2>
           
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto backdrop-blur-xl bg-white/5 rounded-2xl p-6">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-[#1a1a1a]">
+                <tr className="bg-white/10">
                   <th className="border border-[#2a2a2a] p-4 text-left">Feature</th>
                   <th className="border border-[#2a2a2a] p-4 text-center bg-[#38bdf8]/10">OwnerClone</th>
                   <th className="border border-[#2a2a2a] p-4 text-center">Toast Competitor</th>
@@ -236,7 +229,7 @@ export default function Pricing() {
                   <td className="border border-[#2a2a2a] p-4 text-center text-gray-400">$165+</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-gray-400">$300+</td>
                 </tr>
-                <tr className="bg-[#0a0a0a]/40">
+                <tr className="bg-white/5">
                   <td className="border border-[#2a2a2a] p-4 font-semibold">Setup Fee</td>
                   <td className="border border-[#2a2a2a] p-4 text-center bg-[#38bdf8]/10 text-[#10b981] font-bold">$0</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-gray-400">$500+</td>
@@ -248,7 +241,7 @@ export default function Pricing() {
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#10b981]">✓</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#10b981]">✓</td>
                 </tr>
-                <tr className="bg-[#0a0a0a]/40">
+                <tr className="bg-white/5">
                   <td className="border border-[#2a2a2a] p-4 font-semibold">Labor Management</td>
                   <td className="border border-[#2a2a2a] p-4 text-center bg-[#38bdf8]/10 text-[#10b981]">✓</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#10b981]">✓</td>
@@ -260,7 +253,7 @@ export default function Pricing() {
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#ef4444]">✗</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#ef4444]">✗</td>
                 </tr>
-                <tr className="bg-[#0a0a0a]/40">
+                <tr className="bg-white/5">
                   <td className="border border-[#2a2a2a] p-4 font-semibold">Demand Forecasting</td>
                   <td className="border border-[#2a2a2a] p-4 text-center bg-[#38bdf8]/10 text-[#10b981]">✓</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#ef4444]">✗</td>
@@ -272,7 +265,7 @@ export default function Pricing() {
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#ef4444]">✗</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#ef4444]">✗</td>
                 </tr>
-                <tr className="bg-[#0a0a0a]/40">
+                <tr className="bg-white/5">
                   <td className="border border-[#2a2a2a] p-4 font-semibold">AI Phone Assistant</td>
                   <td className="border border-[#2a2a2a] p-4 text-center bg-[#38bdf8]/10 text-[#10b981]">✓</td>
                   <td className="border border-[#2a2a2a] p-4 text-center text-[#ef4444]">✗</td>
@@ -291,14 +284,14 @@ export default function Pricing() {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative py-16 px-4 bg-[#0f1419]/30">
+      <section className="relative py-16 px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-center">
             Common <span className="text-[#38bdf8]">Questions</span>
           </h2>
           
           <div className="space-y-6">
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#38bdf8] mb-3">How do you count customers?</h3>
               <p className="text-gray-300 mb-3">
                 A "customer" is one cover - one person physically walking in your door and sitting down. We pull this directly from your POS system's cover count, not from transactions or checks.
@@ -311,21 +304,21 @@ export default function Pricing() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#38bdf8] mb-3">What if my customer count varies a lot month to month?</h3>
               <p className="text-gray-300">
                 That's the beauty of per-customer pricing. In slow months, you pay less. In busy months, you pay more, but you are also making more money. Your software cost scales naturally with your business.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#38bdf8] mb-3">Is there a minimum or maximum?</h3>
               <p className="text-gray-300">
                 No minimum. No maximum. Whether you serve 100 customers or 10,000, the pricing stays the same: $0.20 per customer. Fair and scalable for businesses of all sizes.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#38bdf8] mb-3">What if OwnerClone isn't saving me money?</h3>
               <p className="text-gray-300 mb-3">
                 <strong className="text-white">Our 150% ROI Guarantee:</strong> We track your return on investment continuously and show you the results in your dashboard. If your ROI falls below 150% of what you're paying us, we schedule a meeting with you immediately.
@@ -335,21 +328,21 @@ export default function Pricing() {
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#38bdf8] mb-3">Do you offer annual discounts?</h3>
               <p className="text-gray-300">
                 Yes! Pay annually and save 15%. Contact us for details and we'll set you up with annual billing.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#38bdf8] mb-3">Can I cancel anytime?</h3>
               <p className="text-gray-300">
                 Absolutely. No long-term contracts. No cancellation fees. If OwnerClone isn't saving you money and making your life easier, you can cancel with 30 days notice. We also offer a 30-day money-back guarantee.
               </p>
             </div>
 
-            <div className="bg-[#0a0a0a]/60 backdrop-blur-xl border border-[#2a2a2a] rounded-xl p-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-[#2a2a2a] rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#38bdf8] mb-3">What about support?</h3>
               <p className="text-gray-300">
                 Email and phone support is included at no extra charge. You'll have direct access to our support team, and because I built this from my own restaurant experience, we actually understand your problems.
@@ -362,7 +355,7 @@ export default function Pricing() {
       {/* Final CTA */}
       <section className="relative py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-[#38bdf8]/20 to-[#10b981]/20 border-2 border-[#38bdf8] rounded-3xl p-12 text-center backdrop-blur-sm shadow-[0_0_80px_rgba(56,189,248,0.3)]">
+          <div className="bg-gradient-to-br from-[#38bdf8]/20 to-[#10b981]/20 border-2 border-[#38bdf8] rounded-3xl p-12 text-center backdrop-blur-sm">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Stop Guessing and <span className="text-[#38bdf8]">Start Knowing</span>?
             </h2>
