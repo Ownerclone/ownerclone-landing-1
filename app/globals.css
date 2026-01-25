@@ -25,8 +25,8 @@ textarea:-webkit-autofill:active {
 :root.light-mode input:-webkit-autofill:hover,
 :root.light-mode input:-webkit-autofill:focus,
 :root.light-mode input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #f0f9ff inset !important;
-  -webkit-text-fill-color: #475569 !important;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #000000 !important;
 }
 
 /* Root theme variables - Dark mode (default) */
@@ -43,32 +43,6 @@ textarea:-webkit-autofill:active {
   --nav-text: #d1d5db;
   --nav-text-hover: #ffffff;
   --logo-color: #38bdf8;
-}
-
-/* Light mode overrides - WHITE BACKGROUND ONLY */
-:root.light-mode {
-  --bg-primary: #ffffff;
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --text-primary: #000000;
-  --text-secondary: #666666;
-  --text-tertiary: #999999;
-  --border: #e5e5e5;
-  --nav-bg: rgba(255, 255, 255, 0.95);
-  --nav-border: rgba(0, 0, 0, 0.1);
-  --nav-text: #000000;
-  --nav-text-hover: #22d3ee;
-  --logo-color: #22d3ee;
-}
-
-/* Remove orb background in light mode */
-:root.light-mode body::before {
-  display: none;
-}
-
-/* Remove background image in light mode */
-:root.light-mode body {
-  background-image: none;
 }
 
 /* Apply theme colors */
@@ -92,16 +66,6 @@ body::before {
   background-repeat: no-repeat;
   z-index: -1;
   pointer-events: none;
-}
-
-/* Remove background in light mode */
-:root.light-mode body::before {
-  display: none;
-}
-
-/* Remove background image in light mode */
-:root.light-mode body {
-  background-image: none;
 }
 
 /* Utility classes */
@@ -162,17 +126,8 @@ body::before {
   transition: background-color 0.3s ease;
 }
 
-:root.light-mode .login-btn {
-  background-color: #cbd5e1;
-  color: #334155;
-}
-
 .login-btn:hover {
   background-color: #06b6d4;
-}
-
-:root.light-mode .login-btn:hover {
-  background-color: #94a3b8;
 }
 
 /* Mobile menu */
@@ -211,219 +166,47 @@ body::before {
 }
 
 /* ============================================
-   LIGHT MODE COMPLETE REDESIGN
+   LIGHT MODE - STEP 1: WHITE BACKGROUND ONLY
    ============================================ */
 
-/* Page backgrounds - white with subtle blue gradient */
-:root.light-mode .min-h-screen {
-  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+/* Light mode overrides - WHITE BACKGROUND */
+:root.light-mode {
+  --bg-primary: #ffffff;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --border: #e5e5e5;
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-border: rgba(0, 0, 0, 0.1);
+  --nav-text: #000000;
+  --nav-text-hover: #22d3ee;
+  --logo-color: #22d3ee;
 }
 
-:root.light-mode .bg-\[\#0a0a0a\] {
-  background-color: #ffffff;
+/* KILL THE ORB BACKGROUND - Multiple approaches */
+:root.light-mode body::before {
+  display: none !important;
+  background-image: none !important;
+  opacity: 0 !important;
 }
 
-:root.light-mode .bg-\[\#0f1419\] {
-  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+:root.light-mode body {
+  background-image: none !important;
+  background-color: #ffffff !important;
 }
 
-:root.light-mode .bg-\[\#0f1419\]\/30 {
-  background-color: #f0f9ff;
+/* Kill any fixed background divs with inline styles */
+:root.light-mode .fixed.inset-0.z-0 {
+  display: none !important;
 }
 
-/* All text becomes graphite */
-:root.light-mode .text-white {
-  color: #334155;
+/* Kill background on any div with style attribute containing bg-glow */
+:root.light-mode div[style*="bg-glow"] {
+  display: none !important;
 }
 
-:root.light-mode .text-gray-300 {
-  color: #64748b;
-}
-
-:root.light-mode .text-gray-400 {
-  color: #94a3b8;
-}
-
-/* Headers stay dark */
-:root.light-mode h1,
-:root.light-mode h2,
-:root.light-mode h3 {
-  color: #1e293b;
-}
-
-/* Cards - silver with clean borders, NO GLOWS */
-:root.light-mode .bg-\[\#1a1a1a\],
-:root.light-mode .bg-\[\#0a0a0a\]\/60,
-:root.light-mode .bg-\[\#0a0a0a\]\/40 {
-  background-color: #f8fafc;
-  border-color: #cbd5e1;
-}
-
-:root.light-mode .border-\[\#2a2a2a\] {
-  border-color: #cbd5e1;
-}
-
-/* Remove glowing borders */
-:root.light-mode .border-\[\#38bdf8\]\/30,
-:root.light-mode .border-\[\#10b981\]\/30 {
-  border-color: #0ea5e9;
-}
-
-:root.light-mode .border-2.border-\[\#38bdf8\],
-:root.light-mode .border-2.border-\[\#10b981\],
-:root.light-mode .border-4.border-\[\#10b981\] {
-  border-color: #0ea5e9;
-  border-width: 2px;
-}
-
-/* Gradient cards - white to light blue */
-:root.light-mode .bg-gradient-to-br {
-  background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
-}
-
-/* Badge/pill buttons - silver */
-:root.light-mode .bg-\[\#10b981\] {
-  background-color: #0ea5e9;
-}
-
-/* Buttons - all become silver */
-:root.light-mode .bg-cyan-400,
-:root.light-mode .bg-\[\#38bdf8\],
-:root.light-mode .bg-\[\#10b981\] {
-  background-color: #cbd5e1;
-  color: #334155;
-}
-
-:root.light-mode .bg-cyan-400:hover,
-:root.light-mode .bg-\[\#38bdf8\]:hover,
-:root.light-mode .bg-\[\#10b981\]:hover {
-  background-color: #94a3b8;
-}
-
-/* Keep accent colors visible but muted */
-:root.light-mode .text-\[\#38bdf8\],
-:root.light-mode .text-\[\#10b981\] {
-  color: #0ea5e9;
-}
-
-:root.light-mode .text-\[\#ef4444\] {
-  color: #dc2626;
-}
-
-/* Price numbers stay prominent */
-:root.light-mode .text-6xl.text-\[\#10b981\],
-:root.light-mode .text-3xl.text-\[\#10b981\],
-:root.light-mode .text-5xl.text-\[\#10b981\] {
-  color: #0ea5e9;
-}
-
-/* Table styling */
-:root.light-mode table {
-  background-color: #ffffff;
-}
-
-:root.light-mode .bg-\[\#38bdf8\]\/10 {
-  background-color: #e0f2fe;
-}
-
-:root.light-mode .bg-\[\#10b981\]\/10 {
-  background-color: #dbeafe;
-}
-
-/* Special tinted sections */
-:root.light-mode .bg-\[\#10b981\]\/10.border-\[\#10b981\]\/30 {
-  background-color: #dbeafe;
-  border-color: #7dd3fc;
-}
-
-/* ============================================
-   FEATURES PAGE STYLING - COMPLETE
-   ============================================ */
-
-/* Remove gradient backgrounds from hero sections */
-:root.light-mode section .absolute.inset-0.bg-gradient-to-b {
-  display: none;
-}
-
-/* Hero section container - clean white background */
-:root.light-mode section.relative.pt-32 {
-  background-color: #ffffff;
-}
-
-/* Hero content wrapper - blue card with white text */
-:root.light-mode section.relative.pt-32 > div > .relative.max-w-7xl,
-:root.light-mode section.relative.pt-32 > div > .relative.max-w-4xl {
-  background: #0ea5e9;
-  padding: 3rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-/* All text inside hero blue card becomes white */
-:root.light-mode section.relative.pt-32 h1 {
-  color: #ffffff !important;
-}
-
-:root.light-mode section.relative.pt-32 .text-5xl,
-:root.light-mode section.relative.pt-32 .text-6xl,
-:root.light-mode section.relative.pt-32 .text-7xl {
-  color: #ffffff !important;
-}
-
-:root.light-mode section.relative.pt-32 .text-xl,
-:root.light-mode section.relative.pt-32 .text-2xl,
-:root.light-mode section.relative.pt-32 .text-gray-300 {
-  color: #ffffff !important;
-  opacity: 0.95;
-}
-
-:root.light-mode section.relative.pt-32 p {
-  color: #ffffff !important;
-}
-
-/* ALL section headings (h2, h3) become blue */
-:root.light-mode h2 {
-  color: #0ea5e9 !important;
-}
-
-:root.light-mode h3 {
-  color: #0ea5e9 !important;
-}
-
-/* Specific heading classes that should be blue */
-:root.light-mode .text-3xl.font-bold,
-:root.light-mode .text-4xl.font-bold,
-:root.light-mode .text-2xl.font-bold {
-  color: #0ea5e9 !important;
-}
-
-/* Override any remaining white headings outside hero */
-:root.light-mode section:not(.relative.pt-32) .text-white {
-  color: #334155 !important;
-}
-
-/* But keep headings blue */
-:root.light-mode section:not(.relative.pt-32) h1,
-:root.light-mode section:not(.relative.pt-32) h2,
-:root.light-mode section:not(.relative.pt-32) h3 {
-  color: #0ea5e9 !important;
-}
-
-/* Body text stays graphite */
-:root.light-mode p:not(section.relative.pt-32 p) {
-  color: #64748b !important;
-}
-
-/* Section dividers/underlines - blue */
-:root.light-mode .border-b-4,
-:root.light-mode .border-b-2 {
-  border-color: #0ea5e9 !important;
-}
-
-/* Remove any cyan underlines and make them blue */
-:root.light-mode .border-cyan-400,
-:root.light-mode .border-\[\#38bdf8\] {
-  border-color: #0ea5e9 !important;
+:root.light-mode div[style*="backgroundImage"] {
+  background-image: none !important;
 }
