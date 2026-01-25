@@ -1,154 +1,246 @@
-'use client'
+// app/free-tools/page.tsx
+// Free Tools Hub Page with Lucide React Icons
 
-import Link from 'next/link'
+import Link from 'next/link';
+import { 
+  UtensilsCrossed, // Food Cost
+  TrendingUp,      // Prime Cost  
+  Users,           // Labor Cost
+  Scale,           // Break-Even
+  Calculator,      // Menu Pricing
+  PieChart,        // Per Plate Pricing
+  Rocket,          // Startup Cost
+  Star,            // Google Review
+  CreditCard       // Third Party Fees
+} from 'lucide-react';
 
-export default function FreeToolsHub() {
+export default function FreeToolsPage() {
   const calculators = [
     {
       name: 'Food Cost Calculator',
-      description: 'Calculate food cost percentage for any recipe and see if you\'re hitting industry benchmarks.',
-      icon: '🍽️',
-      color: 'emerald',
-      href: '/free-tools/food-cost'
+      description: 'Calculate food cost percentage for any recipe. Track ingredient costs down to the gram.',
+      href: '/free-tools/food-cost',
+      icon: UtensilsCrossed,
+      color: 'cyan',
+      borderColor: 'border-cyan-400/30',
+      bgColor: 'bg-cyan-500/10',
+      iconColor: 'text-cyan-400'
     },
     {
       name: 'Prime Cost Calculator',
-      description: 'Track your most important profitability metric: COGS + Labor. Target is 60% or less.',
-      icon: '📊',
-      color: 'blue',
-      href: '/free-tools/prime-cost'
-    },
-    {
-      name: 'Break-Even Calculator',
-      description: 'Find out exactly how many customers you need per day to break even and start making profit.',
-      icon: '🎯',
-      color: 'cyan',
-      href: '/free-tools/break-even'
+      description: 'Your most important profitability metric. COGS + Labor in one powerful calculator.',
+      href: '/free-tools/prime-cost',
+      icon: TrendingUp,
+      color: 'green',
+      borderColor: 'border-green-400/30',
+      bgColor: 'bg-green-500/10',
+      iconColor: 'text-green-400'
     },
     {
       name: 'Labor Cost Calculator',
-      description: 'Calculate your labor cost percentage and optimize staffing to hit the 25-35% target.',
-      icon: '👥',
+      description: 'Analyze labor costs as a percentage of sales. Optimize scheduling and staffing.',
+      href: '/free-tools/labor-cost',
+      icon: Users,
       color: 'indigo',
-      href: '/free-tools/labor-cost'
+      borderColor: 'border-indigo-400/30',
+      bgColor: 'bg-indigo-500/10',
+      iconColor: 'text-indigo-400'
+    },
+    {
+      name: 'Break-Even Calculator',
+      description: 'Find out exactly how many customers you need per day to start making profit.',
+      href: '/free-tools/break-even',
+      icon: Scale,
+      color: 'purple',
+      borderColor: 'border-purple-400/30',
+      bgColor: 'bg-purple-500/10',
+      iconColor: 'text-purple-400'
     },
     {
       name: 'Menu Pricing Calculator',
-      description: 'Price your menu items for maximum profit using multiple pricing strategies and methods.',
-      icon: '💵',
-      color: 'purple',
-      href: '/free-tools/menu-pricing'
+      description: 'Price your menu items perfectly with multiple pricing strategies and cost analysis.',
+      href: '/free-tools/menu-pricing',
+      icon: Calculator,
+      color: 'blue',
+      borderColor: 'border-blue-400/30',
+      bgColor: 'bg-blue-500/10',
+      iconColor: 'text-blue-400'
     },
     {
-      name: 'Per Plate Pricing Calculator',
-      description: 'Calculate exact ingredient costs per plate and see how portion control impacts profitability.',
-      icon: '🍴',
-      color: 'teal',
-      href: '/free-tools/per-plate-pricing'
+      name: 'Per Plate Pricing',
+      description: 'Calculate exact cost per serving with ingredient tracking and portion control.',
+      href: '/free-tools/per-plate-pricing',
+      icon: PieChart,
+      color: 'orange',
+      borderColor: 'border-orange-400/30',
+      bgColor: 'bg-orange-500/10',
+      iconColor: 'text-orange-400'
     },
     {
       name: 'Startup Cost Calculator',
-      description: 'Estimate total investment needed to open your restaurant including equipment, buildout, and working capital.',
-      icon: '🏪',
-      color: 'orange',
-      href: '/free-tools/startup-cost'
+      description: 'Estimate total costs to open your restaurant. Build-out, equipment, inventory, and more.',
+      href: '/free-tools/startup-cost',
+      icon: Rocket,
+      color: 'yellow',
+      borderColor: 'border-yellow-400/30',
+      bgColor: 'bg-yellow-500/10',
+      iconColor: 'text-yellow-400'
     },
     {
       name: 'Google Review Calculator',
-      description: 'Calculate how many 5-star reviews you need to improve your overall Google rating.',
-      icon: '⭐',
-      color: 'amber',
-      href: '/free-tools/google-review'
+      description: 'See how negative reviews impact your rating and plan your recovery strategy.',
+      href: '/free-tools/google-review',
+      icon: Star,
+      color: 'pink',
+      borderColor: 'border-pink-400/30',
+      bgColor: 'bg-pink-500/10',
+      iconColor: 'text-pink-400'
     },
     {
       name: 'Third Party Fees Calculator',
-      description: 'See the REAL fees you\'re paying DoorDash, Uber Eats & Grubhub after all costs add up.',
-      icon: '📱',
-      color: 'rose',
-      href: '/free-tools/third-party-fees'
+      description: 'Calculate the true cost of delivery apps. DoorDash, Uber Eats, Grubhub fees revealed.',
+      href: '/free-tools/third-party-fees',
+      icon: CreditCard,
+      color: 'red',
+      borderColor: 'border-red-400/30',
+      bgColor: 'bg-red-500/10',
+      iconColor: 'text-red-400'
     }
-  ]
-
-  const getColorClasses = (color) => {
-    const colors = {
-      emerald: 'border-emerald-500/20 hover:border-emerald-500/50 hover:shadow-emerald-500/20',
-      blue: 'border-blue-500/20 hover:border-blue-500/50 hover:shadow-blue-500/20',
-      cyan: 'border-cyan-500/20 hover:border-cyan-500/50 hover:shadow-cyan-500/20',
-      indigo: 'border-indigo-500/20 hover:border-indigo-500/50 hover:shadow-indigo-500/20',
-      purple: 'border-purple-500/20 hover:border-purple-500/50 hover:shadow-purple-500/20',
-      teal: 'border-teal-500/20 hover:border-teal-500/50 hover:shadow-teal-500/20',
-      orange: 'border-orange-500/20 hover:border-orange-500/50 hover:shadow-orange-500/20',
-      amber: 'border-amber-500/20 hover:border-amber-500/50 hover:shadow-amber-500/20',
-      rose: 'border-rose-500/20 hover:border-rose-500/50 hover:shadow-rose-500/20'
-    }
-    return colors[color] || colors.emerald
-  }
+  ];
 
   return (
-    <div className="min-h-screen relative text-white">
+    <div className="min-h-screen">
+      {/* Fixed SVG Background */}
       <div 
-        className="fixed inset-0 z-0"
+        className="fixed inset-0 z-0" 
         style={{
           backgroundImage: 'url(/bg-glow.svg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
-        }}
+        }} 
       />
 
-      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-4xl">
-        {/* Header */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-black mb-6">
-            Free Restaurant <span className="text-cyan-400">Calculators</span>
-          </h1>
-          <p className="text-xl text-gray-300">
-            Professional financial tools to help you start, manage, and optimize your restaurant business.
-          </p>
-        </div>
+      {/* Content Layer */}
+      <div className="relative z-10 pt-32 pb-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Header */}
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-12 text-center">
+            <h1 className="text-5xl font-bold text-cyan-400 mb-4">
+              Free Restaurant Tools
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Professional calculators built by restaurant owners, for restaurant owners. 
+              No signup required. No credit card. Just useful tools to help you succeed.
+            </p>
+          </div>
 
-        {/* Calculator Grid */}
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {calculators.map((calc) => (
-            <Link
-              key={calc.href}
-              href={calc.href}
-              className={`backdrop-blur-xl bg-white/5 border ${getColorClasses(calc.color)} rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group`}
-            >
-              <div className="text-5xl mb-4">{calc.icon}</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition">
-                {calc.name}
-              </h3>
-              <p className="text-gray-400 mb-6">
-                {calc.description}
-              </p>
-              <div className="flex items-center text-cyan-400 font-semibold">
-                <span>Try Calculator</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          {/* Calculator Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {calculators.map((calc) => {
+              const Icon = calc.icon;
+              return (
+                <Link
+                  key={calc.href}
+                  href={calc.href}
+                  className={`backdrop-blur-xl bg-white/5 border ${calc.borderColor} rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group`}
+                >
+                  {/* Icon */}
+                  <div className={`inline-flex p-3 ${calc.bgColor} border ${calc.borderColor} rounded-xl mb-4 group-hover:scale-110 transition-transform`}>
+                    <Icon className={`w-8 h-8 ${calc.iconColor}`} />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-2xl font-bold text-gray-200 mb-3 group-hover:text-white transition">
+                    {calc.name}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-400 mb-4">
+                    {calc.description}
+                  </p>
+
+                  {/* Arrow */}
+                  <div className={`flex items-center ${calc.iconColor} font-semibold`}>
+                    <span>Try Calculator</span>
+                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* CTA Section */}
+          <div className="backdrop-blur-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-300/30 rounded-2xl p-8 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Want These Calculations Automated?
+            </h2>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto text-lg">
+              OwnerClone automatically tracks all these metrics in real-time using AI 
+              to analyze your invoices, POS data, and operations. No more manual spreadsheets.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/demo"
+                className="backdrop-blur-xl bg-cyan-500/30 border border-cyan-300/50 text-white hover:bg-cyan-500/40 px-8 py-4 rounded-xl font-bold transition-all inline-flex items-center justify-center gap-2"
+              >
+                <span>See OwnerClone Demo</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+              <Link
+                href="/pricing"
+                className="backdrop-blur-xl bg-white/10 border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl font-bold transition-all"
+              >
+                Join Early Access
+              </Link>
+            </div>
+          </div>
+
+          {/* Why Use These Tools */}
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            <div className="backdrop-blur-xl bg-white/5 border border-green-400/30 rounded-2xl p-6">
+              <div className="inline-flex p-3 bg-green-500/10 border border-green-400/30 rounded-xl mb-4">
+                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-            </Link>
-          ))}
-        </div>
+              <h3 className="text-xl font-bold text-gray-200 mb-2">100% Free Forever</h3>
+              <p className="text-gray-400">
+                No signup, no credit card, no catch. Use these tools as much as you want.
+              </p>
+            </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 max-w-4xl mx-auto backdrop-blur-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-300/30 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold mb-3">Want These Calculations Automated?</h3>
-          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            OwnerClone automatically tracks all these metrics in real-time using AI to analyze your invoices, POS data, and operations.
-          </p>
-          <Link
-            href="/demo"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-cyan-500/25"
-          >
-            See OwnerClone Demo
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </Link>
+            <div className="backdrop-blur-xl bg-white/5 border border-purple-400/30 rounded-2xl p-6">
+              <div className="inline-flex p-3 bg-purple-500/10 border border-purple-400/30 rounded-xl mb-4">
+                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-200 mb-2">Built by Owners</h3>
+              <p className="text-gray-400">
+                Created by a restaurant owner with 10 years of experience. Real-world tested.
+              </p>
+            </div>
+
+            <div className="backdrop-blur-xl bg-white/5 border border-blue-400/30 rounded-2xl p-6">
+              <div className="inline-flex p-3 bg-blue-500/10 border border-blue-400/30 rounded-xl mb-4">
+                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-200 mb-2">Industry Standards</h3>
+              <p className="text-gray-400">
+                All calculations use current restaurant industry benchmarks and best practices.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
