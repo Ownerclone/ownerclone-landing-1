@@ -20,7 +20,7 @@ export default function FoodCostCalculator() {
   const idealPrice35 = cost > 0 ? cost / 0.35 : 0
 
   // Determine status color and message
-  const getStatus = (percentage: number) => {
+  const getStatus = (percentage) => {
     if (percentage === 0) return { color: 'text-gray-500', bg: 'backdrop-blur-xl bg-white/5', border: 'border-white/10', message: 'Enter your numbers above' }
     if (percentage < 28) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Excellent! You\'re maximizing profit per dish.' }
     if (percentage < 32) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Great! You\'re in the ideal range for most restaurants.' }
