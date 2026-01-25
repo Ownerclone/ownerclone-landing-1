@@ -45,14 +45,14 @@ textarea:-webkit-autofill:active {
   --logo-color: #38bdf8;
 }
 
-/* Light mode overrides - NEW PALETTE */
+/* Light mode overrides - CLEAN PALETTE */
 :root.light-mode {
   --bg-primary: #ffffff;
-  --bg-secondary: #f0f9ff; /* Light blue */
-  --bg-card: #f8fafc; /* Silver/light grey */
-  --text-primary: #475569; /* Graphite */
-  --text-secondary: #64748b; /* Lighter graphite */
-  --text-tertiary: #94a3b8; /* Even lighter */
+  --bg-secondary: #f0f9ff; /* Light blue tint */
+  --bg-card: #f8fafc; /* Silver */
+  --text-primary: #334155; /* Graphite */
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
   --border: #cbd5e1; /* Silver border */
   --nav-bg: #38bdf8;
   --nav-border: #0ea5e9;
@@ -68,7 +68,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Utility classes that use theme variables */
+/* Utility classes */
 .bg-theme-primary { background-color: var(--bg-primary); }
 .bg-theme-secondary { background-color: var(--bg-secondary); }
 .bg-theme-card { background-color: var(--bg-card); }
@@ -77,7 +77,7 @@ body {
 .text-theme-tertiary { color: var(--text-tertiary); }
 .border-theme { border-color: var(--border); }
 
-/* Navigation theme classes */
+/* Navigation */
 .nav-bg {
   background-color: var(--nav-bg);
   border-color: var(--nav-border);
@@ -98,7 +98,7 @@ body {
   transition: stroke 0.3s ease;
 }
 
-/* Dropdown menu theming */
+/* Dropdown menu */
 .dropdown-menu {
   background-color: var(--bg-card);
   border-color: var(--border);
@@ -119,17 +119,16 @@ body {
   color: var(--text-tertiary);
 }
 
-/* Login button - cyan in dark mode, silver in light mode */
+/* Login button */
 .login-btn {
   background-color: #22d3ee;
   color: #000000;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 :root.light-mode .login-btn {
-  background-color: #cbd5e1; /* Silver */
-  color: #475569; /* Graphite */
-  border: 1px solid #94a3b8;
+  background-color: #cbd5e1;
+  color: #334155;
 }
 
 .login-btn:hover {
@@ -137,32 +136,30 @@ body {
 }
 
 :root.light-mode .login-btn:hover {
-  background-color: #94a3b8; /* Darker silver */
-  border-color: #64748b;
+  background-color: #94a3b8;
 }
 
-/* Mobile menu theming */
+/* Mobile menu */
 .mobile-menu {
   background-color: var(--nav-bg);
   border-color: var(--nav-border);
 }
 
-/* LIGHT MODE: COMPLETE REDESIGN */
+/* ============================================
+   LIGHT MODE COMPLETE REDESIGN
+   ============================================ */
 
-/* Remove all orbs in light mode */
-:root.light-mode .bg-\[\#0ea5e9\],
-:root.light-mode .bg-\[\#38bdf8\] {
+/* Hide orbs in light mode */
+:root.light-mode .animate-pulse {
   display: none;
 }
 
-/* Page backgrounds */
+/* Page backgrounds - white with subtle blue gradient */
 :root.light-mode .min-h-screen {
   background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
 }
 
-:root.light-mode .bg-\[\#0a0a0a\],
-:root.light-mode .bg-black,
-:root.light-mode .bg-gray-900 {
+:root.light-mode .bg-\[\#0a0a0a\] {
   background-color: #ffffff;
 }
 
@@ -170,117 +167,127 @@ body {
   background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
 }
 
+:root.light-mode .bg-\[\#0f1419\]\/30 {
+  background-color: #f0f9ff;
+}
+
 /* All text becomes graphite */
 :root.light-mode .text-white {
-  color: #475569;
+  color: #334155;
 }
 
+:root.light-mode .text-gray-300 {
+  color: #64748b;
+}
+
+:root.light-mode .text-gray-400 {
+  color: #94a3b8;
+}
+
+/* Headers stay dark */
 :root.light-mode h1,
 :root.light-mode h2,
-:root.light-mode h3,
-:root.light-mode h4,
-:root.light-mode h5,
-:root.light-mode h6 {
-  color: #1e293b; /* Darker graphite for headers */
+:root.light-mode h3 {
+  color: #1e293b;
 }
 
-:root.light-mode .text-gray-300,
-:root.light-mode .text-gray-400,
-:root.light-mode .text-gray-500 {
-  color: #64748b; /* Lighter graphite */
-}
-
-/* Cards become silver with clean borders */
+/* Cards - silver with clean borders, NO GLOWS */
 :root.light-mode .bg-\[\#1a1a1a\],
-:root.light-mode .bg-\[\#1e1e1e\],
-:root.light-mode .bg-\[\#2a2a2a\] {
-  background-color: #f8fafc; /* Silver */
+:root.light-mode .bg-\[\#0a0a0a\]\/60,
+:root.light-mode .bg-\[\#0a0a0a\]\/40 {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
 }
 
-:root.light-mode .border-\[\#1a1a1a\],
-:root.light-mode .border-\[\#2a2a2a\],
-:root.light-mode .border-\[\#3a3a3a\] {
-  border-color: #cbd5e1; /* Silver border */
+:root.light-mode .backdrop-blur-xl {
+  backdrop-filter: none;
 }
 
-/* Remove ALL glowing effects in light mode */
-:root.light-mode .shadow-lg,
-:root.light-mode .shadow-xl,
-:root.light-mode .shadow-2xl {
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+:root.light-mode .border-\[\#2a2a2a\] {
+  border-color: #cbd5e1;
 }
 
-:root.light-mode .hover\:shadow-lg:hover,
-:root.light-mode .hover\:shadow-xl:hover {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+/* Remove ALL glowing shadows */
+:root.light-mode .shadow-\[0_0_60px_rgba\(56\,189\,248\,0\.2\)\],
+:root.light-mode .shadow-\[0_0_80px_rgba\(56\,189\,248\,0\.3\)\],
+:root.light-mode .shadow-\[0_0_80px_rgba\(16\,185\,129\,0\.3\)\] {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
 
-/* Remove glow from borders */
-:root.light-mode .hover\:border-\[\#38bdf8\]:hover,
-:root.light-mode .hover\:border-\[\#10b981\]:hover,
-:root.light-mode .hover\:border-\[\#a855f7\]:hover,
-:root.light-mode .hover\:border-\[\#3b82f6\]:hover,
-:root.light-mode .hover\:border-\[\#fbbf24\]:hover,
-:root.light-mode .hover\:border-\[\#f97316\]:hover,
-:root.light-mode .hover\:border-\[\#ec4899\]:hover,
-:root.light-mode .hover\:border-\[\#8b5cf6\]:hover,
-:root.light-mode .hover\:border-\[\#ef4444\]:hover {
-  border-color: #0ea5e9; /* Clean light blue */
-  box-shadow: none;
+:root.light-mode .hover\:shadow-\[0_0_40px_rgba\(56\,189\,248\,0\.4\)\]:hover,
+:root.light-mode .hover\:shadow-\[0_0_40px_rgba\(16\,185\,129\,0\.4\)\]:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
-/* Buttons: ALL cyan buttons become silver */
-:root.light-mode .bg-cyan-400,
-:root.light-mode .bg-\[\#38bdf8\] {
-  background-color: #cbd5e1;
-  color: #475569;
-  border: 1px solid #94a3b8;
+/* Remove glowing borders */
+:root.light-mode .border-\[\#38bdf8\]\/30,
+:root.light-mode .border-\[\#10b981\]\/30 {
+  border-color: #0ea5e9;
 }
 
-:root.light-mode .bg-cyan-400:hover,
-:root.light-mode .bg-\[\#38bdf8\]:hover {
-  background-color: #94a3b8;
-  border-color: #64748b;
+:root.light-mode .border-2.border-\[\#38bdf8\],
+:root.light-mode .border-2.border-\[\#10b981\],
+:root.light-mode .border-4.border-\[\#10b981\] {
+  border-color: #0ea5e9;
+  border-width: 2px;
 }
 
-/* Gradient backgrounds: white-to-cyan only */
-:root.light-mode .bg-gradient-to-r,
-:root.light-mode .bg-gradient-to-br,
-:root.light-mode .bg-gradient-to-b {
+/* Gradient cards - white to light blue */
+:root.light-mode .bg-gradient-to-br {
   background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
 }
 
-/* Special gradient sections */
-:root.light-mode .bg-gradient-to-br.from-\[\#0ea5e9\]\/20 {
-  background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #ffffff 100%);
+/* Badge/pill buttons - silver */
+:root.light-mode .bg-\[\#10b981\] {
+  background-color: #0ea5e9;
+}
+
+/* Buttons - all become silver */
+:root.light-mode .bg-cyan-400,
+:root.light-mode .bg-\[\#38bdf8\],
+:root.light-mode .bg-\[\#10b981\] {
+  background-color: #cbd5e1;
+  color: #334155;
+}
+
+:root.light-mode .bg-cyan-400:hover,
+:root.light-mode .bg-\[\#38bdf8\]:hover,
+:root.light-mode .bg-\[\#10b981\]:hover {
+  background-color: #94a3b8;
+}
+
+/* Keep accent colors visible but muted */
+:root.light-mode .text-\[\#38bdf8\],
+:root.light-mode .text-\[\#10b981\] {
+  color: #0ea5e9;
+}
+
+:root.light-mode .text-\[\#ef4444\] {
+  color: #dc2626;
+}
+
+/* Price numbers stay prominent */
+:root.light-mode .text-6xl.text-\[\#10b981\],
+:root.light-mode .text-3xl.text-\[\#10b981\],
+:root.light-mode .text-5xl.text-\[\#10b981\] {
+  color: #0ea5e9;
+}
+
+/* Table styling */
+:root.light-mode table {
+  background-color: #ffffff;
+}
+
+:root.light-mode .bg-\[\#38bdf8\]\/10 {
+  background-color: #e0f2fe;
+}
+
+:root.light-mode .bg-\[\#10b981\]\/10 {
+  background-color: #dbeafe;
+}
+
+/* Special tinted sections */
+:root.light-mode .bg-\[\#10b981\]\/10.border-\[\#10b981\]\/30 {
+  background-color: #dbeafe;
   border-color: #7dd3fc;
 }
-
-/* Bordered buttons in light mode */
-:root.light-mode .border-2 {
-  border-color: #cbd5e1;
-  color: #475569;
-  background-color: transparent;
-}
-
-:root.light-mode .border-2:hover {
-  background-color: #f0f9ff;
-  border-color: #38bdf8;
-}
-
-/* Keep blue text blue (but adjust shade) */
-:root.light-mode .text-\[\#38bdf8\],
-:root.light-mode .text-cyan-400 {
-  color: #0ea5e9; /* Slightly darker blue for better contrast */
-}
-
-/* Specific calculator card colors stay but muted */
-:root.light-mode .hover\:text-\[\#38bdf8\]:hover { color: #0ea5e9; }
-:root.light-mode .hover\:text-\[\#10b981\]:hover { color: #059669; }
-:root.light-mode .hover\:text-\[\#a855f7\]:hover { color: #9333ea; }
-:root.light-mode .hover\:text-\[\#3b82f6\]:hover { color: #2563eb; }
-:root.light-mode .hover\:text-\[\#fbbf24\]:hover { color: #f59e0b; }
-:root.light-mode .hover\:text-\[\#f97316\]:hover { color: #ea580c; }
-:root.light-mode .hover\:text-\[\#ec4899\]:hover { color: #db2777; }
-:root.light-mode .hover\:text-\[\#8b5cf6\]:hover { color: #7c3aed; }
-:root.light-mode .hover\:text-\[\#ef4444\]:hover { color: #dc2626; }
