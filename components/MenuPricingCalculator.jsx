@@ -25,7 +25,7 @@ export default function MenuPricingCalculator() {
   const premiumPrice = totalCost * 3.5; // Premium positioning
 
   // Calculate margins for each strategy
-  const calculateMargins = (price) => {
+  const calculateMargins = (price: number) => {
     const foodCostPercent = price > 0 ? (ingCost / price) * 100 : 0;
     const laborPercent = price > 0 ? (labCost / price) * 100 : 0;
     const overheadAmount = price * (overhead / 100);
@@ -73,16 +73,9 @@ export default function MenuPricingCalculator() {
   const recommended = totalCost > 0 ? getRecommendedStrategy() : null;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#a855f7] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#c084fc] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Menu Pricing <span className="text-[#a855f7]">Calculator</span>
@@ -96,7 +89,7 @@ export default function MenuPricingCalculator() {
       <section className="relative py-16 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Main Calculator Card */}
-          <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#a855f7]/20 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(168,85,247,0.1)]">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(168,85,247,0.1)]">
             
             {/* Item Details */}
             <div className="mb-8">
@@ -110,7 +103,7 @@ export default function MenuPricingCalculator() {
                     value={itemName}
                     onChange={(e) => setItemName(e.target.value)}
                     placeholder="e.g., Grilled Salmon"
-                    className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
+                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
                   />
                 </div>
 
@@ -126,7 +119,7 @@ export default function MenuPricingCalculator() {
                         value={ingredientCost}
                         onChange={(e) => setIngredientCost(e.target.value)}
                         placeholder="8.50"
-                        className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
+                        className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
                         step="0.01"
                       />
                     </div>
@@ -144,7 +137,7 @@ export default function MenuPricingCalculator() {
                         value={laborCost}
                         onChange={(e) => setLaborCost(e.target.value)}
                         placeholder="3.00"
-                        className="w-full pl-8 pr-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
+                        className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
                         step="0.01"
                       />
                     </div>
@@ -163,7 +156,7 @@ export default function MenuPricingCalculator() {
                         value={overheadPercent}
                         onChange={(e) => setOverheadPercent(e.target.value)}
                         placeholder="20"
-                        className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
+                        className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
                         min="0"
                         max="50"
                       />
@@ -182,7 +175,7 @@ export default function MenuPricingCalculator() {
                         value={targetFoodCost}
                         onChange={(e) => setTargetFoodCost(e.target.value)}
                         placeholder="30"
-                        className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
+                        className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#a855f7] focus:outline-none text-white transition-colors"
                         min="0"
                         max="100"
                       />
@@ -194,7 +187,7 @@ export default function MenuPricingCalculator() {
               </div>
 
               {totalCost > 0 && (
-                <div className="mt-6 p-4 bg-[#a855f7]/10 border border-[#a855f7]/30 rounded-lg">
+                <div className="mt-6 p-4 backdrop-blur-xl bg-[#a855f7]/10 border border-[#a855f7]/30 rounded-lg">
                   <p className="text-sm text-gray-300">Total Cost Per Plate</p>
                   <p className="text-2xl font-bold text-[#a855f7]">${totalCost.toFixed(2)}</p>
                 </div>
@@ -203,7 +196,7 @@ export default function MenuPricingCalculator() {
 
             {/* Pricing Strategies */}
             {totalCost > 0 && (
-              <div className="border-t-2 border-[#2a2a2a] pt-8">
+              <div className="border-t-2 border-white/10 pt-8">
                 <h3 className="text-2xl font-bold mb-6">Pricing Strategy Analysis</h3>
                 
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -216,7 +209,7 @@ export default function MenuPricingCalculator() {
                         className={`p-6 rounded-lg border-2 backdrop-blur-xl ${
                           isRecommended 
                             ? 'border-[#10b981] bg-[#10b981]/10' 
-                            : 'border-[#2a2a2a] bg-[#0a0a0a]/40'
+                            : 'border-white/10 bg-white/5'
                         }`}
                       >
                         <div className="flex justify-between items-start mb-3">
@@ -278,24 +271,24 @@ export default function MenuPricingCalculator() {
 
                 {/* Psychological Pricing Tips */}
                 {recommended && (
-                  <div className="bg-[#38bdf8]/10 backdrop-blur-xl border border-[#38bdf8]/30 p-6 rounded-lg mb-8">
+                  <div className="backdrop-blur-xl bg-[#38bdf8]/10 border border-[#38bdf8]/30 p-6 rounded-lg mb-8">
                     <h4 className="font-bold text-xl text-white mb-4">Psychological Pricing Tips</h4>
                     <div className="grid md:grid-cols-3 gap-4">
-                      <div className="bg-[#0a0a0a]/60 p-4 rounded-lg border border-[#2a2a2a]">
+                      <div className="backdrop-blur-xl bg-black/40 border border-white/10 p-4 rounded-lg">
                         <p className="text-sm text-gray-400 mb-1">Charm Pricing</p>
                         <p className="text-2xl font-bold text-[#38bdf8]">
                           ${(Math.floor(recommended.price) - 0.01).toFixed(2)}
                         </p>
                         <p className="text-xs text-gray-500 mt-1">Ends in .99 (feels cheaper)</p>
                       </div>
-                      <div className="bg-[#0a0a0a]/60 p-4 rounded-lg border border-[#2a2a2a]">
+                      <div className="backdrop-blur-xl bg-black/40 border border-white/10 p-4 rounded-lg">
                         <p className="text-sm text-gray-400 mb-1">Prestige Pricing</p>
                         <p className="text-2xl font-bold text-[#38bdf8]">
                           ${Math.ceil(recommended.price).toFixed(0)}
                         </p>
                         <p className="text-xs text-gray-500 mt-1">Round number (premium feel)</p>
                       </div>
-                      <div className="bg-[#0a0a0a]/60 p-4 rounded-lg border border-[#2a2a2a]">
+                      <div className="backdrop-blur-xl bg-black/40 border border-white/10 p-4 rounded-lg">
                         <p className="text-sm text-gray-400 mb-1">Mid-Point Sweet Spot</p>
                         <p className="text-2xl font-bold text-[#38bdf8]">
                           ${(Math.floor(recommended.price) + 0.50).toFixed(2)}
@@ -308,7 +301,7 @@ export default function MenuPricingCalculator() {
 
                 {/* Volume Profitability */}
                 {recommended && (
-                  <div className="bg-[#10b981]/10 backdrop-blur-xl border border-[#10b981]/30 p-6 rounded-lg">
+                  <div className="backdrop-blur-xl bg-[#10b981]/10 border border-[#10b981]/30 p-6 rounded-lg">
                     <h4 className="font-bold text-xl text-white mb-4">Volume Profitability Projection</h4>
                     <p className="text-gray-300 mb-4">
                       At ${recommended.price.toFixed(2)} per plate with ${recommended.profit.toFixed(2)} profit margin:
@@ -340,7 +333,7 @@ export default function MenuPricingCalculator() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#a855f7] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(168,85,247,0.15)]">
+          <div className="backdrop-blur-xl bg-gradient-to-br from-[#a855f7]/20 to-[#c084fc]/20 border-2 border-[#a855f7] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(168,85,247,0.15)]">
             <h2 className="text-2xl font-bold mb-4">Want AI-Powered <span className="text-[#a855f7]">Menu Engineering</span>?</h2>
             <p className="text-lg text-gray-300 mb-6">
               OwnerClone automatically analyzes every menu item and recommends optimal pricing based on sales data
