@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -103,346 +104,318 @@ export default function BreakEvenCalculator() {
             </div>
           </div>
         </div>
-  return (
-    <div className="min-h-screen text-white">
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 px-4">
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-black mb-6">
-            Break-Even <span className="text-[#10b981]">Calculator</span>
-          </h1>
-          <p className="text-xl text-gray-300">
-            Find out exactly how many customers you need to break even
-          </p>
-        </div>
-      </section>
 
-      <section className="relative py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Main Calculator Card */}
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
-            
-            {/* Fixed Costs Section */}
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-2">Monthly Fixed Costs</h2>
-              <p className="text-sm text-gray-400 mb-6">Costs that stay the same regardless of sales volume</p>
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Rent/Lease</label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-3.5 text-gray-500">$</span>
-                    <input
-                      type="number"
-                      value={fixedCosts.rent}
-                      onChange={(e) => updateFixedCost('rent', e.target.value)}
-                      placeholder="5,000"
-                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                    />
+        {/* Calculator Section */}
+        <section className="py-8 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12">
+              {/* Input Column */}
+              <div>
+                <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-lg">
+                  <h2 className="text-2xl font-bold mb-6">Enter Your Numbers</h2>
+                  
+                  {/* Fixed Costs */}
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold mb-4 text-cyan-300">Fixed Costs (Monthly)</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Rent</label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            value={fixedCosts.rent}
+                            onChange={(e) => updateFixedCost('rent', e.target.value)}
+                            className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="5000"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Insurance</label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            value={fixedCosts.insurance}
+                            onChange={(e) => updateFixedCost('insurance', e.target.value)}
+                            className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="1000"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Utilities</label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            value={fixedCosts.utilities}
+                            onChange={(e) => updateFixedCost('utilities', e.target.value)}
+                            className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="800"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Salaried Staff</label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            value={fixedCosts.salaries}
+                            onChange={(e) => updateFixedCost('salaries', e.target.value)}
+                            className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="8000"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Other Fixed Costs</label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            value={fixedCosts.other}
+                            onChange={(e) => updateFixedCost('other', e.target.value)}
+                            className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="2000"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-4 p-4 backdrop-blur-xl bg-cyan-500/10 border border-cyan-300/30 rounded-lg">
+                        <p className="text-sm font-semibold text-gray-300">Total Fixed Costs:</p>
+                        <p className="text-2xl font-bold text-cyan-400">${totalFixedCosts.toLocaleString()}/month</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Insurance</label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-3.5 text-gray-500">$</span>
-                    <input
-                      type="number"
-                      value={fixedCosts.insurance}
-                      onChange={(e) => updateFixedCost('insurance', e.target.value)}
-                      placeholder="800"
-                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                    />
+                  {/* Variable Costs */}
+                  <div className="mb-8 border-t border-white/10 pt-8">
+                    <h3 className="text-xl font-semibold mb-4 text-cyan-300">Variable Costs (% of Sales)</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Food Cost %</label>
+                        <div className="relative">
+                          <input
+                            type="number"
+                            value={variableCosts.foodCost}
+                            onChange={(e) => updateVariableCost('foodCost', e.target.value)}
+                            className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="30"
+                          />
+                          <span className="absolute right-4 top-3.5 text-gray-500">%</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Labor %</label>
+                        <div className="relative">
+                          <input
+                            type="number"
+                            value={variableCosts.labor}
+                            onChange={(e) => updateVariableCost('labor', e.target.value)}
+                            className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="25"
+                          />
+                          <span className="absolute right-4 top-3.5 text-gray-500">%</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Supplies %</label>
+                        <div className="relative">
+                          <input
+                            type="number"
+                            value={variableCosts.supplies}
+                            onChange={(e) => updateVariableCost('supplies', e.target.value)}
+                            className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="5"
+                          />
+                          <span className="absolute right-4 top-3.5 text-gray-500">%</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Other Variable %</label>
+                        <div className="relative">
+                          <input
+                            type="number"
+                            value={variableCosts.other}
+                            onChange={(e) => updateVariableCost('other', e.target.value)}
+                            className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="3"
+                          />
+                          <span className="absolute right-4 top-3.5 text-gray-500">%</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 p-4 backdrop-blur-xl bg-cyan-500/10 border border-cyan-300/30 rounded-lg">
+                        <p className="text-sm font-semibold text-gray-300">Total Variable Costs:</p>
+                        <p className="text-2xl font-bold text-cyan-400">{totalVariableCostPercent}% of sales</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Utilities</label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-3.5 text-gray-500">$</span>
-                    <input
-                      type="number"
-                      value={fixedCosts.utilities}
-                      onChange={(e) => updateFixedCost('utilities', e.target.value)}
-                      placeholder="1,200"
-                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                    />
+                  {/* Operating Info */}
+                  <div className="border-t border-white/10 pt-8">
+                    <h3 className="text-xl font-semibold mb-4 text-cyan-300">Operating Information</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Average Check Size ($)</label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            value={avgCheckSize}
+                            onChange={(e) => setAvgCheckSize(e.target.value)}
+                            className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                            placeholder="35"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Hours Open Per Day</label>
+                        <input
+                          type="number"
+                          value={hoursOpen}
+                          onChange={(e) => setHoursOpen(e.target.value)}
+                          className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                          placeholder="12"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Days Open Per Month</label>
+                        <input
+                          type="number"
+                          value={daysOpen}
+                          onChange={(e) => setDaysOpen(e.target.value)}
+                          className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                          placeholder="26"
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Salaried Staff</label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-3.5 text-gray-500">$</span>
-                    <input
-                      type="number"
-                      value={fixedCosts.salaries}
-                      onChange={(e) => updateFixedCost('salaries', e.target.value)}
-                      placeholder="8,000"
-                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Other Fixed Costs</label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-3.5 text-gray-500">$</span>
-                    <input
-                      type="number"
-                      value={fixedCosts.other}
-                      onChange={(e) => updateFixedCost('other', e.target.value)}
-                      placeholder="2,000"
-                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                    />
+                  {/* Optional Current Revenue */}
+                  <div className="border-t border-white/10 pt-8 mt-8">
+                    <h3 className="text-xl font-semibold mb-4 text-cyan-300">Current Performance (Optional)</h3>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Current Monthly Revenue</label>
+                      <div className="relative">
+                        <span className="absolute left-4 top-3.5 text-gray-500">$</span>
+                        <input
+                          type="number"
+                          value={revenue}
+                          onChange={(e) => setRevenue(e.target.value)}
+                          className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/20 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                          placeholder="50000"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 p-4 backdrop-blur-xl bg-[#10b981]/10 border border-[#10b981] rounded-lg">
-                <p className="text-sm font-semibold text-gray-300">Total Fixed Costs:</p>
-                <p className="text-2xl font-bold text-[#10b981]">${totalFixedCosts.toLocaleString()}/month</p>
-              </div>
-            </div>
+              {/* Results Column */}
+              <div>
+                {contributionMargin > 0 && (
+                  <div className="space-y-6">
+                    <h3 className="text-3xl font-bold text-center mb-6">Break-Even Analysis</h3>
+                    
+                    {/* Key Metrics */}
+                    <div className="grid gap-4">
+                      <div className="backdrop-blur-xl bg-cyan-500/10 border border-cyan-300/30 p-6 rounded-xl">
+                        <p className="text-sm text-gray-400 mb-1">Break-Even Revenue</p>
+                        <p className="text-4xl font-bold text-white">${breakEvenRevenue.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                        <p className="text-sm text-cyan-300 mt-1">per month</p>
+                      </div>
 
-            {/* Variable Costs Section */}
-            <div className="mb-8 border-t-2 border-white/10 pt-8">
-              <h2 className="text-2xl font-bold mb-2">Variable Costs (% of Sales)</h2>
-              <p className="text-sm text-gray-400 mb-6">Costs that change based on your sales volume</p>
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Food Cost %</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={variableCosts.foodCost}
-                      onChange={(e) => updateVariableCost('foodCost', e.target.value)}
-                      placeholder="30"
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                      min="0"
-                      max="100"
-                    />
-                    <span className="absolute right-4 top-3.5 text-gray-500">%</span>
+                      <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6 rounded-xl">
+                        <p className="text-sm text-gray-400 mb-1">Break-Even Customers</p>
+                        <p className="text-4xl font-bold text-white">{breakEvenCustomers.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                        <p className="text-sm text-gray-300 mt-1">per month</p>
+                      </div>
+
+                      <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6 rounded-xl">
+                        <p className="text-sm text-gray-400 mb-1">Customers Per Day</p>
+                        <p className="text-4xl font-bold text-white">{customersPerDay.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                      </div>
+
+                      <div className={`backdrop-blur-xl ${achievability.bg} border ${achievability.border} p-6 rounded-xl`}>
+                        <p className="text-sm text-gray-400 mb-1">Customers Per Hour</p>
+                        <p className={`text-4xl font-bold ${achievability.color}`}>{customersPerHour.toLocaleString(undefined, { maximumFractionDigits: 1 })}</p>
+                        {achievability.label && (
+                          <p className={`text-sm ${achievability.color} mt-2 font-semibold`}>{achievability.label}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Current Performance */}
+                    {monthlyRevenue > 0 && (
+                      <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 mt-6">
+                        <h4 className="text-lg font-semibold mb-4">Current Performance</h4>
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-400">Monthly Revenue:</span>
+                            <span className="text-xl font-bold">${monthlyRevenue.toLocaleString()}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-400">Current Customers:</span>
+                            <span className="text-xl font-bold">{currentCustomers.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+                          </div>
+                          <div className="flex justify-between items-center pt-3 border-t border-white/10">
+                            <span className="text-gray-400">Monthly Profit:</span>
+                            <span className={`text-2xl font-bold ${currentProfit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                              ${currentProfit.toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
+                )}
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Labor %</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={variableCosts.labor}
-                      onChange={(e) => updateVariableCost('labor', e.target.value)}
-                      placeholder="25"
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                      min="0"
-                      max="100"
-                    />
-                    <span className="absolute right-4 top-3.5 text-gray-500">%</span>
+                {contributionMargin === 0 && (
+                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-12 text-center">
+                    <svg className="w-16 h-16 mx-auto mb-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <h3 className="text-xl font-semibold text-white mb-2">Enter Your Numbers</h3>
+                    <p className="text-gray-400">Fill out the form to calculate your break-even point</p>
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Supplies %</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={variableCosts.supplies}
-                      onChange={(e) => updateVariableCost('supplies', e.target.value)}
-                      placeholder="5"
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                      min="0"
-                      max="100"
-                    />
-                    <span className="absolute right-4 top-3.5 text-gray-500">%</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Other Variable %</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={variableCosts.other}
-                      onChange={(e) => updateVariableCost('other', e.target.value)}
-                      placeholder="5"
-                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                      min="0"
-                      max="100"
-                    />
-                    <span className="absolute right-4 top-3.5 text-gray-500">%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 p-4 backdrop-blur-xl bg-[#a855f7]/10 border border-[#a855f7] rounded-lg">
-                <p className="text-sm font-semibold text-gray-300">Total Variable Costs:</p>
-                <p className="text-2xl font-bold text-[#a855f7]">{totalVariableCostPercent.toFixed(1)}% of sales</p>
-              </div>
-            </div>
-
-            {/* Operations Section */}
-            <div className="mb-8 border-t-2 border-white/10 pt-8">
-              <h2 className="text-2xl font-bold mb-6">Operations</h2>
-              
-              <div className="grid md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Average Check Size</label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-3.5 text-gray-500">$</span>
-                    <input
-                      type="number"
-                      value={avgCheckSize}
-                      onChange={(e) => setAvgCheckSize(e.target.value)}
-                      placeholder="25"
-                      className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Hours Open Per Day</label>
-                  <input
-                    type="number"
-                    value={hoursOpen}
-                    onChange={(e) => setHoursOpen(e.target.value)}
-                    placeholder="12"
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Days Open Per Month</label>
-                  <input
-                    type="number"
-                    value={daysOpen}
-                    onChange={(e) => setDaysOpen(e.target.value)}
-                    placeholder="26"
-                    className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Optional: Current Revenue */}
-            <div className="border-t-2 border-white/10 pt-8">
-              <h2 className="text-2xl font-bold mb-2">Current Performance (Optional)</h2>
-              <p className="text-sm text-gray-400 mb-6">Enter your current monthly revenue to compare</p>
-              
-              <div className="max-w-md">
-                <label className="block text-sm font-semibold text-gray-300 mb-2">Monthly Revenue</label>
-                <div className="relative">
-                  <span className="absolute left-4 top-3.5 text-gray-500">$</span>
-                  <input
-                    type="number"
-                    value={revenue}
-                    onChange={(e) => setRevenue(e.target.value)}
-                    placeholder="50,000"
-                    className="w-full pl-8 pr-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors"
-                  />
-                </div>
+                )}
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Results Section */}
-          {contributionMargin > 0 && (
-            <div className="space-y-8">
-              <h3 className="text-3xl font-bold text-center mb-8">Break-Even Analysis</h3>
-              
-              {/* Key Metrics */}
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="backdrop-blur-xl bg-[#10b981]/10 border border-[#10b981] p-6 rounded-lg">
-                  <p className="text-sm text-gray-400 mb-1">Break-Even Revenue</p>
-                  <p className="text-3xl font-bold text-white">${breakEvenRevenue.toLocaleString()}</p>
-                  <p className="text-xs text-gray-500 mt-1">per month</p>
-                </div>
-                
-                <div className="backdrop-blur-xl bg-[#38bdf8]/10 border border-[#38bdf8] p-6 rounded-lg">
-                  <p className="text-sm text-gray-400 mb-1">Customers Needed</p>
-                  <p className="text-3xl font-bold text-white">{Math.ceil(breakEvenCustomers).toLocaleString()}</p>
-                  <p className="text-xs text-gray-500 mt-1">per month</p>
-                </div>
-                
-                <div className="backdrop-blur-xl bg-[#a855f7]/10 border border-[#a855f7] p-6 rounded-lg">
-                  <p className="text-sm text-gray-400 mb-1">Contribution Margin</p>
-                  <p className="text-3xl font-bold text-white">${contributionMargin.toFixed(2)}</p>
-                  <p className="text-xs text-gray-500 mt-1">per customer</p>
-                </div>
-              </div>
-
-              {/* Daily/Hourly Breakdown */}
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
-                <h4 className="font-bold text-xl mb-4">Daily & Hourly Breakdown</h4>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <p className="text-sm text-gray-400 mb-1">Customers Per Day</p>
-                    <p className="text-2xl font-bold text-[#10b981]">{Math.ceil(customersPerDay)}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400 mb-1">Customers Per Hour</p>
-                    <p className="text-2xl font-bold text-[#10b981]">{customersPerHour.toFixed(1)}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Achievability Assessment */}
-              {achievability.label && (
-                <div className={`${achievability.bg} border-2 ${achievability.border} p-6 rounded-xl`}>
-                  <h4 className="font-bold text-xl text-white mb-2">Achievability Assessment</h4>
-                  <p className={`text-xl font-bold ${achievability.color} mb-3`}>{achievability.label}</p>
-                  <p className="text-gray-300">
-                    {customersPerHour < 5 && "These numbers look very realistic for most restaurants. You have a solid path to profitability."}
-                    {customersPerHour >= 5 && customersPerHour < 10 && "These numbers are achievable with good marketing and operations. Focus on building a loyal customer base."}
-                    {customersPerHour >= 10 && customersPerHour < 15 && "These numbers are challenging but possible. You'll need strong marketing, great location, and excellent execution."}
-                    {customersPerHour >= 15 && "These numbers are very difficult to achieve consistently. Consider ways to reduce fixed costs or increase average check size."}
-                  </p>
-                </div>
-              )}
-
-              {/* Current Performance (if revenue provided) */}
-              {monthlyRevenue > 0 && (
-                <div className="backdrop-blur-xl bg-[#38bdf8]/10 border border-[#38bdf8] p-6 rounded-xl">
-                  <h4 className="font-bold text-xl text-white mb-4">Your Current Performance</h4>
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div>
-                      <p className="text-sm text-gray-400 mb-1">Monthly Revenue</p>
-                      <p className="text-2xl font-bold text-[#38bdf8]">${monthlyRevenue.toLocaleString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400 mb-1">Monthly Customers</p>
-                      <p className="text-2xl font-bold text-[#38bdf8]">{Math.ceil(currentCustomers).toLocaleString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400 mb-1">Net Profit</p>
-                      <p className={`text-2xl font-bold ${currentProfit > 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
-                        ${currentProfit.toLocaleString()}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* CTA Section */}
-          <div className="mt-12 backdrop-blur-xl bg-gradient-to-br from-[#10b981]/20 to-[#34d399]/20 border-2 border-[#10b981] rounded-3xl p-8 text-center">
-            <h2 className="text-2xl font-bold mb-4">Want Real-Time <span className="text-[#10b981]">Break-Even Tracking</span>?</h2>
-            <p className="text-lg text-gray-300 mb-6">
-              OwnerClone automatically tracks your break-even point daily based on actual POS data
+        {/* CTA Section */}
+        <section className="py-12 px-4">
+          <div className="max-w-4xl mx-auto backdrop-blur-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-300/30 rounded-2xl p-8 text-center">
+            <h3 className="text-2xl font-bold mb-3">Want Real-Time Break-Even Tracking?</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              OwnerClone automatically tracks your break-even point daily based on actual POS data and alerts you when you're falling short.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/pricing" className="bg-[#10b981] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#059669] transition-colors">
-                Join Early Access
-              </Link>
-              <Link href="/blog" className="border-2 border-[#10b981] text-[#10b981] px-8 py-3 rounded-lg font-bold hover:bg-[#10b981]/10 transition-colors">
-                Read Complete Guide
-              </Link>
-            </div>
+            <Link
+              href="/demo"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-cyan-500/25"
+            >
+              See OwnerClone Demo
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
