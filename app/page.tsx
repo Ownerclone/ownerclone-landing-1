@@ -336,28 +336,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-16 px-4 border-t border-white/10">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-              
-              {/* Logo + Tagline */}
-              <div className="lg:col-span-2">
-                <div className="flex items-center gap-3 mb-4">
-                  <svg viewBox="-5 0 85 60" className="h-10 w-auto">
-                    <circle cx="20" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10"/>
-                    <circle cx="48" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
-                  </svg>
-                  <span className="text-2xl font-black text-cyan-400/90">OwnerClone</span>
-                </div>
-                <p className="text-gray-400 mb-4">
-                  AI-powered restaurant management for independent owners who refuse to lose money.
-                </p>
-                <p className="text-sm text-gray-500">
-                  © 2026 OwnerClone, Inc. All rights reserved.
-                </p>
-              </div>
-
               {/* Product */}
               <div>
                 <h3 className="font-bold text-white mb-4">Product</h3>
