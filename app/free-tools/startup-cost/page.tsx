@@ -148,16 +148,9 @@ export default function StartupCostCalculator() {
   const maxAmount = Math.max(...costBreakdown.map((item) => item.amount))
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#fb923c] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#f97316] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Startup Cost <span className="text-[#fb923c]">Calculator</span>
@@ -174,7 +167,7 @@ export default function StartupCostCalculator() {
           <div className="grid lg:grid-cols-2 gap-8">
             
             {/* Input Section */}
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#fb923c]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(251,146,60,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(251,146,60,0.1)]">
               <h2 className="text-2xl font-bold mb-6">Your Restaurant Details</h2>
               
               {/* Number of Seats */}
@@ -189,7 +182,7 @@ export default function StartupCostCalculator() {
                   step="10"
                   value={inputs.seats}
                   onChange={(e) => setInputs({ ...inputs, seats: parseInt(e.target.value) })}
-                  className="w-full h-3 bg-[#2a2a2a] rounded-lg appearance-none cursor-pointer accent-[#fb923c]"
+                  className="w-full h-3 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#fb923c]"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>20 seats</span>
@@ -203,7 +196,7 @@ export default function StartupCostCalculator() {
                 <select
                   value={inputs.locationType}
                   onChange={(e) => setInputs({ ...inputs, locationType: e.target.value as any })}
-                  className="w-full bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#fb923c] transition-colors"
+                  className="w-full backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#fb923c] transition-colors"
                 >
                   <option value="shopping-center">Shopping Center (Lower cost)</option>
                   <option value="standalone">Standalone Building (Average)</option>
@@ -218,7 +211,7 @@ export default function StartupCostCalculator() {
                 <select
                   value={inputs.conceptType}
                   onChange={(e) => setInputs({ ...inputs, conceptType: e.target.value as any })}
-                  className="w-full bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#fb923c] transition-colors"
+                  className="w-full backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#fb923c] transition-colors"
                 >
                   <option value="quick-service">Quick Service (QSR) - Lowest cost</option>
                   <option value="fast-casual">Fast Casual - Low-Medium cost</option>
@@ -233,7 +226,7 @@ export default function StartupCostCalculator() {
                 <select
                   value={inputs.renovationLevel}
                   onChange={(e) => setInputs({ ...inputs, renovationLevel: e.target.value as any })}
-                  className="w-full bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#fb923c] transition-colors"
+                  className="w-full backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#fb923c] transition-colors"
                 >
                   <option value="minimal">Minimal (Existing restaurant space)</option>
                   <option value="moderate">Moderate (Some renovation needed)</option>
@@ -244,12 +237,12 @@ export default function StartupCostCalculator() {
 
               {/* Bar Program */}
               <div className="mb-6">
-                <label className="flex items-center space-x-3 cursor-pointer p-4 bg-[#0a0a0a]/60 border border-[#2a2a2a] rounded-lg hover:border-[#fb923c]/50 transition-colors">
+                <label className="flex items-center space-x-3 cursor-pointer p-4 backdrop-blur-xl bg-white/5 border border-white/10 rounded-lg hover:border-[#fb923c]/50 transition-colors">
                   <input
                     type="checkbox"
                     checked={inputs.hasBar}
                     onChange={(e) => setInputs({ ...inputs, hasBar: e.target.checked })}
-                    className="w-5 h-5 text-[#fb923c] bg-[#0a0a0a] border-[#2a2a2a] rounded focus:ring-[#fb923c]"
+                    className="w-5 h-5 text-[#fb923c] bg-black/40 border-white/10 rounded focus:ring-[#fb923c]"
                   />
                   <div>
                     <span className="text-sm font-semibold">Include Full Bar Program (+{formatCurrency(Math.round(inputs.seats * 800))})</span>
@@ -269,11 +262,11 @@ export default function StartupCostCalculator() {
             </div>
 
             {/* Results Section */}
-            <div className={`bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#fb923c]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(251,146,60,0.1)] transition-all duration-500 ${showResults ? 'opacity-100' : 'opacity-50'}`}>
+            <div className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(251,146,60,0.1)] transition-all duration-500 ${showResults ? 'opacity-100' : 'opacity-50'}`}>
               <h2 className="text-2xl font-bold mb-6">Your Estimated Costs</h2>
 
               {/* Total Cost */}
-              <div className="bg-gradient-to-r from-[#fb923c] to-[#f97316] rounded-xl p-6 mb-6">
+              <div className="backdrop-blur-xl bg-gradient-to-r from-[#fb923c] to-[#f97316] rounded-xl p-6 mb-6">
                 <div className="text-sm font-semibold text-orange-100 mb-1">Total Startup Cost</div>
                 <div className="text-4xl font-black mb-2 text-white">{formatCurrency(costs.totalCost)}</div>
                 <div className="text-sm text-orange-100">
@@ -282,7 +275,7 @@ export default function StartupCostCalculator() {
               </div>
 
               {/* Industry Benchmark */}
-              <div className="bg-[#0a0a0a]/60 border border-[#2a2a2a] rounded-lg p-4 mb-6">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-lg p-4 mb-6">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-semibold text-gray-300">Industry Benchmark</span>
                   {costs.costPerSeat >= 2000 && costs.costPerSeat <= 5000 ? (
@@ -307,7 +300,7 @@ export default function StartupCostCalculator() {
                       <span className="text-gray-300">{item.label}</span>
                       <span className="font-semibold text-white">{formatCurrency(item.amount)}</span>
                     </div>
-                    <div className="w-full bg-[#2a2a2a] rounded-full h-2">
+                    <div className="w-full bg-white/10 rounded-full h-2">
                       <div
                         className={`${item.color} h-2 rounded-full transition-all duration-500`}
                         style={{ width: `${(item.amount / maxAmount) * 100}%` }}
@@ -321,33 +314,27 @@ export default function StartupCostCalculator() {
 
           {/* Key Insights */}
           <div className="mt-12 grid md:grid-cols-3 gap-6">
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#fb923c]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(251,146,60,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 shadow-[0_0_30px_rgba(251,146,60,0.1)]">
               <div className="text-3xl mb-3">💡</div>
               <h3 className="text-lg font-bold text-[#fb923c] mb-2">Budget Tip</h3>
-              <p className="text-sm text-gray-300">
-                Add 20-30% contingency buffer for unexpected costs. Most restaurants go over initial estimates.
-              </p>
+              <p className="text-sm text-gray-300">Add 20-30% contingency buffer for unexpected costs. Most restaurants go over initial estimates.</p>
             </div>
 
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#fb923c]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(251,146,60,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 shadow-[0_0_30px_rgba(251,146,60,0.1)]">
               <div className="text-3xl mb-3">📊</div>
               <h3 className="text-lg font-bold text-[#fb923c] mb-2">Working Capital</h3>
-              <p className="text-sm text-gray-300">
-                We calculate 3 months of operating expenses. Many experts recommend 6 months for safety.
-              </p>
+              <p className="text-sm text-gray-300">We calculate 3 months of operating expenses. Many experts recommend 6 months for safety.</p>
             </div>
 
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#fb923c]/20 rounded-xl p-6 shadow-[0_0_30px_rgba(251,146,60,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 shadow-[0_0_30px_rgba(251,146,60,0.1)]">
               <div className="text-3xl mb-3">🎯</div>
               <h3 className="text-lg font-bold text-[#fb923c] mb-2">Next Steps</h3>
-              <p className="text-sm text-gray-300">
-                Use this estimate for your business plan. Lenders typically want detailed line-item budgets.
-              </p>
+              <p className="text-sm text-gray-300">Use this estimate for your business plan. Lenders typically want detailed line-item budgets.</p>
             </div>
           </div>
 
           {/* CTA */}
-          <div className="mt-12 bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#fb923c] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(251,146,60,0.15)]">
+          <div className="mt-12 backdrop-blur-xl bg-gradient-to-br from-[#fb923c]/20 to-[#f97316]/20 border-2 border-[#fb923c] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(251,146,60,0.15)]">
             <h2 className="text-2xl font-bold mb-4">Ready to Track These Costs <span className="text-[#fb923c]">Automatically</span>?</h2>
             <p className="text-lg text-gray-300 mb-6">
               OwnerClone automatically tracks all your startup expenses, ongoing costs, and profitability metrics in real-time.
