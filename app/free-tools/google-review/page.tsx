@@ -153,16 +153,9 @@ export default function GoogleReviewCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#ec4899] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-[#f472b6] rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
+    <div className="min-h-screen text-white">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-transparent pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black mb-6">
             Google Review <span className="text-[#ec4899]">Calculator</span>
@@ -176,9 +169,9 @@ export default function GoogleReviewCalculator() {
       <section className="relative py-16 px-4">
         <div className="max-w-5xl mx-auto">
           {/* Current Rating Section */}
-          <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ec4899]/20 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
             <h2 className="text-2xl font-bold text-[#ec4899] mb-6">Your Current Rating</h2>
-            <div className="bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
+            <div className="backdrop-blur-xl bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
               <p className="text-gray-300"><strong className="text-[#38bdf8]">💡 Pro Tip:</strong> Find these numbers on your Google Business Profile. Your current star rating and total number of reviews are displayed prominently on your listing.</p>
             </div>
 
@@ -193,7 +186,7 @@ export default function GoogleReviewCalculator() {
                   placeholder="e.g., 4.3"
                   value={currentRating}
                   onChange={(e) => setCurrentRating(e.target.value)}
-                  className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -205,7 +198,7 @@ export default function GoogleReviewCalculator() {
                   placeholder="e.g., 150"
                   value={totalReviews}
                   onChange={(e) => setTotalReviews(e.target.value)}
-                  className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
                 />
               </div>
             </div>
@@ -221,7 +214,7 @@ export default function GoogleReviewCalculator() {
                 className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
                   activeScenario === 'negative'
                     ? 'bg-gradient-to-r from-[#ec4899] to-[#f472b6] text-white'
-                    : 'bg-[#0a0a0a]/40 border border-[#2a2a2a] text-gray-300 hover:border-[#ec4899]/50'
+                    : 'backdrop-blur-xl bg-white/5 border border-white/10 text-gray-300 hover:border-[#ec4899]/50'
                 }`}
               >
                 😰 Negative Impact
@@ -231,7 +224,7 @@ export default function GoogleReviewCalculator() {
                 className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
                   activeScenario === 'recovery'
                     ? 'bg-gradient-to-r from-[#ec4899] to-[#f472b6] text-white'
-                    : 'bg-[#0a0a0a]/40 border border-[#2a2a2a] text-gray-300 hover:border-[#ec4899]/50'
+                    : 'backdrop-blur-xl bg-white/5 border border-white/10 text-gray-300 hover:border-[#ec4899]/50'
                 }`}
               >
                 🚀 Recovery Plan
@@ -241,18 +234,18 @@ export default function GoogleReviewCalculator() {
                 className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
                   activeScenario === 'goal'
                     ? 'bg-gradient-to-r from-[#ec4899] to-[#f472b6] text-white'
-                    : 'bg-[#0a0a0a]/40 border border-[#2a2a2a] text-gray-300 hover:border-[#ec4899]/50'
+                    : 'backdrop-blur-xl bg-white/5 border border-white/10 text-gray-300 hover:border-[#ec4899]/50'
                 }`}
               >
                 🎯 Goal Planning
               </button>
             </div>
 
-            <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ec4899]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
               {/* Negative Impact Scenario */}
               {activeScenario === 'negative' && (
                 <div>
-                  <div className="bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
+                  <div className="backdrop-blur-xl bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
                     <p className="text-gray-300"><strong className="text-[#38bdf8]">📉 What-If Analysis:</strong> See how negative reviews would impact your rating and learn how to recover.</p>
                   </div>
 
@@ -264,7 +257,7 @@ export default function GoogleReviewCalculator() {
                       placeholder="e.g., 5"
                       value={oneStarCount}
                       onChange={(e) => setOneStarCount(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -277,7 +270,7 @@ export default function GoogleReviewCalculator() {
 
                   {negativeResults && (
                     <div className="mt-8 space-y-4 animate-fadeIn">
-                      <div className="bg-[#ef4444]/10 border-l-4 border-[#ef4444] p-6 rounded-lg backdrop-blur-xl">
+                      <div className="backdrop-blur-xl bg-[#ef4444]/10 border-l-4 border-[#ef4444] p-6 rounded-lg">
                         <h3 className="text-xl font-semibold text-[#ef4444] mb-3">⚠️ Impact Analysis</h3>
                         <div className="text-4xl font-bold text-white my-3">{negativeResults.newRating.toFixed(2)} ⭐</div>
                         <p className="text-gray-300">
@@ -287,7 +280,7 @@ export default function GoogleReviewCalculator() {
                         </p>
                       </div>
 
-                      <div className="bg-[#10b981]/10 border-l-4 border-[#10b981] p-6 rounded-lg backdrop-blur-xl">
+                      <div className="backdrop-blur-xl bg-[#10b981]/10 border-l-4 border-[#10b981] p-6 rounded-lg">
                         <h3 className="text-xl font-semibold text-[#10b981] mb-3">💪 Recovery Plan</h3>
                         <div className="text-4xl font-bold text-white my-3">{negativeResults.fiveStarNeeded} Five-Star Reviews</div>
                         <p className="text-gray-300">
@@ -306,7 +299,7 @@ export default function GoogleReviewCalculator() {
               {/* Recovery Scenario */}
               {activeScenario === 'recovery' && (
                 <div>
-                  <div className="bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
+                  <div className="backdrop-blur-xl bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
                     <p className="text-gray-300"><strong className="text-[#38bdf8]">💪 Recovery Calculator:</strong> Get back to your original rating by generating 5-star reviews.</p>
                   </div>
 
@@ -318,7 +311,7 @@ export default function GoogleReviewCalculator() {
                       placeholder="e.g., 3"
                       value={recoveryOneStars}
                       onChange={(e) => setRecoveryOneStars(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -331,7 +324,7 @@ export default function GoogleReviewCalculator() {
 
                   {recoveryResults && (
                     <div className="mt-8 space-y-4 animate-fadeIn">
-                      <div className="bg-[#0a0a0a]/60 border-l-4 border-[#ec4899] p-6 rounded-lg backdrop-blur-xl">
+                      <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#ec4899] p-6 rounded-lg">
                         <h3 className="text-xl font-semibold text-[#ec4899] mb-3">📊 Current Situation</h3>
                         <div className="text-4xl font-bold text-white my-3">{recoveryResults.currentRating.toFixed(2)} ⭐</div>
                         <p className="text-gray-300">
@@ -341,7 +334,7 @@ export default function GoogleReviewCalculator() {
                         </p>
                       </div>
 
-                      <div className="bg-[#10b981]/10 border-l-4 border-[#10b981] p-6 rounded-lg backdrop-blur-xl">
+                      <div className="backdrop-blur-xl bg-[#10b981]/10 border-l-4 border-[#10b981] p-6 rounded-lg">
                         <h3 className="text-xl font-semibold text-[#10b981] mb-3">🎯 Recovery Target</h3>
                         <div className="text-4xl font-bold text-white my-3">{recoveryResults.fiveStarNeeded} Reviews Needed</div>
                         <p className="text-gray-300">
@@ -360,7 +353,7 @@ export default function GoogleReviewCalculator() {
               {/* Goal Scenario */}
               {activeScenario === 'goal' && (
                 <div>
-                  <div className="bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
+                  <div className="backdrop-blur-xl bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-4 rounded-lg mb-6">
                     <p className="text-gray-300"><strong className="text-[#38bdf8]">🎯 Goal Setting:</strong> Calculate exactly how many 5-star reviews you need to reach your target rating.</p>
                   </div>
 
@@ -374,7 +367,7 @@ export default function GoogleReviewCalculator() {
                       placeholder="e.g., 4.8"
                       value={goalRating}
                       onChange={(e) => setGoalRating(e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg text-white text-lg focus:border-[#ec4899] focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -388,7 +381,7 @@ export default function GoogleReviewCalculator() {
                   {goalResults && (
                     <div className="mt-8 space-y-4 animate-fadeIn">
                       {goalResults.tooAmbitious ? (
-                        <div className="bg-[#ef4444]/10 border-l-4 border-[#ef4444] p-6 rounded-lg backdrop-blur-xl">
+                        <div className="backdrop-blur-xl bg-[#ef4444]/10 border-l-4 border-[#ef4444] p-6 rounded-lg">
                           <h3 className="text-xl font-semibold text-[#ef4444] mb-3">⚠️ Goal May Not Be Achievable</h3>
                           <p className="text-gray-300">
                             With your current rating, reaching this goal would require an extremely large number of 5-star reviews.<br /><br />
@@ -400,7 +393,7 @@ export default function GoogleReviewCalculator() {
                         </div>
                       ) : (
                         <>
-                          <div className="bg-[#0a0a0a]/60 border-l-4 border-[#ec4899] p-6 rounded-lg backdrop-blur-xl">
+                          <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#ec4899] p-6 rounded-lg">
                             <h3 className="text-xl font-semibold text-[#ec4899] mb-3">📊 Current Status</h3>
                             <div className="text-4xl font-bold text-white my-3">{goalResults.currentRating.toFixed(2)} ⭐</div>
                             <p className="text-gray-300">
@@ -408,7 +401,7 @@ export default function GoogleReviewCalculator() {
                             </p>
                           </div>
 
-                          <div className="bg-[#10b981]/10 border-l-4 border-[#10b981] p-6 rounded-lg backdrop-blur-xl">
+                          <div className="backdrop-blur-xl bg-[#10b981]/10 border-l-4 border-[#10b981] p-6 rounded-lg">
                             <h3 className="text-xl font-semibold text-[#10b981] mb-3">🎯 Your Goal</h3>
                             <div className="text-4xl font-bold text-white my-3">{goalResults.goalRating.toFixed(2)} ⭐</div>
                             <p className="text-gray-300">
@@ -416,7 +409,7 @@ export default function GoogleReviewCalculator() {
                             </p>
                           </div>
 
-                          <div className="bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-6 rounded-lg backdrop-blur-xl">
+                          <div className="backdrop-blur-xl bg-[#38bdf8]/10 border-l-4 border-[#38bdf8] p-6 rounded-lg">
                             <h3 className="text-xl font-semibold text-[#38bdf8] mb-3">📈 Action Plan</h3>
                             <div className="text-4xl font-bold text-white my-3">{goalResults.fiveStarNeeded} Five-Star Reviews</div>
                             <p className="text-gray-300">
@@ -438,11 +431,11 @@ export default function GoogleReviewCalculator() {
           </div>
 
           {/* Strategies Section */}
-          <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-[#ec4899]/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-[0_0_50px_rgba(236,72,153,0.1)]">
             <h3 className="text-2xl font-bold text-[#ec4899] mb-6">Proven Strategies to Get More 5-Star Reviews</h3>
 
             <div className="space-y-4">
-              <div className="bg-[#0a0a0a]/60 border-l-4 border-[#10b981] p-6 rounded-lg relative">
+              <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#10b981] p-6 rounded-lg relative">
                 <span className="absolute top-4 right-4 bg-[#10b981] text-white px-4 py-1 rounded-full text-sm font-semibold">⭐ TOP RATED</span>
                 <h4 className="text-xl font-semibold text-white mb-3 pr-32">Server Selection Method with QR Code Cards</h4>
                 <p className="text-gray-300 leading-relaxed">
@@ -453,21 +446,21 @@ export default function GoogleReviewCalculator() {
                 </p>
               </div>
 
-              <div className="bg-[#0a0a0a]/60 border-l-4 border-[#ec4899] p-6 rounded-lg">
+              <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#ec4899] p-6 rounded-lg">
                 <h4 className="text-xl font-semibold text-white mb-3">📱 Text Message Follow-Up (24-Hour Window)</h4>
                 <p className="text-gray-300 leading-relaxed">
                   <strong>Timing is everything:</strong> Send a text within 24 hours of visit: "Hi [Name]! Thanks for dining with us last night. If you enjoyed your experience, we'd love a quick review: [link]." Studies show 24-hour follow-ups get 3x more responses than emails sent days later.
                 </p>
               </div>
 
-              <div className="bg-[#0a0a0a]/60 border-l-4 border-[#ec4899] p-6 rounded-lg">
+              <div className="backdrop-blur-xl bg-white/5 border-l-4 border-[#ec4899] p-6 rounded-lg">
                 <h4 className="text-xl font-semibold text-white mb-3">🎁 Thank You Card with Every Check</h4>
                 <p className="text-gray-300 leading-relaxed">
                   <strong>The simple approach:</strong> Include a small card with every check: "Thank you for dining with us! Share your experience:" with QR code. This passive method generates consistent reviews without being pushy. Place it facing up so guests see it immediately.
                 </p>
               </div>
 
-              <div className="bg-[#10b981]/10 border-l-4 border-[#10b981] p-4 rounded-lg mt-6">
+              <div className="backdrop-blur-xl bg-[#10b981]/10 border-l-4 border-[#10b981] p-4 rounded-lg mt-6">
                 <p className="text-gray-300">
                   <strong className="text-[#10b981]">⚠️ Google's Guidelines:</strong> Never offer incentives (discounts, free items) for reviews. Google will remove incentivized reviews and may penalize your listing. Focus on making the review process easy and asking at the right moment.
                 </p>
@@ -476,7 +469,7 @@ export default function GoogleReviewCalculator() {
           </div>
 
           {/* CTA Section */}
-          <div className="mt-12 bg-[#0a0a0a]/40 backdrop-blur-xl border-2 border-[#ec4899] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(236,72,153,0.15)]">
+          <div className="mt-12 backdrop-blur-xl bg-gradient-to-br from-[#ec4899]/20 to-[#f472b6]/20 border-2 border-[#ec4899] rounded-3xl p-8 text-center shadow-[0_0_80px_rgba(236,72,153,0.15)]">
             <h2 className="text-2xl font-bold mb-4">Ready to Manage Your Reviews <span className="text-[#ec4899]">Like a Pro</span>?</h2>
             <p className="text-lg text-gray-300 mb-6">
               OwnerClone helps you track reviews, respond strategically, and build a 5-star reputation automatically.
