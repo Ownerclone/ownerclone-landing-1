@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -12,12 +11,14 @@ export default function BreakEvenCalculator() {
     salaries: '',
     other: ''
   });
+  
   const [variableCosts, setVariableCosts] = useState({
     foodCost: '',
     labor: '',
     supplies: '',
     other: ''
   });
+  
   const [avgCheckSize, setAvgCheckSize] = useState('');
   const [hoursOpen, setHoursOpen] = useState('');
   const [daysOpen, setDaysOpen] = useState('');
