@@ -651,20 +651,187 @@ nav, .nav, header {
 .text-theme-muted { color: var(--text-muted); }
 
 /* Override white text in light themes */
-.text-white { color: var(--text-primary) !important; }
-.text-gray-100, .text-gray-200, .text-gray-300 { color: var(--text-primary) !important; }
-.text-gray-400, .text-gray-500 { color: var(--text-secondary) !important; }
-.text-gray-600, .text-gray-700 { color: var(--text-muted) !important; }
+body:not(.dark-mode) .text-white { color: var(--text-primary) !important; }
+body:not(.dark-mode) .text-gray-100, 
+body:not(.dark-mode) .text-gray-200, 
+body:not(.dark-mode) .text-gray-300 { color: var(--text-primary) !important; }
+body:not(.dark-mode) .text-gray-400, 
+body:not(.dark-mode) .text-gray-500 { color: var(--text-secondary) !important; }
+body:not(.dark-mode) .text-gray-600, 
+body:not(.dark-mode) .text-gray-700 { color: var(--text-muted) !important; }
 
 /* Brand colors */
 .text-brand { color: var(--brand-primary) !important; }
 .text-brand-secondary { color: var(--brand-secondary) !important; }
 .text-brand-accent { color: var(--brand-accent) !important; }
 
-/* Cyan/blue overrides for brand */
-.text-cyan-400, .text-cyan-500, .text-sky-400, .text-sky-500,
-.text-blue-400, .text-blue-500, [class*="text-ownerclone"] {
+/* Cyan/blue overrides for brand - these become theme-aware */
+body:not(.dark-mode) .text-cyan-400,
+body:not(.dark-mode) .text-cyan-500,
+body:not(.dark-mode) .text-sky-400,
+body:not(.dark-mode) .text-sky-500,
+body:not(.dark-mode) .text-blue-400,
+body:not(.dark-mode) .text-blue-500,
+body:not(.dark-mode) [class*="text-cyan-400\\/"] {
   color: var(--brand-primary) !important;
+}
+
+/* ============================================
+   LOGO STYLING - Theme Aware
+   ============================================ */
+
+/* Logo stroke color adapts to theme */
+.logo-stroke,
+body:not(.dark-mode) svg circle[class*="stroke-cyan"],
+body:not(.dark-mode) .stroke-cyan-400,
+body:not(.dark-mode) .stroke-cyan-400\\/60 {
+  stroke: var(--brand-primary) !important;
+}
+
+/* Hero logo specifically */
+body:not(.dark-mode) section svg circle {
+  stroke: var(--brand-primary) !important;
+  opacity: 0.8;
+}
+
+/* Logo text/name */
+body:not(.dark-mode) h1.text-cyan-400\\/90,
+body:not(.dark-mode) h1[class*="text-cyan"] {
+  color: var(--brand-primary) !important;
+}
+
+/* ============================================
+   CARD ACCENT COLORS - Theme Aware
+   ============================================ */
+
+/* Red accent cards (Employee Theft, etc) */
+body:not(.dark-mode) .border-red-400\\/30,
+body:not(.dark-mode) [class*="border-red-400"] {
+  border-color: color-mix(in srgb, var(--brand-primary) 60%, #ef4444 40%) !important;
+}
+body:not(.dark-mode) .bg-red-400\\/20,
+body:not(.dark-mode) [class*="bg-red-400\\/"] {
+  background-color: color-mix(in srgb, var(--brand-primary) 30%, transparent 70%) !important;
+}
+body:not(.dark-mode) .text-red-400 {
+  color: color-mix(in srgb, var(--brand-primary) 70%, #ef4444 30%) !important;
+}
+
+/* Yellow accent cards (Food Costs, etc) */
+body:not(.dark-mode) .border-yellow-400\\/30,
+body:not(.dark-mode) [class*="border-yellow-400"] {
+  border-color: color-mix(in srgb, var(--brand-primary) 50%, var(--brand-accent) 50%) !important;
+}
+body:not(.dark-mode) .bg-yellow-400\\/20,
+body:not(.dark-mode) [class*="bg-yellow-400\\/"] {
+  background-color: color-mix(in srgb, var(--brand-accent) 20%, transparent 80%) !important;
+}
+body:not(.dark-mode) .text-yellow-400 {
+  color: var(--brand-accent) !important;
+}
+
+/* Purple accent cards (Forecasting, etc) */
+body:not(.dark-mode) .border-purple-400\\/30,
+body:not(.dark-mode) [class*="border-purple-400"] {
+  border-color: color-mix(in srgb, var(--brand-primary) 40%, var(--brand-secondary) 60%) !important;
+}
+body:not(.dark-mode) .bg-purple-400\\/20,
+body:not(.dark-mode) [class*="bg-purple-400\\/"] {
+  background-color: color-mix(in srgb, var(--brand-secondary) 20%, transparent 80%) !important;
+}
+body:not(.dark-mode) .text-purple-400 {
+  color: var(--brand-secondary) !important;
+}
+
+/* Cyan accent cards */
+body:not(.dark-mode) .border-cyan-400\\/30,
+body:not(.dark-mode) [class*="border-cyan-400"] {
+  border-color: var(--glass-border) !important;
+}
+body:not(.dark-mode) .bg-cyan-400\\/20,
+body:not(.dark-mode) [class*="bg-cyan-400\\/"] {
+  background-color: color-mix(in srgb, var(--brand-primary) 15%, transparent 85%) !important;
+}
+
+/* Green accent cards (ROI, etc) */
+body:not(.dark-mode) .border-green-400\\/30,
+body:not(.dark-mode) [class*="border-green-400"] {
+  border-color: color-mix(in srgb, var(--brand-primary) 30%, #22c55e 70%) !important;
+}
+body:not(.dark-mode) .bg-green-400\\/20,
+body:not(.dark-mode) .bg-green-400\\/10,
+body:not(.dark-mode) [class*="bg-green-400\\/"] {
+  background-color: color-mix(in srgb, var(--brand-primary) 10%, rgba(34, 197, 94, 0.15) 90%) !important;
+}
+body:not(.dark-mode) .text-green-400 {
+  color: color-mix(in srgb, var(--brand-primary) 30%, #22c55e 70%) !important;
+}
+
+/* Orange accent cards */
+body:not(.dark-mode) .border-orange-400\\/30,
+body:not(.dark-mode) [class*="border-orange-400"] {
+  border-color: color-mix(in srgb, var(--brand-accent) 60%, #f97316 40%) !important;
+}
+body:not(.dark-mode) .bg-orange-400\\/20,
+body:not(.dark-mode) [class*="bg-orange-400\\/"] {
+  background-color: color-mix(in srgb, var(--brand-accent) 15%, transparent 85%) !important;
+}
+body:not(.dark-mode) .text-orange-400 {
+  color: color-mix(in srgb, var(--brand-accent) 70%, #f97316 30%) !important;
+}
+
+/* ============================================
+   GLASS CARD BACKGROUNDS - Theme Aware
+   ============================================ */
+
+/* Main glass cards with white/5 opacity */
+body:not(.dark-mode) .bg-white\\/5,
+body:not(.dark-mode) [class*="bg-white\\/5"] {
+  background: var(--glass-bg) !important;
+}
+
+/* Card borders */
+body:not(.dark-mode) .border-white\\/10,
+body:not(.dark-mode) [class*="border-white\\/10"] {
+  border-color: var(--glass-border) !important;
+}
+
+/* Gradient backgrounds for ROI section */
+body:not(.dark-mode) .from-green-500\\/10,
+body:not(.dark-mode) .to-emerald-500\\/10,
+body:not(.dark-mode) [class*="from-green-500"],
+body:not(.dark-mode) [class*="to-emerald-500"] {
+  --tw-gradient-from: color-mix(in srgb, var(--brand-primary) 10%, transparent 90%);
+  --tw-gradient-to: color-mix(in srgb, var(--brand-secondary) 10%, transparent 90%);
+}
+
+/* ============================================
+   BUTTON ACCENT COLORS - Theme Aware  
+   ============================================ */
+
+/* Primary CTA buttons */
+body:not(.dark-mode) .bg-cyan-500\\/20,
+body:not(.dark-mode) [class*="bg-cyan-500\\/"] {
+  background: color-mix(in srgb, var(--brand-primary) 25%, transparent 75%) !important;
+}
+
+body:not(.dark-mode) .border-cyan-300\\/30,
+body:not(.dark-mode) [class*="border-cyan-300"] {
+  border-color: color-mix(in srgb, var(--brand-primary) 40%, transparent 60%) !important;
+}
+
+body:not(.dark-mode) .text-cyan-200,
+body:not(.dark-mode) [class*="text-cyan-200"] {
+  color: var(--brand-primary) !important;
+}
+
+/* Hover states */
+body:not(.dark-mode) .hover\\:bg-cyan-500\\/30:hover {
+  background: color-mix(in srgb, var(--brand-primary) 35%, transparent 65%) !important;
+}
+
+body:not(.dark-mode) .hover\\:border-cyan-500\\/50:hover {
+  border-color: color-mix(in srgb, var(--brand-primary) 60%, transparent 40%) !important;
 }
 
 /* ============================================
