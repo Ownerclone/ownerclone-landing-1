@@ -154,15 +154,6 @@ export default function GoogleReviewCalculator() {
 
   return (
     <div className="min-h-screen relative text-white">
-      <div 
-        className="fixed inset-0 z-0"
-        style={{
-          backgroundImage: 'url(/bg-glow.svg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
 
       <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 max-w-4xl">
         {/* Header */}
