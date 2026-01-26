@@ -230,7 +230,8 @@ export default function Navigation() {
               ))}
 
               {/* Theme Slider */}
-<ThemeSlider />
+{/* Theme Toggle */}
+<ThemeToggle />
 {/* Login Button - Glass Style */}
 <button 
   onClick={() => setLoginOpen(true)}
