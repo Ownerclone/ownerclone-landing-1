@@ -677,13 +677,10 @@ body::after {
 
 /* ============================================
    OVERRIDE: Hide hardcoded bg-glow.svg divs on pages
+   Only target divs that have inline background styles (the bg-glow divs)
    ============================================ */
 
-body:not(.dark-mode) div[style*="bg-glow"] {
-  display: none !important;
-}
-
-body:not(.dark-mode) main > div:first-child {
+body:not(.dark-mode) main > div[style*="background"] {
   display: none !important;
 }
 
@@ -691,7 +688,7 @@ body:not(.dark-mode) main {
   background: transparent !important;
 }
 
-body.dark-mode main > div:first-child {
+body.dark-mode main > div[style*="background"] {
   display: block;
 }
 
@@ -921,39 +918,48 @@ body::before {
 }
 
 /* ============================================
-   MOBILE: Simplified Dark/Light Mode Only
-   On mobile, we skip the complex sky themes and
-   just show dark mode (default) or a clean light mode
+   MOBILE: Force Dark Mode Only
+   On mobile, we always show dark mode regardless
+   of theme class - simpler and faster
    ============================================ */
 @media (max-width: 768px) {
   
-  /* Mobile Light Mode - Clean and simple */
-  body:not(.dark-mode) {
+  /* Force dark mode styles on ALL bodies on mobile */
+  body,
+  body.dark-mode,
+  body[class*="theme-"] {
     --bg-image: none !important;
-    --bg-color: #f8fafc !important;
+    --bg-color: #0a0e27 !important;
     --bg-overlay: transparent !important;
     
-    --glass-bg: rgba(255, 255, 255, 0.95) !important;
-    --glass-border: rgba(14, 165, 233, 0.15) !important;
-    --glass-shadow: rgba(14, 165, 233, 0.1) !important;
+    --glass-bg: rgba(14, 20, 51, 0.8) !important;
+    --glass-border: rgba(30, 159, 242, 0.2) !important;
+    --glass-shadow: rgba(30, 159, 242, 0.15) !important;
     
-    --nav-bg: rgba(255, 255, 255, 0.98) !important;
-    --nav-border: rgba(14, 165, 233, 0.1) !important;
+    --nav-bg: rgba(10, 14, 39, 0.95) !important;
+    --nav-border: rgba(30, 159, 242, 0.15) !important;
     
-    --text-primary: #0f172a !important;
-    --text-secondary: #475569 !important;
+    --text-primary: #ffffff !important;
+    --text-secondary: #94a3b8 !important;
     --text-muted: #64748b !important;
     
-    --brand-primary: #0ea5e9 !important;
-    --brand-secondary: #0284c7 !important;
-    --brand-accent: #38bdf8 !important;
+    --brand-primary: #1E9FF2 !important;
+    --brand-secondary: #764BA2 !important;
+    --brand-accent: #22d3ee !important;
     
-    --card-bg: rgba(255, 255, 255, 0.9) !important;
-    --card-border: rgba(14, 165, 233, 0.1) !important;
+    --card-bg: rgba(14, 20, 51, 0.6) !important;
+    --card-border: rgba(30, 159, 242, 0.15) !important;
+    --card-shadow: 0 8px 32px rgba(30, 159, 242, 0.1) !important;
     
-    --footer-bg: #0f172a !important;
-    --footer-text: #cbd5e1 !important;
-    --footer-border: rgba(14, 165, 233, 0.2) !important;
+    --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2) !important;
+    --btn-primary-text: #ffffff !important;
+    --btn-secondary-bg: transparent !important;
+    --btn-secondary-text: #1E9FF2 !important;
+    --btn-secondary-border: rgba(30, 159, 242, 0.5) !important;
+    
+    --footer-bg: rgba(10, 14, 39, 0.98) !important;
+    --footer-text: #94a3b8 !important;
+    --footer-border: rgba(30, 159, 242, 0.15) !important;
     
     --accent-red: #ef4444 !important;
     --accent-yellow: #eab308 !important;
@@ -962,28 +968,43 @@ body::before {
     --accent-orange: #f97316 !important;
   }
   
-  /* Hide sky background on mobile light mode */
-  body:not(.dark-mode)::before {
-    background-image: none !important;
-    background-color: #f8fafc !important;
+  /* Hide sky background completely on mobile */
+  body::before {
+    background-image: url("/bg-glow.svg") !important;
+    background-size: cover !important;
+    background-position: center top !important;
+    opacity: 0.6 !important;
   }
   
-  /* Mobile Dark Mode - Your original dark design */
-  body.dark-mode {
-    --bg-color: #0a0e27 !important;
-    --glass-bg: rgba(14, 20, 51, 0.8) !important;
-    --nav-bg: rgba(10, 14, 39, 0.95) !important;
-    --text-primary: #ffffff !important;
-    --brand-primary: #1E9FF2 !important;
-  }
-  
-  /* Show the bg-glow div on mobile dark mode */
-  body.dark-mode main > div:first-child {
+  /* Always show the bg-glow div on mobile (only if it has inline style) */
+  body main > div[style*="background"] {
     display: block !important;
   }
   
-  /* Hide bg-glow on mobile light mode */
-  body:not(.dark-mode) main > div:first-child {
+  /* Reset text color overrides on mobile - keep original dark mode colors */
+  body .text-white,
+  body .text-gray-100,
+  body .text-gray-200,
+  body .text-gray-300,
+  body .text-gray-400 {
+    color: inherit !important;
+  }
+  
+  body .text-cyan-400,
+  body h1[class*="text-cyan"],
+  body h2[class*="text-cyan"] {
+    color: #1E9FF2 !important;
+  }
+  
+  /* Reset card colors on mobile */
+  body .text-red-400 { color: #ef4444 !important; }
+  body .text-yellow-400 { color: #eab308 !important; }
+  body .text-purple-400 { color: #a855f7 !important; }
+  body .text-green-400 { color: #22c55e !important; }
+  body .text-orange-400 { color: #f97316 !important; }
+  
+  /* Hide theme toggle dropdown on mobile (optional - just show moon icon) */
+  .theme-dropdown {
     display: none !important;
   }
 }
