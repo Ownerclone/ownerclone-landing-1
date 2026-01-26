@@ -169,7 +169,7 @@ body::before {
    LIGHT MODE - STEP 1: WHITE BACKGROUND ONLY
    ============================================ */
 
-/* Light mode overrides - WHITE BACKGROUND */
+/* Light mode overrides - STEP 2: BLUE GLASS NAV */
 :root.light-mode {
   --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
@@ -178,11 +178,11 @@ body::before {
   --text-secondary: #666666;
   --text-tertiary: #999999;
   --border: #e5e5e5;
-  --nav-bg: rgba(255, 255, 255, 0.95);
-  --nav-border: rgba(0, 0, 0, 0.1);
-  --nav-text: #000000;
-  --nav-text-hover: #22d3ee;
-  --logo-color: #22d3ee;
+  --nav-bg: rgba(34, 211, 238, 0.7);  /* Cyan glass - 70% opacity */
+  --nav-border: rgba(34, 211, 238, 0.3);  /* Cyan border */
+  --nav-text: #ffffff;  /* White text */
+  --nav-text-hover: #ffffff;  /* White on hover */
+  --logo-color: #ffffff;  /* White logo */
 }
 
 /* KILL THE ORB BACKGROUND - Multiple approaches */
@@ -209,4 +209,30 @@ body::before {
 
 :root.light-mode div[style*="backgroundImage"] {
   background-image: none !important;
+}
+
+/* Light mode nav active arrow - white to show through blue glass */
+:root.light-mode .nav-text {
+  color: #ffffff !important;
+}
+
+:root.light-mode .nav-text:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Active nav arrow - make it white/bright to show through blue */
+:root.light-mode [style*="border-b-cyan"] {
+  border-bottom-color: rgba(255, 255, 255, 0.9) !important;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
+}
+
+/* Login button in light mode nav - white/transparent */
+:root.light-mode .login-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+:root.light-mode .login-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
