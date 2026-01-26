@@ -51,6 +51,13 @@
   --footer-bg: rgba(15, 23, 42, 0.95);
   --footer-text: #cbd5e1;
   --footer-border: rgba(14, 165, 233, 0.2);
+  
+  /* Accent colors for cards */
+  --accent-red: #ef4444;
+  --accent-yellow: #eab308;
+  --accent-purple: #a855f7;
+  --accent-green: #22c55e;
+  --accent-orange: #f97316;
 }
 
 /* ============================================
@@ -59,7 +66,7 @@
 
 /* Sunrise Clear - Golden hour warmth */
 .theme-sunrise-clear {
-  --bg-image: url(/images/sunrise-rainy.jpg); /* Fallback since sunrise-clear.jpg is missing */
+  --bg-image: url(/images/sunrise-rainy.jpg);
   --bg-color: #1e1b4b;
   --bg-overlay: rgba(251, 146, 60, 0.05);
   
@@ -91,6 +98,12 @@
   --footer-bg: rgba(30, 15, 45, 0.95);
   --footer-text: #fcd34d;
   --footer-border: rgba(251, 191, 36, 0.2);
+  
+  --accent-red: #fb923c;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #d97706;
+  --accent-green: #a3e635;
+  --accent-orange: #f59e0b;
 }
 
 /* Sunrise Rainy - Soft morning overcast */
@@ -127,6 +140,12 @@
   --footer-bg: rgba(30, 41, 59, 0.95);
   --footer-text: #cbd5e1;
   --footer-border: rgba(148, 163, 184, 0.2);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* Sunrise Stormy - Dramatic morning sky */
@@ -163,6 +182,12 @@
   --footer-bg: rgba(15, 23, 42, 0.95);
   --footer-text: #a5b4fc;
   --footer-border: rgba(129, 140, 248, 0.2);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* ============================================
@@ -203,6 +228,12 @@
   --footer-bg: rgba(15, 23, 42, 0.95);
   --footer-text: #cbd5e1;
   --footer-border: rgba(14, 165, 233, 0.2);
+  
+  --accent-red: #ef4444;
+  --accent-yellow: #eab308;
+  --accent-purple: #a855f7;
+  --accent-green: #22c55e;
+  --accent-orange: #f97316;
 }
 
 /* Midday Rainy - Overcast afternoon */
@@ -239,6 +270,12 @@
   --footer-bg: rgba(30, 41, 59, 0.95);
   --footer-text: #cbd5e1;
   --footer-border: rgba(56, 189, 248, 0.2);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* Midday Stormy - Dark dramatic clouds */
@@ -275,6 +312,12 @@
   --footer-bg: rgba(15, 23, 42, 0.95);
   --footer-text: #94a3b8;
   --footer-border: rgba(96, 165, 250, 0.2);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* ============================================
@@ -307,7 +350,6 @@
   --card-shadow: 0 8px 32px rgba(249, 115, 22, 0.2);
   
   --btn-primary-bg: linear-gradient(135deg, #f97316, #ea580c);
-  --btn-primary-text: #1c1917;
   --btn-primary-text: #ffffff;
   --btn-secondary-bg: rgba(28, 25, 23, 0.8);
   --btn-secondary-text: #fb923c;
@@ -316,6 +358,12 @@
   --footer-bg: rgba(28, 25, 23, 0.95);
   --footer-text: #fed7aa;
   --footer-border: rgba(251, 146, 60, 0.25);
+  
+  --accent-red: #fb923c;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #f97316;
+  --accent-green: #a3e635;
+  --accent-orange: #f97316;
 }
 
 /* Sunset Rainy - Moody evening */
@@ -352,6 +400,12 @@
   --footer-bg: rgba(28, 25, 23, 0.95);
   --footer-text: #d6d3d1;
   --footer-border: rgba(214, 211, 209, 0.2);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* Sunset Stormy - Dramatic purple sky */
@@ -388,6 +442,12 @@
   --footer-bg: rgba(15, 13, 51, 0.95);
   --footer-text: #c4b5fd;
   --footer-border: rgba(167, 139, 250, 0.2);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #c4b5fd;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* ============================================
@@ -428,6 +488,12 @@
   --footer-bg: rgba(2, 6, 23, 0.95);
   --footer-text: #7dd3fc;
   --footer-border: rgba(34, 211, 238, 0.15);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* Night Rainy - Moody night rain */
@@ -464,6 +530,12 @@
   --footer-bg: rgba(2, 6, 23, 0.95);
   --footer-text: #94a3b8;
   --footer-border: rgba(148, 163, 184, 0.15);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* Night Stormy - Electric storm */
@@ -500,6 +572,12 @@
   --footer-bg: rgba(6, 5, 15, 0.95);
   --footer-text: #a78bfa;
   --footer-border: rgba(167, 139, 250, 0.15);
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #c4b5fd;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
 }
 
 /* ============================================
@@ -538,6 +616,12 @@
   --footer-bg: rgba(10, 14, 39, 0.98);
   --footer-text: #94a3b8;
   --footer-border: rgba(30, 159, 242, 0.15);
+  
+  --accent-red: #ef4444;
+  --accent-yellow: #eab308;
+  --accent-purple: #a855f7;
+  --accent-green: #22c55e;
+  --accent-orange: #f97316;
 }
 
 /* ============================================
@@ -593,28 +677,21 @@ body::after {
 
 /* ============================================
    OVERRIDE: Hide hardcoded bg-glow.svg divs on pages
-   This targets the inline-styled divs that block sky themes
    ============================================ */
 
-/* Hide the fixed bg-glow div when in sky theme mode (not dark mode) */
-body:not(.dark-mode) > main > div[style*="bg-glow"],
-body:not(.dark-mode) > main > div[style*="background-image"]:first-child,
-body:not(.dark-mode) div.fixed.inset-0.z-0[style*="background"] {
+body:not(.dark-mode) div[style*="bg-glow"] {
   display: none !important;
 }
 
-/* More specific selector for Next.js rendered pages */
-body:not(.dark-mode) main > div:first-child[class*="fixed"][class*="inset-0"] {
+body:not(.dark-mode) main > div:first-child {
   display: none !important;
 }
 
-/* Ensure sky themes show through by making content wrappers transparent */
 body:not(.dark-mode) main {
   background: transparent !important;
 }
 
-/* In dark mode, show the bg-glow div */
-body.dark-mode div.fixed.inset-0.z-0 {
+body.dark-mode main > div:first-child {
   display: block;
 }
 
@@ -632,10 +709,7 @@ nav, .nav, header {
 
 /* Glass cards */
 .glass-card,
-.card,
-[class*="bg-gray-800"],
-[class*="bg-slate-800"],
-[class*="bg-zinc-800"] {
+.card {
   background: var(--glass-bg) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -650,196 +724,134 @@ nav, .nav, header {
 .text-theme-secondary { color: var(--text-secondary); }
 .text-theme-muted { color: var(--text-muted); }
 
-/* Override white text in light themes */
-body:not(.dark-mode) .text-white { color: var(--text-primary) !important; }
-body:not(.dark-mode) .text-gray-100, 
-body:not(.dark-mode) .text-gray-200, 
-body:not(.dark-mode) .text-gray-300 { color: var(--text-primary) !important; }
-body:not(.dark-mode) .text-gray-400, 
-body:not(.dark-mode) .text-gray-500 { color: var(--text-secondary) !important; }
-body:not(.dark-mode) .text-gray-600, 
-body:not(.dark-mode) .text-gray-700 { color: var(--text-muted) !important; }
-
 /* Brand colors */
 .text-brand { color: var(--brand-primary) !important; }
 .text-brand-secondary { color: var(--brand-secondary) !important; }
 .text-brand-accent { color: var(--brand-accent) !important; }
 
-/* Cyan/blue overrides for brand - these become theme-aware */
+/* ============================================
+   THEME-AWARE COLOR OVERRIDES (Sky themes only)
+   ============================================ */
+
+/* Override text colors in sky themes */
+body:not(.dark-mode) .text-white,
+body:not(.dark-mode) .text-gray-100,
+body:not(.dark-mode) .text-gray-200,
+body:not(.dark-mode) .text-gray-300 { 
+  color: var(--text-primary) !important; 
+}
+
+body:not(.dark-mode) .text-gray-400,
+body:not(.dark-mode) .text-gray-500 { 
+  color: var(--text-secondary) !important; 
+}
+
+/* Cyan becomes brand color */
 body:not(.dark-mode) .text-cyan-400,
 body:not(.dark-mode) .text-cyan-500,
-body:not(.dark-mode) .text-sky-400,
-body:not(.dark-mode) .text-sky-500,
-body:not(.dark-mode) .text-blue-400,
-body:not(.dark-mode) .text-blue-500,
-body:not(.dark-mode) [class*="text-cyan-400\\/"] {
+body:not(.dark-mode) h1[class*="text-cyan"],
+body:not(.dark-mode) h2[class*="text-cyan"] {
   color: var(--brand-primary) !important;
 }
 
-/* ============================================
-   LOGO STYLING - Theme Aware
-   ============================================ */
-
-/* Logo stroke color adapts to theme */
-.logo-stroke,
-body:not(.dark-mode) svg circle[class*="stroke-cyan"],
-body:not(.dark-mode) .stroke-cyan-400,
-body:not(.dark-mode) .stroke-cyan-400\\/60 {
+/* Logo stroke color */
+body:not(.dark-mode) svg circle[class*="stroke-cyan"] {
   stroke: var(--brand-primary) !important;
 }
 
-/* Hero logo specifically */
-body:not(.dark-mode) section svg circle {
-  stroke: var(--brand-primary) !important;
-  opacity: 0.8;
-}
-
-/* Logo text/name */
-body:not(.dark-mode) h1.text-cyan-400\\/90,
-body:not(.dark-mode) h1[class*="text-cyan"] {
-  color: var(--brand-primary) !important;
-}
-
-/* ============================================
-   CARD ACCENT COLORS - Theme Aware
-   ============================================ */
-
-/* Red accent cards (Employee Theft, etc) */
-body:not(.dark-mode) .border-red-400\\/30,
-body:not(.dark-mode) [class*="border-red-400"] {
-  border-color: color-mix(in srgb, var(--brand-primary) 60%, #ef4444 40%) !important;
-}
-body:not(.dark-mode) .bg-red-400\\/20,
-body:not(.dark-mode) [class*="bg-red-400\\/"] {
-  background-color: color-mix(in srgb, var(--brand-primary) 30%, transparent 70%) !important;
-}
+/* Red accents */
 body:not(.dark-mode) .text-red-400 {
-  color: color-mix(in srgb, var(--brand-primary) 70%, #ef4444 30%) !important;
+  color: var(--accent-red) !important;
 }
 
-/* Yellow accent cards (Food Costs, etc) */
-body:not(.dark-mode) .border-yellow-400\\/30,
-body:not(.dark-mode) [class*="border-yellow-400"] {
-  border-color: color-mix(in srgb, var(--brand-primary) 50%, var(--brand-accent) 50%) !important;
+body:not(.dark-mode) [class*="border-red-400"] {
+  border-color: var(--accent-red) !important;
 }
-body:not(.dark-mode) .bg-yellow-400\\/20,
-body:not(.dark-mode) [class*="bg-yellow-400\\/"] {
-  background-color: color-mix(in srgb, var(--brand-accent) 20%, transparent 80%) !important;
+
+body:not(.dark-mode) [class*="bg-red-400"] {
+  background-color: rgba(239, 68, 68, 0.2) !important;
 }
+
+/* Yellow accents */
 body:not(.dark-mode) .text-yellow-400 {
-  color: var(--brand-accent) !important;
+  color: var(--accent-yellow) !important;
 }
 
-/* Purple accent cards (Forecasting, etc) */
-body:not(.dark-mode) .border-purple-400\\/30,
-body:not(.dark-mode) [class*="border-purple-400"] {
-  border-color: color-mix(in srgb, var(--brand-primary) 40%, var(--brand-secondary) 60%) !important;
+body:not(.dark-mode) [class*="border-yellow-400"] {
+  border-color: var(--accent-yellow) !important;
 }
-body:not(.dark-mode) .bg-purple-400\\/20,
-body:not(.dark-mode) [class*="bg-purple-400\\/"] {
-  background-color: color-mix(in srgb, var(--brand-secondary) 20%, transparent 80%) !important;
+
+body:not(.dark-mode) [class*="bg-yellow-400"] {
+  background-color: rgba(234, 179, 8, 0.2) !important;
 }
+
+/* Purple accents */
 body:not(.dark-mode) .text-purple-400 {
-  color: var(--brand-secondary) !important;
+  color: var(--accent-purple) !important;
 }
 
-/* Cyan accent cards */
-body:not(.dark-mode) .border-cyan-400\\/30,
-body:not(.dark-mode) [class*="border-cyan-400"] {
-  border-color: var(--glass-border) !important;
-}
-body:not(.dark-mode) .bg-cyan-400\\/20,
-body:not(.dark-mode) [class*="bg-cyan-400\\/"] {
-  background-color: color-mix(in srgb, var(--brand-primary) 15%, transparent 85%) !important;
+body:not(.dark-mode) [class*="border-purple-400"] {
+  border-color: var(--accent-purple) !important;
 }
 
-/* Green accent cards (ROI, etc) */
-body:not(.dark-mode) .border-green-400\\/30,
-body:not(.dark-mode) [class*="border-green-400"] {
-  border-color: color-mix(in srgb, var(--brand-primary) 30%, #22c55e 70%) !important;
+body:not(.dark-mode) [class*="bg-purple-400"] {
+  background-color: rgba(168, 85, 247, 0.2) !important;
 }
-body:not(.dark-mode) .bg-green-400\\/20,
-body:not(.dark-mode) .bg-green-400\\/10,
-body:not(.dark-mode) [class*="bg-green-400\\/"] {
-  background-color: color-mix(in srgb, var(--brand-primary) 10%, rgba(34, 197, 94, 0.15) 90%) !important;
-}
+
+/* Green accents */
 body:not(.dark-mode) .text-green-400 {
-  color: color-mix(in srgb, var(--brand-primary) 30%, #22c55e 70%) !important;
+  color: var(--accent-green) !important;
 }
 
-/* Orange accent cards */
-body:not(.dark-mode) .border-orange-400\\/30,
-body:not(.dark-mode) [class*="border-orange-400"] {
-  border-color: color-mix(in srgb, var(--brand-accent) 60%, #f97316 40%) !important;
+body:not(.dark-mode) [class*="border-green-400"] {
+  border-color: var(--accent-green) !important;
 }
-body:not(.dark-mode) .bg-orange-400\\/20,
-body:not(.dark-mode) [class*="bg-orange-400\\/"] {
-  background-color: color-mix(in srgb, var(--brand-accent) 15%, transparent 85%) !important;
+
+body:not(.dark-mode) [class*="bg-green-400"] {
+  background-color: rgba(34, 197, 94, 0.15) !important;
 }
+
+/* Orange accents */
 body:not(.dark-mode) .text-orange-400 {
-  color: color-mix(in srgb, var(--brand-accent) 70%, #f97316 30%) !important;
+  color: var(--accent-orange) !important;
 }
 
-/* ============================================
-   GLASS CARD BACKGROUNDS - Theme Aware
-   ============================================ */
+body:not(.dark-mode) [class*="border-orange-400"] {
+  border-color: var(--accent-orange) !important;
+}
 
-/* Main glass cards with white/5 opacity */
-body:not(.dark-mode) .bg-white\\/5,
-body:not(.dark-mode) [class*="bg-white\\/5"] {
+body:not(.dark-mode) [class*="bg-orange-400"] {
+  background-color: rgba(249, 115, 22, 0.2) !important;
+}
+
+/* Cyan accents */
+body:not(.dark-mode) [class*="border-cyan-400"],
+body:not(.dark-mode) [class*="border-cyan-300"] {
+  border-color: var(--brand-primary) !important;
+}
+
+body:not(.dark-mode) [class*="bg-cyan-500"],
+body:not(.dark-mode) [class*="bg-cyan-400"] {
+  background-color: rgba(14, 165, 233, 0.2) !important;
+}
+
+/* Glass card backgrounds */
+body:not(.dark-mode) [class*="bg-white\\/5"],
+body:not(.dark-mode) .backdrop-blur-xl[class*="bg-white"] {
   background: var(--glass-bg) !important;
 }
 
-/* Card borders */
-body:not(.dark-mode) .border-white\\/10,
-body:not(.dark-mode) [class*="border-white\\/10"] {
+/* Glass card borders */
+body:not(.dark-mode) [class*="border-white\\/10"],
+body:not(.dark-mode) .backdrop-blur-xl[class*="border-white"] {
   border-color: var(--glass-border) !important;
-}
-
-/* Gradient backgrounds for ROI section */
-body:not(.dark-mode) .from-green-500\\/10,
-body:not(.dark-mode) .to-emerald-500\\/10,
-body:not(.dark-mode) [class*="from-green-500"],
-body:not(.dark-mode) [class*="to-emerald-500"] {
-  --tw-gradient-from: color-mix(in srgb, var(--brand-primary) 10%, transparent 90%);
-  --tw-gradient-to: color-mix(in srgb, var(--brand-secondary) 10%, transparent 90%);
-}
-
-/* ============================================
-   BUTTON ACCENT COLORS - Theme Aware  
-   ============================================ */
-
-/* Primary CTA buttons */
-body:not(.dark-mode) .bg-cyan-500\\/20,
-body:not(.dark-mode) [class*="bg-cyan-500\\/"] {
-  background: color-mix(in srgb, var(--brand-primary) 25%, transparent 75%) !important;
-}
-
-body:not(.dark-mode) .border-cyan-300\\/30,
-body:not(.dark-mode) [class*="border-cyan-300"] {
-  border-color: color-mix(in srgb, var(--brand-primary) 40%, transparent 60%) !important;
-}
-
-body:not(.dark-mode) .text-cyan-200,
-body:not(.dark-mode) [class*="text-cyan-200"] {
-  color: var(--brand-primary) !important;
-}
-
-/* Hover states */
-body:not(.dark-mode) .hover\\:bg-cyan-500\\/30:hover {
-  background: color-mix(in srgb, var(--brand-primary) 35%, transparent 65%) !important;
-}
-
-body:not(.dark-mode) .hover\\:border-cyan-500\\/50:hover {
-  border-color: color-mix(in srgb, var(--brand-primary) 60%, transparent 40%) !important;
 }
 
 /* ============================================
    BUTTON STYLES
    ============================================ */
 .btn-primary,
-.gradient-bg,
-[class*="bg-gradient"] {
+.gradient-bg {
   background: var(--btn-primary-bg) !important;
   color: var(--btn-primary-text) !important;
   border: none;
@@ -867,12 +879,6 @@ footer, .footer {
 .border-theme { border-color: var(--glass-border); }
 .border-brand { border-color: var(--brand-primary); }
 
-[class*="border-gray"],
-[class*="border-slate"],
-[class*="border-zinc"] {
-  border-color: var(--glass-border) !important;
-}
-
 /* ============================================
    FORM ELEMENTS
    ============================================ */
@@ -885,7 +891,6 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   border-color: var(--brand-primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(var(--brand-primary), 0.1);
 }
 
 input::placeholder, textarea::placeholder {
@@ -912,5 +917,73 @@ body::before {
 @media (max-width: 768px) {
   body::before {
     background-attachment: scroll;
+  }
+}
+
+/* ============================================
+   MOBILE: Simplified Dark/Light Mode Only
+   On mobile, we skip the complex sky themes and
+   just show dark mode (default) or a clean light mode
+   ============================================ */
+@media (max-width: 768px) {
+  
+  /* Mobile Light Mode - Clean and simple */
+  body:not(.dark-mode) {
+    --bg-image: none !important;
+    --bg-color: #f8fafc !important;
+    --bg-overlay: transparent !important;
+    
+    --glass-bg: rgba(255, 255, 255, 0.95) !important;
+    --glass-border: rgba(14, 165, 233, 0.15) !important;
+    --glass-shadow: rgba(14, 165, 233, 0.1) !important;
+    
+    --nav-bg: rgba(255, 255, 255, 0.98) !important;
+    --nav-border: rgba(14, 165, 233, 0.1) !important;
+    
+    --text-primary: #0f172a !important;
+    --text-secondary: #475569 !important;
+    --text-muted: #64748b !important;
+    
+    --brand-primary: #0ea5e9 !important;
+    --brand-secondary: #0284c7 !important;
+    --brand-accent: #38bdf8 !important;
+    
+    --card-bg: rgba(255, 255, 255, 0.9) !important;
+    --card-border: rgba(14, 165, 233, 0.1) !important;
+    
+    --footer-bg: #0f172a !important;
+    --footer-text: #cbd5e1 !important;
+    --footer-border: rgba(14, 165, 233, 0.2) !important;
+    
+    --accent-red: #ef4444 !important;
+    --accent-yellow: #eab308 !important;
+    --accent-purple: #a855f7 !important;
+    --accent-green: #22c55e !important;
+    --accent-orange: #f97316 !important;
+  }
+  
+  /* Hide sky background on mobile light mode */
+  body:not(.dark-mode)::before {
+    background-image: none !important;
+    background-color: #f8fafc !important;
+  }
+  
+  /* Mobile Dark Mode - Your original dark design */
+  body.dark-mode {
+    --bg-color: #0a0e27 !important;
+    --glass-bg: rgba(14, 20, 51, 0.8) !important;
+    --nav-bg: rgba(10, 14, 39, 0.95) !important;
+    --text-primary: #ffffff !important;
+    --brand-primary: #1E9FF2 !important;
+  }
+  
+  /* Show the bg-glow div on mobile dark mode */
+  body.dark-mode main > div:first-child {
+    display: block !important;
+  }
+  
+  /* Hide bg-glow on mobile light mode */
+  body:not(.dark-mode) main > div:first-child {
+    display: none !important;
   }
 }
