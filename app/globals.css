@@ -170,11 +170,11 @@ body::before {
   --text-secondary: #666666;
   --text-tertiary: #999999;
   --border: #e5e5e5;
-  --nav-bg: rgba(100, 116, 139, 0.85);  /* Smoke glass - very opaque */
-  --nav-border: rgba(100, 116, 139, 0.9);
-  --nav-text: #0c4a6e;
-  --nav-text-hover: #075985;
-  --logo-color: #0c4a6e;
+  --nav-bg: rgba(100, 116, 139, 0.95);  /* Smoke glass - 20% darker (was 0.85) */
+  --nav-border: rgba(100, 116, 139, 0.98);
+  --nav-text: #22d3ee;  /* Cyan text */
+  --nav-text-hover: #06b6d4;  /* Darker cyan on hover */
+  --logo-color: #22d3ee;  /* Cyan logo */
 }
 
 :root.light-mode body::before {
@@ -199,44 +199,44 @@ body::before {
   background-image: none !important;
 }
 
-/* Nav styling */
+/* Nav styling - CYAN TEXT */
 :root.light-mode .nav-text {
-  color: #0c4a6e !important;
+  color: #22d3ee !important;  /* Cyan */
   font-weight: 600 !important;
 }
 
 :root.light-mode .nav-text:hover {
-  color: #075985 !important;
+  color: #06b6d4 !important;  /* Darker cyan */
 }
 
 :root.light-mode nav a {
-  color: #0c4a6e !important;
+  color: #22d3ee !important;  /* Cyan */
   font-weight: 600 !important;
 }
 
 :root.light-mode nav button:not(.login-btn) {
-  color: #0c4a6e !important;
+  color: #22d3ee !important;  /* Cyan */
   font-weight: 600 !important;
 }
 
 :root.light-mode .logo-color {
-  stroke: #0c4a6e !important;
+  stroke: #22d3ee !important;  /* Cyan logo */
 }
 
 :root.light-mode nav .text-2xl,
 :root.light-mode nav .font-black {
-  color: #0c4a6e !important;
+  color: #22d3ee !important;  /* Cyan */
   font-weight: 800 !important;
 }
 
 :root.light-mode [style*="border-b-cyan"],
 :root.light-mode [style*="border-bottom"] {
-  border-bottom-color: #0c4a6e !important;
-  filter: drop-shadow(0 0 4px rgba(12, 74, 110, 0.5)) !important;
+  border-bottom-color: #22d3ee !important;  /* Cyan arrow */
+  filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.6)) !important;
 }
 
 :root.light-mode .text-cyan-400 {
-  color: #0c4a6e !important;
+  color: #22d3ee !important;  /* Cyan */
 }
 
 /* Dropdown - smoke glass to match nav */
@@ -287,16 +287,16 @@ body::before {
   border-color: rgba(100, 116, 139, 0.5) !important;
 }
 
-/* Login button */
+/* Login button - CYAN */
 :root.light-mode .login-btn {
-  background-color: rgba(12, 74, 110, 0.25);
-  color: #0c4a6e;
-  border: 1px solid rgba(12, 74, 110, 0.4);
+  background-color: #22d3ee;
+  color: #000000;
+  border: 1px solid #22d3ee;
 }
 
 :root.light-mode .login-btn:hover {
-  background-color: rgba(12, 74, 110, 0.35);
-  color: #075985;
+  background-color: #06b6d4;
+  color: #000000;
 }
 
 /* TEXT COLORS */
@@ -308,25 +308,19 @@ body::before {
   color: #0c4a6e !important;
 }
 
-/* Cyan text - white with 2px navy outline */
+/* Cyan text - NO OUTLINE */
 :root.light-mode .text-cyan-400,
 :root.light-mode .text-cyan-500 {
-  color: #ffffff !important;
-  -webkit-text-stroke: 2px #0c4a6e;
-  text-stroke: 2px #0c4a6e;
-  paint-order: stroke fill;
+  color: #22d3ee !important;  /* Just cyan, no stroke */
 }
 
-/* Green text - DARKER green with 1px black outline */
+/* Green text - NO OUTLINE, just darker green */
 :root.light-mode .text-green-400,
 :root.light-mode .text-green-500,
 :root.light-mode .text-\[\#10b981\],
 :root.light-mode .text-emerald-400,
 :root.light-mode .text-emerald-500 {
-  color: #059669 !important;  /* Darker green - emerald-600 */
-  -webkit-text-stroke: 1px #000000;
-  text-stroke: 1px #000000;
-  paint-order: stroke fill;
+  color: #059669 !important;  /* Darker green - emerald-600, no stroke */
   font-weight: 600 !important;
 }
 
