@@ -400,3 +400,95 @@ body::before {
 :root nav .logo-color {
   stroke-opacity: 0.6;  /* Translucent in dark mode */
 }
+
+/* ============================================
+   PRICING PAGE SPECIFIC FIXES
+   ============================================ */
+
+/* GREEN GLASS CARDS - 1px borders */
+:root.light-mode .border-green-500\/50,
+:root.light-mode .border-green-400\/30,
+:root.light-mode [class*="border-green"] {
+  border-width: 1px !important;
+}
+
+/* Bottom CTA section - darker green text on green background */
+:root.light-mode .bg-gradient-to-br.from-green-500\/10 .text-cyan-400,
+:root.light-mode [class*="green"] .text-cyan-400 {
+  color: #047857 !important;  /* Darker green - emerald-700 for readability */
+}
+
+/* CTA Button on green background - green with white text */
+:root.light-mode .bg-gradient-to-br.from-green-500\/10 button,
+:root.light-mode .bg-gradient-to-br.from-green-500\/10 .btn,
+:root.light-mode [class*="bg-gradient"][class*="green"] button {
+  background-color: #059669 !important;  /* Green button */
+  color: #ffffff !important;  /* White text */
+  border: 1px solid #047857 !important;
+}
+
+/* Comparison table checkmarks - brighter and larger */
+:root.light-mode .text-green-400,
+:root.light-mode .text-green-500,
+:root.light-mode svg.text-green-400,
+:root.light-mode svg.text-green-500 {
+  color: #10b981 !important;  /* Bright emerald-500 */
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* Red X marks - larger to match */
+:root.light-mode .text-red-400,
+:root.light-mode .text-red-500,
+:root.light-mode svg.text-red-400,
+:root.light-mode svg.text-red-500 {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* Top grey pricing box - darker green background */
+:root.light-mode .bg-gray-900\/50,
+:root.light-mode [class*="pricing"] .bg-gray-900 {
+  background-color: rgba(5, 150, 105, 0.3) !important;  /* Dark green tint */
+}
+
+/* Cyan text in green boxes - lighter green for contrast */
+:root.light-mode [class*="pricing"] .text-cyan-400 {
+  color: #6ee7b7 !important;  /* Light green - emerald-300 */
+}
+
+/* Green price boxes - darker green text */
+:root.light-mode [class*="pricing"] .text-green-400,
+:root.light-mode [class*="bg-green"] .text-green-400,
+:root.light-mode [class*="bg-green"] .text-green-500 {
+  color: #047857 !important;  /* Dark green - emerald-700 */
+  font-weight: 600 !important;
+}
+
+/* Individual green rectangles - glass effect with light border */
+:root.light-mode .bg-green-500\/10 > div,
+:root.light-mode [class*="pricing-example"] > div {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(110, 231, 183, 0.4) !important;  /* Light green border */
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1) !important;  /* Raised glass effect */
+}
+
+/* Main green container border - 1px glass effect */
+:root.light-mode .border-green-500\/50 {
+  border-width: 1px !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Grey box in pic 4 - much darker for readability */
+:root.light-mode [class*="pricing"] .bg-gray-900,
+:root.light-mode [class*="what-you-pay"] {
+  background-color: rgba(30, 41, 59, 0.8) !important;  /* Dark slate */
+  color: #ffffff !important;
+}
+
+/* Border around pricing tables - 1px glass effect */
+:root.light-mode [class*="pricing-card"],
+:root.light-mode [class*="pricing-table"] {
+  border-width: 1px !important;
+  border-color: rgba(100, 116, 139, 0.3) !important;
+}
