@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { supabasePlatform } from '@/lib/supabase-platform'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -40,25 +41,46 @@ export default function SignupPage() {
     setLoading(true)
     
     try {
-      // TODO: Connect to Supabase Auth
-      // const { data, error } = await supabase.auth.signUp({
-      //   email: formData.email,
-      //   password: formData.password,
-      //   options: {
-      //     data: {
-      //       name: formData.name,
-      //       restaurant_name: formData.restaurantName,
-      //       restaurant_website: formData.restaurantWebsite,
-      //       phone: formData.phone
-      //     }
-      //   }
-      // })
+      // 1. Create auth user
+      const { data, error: signUpError } = await supabasePlatform.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            name: formData.name,
+            restaurant_name: formData.restaurantName,
+            restaurant_website: formData.restaurantWebsite,
+            phone: formData.phone
+          },
+          emailRedirectTo: `${window.location.origin}/app-dashboard`
+        }
+      })
       
-      // For now, simulate success and redirect
-      console.log('Signup data:', formData)
-      router.push('/app-dashboard')
-    } catch (err) {
-      setError('Something went wrong. Please try again.')
+      if (signUpError) {
+        setError(signUpError.message)
+        return
+      }
+
+      // 2. If user created and has session, setup organization
+      if (data?.user && data.session) {
+        const { error: orgError } = await supabasePlatform.rpc('setup_new_user_organization', {
+          p_user_id: data.user.id,
+          p_restaurant_name: formData.restaurantName,
+          p_restaurant_website: formData.restaurantWebsite || null
+        })
+        
+        if (orgError) {
+          console.error('Org setup error:', orgError)
+          // Don't block signup, org can be created later
+        }
+        
+        router.push('/app-dashboard')
+      } else if (data?.user && !data.session) {
+        // Email confirmation required
+        router.push('/signup/confirm?email=' + encodeURIComponent(formData.email))
+      }
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -67,15 +89,17 @@ export default function SignupPage() {
   const handleOAuth = async (provider: 'google' | 'apple') => {
     setLoading(true)
     try {
-      // TODO: Connect to Supabase OAuth
-      // const { data, error } = await supabase.auth.signInWithOAuth({
-      //   provider: provider,
-      //   options: {
-      //     redirectTo: `${window.location.origin}/app-dashboard`
-      //   }
-      // })
-      console.log(`OAuth with ${provider}`)
-    } catch (err) {
+      const { error } = await supabasePlatform.auth.signInWithOAuth({
+        provider: provider,
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`
+        }
+      })
+      
+      if (error) {
+        setError(error.message)
+      }
+    } catch (err: any) {
       setError(`Failed to sign in with ${provider}`)
     } finally {
       setLoading(false)
@@ -117,7 +141,7 @@ export default function SignupPage() {
             <button
               onClick={() => handleOAuth('google')}
               disabled={loading}
-              className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg font-semibold transition-all border"
+              className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg font-semibold transition-all border hover:bg-white/10"
               style={{ 
                 background: 'rgba(255,255,255,0.05)', 
                 borderColor: 'var(--glass-border)',
@@ -136,7 +160,7 @@ export default function SignupPage() {
             <button
               onClick={() => handleOAuth('apple')}
               disabled={loading}
-              className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg font-semibold transition-all border"
+              className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg font-semibold transition-all border hover:bg-white/10"
               style={{ 
                 background: 'rgba(255,255,255,0.05)', 
                 borderColor: 'var(--glass-border)',
