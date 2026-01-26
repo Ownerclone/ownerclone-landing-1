@@ -682,19 +682,23 @@ body.dark-mode main > div[style*="background"] {
 }
 
 /* ============================================
-   LOGO STYLING - Theme Aware
+   LOGO STYLING - Glass Effect
    ============================================ */
 .logo-color,
 .logo-stroke {
   stroke: var(--logo-color) !important;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 8px var(--logo-color));
 }
 
-/* Logo in navigation */
+/* Logo in navigation - glass effect */
 nav .logo-color,
 nav .logo-stroke,
 nav svg circle,
 nav svg path {
   stroke: var(--logo-color) !important;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 6px var(--logo-color));
 }
 
 /* Logo in footer */
@@ -702,11 +706,14 @@ footer .logo-color,
 footer .logo-stroke,
 footer svg circle {
   stroke: var(--logo-color) !important;
+  opacity: 0.7;
 }
 
 /* Logo in hero section */
 section svg circle[class*="stroke-cyan"] {
   stroke: var(--logo-color) !important;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 10px var(--logo-color));
 }
 
 /* ============================================
@@ -748,6 +755,33 @@ nav button:hover,
 nav a[href*="login"]:hover {
   background: var(--brand-primary) !important;
   color: var(--bg-color) !important;
+}
+
+/* ============================================
+   BACKGROUND OVERRIDES FOR ALL PAGES
+   Forces sky theme backgrounds on pages with 
+   Tailwind bg-gray-900 or similar classes
+   ============================================ */
+
+/* Override Tailwind background classes in sky themes */
+body:not(.dark-mode) .bg-gray-900,
+body:not(.dark-mode) .bg-slate-900,
+body:not(.dark-mode) .bg-zinc-900,
+body:not(.dark-mode) [class*="bg-gray-900"],
+body:not(.dark-mode) [class*="bg-slate-900"],
+body:not(.dark-mode) main {
+  background: transparent !important;
+}
+
+/* Keep cards styled properly */
+body:not(.dark-mode) .bg-gray-800,
+body:not(.dark-mode) .bg-slate-800,
+body:not(.dark-mode) [class*="bg-gray-800"],
+body:not(.dark-mode) [class*="bg-slate-800"] {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border) !important;
 }
 
 /* ============================================
