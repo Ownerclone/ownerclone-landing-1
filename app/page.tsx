@@ -5,13 +5,11 @@ import WeatherGreeting from '@/components/WeatherGreeting'
 export default function Home() {
   return (
     <main className="min-h-screen relative">
-      {/* Fixed SVG Background */}
-      <div className="fixed inset-0 z-0" style={{
-        backgroundImage: 'url(/bg-glow.svg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }} />
+      {/* 
+        REMOVED: The hardcoded bg-glow.svg div that was blocking the sky themes
+        The background is now handled by body::before in globals.css
+        which responds to theme classes (theme-midday-clear, dark-mode, etc.)
+      */}
       
       {/* All content with relative z-10 */}
       <div className="relative z-10">
