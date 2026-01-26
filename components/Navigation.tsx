@@ -1,1097 +1,478 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* ============================================
-   OWNERCLONE DYNAMIC SKY THEME SYSTEM
-   Version 4: Fixed logo blur, glassier dark mode
-   ============================================ */
-
-/* ============================================
-   DEFAULT: Light mode (midday-clear as default)
-   ============================================ */
-:root {
-  /* Background */
-  --bg-image: url(/images/midday-clear.jpg);
-  --bg-color: #e0f2fe;
-  --bg-overlay: rgba(255, 255, 255, 0.05);
-  
-  /* Glass morphism - consistent style */
-  --glass-bg: rgba(15, 23, 42, 0.65);
-  --glass-border: rgba(56, 189, 248, 0.2);
-  --glass-shadow: rgba(14, 165, 233, 0.15);
-  
-  /* Navigation */
-  --nav-bg: rgba(15, 23, 42, 0.75);
-  --nav-border: rgba(56, 189, 248, 0.15);
-  
-  /* Text colors */
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  
-  /* Brand/accent colors - changes per theme */
-  --brand-primary: #38bdf8;
-  --brand-secondary: #0ea5e9;
-  --brand-accent: #7dd3fc;
-  
-  /* Logo color */
-  --logo-color: #38bdf8;
-  
-  /* Cards */
-  --card-bg: rgba(15, 23, 42, 0.6);
-  --card-border: rgba(56, 189, 248, 0.15);
-  --card-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
-  
-  /* Buttons */
-  --btn-primary-bg: linear-gradient(135deg, #0ea5e9, #0284c7);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(15, 23, 42, 0.6);
-  --btn-secondary-text: #38bdf8;
-  --btn-secondary-border: rgba(56, 189, 248, 0.4);
-  
-  /* Footer */
-  --footer-bg: rgba(15, 23, 42, 0.85);
-  --footer-text: #cbd5e1;
-  --footer-border: rgba(56, 189, 248, 0.2);
-  
-  /* Accent colors for feature cards */
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #22d3ee;
-}
-
-/* ============================================
-   SUNRISE THEMES (6am - 9am)
-   Colors: Warm golds, soft pinks, light greys
-   ============================================ */
-
-/* Sunrise Clear - Golden hour warmth */
-.theme-sunrise-clear {
-  --bg-image: url(/images/sunrise-clear.jpg);
-  --bg-color: #1c1917;
-  
-  --glass-bg: rgba(28, 25, 23, 0.65);
-  --glass-border: rgba(251, 191, 36, 0.25);
-  --glass-shadow: rgba(251, 146, 60, 0.2);
-  
-  --nav-bg: rgba(28, 25, 23, 0.78);
-  --nav-border: rgba(251, 191, 36, 0.2);
-  
-  --text-primary: #fef3c7;
-  --text-secondary: #fde68a;
-  --text-muted: #fcd34d;
-  
-  --brand-primary: #fbbf24;
-  --brand-secondary: #f59e0b;
-  --brand-accent: #fcd34d;
-  
-  --logo-color: #fbbf24;
-  
-  --card-bg: rgba(28, 25, 23, 0.6);
-  --card-border: rgba(251, 191, 36, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #f59e0b, #d97706);
-  --btn-primary-text: #1c1917;
-  --btn-secondary-bg: rgba(28, 25, 23, 0.6);
-  --btn-secondary-text: #fbbf24;
-  --btn-secondary-border: rgba(251, 191, 36, 0.4);
-  
-  --footer-bg: rgba(28, 25, 23, 0.9);
-  --footer-text: #fde68a;
-  
-  --accent-red: #fb923c;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #f59e0b;
-  --accent-green: #a3e635;
-  --accent-orange: #f97316;
-  --accent-cyan: #fcd34d;
-}
-
-/* Sunrise Rainy - Soft grey morning */
-.theme-sunrise-rainy {
-  --bg-image: url(/images/sunrise-rainy.jpg);
-  --bg-color: #1e293b;
-  
-  --glass-bg: rgba(30, 41, 59, 0.65);
-  --glass-border: rgba(148, 163, 184, 0.25);
-  --glass-shadow: rgba(100, 116, 139, 0.2);
-  
-  --nav-bg: rgba(30, 41, 59, 0.78);
-  --nav-border: rgba(148, 163, 184, 0.2);
-  
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  
-  --brand-primary: #94a3b8;
-  --brand-secondary: #64748b;
-  --brand-accent: #cbd5e1;
-  
-  --logo-color: #94a3b8;
-  
-  --card-bg: rgba(30, 41, 59, 0.6);
-  --card-border: rgba(148, 163, 184, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #64748b, #475569);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(30, 41, 59, 0.6);
-  --btn-secondary-text: #cbd5e1;
-  --btn-secondary-border: rgba(148, 163, 184, 0.4);
-  
-  --footer-bg: rgba(15, 23, 42, 0.9);
-  --footer-text: #cbd5e1;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #94a3b8;
-}
-
-/* Sunrise Stormy - Red/grey dramatic sky */
-.theme-sunrise-stormy {
-  --bg-image: url(/images/sunrise-stormy.jpg);
-  --bg-color: #1c1917;
-  
-  --glass-bg: rgba(28, 25, 23, 0.65);
-  --glass-border: rgba(248, 113, 113, 0.25);
-  --glass-shadow: rgba(239, 68, 68, 0.15);
-  
-  --nav-bg: rgba(28, 25, 23, 0.78);
-  --nav-border: rgba(248, 113, 113, 0.2);
-  
-  --text-primary: #fef2f2;
-  --text-secondary: #fecaca;
-  --text-muted: #fca5a5;
-  
-  --brand-primary: #f87171;
-  --brand-secondary: #ef4444;
-  --brand-accent: #fca5a5;
-  
-  --logo-color: #f87171;
-  
-  --card-bg: rgba(28, 25, 23, 0.6);
-  --card-border: rgba(248, 113, 113, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #ef4444, #dc2626);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(28, 25, 23, 0.6);
-  --btn-secondary-text: #fca5a5;
-  --btn-secondary-border: rgba(248, 113, 113, 0.4);
-  
-  --footer-bg: rgba(28, 25, 23, 0.9);
-  --footer-text: #fecaca;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #fb7185;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #f87171;
-}
-
-/* ============================================
-   MIDDAY THEMES (9am - 5pm)
-   ============================================ */
-
-/* Midday Clear - Bright blue sky */
-.theme-midday-clear {
-  --bg-image: url(/images/midday-clear.jpg);
-  --bg-color: #0c4a6e;
-  
-  --glass-bg: rgba(12, 74, 110, 0.65);
-  --glass-border: rgba(56, 189, 248, 0.25);
-  --glass-shadow: rgba(14, 165, 233, 0.2);
-  
-  --nav-bg: rgba(12, 74, 110, 0.78);
-  --nav-border: rgba(56, 189, 248, 0.2);
-  
-  --text-primary: #f0f9ff;
-  --text-secondary: #bae6fd;
-  --text-muted: #7dd3fc;
-  
-  --brand-primary: #38bdf8;
-  --brand-secondary: #0ea5e9;
-  --brand-accent: #7dd3fc;
-  
-  --logo-color: #38bdf8;
-  
-  --card-bg: rgba(12, 74, 110, 0.6);
-  --card-border: rgba(56, 189, 248, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #0ea5e9, #0284c7);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(12, 74, 110, 0.6);
-  --btn-secondary-text: #7dd3fc;
-  --btn-secondary-border: rgba(56, 189, 248, 0.4);
-  
-  --footer-bg: rgba(7, 47, 71, 0.9);
-  --footer-text: #bae6fd;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #22d3ee;
-}
-
-/* Midday Rainy - Overcast afternoon */
-.theme-midday-rainy {
-  --bg-image: url(/images/midday-rainy.jpg);
-  --bg-color: #1e293b;
-  
-  --glass-bg: rgba(30, 41, 59, 0.65);
-  --glass-border: rgba(148, 163, 184, 0.25);
-  --glass-shadow: rgba(100, 116, 139, 0.2);
-  
-  --nav-bg: rgba(30, 41, 59, 0.78);
-  --nav-border: rgba(148, 163, 184, 0.2);
-  
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  
-  --brand-primary: #64748b;
-  --brand-secondary: #475569;
-  --brand-accent: #94a3b8;
-  
-  --logo-color: #64748b;
-  
-  --card-bg: rgba(30, 41, 59, 0.6);
-  --card-border: rgba(148, 163, 184, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #475569, #334155);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(30, 41, 59, 0.6);
-  --btn-secondary-text: #94a3b8;
-  --btn-secondary-border: rgba(148, 163, 184, 0.4);
-  
-  --footer-bg: rgba(15, 23, 42, 0.9);
-  --footer-text: #94a3b8;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #64748b;
-}
-
-/* Midday Stormy - Dark dramatic clouds */
-.theme-midday-stormy {
-  --bg-image: url(/images/midday-stormy.jpg);
-  --bg-color: #1e293b;
-  
-  --glass-bg: rgba(30, 41, 59, 0.65);
-  --glass-border: rgba(148, 163, 184, 0.25);
-  --glass-shadow: rgba(71, 85, 105, 0.25);
-  
-  --nav-bg: rgba(30, 41, 59, 0.78);
-  --nav-border: rgba(148, 163, 184, 0.2);
-  
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  
-  --brand-primary: #94a3b8;
-  --brand-secondary: #64748b;
-  --brand-accent: #cbd5e1;
-  
-  --logo-color: #94a3b8;
-  
-  --card-bg: rgba(30, 41, 59, 0.6);
-  --card-border: rgba(148, 163, 184, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #64748b, #475569);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(30, 41, 59, 0.6);
-  --btn-secondary-text: #cbd5e1;
-  --btn-secondary-border: rgba(148, 163, 184, 0.4);
-  
-  --footer-bg: rgba(15, 23, 42, 0.9);
-  --footer-text: #94a3b8;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #94a3b8;
-}
-
-/* ============================================
-   SUNSET THEMES (5pm - 8pm)
-   ============================================ */
-
-/* Sunset Clear - Golden/orange hour */
-.theme-sunset-clear {
-  --bg-image: url(/images/sunset-clear.jpg);
-  --bg-color: #431407;
-  
-  --glass-bg: rgba(67, 20, 7, 0.65);
-  --glass-border: rgba(251, 146, 60, 0.3);
-  --glass-shadow: rgba(249, 115, 22, 0.25);
-  
-  --nav-bg: rgba(67, 20, 7, 0.78);
-  --nav-border: rgba(251, 146, 60, 0.25);
-  
-  --text-primary: #ffedd5;
-  --text-secondary: #fed7aa;
-  --text-muted: #fdba74;
-  
-  --brand-primary: #fb923c;
-  --brand-secondary: #f97316;
-  --brand-accent: #fdba74;
-  
-  --logo-color: #fb923c;
-  
-  --card-bg: rgba(67, 20, 7, 0.6);
-  --card-border: rgba(251, 146, 60, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #f97316, #ea580c);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(67, 20, 7, 0.6);
-  --btn-secondary-text: #fdba74;
-  --btn-secondary-border: rgba(251, 146, 60, 0.45);
-  
-  --footer-bg: rgba(67, 20, 7, 0.9);
-  --footer-text: #fed7aa;
-  
-  --accent-red: #fb923c;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #f97316;
-  --accent-green: #a3e635;
-  --accent-orange: #f97316;
-  --accent-cyan: #fb923c;
-}
-
-/* Sunset Rainy - Moody evening */
-.theme-sunset-rainy {
-  --bg-image: url(/images/sunset-rainy.jpg);
-  --bg-color: #292524;
-  
-  --glass-bg: rgba(41, 37, 36, 0.65);
-  --glass-border: rgba(168, 162, 158, 0.25);
-  --glass-shadow: rgba(120, 113, 108, 0.2);
-  
-  --nav-bg: rgba(41, 37, 36, 0.78);
-  --nav-border: rgba(168, 162, 158, 0.2);
-  
-  --text-primary: #fafaf9;
-  --text-secondary: #e7e5e4;
-  --text-muted: #d6d3d1;
-  
-  --brand-primary: #a8a29e;
-  --brand-secondary: #78716c;
-  --brand-accent: #d6d3d1;
-  
-  --logo-color: #a8a29e;
-  
-  --card-bg: rgba(41, 37, 36, 0.6);
-  --card-border: rgba(168, 162, 158, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #78716c, #57534e);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(41, 37, 36, 0.6);
-  --btn-secondary-text: #d6d3d1;
-  --btn-secondary-border: rgba(168, 162, 158, 0.35);
-  
-  --footer-bg: rgba(28, 25, 23, 0.9);
-  --footer-text: #d6d3d1;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #a8a29e;
-}
-
-/* Sunset Stormy - Pink/purple dramatic */
-.theme-sunset-stormy {
-  --bg-image: url(/images/sunset-stormy.jpg);
-  --bg-color: #4c1d3d;
-  
-  --glass-bg: rgba(76, 29, 61, 0.65);
-  --glass-border: rgba(244, 114, 182, 0.25);
-  --glass-shadow: rgba(236, 72, 153, 0.2);
-  
-  --nav-bg: rgba(76, 29, 61, 0.78);
-  --nav-border: rgba(244, 114, 182, 0.2);
-  
-  --text-primary: #fdf2f8;
-  --text-secondary: #fbcfe8;
-  --text-muted: #f9a8d4;
-  
-  --brand-primary: #f472b6;
-  --brand-secondary: #ec4899;
-  --brand-accent: #f9a8d4;
-  
-  --logo-color: #f472b6;
-  
-  --card-bg: rgba(76, 29, 61, 0.6);
-  --card-border: rgba(244, 114, 182, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #ec4899, #db2777);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(76, 29, 61, 0.6);
-  --btn-secondary-text: #f9a8d4;
-  --btn-secondary-border: rgba(244, 114, 182, 0.4);
-  
-  --footer-bg: rgba(76, 29, 61, 0.9);
-  --footer-text: #fbcfe8;
-  
-  --accent-red: #fb7185;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #f472b6;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #f472b6;
-}
-
-/* ============================================
-   NIGHT THEMES (8pm - 6am)
-   ============================================ */
-
-/* Night Clear - Aurora/starry sky */
-.theme-night-clear {
-  --bg-image: url(/images/night-clear.jpg);
-  --bg-color: #020617;
-  
-  --glass-bg: rgba(2, 6, 23, 0.6);
-  --glass-border: rgba(34, 211, 238, 0.25);
-  --glass-shadow: rgba(6, 182, 212, 0.15);
-  
-  --nav-bg: rgba(2, 6, 23, 0.75);
-  --nav-border: rgba(34, 211, 238, 0.2);
-  
-  --text-primary: #ecfeff;
-  --text-secondary: #a5f3fc;
-  --text-muted: #67e8f9;
-  
-  --brand-primary: #22d3ee;
-  --brand-secondary: #06b6d4;
-  --brand-accent: #67e8f9;
-  
-  --logo-color: #22d3ee;
-  
-  --card-bg: rgba(2, 6, 23, 0.55);
-  --card-border: rgba(34, 211, 238, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #06b6d4, #0891b2);
-  --btn-primary-text: #020617;
-  --btn-secondary-bg: rgba(2, 6, 23, 0.6);
-  --btn-secondary-text: #67e8f9;
-  --btn-secondary-border: rgba(34, 211, 238, 0.35);
-  
-  --footer-bg: rgba(2, 6, 23, 0.9);
-  --footer-text: #a5f3fc;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #22d3ee;
-}
-
-/* Night Rainy - Moody night */
-.theme-night-rainy {
-  --bg-image: url(/images/night-rainy.jpg);
-  --bg-color: #0f172a;
-  
-  --glass-bg: rgba(15, 23, 42, 0.6);
-  --glass-border: rgba(100, 116, 139, 0.25);
-  --glass-shadow: rgba(71, 85, 105, 0.2);
-  
-  --nav-bg: rgba(15, 23, 42, 0.75);
-  --nav-border: rgba(100, 116, 139, 0.2);
-  
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  
-  --brand-primary: #64748b;
-  --brand-secondary: #475569;
-  --brand-accent: #94a3b8;
-  
-  --logo-color: #64748b;
-  
-  --card-bg: rgba(15, 23, 42, 0.55);
-  --card-border: rgba(100, 116, 139, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #475569, #334155);
-  --btn-primary-text: #f1f5f9;
-  --btn-secondary-bg: rgba(15, 23, 42, 0.6);
-  --btn-secondary-text: #94a3b8;
-  --btn-secondary-border: rgba(100, 116, 139, 0.35);
-  
-  --footer-bg: rgba(2, 6, 23, 0.9);
-  --footer-text: #94a3b8;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #64748b;
-}
-
-/* Night Stormy - Electric storm */
-.theme-night-stormy {
-  --bg-image: url(/images/night-stormy.jpg);
-  --bg-color: #0c0a1d;
-  
-  --glass-bg: rgba(12, 10, 29, 0.6);
-  --glass-border: rgba(139, 92, 246, 0.25);
-  --glass-shadow: rgba(124, 58, 237, 0.2);
-  
-  --nav-bg: rgba(12, 10, 29, 0.75);
-  --nav-border: rgba(139, 92, 246, 0.2);
-  
-  --text-primary: #ede9fe;
-  --text-secondary: #c4b5fd;
-  --text-muted: #a78bfa;
-  
-  --brand-primary: #8b5cf6;
-  --brand-secondary: #7c3aed;
-  --brand-accent: #a78bfa;
-  
-  --logo-color: #8b5cf6;
-  
-  --card-bg: rgba(12, 10, 29, 0.55);
-  --card-border: rgba(139, 92, 246, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #7c3aed, #6d28d9);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(12, 10, 29, 0.6);
-  --btn-secondary-text: #a78bfa;
-  --btn-secondary-border: rgba(139, 92, 246, 0.4);
-  
-  --footer-bg: rgba(6, 5, 15, 0.9);
-  --footer-text: #c4b5fd;
-  
-  --accent-red: #f87171;
-  --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --accent-cyan: #8b5cf6;
-}
-
-/* ============================================
-   DARK MODE (Original site design)
-   BRIGHT BLUE GLASS
-   ============================================ */
-.dark-mode {
-  --bg-image: none;
-  --bg-color: #0a0e27;
-  --bg-overlay: transparent;
-  
-  /* BRIGHTER BLUE GLASS */
-  --glass-bg: rgba(30, 100, 180, 0.25);
-  --glass-border: rgba(56, 189, 248, 0.3);
-  --glass-shadow: rgba(56, 189, 248, 0.25);
-  
-  --nav-bg: rgba(20, 80, 150, 0.4);
-  --nav-border: rgba(56, 189, 248, 0.25);
-  
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  
-  --brand-primary: #22d3ee;
-  --brand-secondary: #764BA2;
-  --brand-accent: #67e8f9;
-  
-  --logo-color: #22d3ee;
-  
-  /* BRIGHTER cards */
-  --card-bg: rgba(30, 100, 180, 0.2);
-  --card-border: rgba(56, 189, 248, 0.25);
-  --card-shadow: 0 8px 32px rgba(56, 189, 248, 0.2);
-  
-  --btn-primary-bg: linear-gradient(135deg, #22d3ee, #764BA2);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(30, 100, 180, 0.3);
-  --btn-secondary-text: #22d3ee;
-  --btn-secondary-border: rgba(56, 189, 248, 0.5);
-  
-  --footer-bg: rgba(15, 60, 120, 0.5);
-  --footer-text: #94a3b8;
-  --footer-border: rgba(56, 189, 248, 0.25);
-  
-  --accent-red: #ef4444;
-  --accent-yellow: #eab308;
-  --accent-purple: #a855f7;
-  --accent-green: #22c55e;
-  --accent-orange: #f97316;
-  --accent-cyan: #22d3ee;
-}
-
-/* ============================================
-   BODY STYLING - Sky Background
-   ============================================ */
-body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  min-height: 100vh;
-  position: relative;
-}
-
-/* Sky image background layer */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -2;
-  transition: background-image 0.5s ease-in-out;
-}
-
-/* Dark mode uses bg-glow.svg */
-.dark-mode::before {
-  background-image: url("/bg-glow.svg");
-  background-size: cover;
-  background-position: center top;
-  opacity: 0.6;
-}
-
-/* ============================================
-   OVERRIDE: Hide hardcoded bg-glow divs
-   ============================================ */
-body:not(.dark-mode) main > div[style*="background"] {
-  display: none !important;
-}
-
-body:not(.dark-mode) main {
-  background: transparent !important;
-}
-
-body.dark-mode main > div[style*="background"] {
-  display: block;
-}
-
-/* ============================================
-   LOGO STYLING - Clean, no blur bleed
-   ============================================ */
-.logo-color,
-.logo-stroke {
-  stroke: var(--logo-color) !important;
-}
-
-/* Logo in navigation - clean, no blur */
-nav .logo-color,
-nav .logo-stroke,
-nav svg circle,
-nav svg path {
-  stroke: var(--logo-color) !important;
-}
-
-/* Logo in footer */
-footer .logo-color,
-footer .logo-stroke,
-footer svg circle,
-footer svg path {
-  stroke: var(--logo-color) !important;
-}
-
-/* Logo in hero section - subtle glow only */
-section svg circle[class*="stroke-cyan"],
-section svg path[class*="stroke-cyan"] {
-  stroke: var(--logo-color) !important;
-}
-
-/* ============================================
-   NAVIGATION - Theme Aware
-   ============================================ */
-nav, .nav, header {
-  background: var(--nav-bg) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--nav-border) !important;
-}
-
-/* Nav links */
-nav a {
-  color: var(--text-secondary) !important;
-  transition: color 0.2s ease;
-}
-
-nav a:hover {
-  color: var(--brand-primary) !important;
-}
-
-/* Nav logo text */
-nav .text-brand,
-nav span[class*="font-bold"],
-nav span[class*="font-black"] {
-  color: var(--brand-primary) !important;
-}
-
-/* Login button in nav */
-nav button,
-nav [class*="Login"],
-nav a[href*="login"] {
-  color: var(--brand-primary) !important;
-  border-color: var(--brand-primary) !important;
-}
-
-nav button:hover,
-nav a[href*="login"]:hover {
-  background: var(--brand-primary) !important;
-  color: var(--bg-color) !important;
-}
-
-/* ============================================
-   BACKGROUND OVERRIDES FOR ALL PAGES
-   Forces sky theme backgrounds on pages with 
-   Tailwind bg-gray-900 or similar classes
-   ============================================ */
-
-/* Override Tailwind background classes in sky themes */
-body:not(.dark-mode) .bg-gray-900,
-body:not(.dark-mode) .bg-slate-900,
-body:not(.dark-mode) .bg-zinc-900,
-body:not(.dark-mode) [class*="bg-gray-900"],
-body:not(.dark-mode) [class*="bg-slate-900"],
-body:not(.dark-mode) main {
-  background: transparent !important;
-}
-
-/* Keep cards styled properly - GLASSIER */
-body:not(.dark-mode) .bg-gray-800,
-body:not(.dark-mode) .bg-slate-800,
-body:not(.dark-mode) [class*="bg-gray-800"],
-body:not(.dark-mode) [class*="bg-slate-800"] {
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border) !important;
-}
-
-/* Dark mode cards - GLASSIER */
-.dark-mode .bg-gray-800,
-.dark-mode .bg-slate-800,
-.dark-mode [class*="bg-gray-800"],
-.dark-mode [class*="bg-slate-800"] {
-  background: var(--card-bg) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--card-border) !important;
-}
-
-/* ============================================
-   GLASS MORPHISM COMPONENTS
-   ============================================ */
-.glass-card,
-.card,
-.backdrop-blur-xl[class*="bg-white"],
-[class*="bg-white\\/5"] {
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border) !important;
-  box-shadow: var(--card-shadow);
-}
-
-/* ============================================
-   TEXT COLOR UTILITIES
-   ============================================ */
-.text-theme-primary { color: var(--text-primary); }
-.text-theme-secondary { color: var(--text-secondary); }
-.text-theme-muted { color: var(--text-muted); }
-.text-brand { color: var(--brand-primary) !important; }
-
-/* Override Tailwind text colors in sky themes */
-body:not(.dark-mode) .text-white,
-body:not(.dark-mode) .text-gray-100,
-body:not(.dark-mode) .text-gray-200,
-body:not(.dark-mode) .text-gray-300 { 
-  color: var(--text-primary) !important; 
-}
-
-body:not(.dark-mode) .text-gray-400,
-body:not(.dark-mode) .text-gray-500 { 
-  color: var(--text-secondary) !important; 
-}
-
-/* Cyan text becomes brand color */
-body:not(.dark-mode) .text-cyan-400,
-body:not(.dark-mode) .text-cyan-500,
-body:not(.dark-mode) h1[class*="text-cyan"],
-body:not(.dark-mode) h2[class*="text-cyan"] {
-  color: var(--brand-primary) !important;
-}
-
-/* Feature card accent colors */
-body:not(.dark-mode) .text-red-400 { color: var(--accent-red) !important; }
-body:not(.dark-mode) .text-yellow-400 { color: var(--accent-yellow) !important; }
-body:not(.dark-mode) .text-purple-400 { color: var(--accent-purple) !important; }
-body:not(.dark-mode) .text-green-400 { color: var(--accent-green) !important; }
-body:not(.dark-mode) .text-orange-400 { color: var(--accent-orange) !important; }
-
-/* Border colors */
-body:not(.dark-mode) [class*="border-red-400"] { border-color: var(--accent-red) !important; }
-body:not(.dark-mode) [class*="border-yellow-400"] { border-color: var(--accent-yellow) !important; }
-body:not(.dark-mode) [class*="border-purple-400"] { border-color: var(--accent-purple) !important; }
-body:not(.dark-mode) [class*="border-green-400"] { border-color: var(--accent-green) !important; }
-body:not(.dark-mode) [class*="border-orange-400"] { border-color: var(--accent-orange) !important; }
-body:not(.dark-mode) [class*="border-cyan-400"] { border-color: var(--brand-primary) !important; }
-body:not(.dark-mode) [class*="border-white"] { border-color: var(--glass-border) !important; }
-
-/* Background colors for icon circles */
-body:not(.dark-mode) [class*="bg-red-400"] { background-color: rgba(248, 113, 113, 0.2) !important; }
-body:not(.dark-mode) [class*="bg-yellow-400"] { background-color: rgba(251, 191, 36, 0.2) !important; }
-body:not(.dark-mode) [class*="bg-purple-400"] { background-color: rgba(167, 139, 250, 0.2) !important; }
-body:not(.dark-mode) [class*="bg-green-400"] { background-color: rgba(74, 222, 128, 0.15) !important; }
-body:not(.dark-mode) [class*="bg-orange-400"] { background-color: rgba(251, 146, 60, 0.2) !important; }
-body:not(.dark-mode) [class*="bg-cyan-400"],
-body:not(.dark-mode) [class*="bg-cyan-500"] { background-color: rgba(34, 211, 238, 0.2) !important; }
-
-/* ============================================
-   BUTTON STYLES
-   ============================================ */
-.btn-primary,
-.gradient-bg {
-  background: var(--btn-primary-bg) !important;
-  color: var(--btn-primary-text) !important;
-  border: none;
-}
-
-.btn-secondary,
-.btn-outline {
-  background: var(--btn-secondary-bg) !important;
-  color: var(--btn-secondary-text) !important;
-  border: 1px solid var(--btn-secondary-border) !important;
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-footer, .footer {
-  background: var(--footer-bg) !important;
-  color: var(--footer-text);
-  border-top: 1px solid var(--glass-border);
-}
-
-footer a {
-  color: var(--text-secondary) !important;
-}
-
-footer a:hover {
-  color: var(--brand-primary) !important;
-}
-
-/* ============================================
-   FORM ELEMENTS
-   ============================================ */
-input, textarea, select {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  color: var(--text-primary);
-}
-
-input:focus, textarea:focus, select:focus {
-  border-color: var(--brand-primary);
-  outline: none;
-}
-
-input::placeholder, textarea::placeholder {
-  color: var(--text-muted);
-}
-
-/* ============================================
-   TRANSITIONS
-   ============================================ */
-* {
-  transition: background-color 0.3s ease, 
-              color 0.3s ease, 
-              border-color 0.3s ease,
-              box-shadow 0.3s ease;
-}
-
-body::before {
-  transition: background-image 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
-
-/* ============================================
-   GREEN GLASS CARD - More opaque for readability
-   (The "Honesty Advantage" card with green border)
-   ============================================ */
-/* Sky themes need more opaque green cards - KEEP IT GREEN */
-body:not(.dark-mode) [class*="border-green"],
-body:not(.dark-mode) .border-green-400,
-body:not(.dark-mode) .border-green-500 {
-  background: rgba(20, 80, 40, 0.8) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-}
-
-/* Sunset/Dusk themes - darker green glass */
-.theme-sunset-clear [class*="border-green"],
-.theme-sunset-rainy [class*="border-green"],
-.theme-sunset-stormy [class*="border-green"] {
-  background: rgba(20, 70, 35, 0.85) !important;
-}
-
-/* ============================================
-   SUNSET/DUSK MODE - Orange Buttons
-   ============================================ */
-.theme-sunset-clear .btn-primary,
-.theme-sunset-clear .gradient-bg,
-.theme-sunset-clear button[class*="bg-cyan"],
-.theme-sunset-clear button[class*="bg-blue"],
-.theme-sunset-clear a[class*="bg-cyan"],
-.theme-sunset-clear a[class*="bg-blue"] {
-  background: linear-gradient(135deg, #f97316, #ea580c) !important;
-  color: #ffffff !important;
-}
-
-.theme-sunset-clear .btn-secondary,
-.theme-sunset-clear .btn-outline {
-  background: rgba(67, 20, 7, 0.6) !important;
-  color: #fdba74 !important;
-  border-color: rgba(251, 146, 60, 0.5) !important;
-}
-
-/* Override any cyan/blue buttons in sunset mode */
-.theme-sunset-clear [class*="border-cyan"],
-.theme-sunset-rainy [class*="border-cyan"],
-.theme-sunset-stormy [class*="border-cyan"] {
-  border-color: rgba(251, 146, 60, 0.5) !important;
-}
-
-.theme-sunset-clear [class*="text-cyan"],
-.theme-sunset-rainy [class*="text-cyan"],
-.theme-sunset-stormy [class*="text-cyan"] {
-  color: #fb923c !important;
-}
-
-/* ============================================
-   ACTIVE PAGE TRIANGLE - Orange in Sunset/Dusk
-   ============================================ */
-.theme-sunset-clear nav .active-indicator,
-.theme-sunset-clear nav [class*="triangle"],
-.theme-sunset-clear nav [class*="arrow"],
-.theme-sunset-clear nav a[aria-current="page"]::after,
-.theme-sunset-rainy nav .active-indicator,
-.theme-sunset-stormy nav .active-indicator {
-  border-color: transparent transparent #fb923c transparent !important;
-  color: #fb923c !important;
-}
-
-/* Active nav link color in sunset mode */
-.theme-sunset-clear nav a[aria-current="page"],
-.theme-sunset-clear nav a.active,
-.theme-sunset-rainy nav a[aria-current="page"],
-.theme-sunset-stormy nav a[aria-current="page"] {
-  color: #fb923c !important;
-}
-
-/* ============================================
-   CALCULATOR PAGES - Force sky background
-   ============================================ */
-body:not(.dark-mode) [class*="bg-gray-900"],
-body:not(.dark-mode) [class*="bg-slate-900"],
-body:not(.dark-mode) [class*="bg-zinc-900"],
-body:not(.dark-mode) [class*="bg-neutral-900"],
-body:not(.dark-mode) [class*="bg-stone-900"],
-body:not(.dark-mode) .calculator-page,
-body:not(.dark-mode) main[class*="bg-"],
-body:not(.dark-mode) div[class*="min-h-screen"][class*="bg-"] {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Ensure body background shows through */
-body:not(.dark-mode) main,
-body:not(.dark-mode) #__next,
-body:not(.dark-mode) [data-nextjs-scroll-focus-boundary] {
-  background: transparent !important;
-}
-
-/* ============================================
-   MOBILE: Force Dark Mode Only
-   ============================================ */
-@media (max-width: 768px) {
-  body::before {
-    background-attachment: scroll;
-  }
-  
-  /* Force dark mode on mobile */
-  body,
-  body.dark-mode,
-  body[class*="theme-"] {
-    --bg-image: none !important;
-    --bg-color: #0a0e27 !important;
-    
-    --glass-bg: rgba(30, 100, 180, 0.25) !important;
-    --glass-border: rgba(56, 189, 248, 0.3) !important;
-    
-    --nav-bg: rgba(20, 80, 150, 0.4) !important;
-    --nav-border: rgba(56, 189, 248, 0.25) !important;
-    
-    --text-primary: #ffffff !important;
-    --text-secondary: #94a3b8 !important;
-    --text-muted: #64748b !important;
-    
-    --brand-primary: #22d3ee !important;
-    --brand-secondary: #764BA2 !important;
-    --brand-accent: #67e8f9 !important;
-    
-    --logo-color: #22d3ee !important;
-    
-    --card-bg: rgba(30, 100, 180, 0.2) !important;
-    --card-border: rgba(56, 189, 248, 0.25) !important;
-    
-    --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2) !important;
-    --btn-primary-text: #ffffff !important;
-    
-    --footer-bg: rgba(15, 60, 120, 0.5) !important;
-    --footer-text: #94a3b8 !important;
-  }
-  
-  /* Use bg-glow on mobile */
-  body::before {
-    background-image: url("/bg-glow.svg") !important;
-    background-size: cover !important;
-    background-position: center top !important;
-    opacity: 0.6 !important;
-  }
-  
-  /* Show bg-glow div on mobile */
-  body main > div[style*="background"] {
-    display: block !important;
-  }
-  
-  /* Reset text colors on mobile */
-  body .text-cyan-400,
-  body h1[class*="text-cyan"],
-  body h2[class*="text-cyan"] {
-    color: #1E9FF2 !important;
-  }
-  
-  body .text-red-400 { color: #ef4444 !important; }
-  body .text-yellow-400 { color: #eab308 !important; }
-  body .text-purple-400 { color: #a855f7 !important; }
-  body .text-green-400 { color: #22c55e !important; }
-  body .text-orange-400 { color: #f97316 !important; }
-  
-  /* Hide theme slider on mobile */
-  .theme-slider-container {
-    display: none !important;
-  }
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
+import { 
+  UtensilsCrossed, // Food Cost
+  TrendingUp,      // Prime Cost  
+  Users,           // Labor Cost
+  Scale,           // Break-Even
+  Calculator,      // Menu Pricing
+  PieChart,        // Per Plate Pricing
+  Rocket,          // Startup Cost
+  Star,            // Google Review
+  CreditCard       // Third Party Fees
+} from 'lucide-react';
+
+export default function Navigation() {
+  const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+
+  const calculators = [
+    {
+      name: 'Food Cost Calculator',
+      href: '/free-tools/food-cost',
+      icon: UtensilsCrossed,
+      description: 'Calculate recipe costs',
+      color: 'text-cyan-400'
+    },
+    {
+      name: 'Prime Cost Calculator',
+      href: '/free-tools/prime-cost',
+      icon: TrendingUp,
+      description: 'Food + labor costs',
+      color: 'text-green-400'
+    },
+    {
+      name: 'Labor Cost Calculator',
+      href: '/free-tools/labor-cost',
+      icon: Users,
+      description: 'Staff cost analysis',
+      color: 'text-indigo-400'
+    },
+    {
+      name: 'Break-Even Calculator',
+      href: '/free-tools/break-even',
+      icon: Scale,
+      description: 'Find your break-even point',
+      color: 'text-purple-400'
+    },
+    {
+      name: 'Menu Pricing Calculator',
+      href: '/free-tools/menu-pricing',
+      icon: Calculator,
+      description: 'Optimize menu prices',
+      color: 'text-blue-400'
+    },
+    {
+      name: 'Per Plate Pricing',
+      href: '/free-tools/per-plate-pricing',
+      icon: PieChart,
+      description: 'Price per serving',
+      color: 'text-orange-400'
+    },
+    {
+      name: 'Startup Cost Calculator',
+      href: '/free-tools/startup-cost',
+      icon: Rocket,
+      description: 'Launch budget planner',
+      color: 'text-yellow-400'
+    },
+    {
+      name: 'Google Review Calculator',
+      href: '/free-tools/google-review',
+      icon: Star,
+      description: 'Review impact analysis',
+      color: 'text-pink-400'
+    },
+    {
+      name: 'Third Party Fees',
+      href: '/free-tools/third-party-fees',
+      icon: CreditCard,
+      description: 'Delivery app costs',
+      color: 'text-red-400'
+    }
+  ];
+
+  // Navigation items with their paths
+  const navItems = [
+    { label: 'Features', href: '/features' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Roadmap', href: '/roadmap' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' }
+  ];
+
+  // Check if current path matches
+  const isActive = (href: string) => pathname === href;
+  
+  // Check if Free Tools dropdown should be active
+  const isFreeToolsActive = pathname?.startsWith('/free-tools');
+
+  const handleForgotPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setLoginOpen(false);
+    setForgotPasswordOpen(true);
+  };
+
+  const handleBackToLogin = () => {
+    setForgotPasswordOpen(false);
+    setLoginOpen(true);
+  };
+
+  // Close mobile menu when clicking a link
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileDropdownOpen(false);
+  };
+
+  // Active indicator triangle component - uses CSS variable for color
+  const ActiveTriangle = () => (
+    <div 
+      className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 active-nav-triangle"
+      style={{
+        borderLeft: '6px solid transparent',
+        borderRight: '6px solid transparent',
+        borderBottom: '6px solid var(--brand-primary)',
+        filter: 'drop-shadow(0 0 8px var(--brand-primary))'
+      }}
+    />
+  );
+
+  return (
+    <>
+      {/* GLASS NAVIGATION BAR */}
+      <nav className="fixed top-0 left-0 right-0 z-50 nav-bg border-b" style={{ borderColor: 'var(--nav-border)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-2" onClick={closeMobileMenu}>
+              <svg viewBox="-5 0 85 60" className="h-10 md:h-12 w-auto">
+                <circle cx="20" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10"/>
+                <circle cx="48" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
+              </svg>
+              <span className="text-2xl font-black text-white">OwnerClone</span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-8">
+              {navItems.slice(0, 1).map((item) => (
+                <Link 
+                  key={item.href}
+                  href={item.href} 
+                  className="relative nav-text transition-colors"
+                  style={{
+                    color: isActive(item.href) ? 'var(--brand-primary)' : undefined
+                  }}
+                >
+                  {item.label}
+                  {isActive(item.href) && <ActiveTriangle />}
+                </Link>
+              ))}
+              
+              {/* Free Tools Dropdown */}
+              <div className="relative group">
+                <button 
+                  className="nav-text flex items-center gap-1 transition-colors"
+                  style={{
+                    color: isFreeToolsActive ? 'var(--brand-primary)' : undefined
+                  }}
+                >
+                  Free Tools
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                  {isFreeToolsActive && <ActiveTriangle />}
+                </button>
+                
+                {/* Glass Dropdown Menu */}
+                <div className="absolute top-full left-0 pt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="backdrop-blur-xl bg-black/60 border border-white/10 rounded-lg shadow-xl">
+                    <div className="p-2">
+                      {calculators.map((calc) => {
+                        const Icon = calc.icon;
+                        return (
+                          <Link 
+                            key={calc.href}
+                            href={calc.href} 
+                            className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 rounded-lg transition-colors"
+                          >
+                            <Icon className={`w-5 h-5 ${calc.color}`} />
+                            <div>
+                              <div className="font-semibold text-white">{calc.name}</div>
+                              <div className="text-xs text-gray-400">{calc.description}</div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                      <Link href="/free-tools" className="block px-4 py-3 hover:bg-white/10 border-t border-white/10 rounded-lg mt-1" style={{ color: 'var(--brand-primary)' }}>
+                        View All Tools →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {navItems.slice(1).map((item) => (
+                <Link 
+                  key={item.href}
+                  href={item.href} 
+                  className="relative nav-text transition-colors"
+                  style={{
+                    color: isActive(item.href) ? 'var(--brand-primary)' : undefined
+                  }}
+                >
+                  {item.label}
+                  {isActive(item.href) && <ActiveTriangle />}
+                </Link>
+              ))}
+
+              {/* Theme Toggle */}
+              <ThemeToggle />
+              {/* Login Button - Glass Style */}
+              <button 
+                onClick={() => setLoginOpen(true)}
+                className="login-btn px-4 py-2 rounded-lg font-bold"
+              >
+                Login
+              </button>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="lg:hidden flex items-center gap-2">
+              {/* Theme Toggle for mobile */}
+              <ThemeToggle />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 nav-text rounded-lg"
+                style={{ background: mobileMenuOpen ? 'rgba(255,255,255,0.1)' : 'transparent' }}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {mobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile menu - GLASS EFFECT */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-white/10 backdrop-blur-xl bg-black/60">
+            <div className="px-4 py-3 space-y-3">
+              <Link 
+                href="/features" 
+                className="block nav-text"
+                style={{ color: isActive('/features') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/features') ? 600 : undefined }}
+                onClick={closeMobileMenu}
+              >
+                Features
+              </Link>
+              
+              {/* Mobile Free Tools Dropdown */}
+              <div>
+                <button 
+                  onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                  className="w-full flex items-center justify-between nav-text"
+                  style={{ color: isFreeToolsActive ? 'var(--brand-primary)' : undefined, fontWeight: isFreeToolsActive ? 600 : undefined }}
+                >
+                  <span>Free Tools</span>
+                  <svg 
+                    className={`w-4 h-4 transition-transform ${mobileDropdownOpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Mobile dropdown items */}
+                {mobileDropdownOpen && (
+                  <div className="mt-2 ml-4 space-y-2 border-l-2 pl-4" style={{ borderColor: 'var(--brand-primary)' }}>
+                    {calculators.map((calc) => {
+                      const Icon = calc.icon;
+                      return (
+                        <Link 
+                          key={calc.href}
+                          href={calc.href} 
+                          className="flex items-center gap-2 text-sm nav-text py-1" 
+                          onClick={closeMobileMenu}
+                        >
+                          <Icon className={`w-4 h-4 ${calc.color}`} />
+                          <span>{calc.name}</span>
+                        </Link>
+                      );
+                    })}
+                    <Link href="/free-tools" className="block text-sm py-1 font-semibold" style={{ color: 'var(--brand-primary)' }} onClick={closeMobileMenu}>
+                      View All Tools →
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <Link 
+                href="/pricing" 
+                className="block nav-text"
+                style={{ color: isActive('/pricing') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/pricing') ? 600 : undefined }}
+                onClick={closeMobileMenu}
+              >
+                Pricing
+              </Link>
+              <Link 
+                href="/blog" 
+                className="block nav-text"
+                style={{ color: isActive('/blog') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/blog') ? 600 : undefined }}
+                onClick={closeMobileMenu}
+              >
+                Blog
+              </Link>
+              <Link 
+                href="/roadmap" 
+                className="block nav-text"
+                style={{ color: isActive('/roadmap') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/roadmap') ? 600 : undefined }}
+                onClick={closeMobileMenu}
+              >
+                Roadmap
+              </Link>
+              <Link 
+                href="/about" 
+                className="block nav-text"
+                style={{ color: isActive('/about') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/about') ? 600 : undefined }}
+                onClick={closeMobileMenu}
+              >
+                About
+              </Link>
+              <Link 
+                href="/contact" 
+                className="block nav-text"
+                style={{ color: isActive('/contact') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/contact') ? 600 : undefined }}
+                onClick={closeMobileMenu}
+              >
+                Contact
+              </Link>
+              <div className="pt-3 border-t border-white/10">
+                <button 
+                  onClick={() => {
+                    setLoginOpen(true);
+                    closeMobileMenu();
+                  }}
+                  className="block w-full text-center backdrop-blur-xl border rounded-lg px-4 py-2 font-bold transition-all"
+                  style={{ 
+                    backgroundColor: 'rgba(var(--brand-primary-rgb, 34, 211, 238), 0.2)',
+                    borderColor: 'var(--brand-primary)',
+                    color: 'var(--brand-primary)'
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Login Modal - GLASS EFFECT */}
+      {loginOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setLoginOpen(false)}>
+          <div className="backdrop-blur-xl bg-white/10 border-2 rounded-2xl p-8 max-w-md w-full mx-4" style={{ borderColor: 'var(--brand-primary)', boxShadow: '0 0 80px rgba(34, 211, 238, 0.3)' }} onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold">Login to <span style={{ color: 'var(--brand-primary)' }}>OwnerClone</span></h2>
+              <button onClick={() => setLoginOpen(false)} className="text-gray-400 hover:text-white transition">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Email</label>
+                <input
+                  type="email"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:outline-none text-white transition-colors"
+                  style={{ '--tw-ring-color': 'var(--brand-primary)' } as React.CSSProperties}
+                  placeholder="your@email.com"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Password</label>
+                <input
+                  type="password"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:outline-none text-white transition-colors"
+                  placeholder="••••••••"
+                />
+              </div>
+              
+              <div className="text-right">
+                <button 
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-sm transition"
+                  style={{ color: 'var(--brand-primary)' }}
+                >
+                  Forgot password/username?
+                </button>
+              </div>
+              
+              <button type="submit" className="w-full text-black px-6 py-3 rounded-lg font-bold transition" style={{ backgroundColor: 'var(--brand-primary)' }}>
+                Sign In
+              </button>
+            </form>
+            
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-400">
+                Don&apos;t have an account? <Link href="/pricing" className="font-semibold" style={{ color: 'var(--brand-primary)' }}>Join Early Access</Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Forgot Password Modal - GLASS EFFECT */}
+      {forgotPasswordOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setForgotPasswordOpen(false)}>
+          <div className="backdrop-blur-xl bg-white/10 border-2 rounded-2xl p-8 max-w-md w-full mx-4" style={{ borderColor: 'var(--brand-primary)', boxShadow: '0 0 80px rgba(34, 211, 238, 0.3)' }} onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold">Reset <span style={{ color: 'var(--brand-primary)' }}>Password</span></h2>
+              <button onClick={() => setForgotPasswordOpen(false)} className="text-gray-400 hover:text-white transition">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            
+            <p className="text-gray-300 mb-6">
+              Enter your email address and we&apos;ll send you a link to reset your password along with your username.
+            </p>
+            
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:outline-none text-white transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
+              
+              <button type="submit" className="w-full text-black px-6 py-3 rounded-lg font-bold transition" style={{ backgroundColor: 'var(--brand-primary)' }}>
+                Send Recovery Email
+              </button>
+            </form>
+            
+            <div className="mt-6 text-center">
+              <button 
+                onClick={handleBackToLogin}
+                className="text-sm transition"
+                style={{ color: 'var(--brand-primary)' }}
+              >
+                ← Back to Login
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
