@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import ThemeSlider from './ThemeSlider';
 import ThemeToggle from './ThemeToggle';
 import { 
   UtensilsCrossed, // Food Cost
@@ -123,6 +122,19 @@ export default function Navigation() {
     setMobileDropdownOpen(false);
   };
 
+  // Active indicator triangle component - uses CSS variable for color
+  const ActiveTriangle = () => (
+    <div 
+      className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 active-nav-triangle"
+      style={{
+        borderLeft: '6px solid transparent',
+        borderRight: '6px solid transparent',
+        borderBottom: '6px solid var(--brand-primary)',
+        filter: 'drop-shadow(0 0 8px var(--brand-primary))'
+      }}
+    />
+  );
+
   return (
     <>
       {/* GLASS NAVIGATION BAR */}
@@ -146,17 +158,11 @@ export default function Navigation() {
                   href={item.href} 
                   className="relative nav-text transition-colors"
                   style={{
-                    color: isActive(item.href) ? '#22d3ee' : undefined
+                    color: isActive(item.href) ? 'var(--brand-primary)' : undefined
                   }}
                 >
                   {item.label}
-                  {isActive(item.href) && (
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-cyan-400/70" 
-                      style={{
-                        filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))'
-                      }}
-                    />
-                  )}
+                  {isActive(item.href) && <ActiveTriangle />}
                 </Link>
               ))}
               
@@ -165,20 +171,14 @@ export default function Navigation() {
                 <button 
                   className="nav-text flex items-center gap-1 transition-colors"
                   style={{
-                    color: isFreeToolsActive ? '#22d3ee' : undefined
+                    color: isFreeToolsActive ? 'var(--brand-primary)' : undefined
                   }}
                 >
                   Free Tools
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
-                  {isFreeToolsActive && (
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-cyan-400/70" 
-                      style={{
-                        filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))'
-                      }}
-                    />
-                  )}
+                  {isFreeToolsActive && <ActiveTriangle />}
                 </button>
                 
                 {/* Glass Dropdown Menu */}
@@ -201,7 +201,7 @@ export default function Navigation() {
                           </Link>
                         );
                       })}
-                      <Link href="/free-tools" className="block px-4 py-3 text-cyan-400 hover:bg-white/10 border-t border-white/10 rounded-lg mt-1">
+                      <Link href="/free-tools" className="block px-4 py-3 hover:bg-white/10 border-t border-white/10 rounded-lg mt-1" style={{ color: 'var(--brand-primary)' }}>
                         View All Tools →
                       </Link>
                     </div>
@@ -215,30 +215,23 @@ export default function Navigation() {
                   href={item.href} 
                   className="relative nav-text transition-colors"
                   style={{
-                    color: isActive(item.href) ? '#22d3ee' : undefined
+                    color: isActive(item.href) ? 'var(--brand-primary)' : undefined
                   }}
                 >
                   {item.label}
-                  {isActive(item.href) && (
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-cyan-400/70" 
-                      style={{
-                        filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))'
-                      }}
-                    />
-                  )}
+                  {isActive(item.href) && <ActiveTriangle />}
                 </Link>
               ))}
 
-              {/* Theme Slider */}
-{/* Theme Toggle */}
-<ThemeToggle />
-{/* Login Button - Glass Style */}
-<button 
-  onClick={() => setLoginOpen(true)}
-  className="login-btn px-4 py-2 rounded-lg font-bold"
->
-  Login
-</button>
+              {/* Theme Toggle */}
+              <ThemeToggle />
+              {/* Login Button - Glass Style */}
+              <button 
+                onClick={() => setLoginOpen(true)}
+                className="login-btn px-4 py-2 rounded-lg font-bold"
+              >
+                Login
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -263,7 +256,8 @@ export default function Navigation() {
             <div className="px-4 py-3 space-y-3">
               <Link 
                 href="/features" 
-                className={`block nav-text ${isActive('/features') ? 'text-cyan-400 font-semibold' : ''}`}
+                className="block nav-text"
+                style={{ color: isActive('/features') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/features') ? 600 : undefined }}
                 onClick={closeMobileMenu}
               >
                 Features
@@ -273,7 +267,8 @@ export default function Navigation() {
               <div>
                 <button 
                   onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                  className={`w-full flex items-center justify-between nav-text ${isFreeToolsActive ? 'text-cyan-400 font-semibold' : ''}`}
+                  className="w-full flex items-center justify-between nav-text"
+                  style={{ color: isFreeToolsActive ? 'var(--brand-primary)' : undefined, fontWeight: isFreeToolsActive ? 600 : undefined }}
                 >
                   <span>Free Tools</span>
                   <svg 
@@ -288,7 +283,7 @@ export default function Navigation() {
                 
                 {/* Mobile dropdown items */}
                 {mobileDropdownOpen && (
-                  <div className="mt-2 ml-4 space-y-2 border-l-2 border-cyan-400 pl-4">
+                  <div className="mt-2 ml-4 space-y-2 border-l-2 pl-4" style={{ borderColor: 'var(--brand-primary)' }}>
                     {calculators.map((calc) => {
                       const Icon = calc.icon;
                       return (
@@ -303,7 +298,7 @@ export default function Navigation() {
                         </Link>
                       );
                     })}
-                    <Link href="/free-tools" className="block text-sm text-cyan-400 py-1 font-semibold" onClick={closeMobileMenu}>
+                    <Link href="/free-tools" className="block text-sm py-1 font-semibold" style={{ color: 'var(--brand-primary)' }} onClick={closeMobileMenu}>
                       View All Tools →
                     </Link>
                   </div>
@@ -312,35 +307,40 @@ export default function Navigation() {
 
               <Link 
                 href="/pricing" 
-                className={`block nav-text ${isActive('/pricing') ? 'text-cyan-400 font-semibold' : ''}`}
+                className="block nav-text"
+                style={{ color: isActive('/pricing') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/pricing') ? 600 : undefined }}
                 onClick={closeMobileMenu}
               >
                 Pricing
               </Link>
               <Link 
                 href="/blog" 
-                className={`block nav-text ${isActive('/blog') ? 'text-cyan-400 font-semibold' : ''}`}
+                className="block nav-text"
+                style={{ color: isActive('/blog') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/blog') ? 600 : undefined }}
                 onClick={closeMobileMenu}
               >
                 Blog
               </Link>
               <Link 
                 href="/roadmap" 
-                className={`block nav-text ${isActive('/roadmap') ? 'text-cyan-400 font-semibold' : ''}`}
+                className="block nav-text"
+                style={{ color: isActive('/roadmap') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/roadmap') ? 600 : undefined }}
                 onClick={closeMobileMenu}
               >
                 Roadmap
               </Link>
               <Link 
                 href="/about" 
-                className={`block nav-text ${isActive('/about') ? 'text-cyan-400 font-semibold' : ''}`}
+                className="block nav-text"
+                style={{ color: isActive('/about') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/about') ? 600 : undefined }}
                 onClick={closeMobileMenu}
               >
                 About
               </Link>
               <Link 
                 href="/contact" 
-                className={`block nav-text ${isActive('/contact') ? 'text-cyan-400 font-semibold' : ''}`}
+                className="block nav-text"
+                style={{ color: isActive('/contact') ? 'var(--brand-primary)' : undefined, fontWeight: isActive('/contact') ? 600 : undefined }}
                 onClick={closeMobileMenu}
               >
                 Contact
@@ -351,7 +351,12 @@ export default function Navigation() {
                     setLoginOpen(true);
                     closeMobileMenu();
                   }}
-                  className="block w-full text-center backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-4 py-2 rounded-lg font-bold"
+                  className="block w-full text-center backdrop-blur-xl border rounded-lg px-4 py-2 font-bold transition-all"
+                  style={{ 
+                    backgroundColor: 'rgba(var(--brand-primary-rgb, 34, 211, 238), 0.2)',
+                    borderColor: 'var(--brand-primary)',
+                    color: 'var(--brand-primary)'
+                  }}
                 >
                   Login
                 </button>
@@ -364,9 +369,9 @@ export default function Navigation() {
       {/* Login Modal - GLASS EFFECT */}
       {loginOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setLoginOpen(false)}>
-          <div className="backdrop-blur-xl bg-white/10 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
+          <div className="backdrop-blur-xl bg-white/10 border-2 rounded-2xl p-8 max-w-md w-full mx-4" style={{ borderColor: 'var(--brand-primary)', boxShadow: '0 0 80px rgba(34, 211, 238, 0.3)' }} onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">Login to <span className="text-[#38bdf8]">OwnerClone</span></h2>
+              <h2 className="text-2xl font-bold">Login to <span style={{ color: 'var(--brand-primary)' }}>OwnerClone</span></h2>
               <button onClick={() => setLoginOpen(false)} className="text-gray-400 hover:text-white transition">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
@@ -379,7 +384,8 @@ export default function Navigation() {
                 <label className="block text-sm font-semibold text-gray-300 mb-2">Email</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:outline-none text-white transition-colors"
+                  style={{ '--tw-ring-color': 'var(--brand-primary)' } as React.CSSProperties}
                   placeholder="your@email.com"
                 />
               </div>
@@ -388,7 +394,7 @@ export default function Navigation() {
                 <label className="block text-sm font-semibold text-gray-300 mb-2">Password</label>
                 <input
                   type="password"
-                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:outline-none text-white transition-colors"
                   placeholder="••••••••"
                 />
               </div>
@@ -397,20 +403,21 @@ export default function Navigation() {
                 <button 
                   type="button"
                   onClick={handleForgotPassword}
-                  className="text-sm text-[#38bdf8] hover:text-[#0ea5e9] transition"
+                  className="text-sm transition"
+                  style={{ color: 'var(--brand-primary)' }}
                 >
                   Forgot password/username?
                 </button>
               </div>
               
-              <button type="submit" className="w-full bg-[#38bdf8] text-black px-6 py-3 rounded-lg font-bold hover:bg-[#0ea5e9] transition">
+              <button type="submit" className="w-full text-black px-6 py-3 rounded-lg font-bold transition" style={{ backgroundColor: 'var(--brand-primary)' }}>
                 Sign In
               </button>
             </form>
             
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-400">
-                Don&apos;t have an account? <Link href="/pricing" className="text-[#38bdf8] hover:text-[#0ea5e9] font-semibold">Join Early Access</Link>
+                Don&apos;t have an account? <Link href="/pricing" className="font-semibold" style={{ color: 'var(--brand-primary)' }}>Join Early Access</Link>
               </p>
             </div>
           </div>
@@ -420,9 +427,9 @@ export default function Navigation() {
       {/* Forgot Password Modal - GLASS EFFECT */}
       {forgotPasswordOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setForgotPasswordOpen(false)}>
-          <div className="backdrop-blur-xl bg-white/10 border-2 border-[#38bdf8] rounded-2xl p-8 max-w-md w-full mx-4 shadow-[0_0_80px_rgba(56,189,248,0.3)]" onClick={(e) => e.stopPropagation()}>
+          <div className="backdrop-blur-xl bg-white/10 border-2 rounded-2xl p-8 max-w-md w-full mx-4" style={{ borderColor: 'var(--brand-primary)', boxShadow: '0 0 80px rgba(34, 211, 238, 0.3)' }} onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">Reset <span className="text-[#38bdf8]">Password</span></h2>
+              <h2 className="text-2xl font-bold">Reset <span style={{ color: 'var(--brand-primary)' }}>Password</span></h2>
               <button onClick={() => setForgotPasswordOpen(false)} className="text-gray-400 hover:text-white transition">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
@@ -439,12 +446,12 @@ export default function Navigation() {
                 <label className="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white transition-colors"
+                  className="w-full px-4 py-3 backdrop-blur-xl bg-black/40 border-2 border-white/10 rounded-lg focus:outline-none text-white transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
               
-              <button type="submit" className="w-full bg-[#38bdf8] text-black px-6 py-3 rounded-lg font-bold hover:bg-[#0ea5e9] transition">
+              <button type="submit" className="w-full text-black px-6 py-3 rounded-lg font-bold transition" style={{ backgroundColor: 'var(--brand-primary)' }}>
                 Send Recovery Email
               </button>
             </form>
@@ -452,7 +459,8 @@ export default function Navigation() {
             <div className="mt-6 text-center">
               <button 
                 onClick={handleBackToLogin}
-                className="text-sm text-[#38bdf8] hover:text-[#0ea5e9] transition"
+                className="text-sm transition"
+                style={{ color: 'var(--brand-primary)' }}
               >
                 ← Back to Login
               </button>
