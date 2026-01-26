@@ -587,45 +587,45 @@
 
 /* ============================================
    DARK MODE (Original site design)
-   BLUE GLASS - not smoke glass
+   BRIGHT BLUE GLASS
    ============================================ */
 .dark-mode {
   --bg-image: none;
   --bg-color: #0a0e27;
   --bg-overlay: transparent;
   
-  /* BLUE GLASS - transparent with blue tint */
-  --glass-bg: rgba(20, 60, 130, 0.35);
-  --glass-border: rgba(30, 159, 242, 0.25);
-  --glass-shadow: rgba(30, 159, 242, 0.2);
+  /* BRIGHTER BLUE GLASS */
+  --glass-bg: rgba(30, 100, 180, 0.25);
+  --glass-border: rgba(56, 189, 248, 0.3);
+  --glass-shadow: rgba(56, 189, 248, 0.25);
   
-  --nav-bg: rgba(15, 50, 110, 0.5);
-  --nav-border: rgba(30, 159, 242, 0.2);
+  --nav-bg: rgba(20, 80, 150, 0.4);
+  --nav-border: rgba(56, 189, 248, 0.25);
   
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
-  --brand-primary: #38bdf8;
+  --brand-primary: #22d3ee;
   --brand-secondary: #764BA2;
-  --brand-accent: #22d3ee;
+  --brand-accent: #67e8f9;
   
-  --logo-color: #38bdf8;
+  --logo-color: #22d3ee;
   
-  /* BLUE GLASS cards */
-  --card-bg: rgba(20, 60, 130, 0.3);
-  --card-border: rgba(30, 159, 242, 0.2);
-  --card-shadow: 0 8px 32px rgba(30, 159, 242, 0.15);
+  /* BRIGHTER cards */
+  --card-bg: rgba(30, 100, 180, 0.2);
+  --card-border: rgba(56, 189, 248, 0.25);
+  --card-shadow: 0 8px 32px rgba(56, 189, 248, 0.2);
   
-  --btn-primary-bg: linear-gradient(135deg, #38bdf8, #764BA2);
+  --btn-primary-bg: linear-gradient(135deg, #22d3ee, #764BA2);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(20, 60, 130, 0.4);
-  --btn-secondary-text: #38bdf8;
+  --btn-secondary-bg: rgba(30, 100, 180, 0.3);
+  --btn-secondary-text: #22d3ee;
   --btn-secondary-border: rgba(56, 189, 248, 0.5);
   
-  --footer-bg: rgba(10, 40, 90, 0.7);
+  --footer-bg: rgba(15, 60, 120, 0.5);
   --footer-text: #94a3b8;
-  --footer-border: rgba(30, 159, 242, 0.2);
+  --footer-border: rgba(56, 189, 248, 0.25);
   
   --accent-red: #ef4444;
   --accent-yellow: #eab308;
@@ -942,29 +942,29 @@ body::before {
     --bg-image: none !important;
     --bg-color: #0a0e27 !important;
     
-    --glass-bg: rgba(20, 60, 130, 0.35) !important;
-    --glass-border: rgba(30, 159, 242, 0.25) !important;
+    --glass-bg: rgba(30, 100, 180, 0.25) !important;
+    --glass-border: rgba(56, 189, 248, 0.3) !important;
     
-    --nav-bg: rgba(15, 50, 110, 0.5) !important;
-    --nav-border: rgba(30, 159, 242, 0.2) !important;
+    --nav-bg: rgba(20, 80, 150, 0.4) !important;
+    --nav-border: rgba(56, 189, 248, 0.25) !important;
     
     --text-primary: #ffffff !important;
     --text-secondary: #94a3b8 !important;
     --text-muted: #64748b !important;
     
-    --brand-primary: #38bdf8 !important;
+    --brand-primary: #22d3ee !important;
     --brand-secondary: #764BA2 !important;
-    --brand-accent: #22d3ee !important;
+    --brand-accent: #67e8f9 !important;
     
-    --logo-color: #38bdf8 !important;
+    --logo-color: #22d3ee !important;
     
-    --card-bg: rgba(20, 60, 130, 0.3) !important;
-    --card-border: rgba(30, 159, 242, 0.2) !important;
+    --card-bg: rgba(30, 100, 180, 0.2) !important;
+    --card-border: rgba(56, 189, 248, 0.25) !important;
     
     --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2) !important;
     --btn-primary-text: #ffffff !important;
     
-    --footer-bg: rgba(10, 40, 90, 0.7) !important;
+    --footer-bg: rgba(15, 60, 120, 0.5) !important;
     --footer-text: #94a3b8 !important;
   }
   
