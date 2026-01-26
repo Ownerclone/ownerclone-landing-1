@@ -9,31 +9,16 @@ export default function WeatherGreeting() {
     condition: string | null
     icon: string | null
   }>({ temp: null, condition: null, icon: null })
-  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
-    // Check dark mode state
-    const checkDarkMode = () => {
-      setIsDarkMode(document.body.classList.contains('dark-mode'))
-    }
-    
-    // Initial check
-    checkDarkMode()
-    
-    // Watch for theme changes
-    const observer = new MutationObserver(checkDarkMode)
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] })
-
     // Update greeting based on time
     const updateGreeting = () => {
       const hour = new Date().getHours()
-      if (document.body.classList.contains('dark-mode')) {
-        setGreeting('👋 Welcome')
-      } else if (hour >= 6 && hour < 9) {
-        setGreeting('🌅 Good Morning')
-      } else if (hour >= 9 && hour < 17) {
+      if (hour >= 5 && hour < 12) {
+        setGreeting('☀️ Good Morning')
+      } else if (hour >= 12 && hour < 17) {
         setGreeting('☀️ Good Afternoon')
-      } else if (hour >= 17 && hour < 19) {
+      } else if (hour >= 17 && hour < 21) {
         setGreeting('🌇 Good Evening')
       } else {
         setGreeting('🌙 Good Night')
@@ -99,7 +84,6 @@ export default function WeatherGreeting() {
     const weatherInterval = setInterval(getWeather, 30000) // Check every 30 seconds
 
     return () => {
-      observer.disconnect()
       clearInterval(greetingInterval)
       clearInterval(weatherInterval)
     }
@@ -108,18 +92,18 @@ export default function WeatherGreeting() {
   return (
     <div className="greeting-section flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
       {/* Greeting */}
-      <span className="greeting-text text-lg font-medium text-theme-secondary">
+      <span className="greeting-text text-lg font-medium" style={{ color: 'var(--text-secondary)' }}>
         {greeting}
       </span>
       
-      {/* Divider */}
-      {weather.temp && !isDarkMode && (
-        <span className="hidden sm:inline text-theme-muted">|</span>
+      {/* Divider - show when we have weather */}
+      {weather.temp && (
+        <span className="hidden sm:inline" style={{ color: 'var(--text-muted)' }}>|</span>
       )}
       
-      {/* Weather Display - only show in sky theme mode */}
-      {weather.temp && !isDarkMode && (
-        <div className="weather-widget flex items-center gap-2 text-theme-secondary">
+      {/* Weather Display - ALWAYS show on all modes */}
+      {weather.temp && (
+        <div className="weather-widget flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
           {weather.icon && (
             <img 
               src={`https:${weather.icon}`} 
@@ -132,16 +116,11 @@ export default function WeatherGreeting() {
           <span className="weather-temp font-semibold">{weather.temp}°F</span>
           {weather.condition && (
             <>
-              <span className="text-theme-muted">•</span>
+              <span style={{ color: 'var(--text-muted)' }}>•</span>
               <span className="weather-condition">{weather.condition}</span>
             </>
           )}
         </div>
-      )}
-      
-      {/* Theme toggle hint for dark mode */}
-      {isDarkMode && (
-        <span className="text-sm text-theme-muted ml-2">(Toggle ☀️ for live weather)</span>
       )}
     </div>
   )
