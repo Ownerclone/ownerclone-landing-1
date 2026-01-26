@@ -237,3 +237,52 @@ body::before {
   background-color: rgba(12, 74, 110, 0.25);
   color: #075985;
 }
+
+/* ============================================
+   LIGHT MODE NAV - ALL TEXT NAVY BLUE
+   ============================================ */
+
+:root.light-mode .nav-text {
+  color: #0c4a6e !important;
+}
+
+:root.light-mode .nav-text:hover {
+  color: #075985 !important;
+}
+
+/* All nav links navy */
+:root.light-mode nav a {
+  color: #0c4a6e !important;
+}
+
+:root.light-mode nav button:not(.login-btn) {
+  color: #0c4a6e !important;
+}
+
+/* Logo navy */
+:root.light-mode .logo-color {
+  stroke: #0c4a6e !important;
+}
+
+/* OwnerClone text navy */
+:root.light-mode nav .text-2xl,
+:root.light-mode nav .font-black {
+  color: #0c4a6e !important;
+}
+
+/* Active nav arrow - navy */
+:root.light-mode [style*="border-b-cyan"],
+:root.light-mode [style*="border-bottom"] {
+  border-bottom-color: #0c4a6e !important;
+  filter: drop-shadow(0 0 4px rgba(12, 74, 110, 0.5)) !important;
+}
+
+/* Dropdown menu items navy */
+:root.light-mode .dropdown-item {
+  color: #0c4a6e !important;
+}
+
+/* Mobile menu links navy */
+:root.light-mode .mobile-menu a {
+  color: #0c4a6e !important;
+}
