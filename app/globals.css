@@ -2,57 +2,329 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent autofill from changing input background colors */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus,
-select:-webkit-autofill:active,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-textarea:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset !important;
-  -webkit-text-fill-color: white !important;
-  transition: background-color 5000s ease-in-out 0s;
-}
+/* ============================================
+   OWNERCLONE DYNAMIC THEME SYSTEM
+   ============================================
+   
+   Themes available:
+   - theme-night (default/dark mode)
+   - theme-sunrise (6am-9am)
+   - theme-midday (9am-5pm) 
+   - theme-sunset (5pm-7pm)
+   - theme-dusk (7pm-9pm)
+   - theme-stormy (weather-based)
+   
+   Usage: Add theme class to <html> or <body>
+   Example: <body class="theme-sunrise">
+   
+============================================ */
 
-/* Light mode autofill fix */
-:root.light-mode input:-webkit-autofill,
-:root.light-mode input:-webkit-autofill:hover,
-:root.light-mode input:-webkit-autofill:focus,
-:root.light-mode input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Root theme variables - Dark mode (DEFAULT) */
+/* ============================================
+   BASE VARIABLES - NIGHT MODE (DEFAULT)
+   ============================================ */
 :root {
-  --bg-primary: #000000;
-  --bg-secondary: #0a0a0a;
-  --bg-card: #1a1a1a;
+  /* Background */
+  --bg-image: url('/images/sky-night.jpg');
+  --bg-color: #0a0a0a;
+  --bg-overlay: rgba(0, 0, 0, 0.3);
+  
+  /* Glass cards - more transparent on dark backgrounds */
+  --glass-bg: rgba(10, 10, 25, 0.6);
+  --glass-border: rgba(139, 92, 246, 0.3);
+  --glass-shadow: rgba(139, 92, 246, 0.15);
+  --nav-bg: rgba(10, 10, 25, 0.7);
+  --nav-border: rgba(139, 92, 246, 0.25);
+  
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-secondary: #c4b5fd;
+  --text-muted: #94a3b8;
+  
+  /* Brand/Accent colors */
+  --brand-color: #a78bfa;
+  --brand-hover: #c4b5fd;
+  --gradient-start: #6366f1;
+  --gradient-end: #a855f7;
+  
+  /* Stat cards */
+  --stat-1-from: #4f46e5;
+  --stat-1-to: #6366f1;
+  --stat-2-from: #7c3aed;
+  --stat-2-to: #8b5cf6;
+  --stat-3-from: #db2777;
+  --stat-3-to: #ec4899;
+  
+  /* Alert boxes */
+  --alert-red-bg: rgba(127, 29, 29, 0.4);
+  --alert-red-border: rgba(239, 68, 68, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-amber-bg: rgba(120, 53, 15, 0.4);
+  --alert-amber-border: rgba(245, 158, 11, 0.5);
+  --alert-amber-text: #fcd34d;
+  --alert-blue-bg: rgba(30, 58, 138, 0.4);
+  --alert-blue-border: rgba(59, 130, 246, 0.5);
+  --alert-blue-text: #93c5fd;
+  
+  /* Footer */
+  --footer-bg: rgba(10, 10, 25, 0.8);
+  
+  /* Misc */
+  --logo-color: #a78bfa;
+  --button-text: #ffffff;
+}
+
+/* ============================================
+   THEME: SUNRISE (6am - 9am)
+   Warm pink/orange clouds, dark purple glass
+   ============================================ */
+.theme-sunrise {
+  --bg-image: url('/images/sky-sunrise.jpg');
+  --bg-color: #1e1b4b;
+  --bg-overlay: rgba(30, 15, 45, 0.2);
+  
+  --glass-bg: rgba(30, 15, 45, 0.72);
+  --glass-border: rgba(251, 191, 36, 0.3);
+  --glass-shadow: rgba(234, 88, 12, 0.2);
+  --nav-bg: rgba(30, 15, 45, 0.8);
+  --nav-border: rgba(251, 191, 36, 0.25);
+  
   --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-tertiary: #666666;
-  --border: #2a2a2a;
-  --nav-bg: rgba(0, 0, 0, 0.4);
-  --nav-border: rgba(255, 255, 255, 0.1);
-  --nav-text: #d1d5db;
-  --nav-text-hover: #ffffff;
+  --text-secondary: #fde68a;
+  --text-muted: #fcd34d;
+  
+  --brand-color: #fbbf24;
+  --brand-hover: #fcd34d;
+  --gradient-start: #f97316;
+  --gradient-end: #ec4899;
+  
+  --stat-1-from: #f97316;
+  --stat-1-to: #ea580c;
+  --stat-2-from: #f59e0b;
+  --stat-2-to: #d97706;
+  --stat-3-from: #ec4899;
+  --stat-3-to: #db2777;
+  
+  --alert-red-bg: rgba(239, 68, 68, 0.25);
+  --alert-red-border: rgba(248, 113, 113, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-amber-bg: rgba(245, 158, 11, 0.25);
+  --alert-amber-border: rgba(252, 211, 77, 0.5);
+  --alert-amber-text: #fde68a;
+  --alert-blue-bg: rgba(236, 72, 153, 0.25);
+  --alert-blue-border: rgba(244, 114, 182, 0.5);
+  --alert-blue-text: #f9a8d4;
+  
+  --footer-bg: rgba(30, 15, 45, 0.85);
+  --logo-color: #fbbf24;
+  --button-text: #ffffff;
+}
+
+/* ============================================
+   THEME: MIDDAY (9am - 5pm)
+   Bright blue sky, white/frosted glass
+   Most opaque glass for readability
+   ============================================ */
+.theme-midday {
+  --bg-image: url('/images/sky-midday.jpg');
+  --bg-color: #e0f2fe;
+  --bg-overlay: rgba(255, 255, 255, 0.1);
+  
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: rgba(14, 165, 233, 0.15);
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --nav-border: rgba(14, 165, 233, 0.2);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  
+  --brand-color: #0284c7;
+  --brand-hover: #0369a1;
+  --gradient-start: #0ea5e9;
+  --gradient-end: #3b82f6;
+  
+  --stat-1-from: #0ea5e9;
+  --stat-1-to: #0284c7;
+  --stat-2-from: #06b6d4;
+  --stat-2-to: #0891b2;
+  --stat-3-from: #f43f5e;
+  --stat-3-to: #e11d48;
+  
+  --alert-red-bg: rgba(239, 68, 68, 0.1);
+  --alert-red-border: rgba(239, 68, 68, 0.3);
+  --alert-red-text: #dc2626;
+  --alert-amber-bg: rgba(245, 158, 11, 0.1);
+  --alert-amber-border: rgba(245, 158, 11, 0.3);
+  --alert-amber-text: #d97706;
+  --alert-blue-bg: rgba(14, 165, 233, 0.1);
+  --alert-blue-border: rgba(14, 165, 233, 0.3);
+  --alert-blue-text: #0284c7;
+  
+  --footer-bg: rgba(15, 23, 42, 0.9);
+  --logo-color: #0ea5e9;
+  --button-text: #ffffff;
+}
+
+/* ============================================
+   THEME: SUNSET (5pm - 7pm)
+   Fiery red/orange clouds, dark translucent glass
+   More transparent to see dramatic sky
+   ============================================ */
+.theme-sunset {
+  --bg-image: url('/images/sky-sunset.jpg');
+  --bg-color: #1c1917;
+  --bg-overlay: rgba(20, 10, 30, 0.15);
+  
+  --glass-bg: rgba(20, 10, 30, 0.65);
+  --glass-border: rgba(251, 146, 60, 0.3);
+  --glass-shadow: rgba(234, 88, 12, 0.25);
+  --nav-bg: rgba(20, 10, 30, 0.72);
+  --nav-border: rgba(251, 146, 60, 0.25);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #fed7aa;
+  --text-muted: #fdba74;
+  
+  --brand-color: #fbbf24;
+  --brand-hover: #fcd34d;
+  --gradient-start: #f97316;
+  --gradient-end: #dc2626;
+  
+  --stat-1-from: #ea580c;
+  --stat-1-to: #dc2626;
+  --stat-2-from: #f59e0b;
+  --stat-2-to: #ea580c;
+  --stat-3-from: #e11d48;
+  --stat-3-to: #be123c;
+  
+  --alert-red-bg: rgba(239, 68, 68, 0.25);
+  --alert-red-border: rgba(248, 113, 113, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-amber-bg: rgba(245, 158, 11, 0.25);
+  --alert-amber-border: rgba(252, 211, 77, 0.5);
+  --alert-amber-text: #fde68a;
+  --alert-blue-bg: rgba(249, 115, 22, 0.25);
+  --alert-blue-border: rgba(251, 146, 60, 0.5);
+  --alert-blue-text: #fed7aa;
+  
+  --footer-bg: rgba(20, 10, 30, 0.85);
+  --logo-color: #fbbf24;
+  --button-text: #ffffff;
+}
+
+/* ============================================
+   THEME: DUSK (7pm - 9pm)
+   Twilight with moon, transitional glass
+   ============================================ */
+.theme-dusk {
+  --bg-image: url('/images/sky-dusk.jpg');
+  --bg-color: #0f172a;
+  --bg-overlay: rgba(15, 23, 42, 0.2);
+  
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(251, 191, 36, 0.25);
+  --glass-shadow: rgba(251, 191, 36, 0.15);
+  --nav-bg: rgba(15, 23, 42, 0.78);
+  --nav-border: rgba(251, 191, 36, 0.2);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #fde68a;
+  --text-muted: #fcd34d;
+  
+  --brand-color: #fbbf24;
+  --brand-hover: #fcd34d;
+  --gradient-start: #1e3a5f;
+  --gradient-end: #f97316;
+  
+  --stat-1-from: #1e40af;
+  --stat-1-to: #1d4ed8;
+  --stat-2-from: #d97706;
+  --stat-2-to: #b45309;
+  --stat-3-from: #e11d48;
+  --stat-3-to: #be123c;
+  
+  --alert-red-bg: rgba(239, 68, 68, 0.25);
+  --alert-red-border: rgba(248, 113, 113, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-amber-bg: rgba(245, 158, 11, 0.25);
+  --alert-amber-border: rgba(252, 211, 77, 0.5);
+  --alert-amber-text: #fde68a;
+  --alert-blue-bg: rgba(30, 64, 175, 0.3);
+  --alert-blue-border: rgba(59, 130, 246, 0.5);
+  --alert-blue-text: #93c5fd;
+  
+  --footer-bg: rgba(15, 23, 42, 0.88);
+  --logo-color: #fbbf24;
+  --button-text: #ffffff;
+}
+
+/* ============================================
+   THEME: NIGHT (9pm - 6am) - Same as default
+   Starry sky, most transparent glass
+   ============================================ */
+.theme-night {
+  /* Uses :root defaults - no overrides needed */
+}
+
+/* ============================================
+   THEME: STORMY (Weather-based)
+   Grey dramatic clouds, teal accents
+   ============================================ */
+.theme-stormy {
+  --bg-image: url('/images/sky-stormy.jpg');
+  --bg-color: #1e293b;
+  --bg-overlay: rgba(15, 30, 40, 0.2);
+  
+  --glass-bg: rgba(15, 30, 40, 0.7);
+  --glass-border: rgba(56, 189, 248, 0.25);
+  --glass-shadow: rgba(56, 189, 248, 0.15);
+  --nav-bg: rgba(15, 30, 40, 0.78);
+  --nav-border: rgba(56, 189, 248, 0.2);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --brand-color: #22d3ee;
+  --brand-hover: #06b6d4;
+  --gradient-start: #0891b2;
+  --gradient-end: #0ea5e9;
+  
+  --stat-1-from: #0891b2;
+  --stat-1-to: #0e7490;
+  --stat-2-from: #475569;
+  --stat-2-to: #334155;
+  --stat-3-from: #e11d48;
+  --stat-3-to: #be123c;
+  
+  --alert-red-bg: rgba(127, 29, 29, 0.3);
+  --alert-red-border: rgba(239, 68, 68, 0.4);
+  --alert-red-text: #fca5a5;
+  --alert-amber-bg: rgba(120, 53, 15, 0.3);
+  --alert-amber-border: rgba(245, 158, 11, 0.4);
+  --alert-amber-text: #fcd34d;
+  --alert-blue-bg: rgba(8, 145, 178, 0.3);
+  --alert-blue-border: rgba(34, 211, 238, 0.4);
+  --alert-blue-text: #67e8f9;
+  
+  --footer-bg: rgba(15, 30, 40, 0.88);
   --logo-color: #22d3ee;
+  --button-text: #ffffff;
 }
 
-/* Apply theme colors */
+/* ============================================
+   APPLY THEME VARIABLES TO ELEMENTS
+   ============================================ */
+
+/* Body background */
 body {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-color);
   color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.5s ease, color 0.3s ease;
 }
 
-/* Orb background - works on mobile */
+/* Background image */
 body::before {
   content: '';
   position: fixed;
@@ -60,435 +332,355 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/bg-glow.svg');
+  background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Optional overlay for better text readability */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-overlay);
   z-index: -1;
   pointer-events: none;
 }
 
-/* Utility classes */
-.bg-theme-primary { background-color: var(--bg-primary); }
-.bg-theme-secondary { background-color: var(--bg-secondary); }
-.bg-theme-card { background-color: var(--bg-card); }
-.text-theme-primary { color: var(--text-primary); }
-.text-theme-secondary { color: var(--text-secondary); }
-.text-theme-tertiary { color: var(--text-tertiary); }
-.border-theme { border-color: var(--border); }
+/* ============================================
+   GLASS CARD COMPONENTS
+   ============================================ */
+
+/* Primary glass card */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
 
 /* Navigation */
-.nav-bg {
-  background-color: var(--nav-bg);
-  border-color: var(--nav-border);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+.glass-nav,
+nav {
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.nav-text {
-  color: var(--nav-text);
-  transition: color 0.3s ease;
+/* Apply to existing Tailwind glass classes */
+.backdrop-blur-xl,
+.backdrop-blur-lg,
+.backdrop-blur-md,
+.backdrop-blur,
+.bg-white\/5,
+.bg-white\/10,
+.bg-black\/40,
+.bg-black\/60,
+.bg-black\/80,
+.bg-gray-900,
+.bg-gray-800 {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
 }
 
-.nav-text:hover {
-  color: var(--nav-text-hover);
+/* ============================================
+   TEXT COLORS
+   ============================================ */
+
+.text-theme-primary,
+.text-white,
+.text-gray-100 {
+  color: var(--text-primary);
 }
 
+.text-theme-secondary,
+.text-gray-300,
+.text-gray-400 {
+  color: var(--text-secondary);
+}
+
+.text-theme-muted,
+.text-gray-500,
+.text-gray-600 {
+  color: var(--text-muted);
+}
+
+/* ============================================
+   BRAND/ACCENT COLORS
+   ============================================ */
+
+.text-brand,
+.text-cyan-400,
+.text-cyan-500,
+.brand-color {
+  color: var(--brand-color);
+}
+
+.hover\:text-brand:hover {
+  color: var(--brand-hover);
+}
+
+/* Logo */
 .logo-color {
   stroke: var(--logo-color);
   transition: stroke 0.3s ease;
 }
 
-/* Dropdown menu */
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient background (buttons, CTAs) */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: var(--button-text);
+}
+
+/* ============================================
+   STAT CARDS
+   ============================================ */
+
+.stat-card-1,
+.stat-1 {
+  background: linear-gradient(135deg, var(--stat-1-from), var(--stat-1-to));
+}
+
+.stat-card-2,
+.stat-2 {
+  background: linear-gradient(135deg, var(--stat-2-from), var(--stat-2-to));
+}
+
+.stat-card-3,
+.stat-3 {
+  background: linear-gradient(135deg, var(--stat-3-from), var(--stat-3-to));
+}
+
+/* ============================================
+   ALERT BOXES
+   ============================================ */
+
+.alert-red {
+  background: var(--alert-red-bg);
+  border: 1px solid var(--alert-red-border);
+  color: var(--alert-red-text);
+}
+
+.alert-amber {
+  background: var(--alert-amber-bg);
+  border: 1px solid var(--alert-amber-border);
+  color: var(--alert-amber-text);
+}
+
+.alert-blue {
+  background: var(--alert-blue-bg);
+  border: 1px solid var(--alert-blue-border);
+  color: var(--alert-blue-text);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer,
+.footer {
+  background: var(--footer-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: var(--button-text);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 20px var(--glass-shadow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--brand-color);
+}
+
+.btn-secondary:hover {
+  background: var(--nav-bg);
+}
+
+/* ============================================
+   FORM INPUTS
+   ============================================ */
+
+input,
+textarea,
+select {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--brand-color);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--glass-shadow);
+}
+
+/* Autofill fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--glass-bg) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ============================================
+   DROPDOWN MENUS
+   ============================================ */
+
 .dropdown-menu {
-  background-color: var(--bg-card);
-  border-color: var(--border);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  background: var(--nav-bg);
+  border: 1px solid var(--nav-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .dropdown-item {
   color: var(--text-secondary);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dropdown-item:hover {
-  background-color: var(--bg-secondary);
+  background: var(--glass-bg);
   color: var(--text-primary);
 }
 
-.dropdown-item-desc {
-  color: var(--text-tertiary);
-}
+/* ============================================
+   MOBILE MENU
+   ============================================ */
 
-/* Login button */
-.login-btn {
-  background-color: #22d3ee;
-  color: #000000;
-  transition: background-color 0.3s ease;
-}
-
-.login-btn:hover {
-  background-color: #06b6d4;
-}
-
-/* Mobile menu */
 .mobile-menu {
-  background-color: var(--nav-bg);
-  border-color: var(--nav-border);
-}
-
-/* Performance optimizations */
-.animate-pulse,
-[class*="animate-"] {
-  display: none !important;
-}
-
-.backdrop-blur-xl,
-.backdrop-blur-lg,
-.backdrop-blur-md,
-.backdrop-blur-sm,
-.backdrop-blur {
-  backdrop-filter: none !important;
-}
-
-[class*="shadow-[0_0_"] {
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1) !important;
-}
-
-[class*="hover:shadow-"]:hover {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+  background: var(--nav-bg);
+  border: 1px solid var(--nav-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 /* ============================================
-   LIGHT MODE
+   UTILITY CLASSES
    ============================================ */
 
-:root.light-mode {
-  --bg-primary: #f3f4f6;
-  --bg-secondary: #e5e7eb;
-  --bg-card: #ffffff;
-  --text-primary: #000000;
-  --text-secondary: #666666;
-  --text-tertiary: #999999;
-  --border: #e5e5e5;
-  --nav-bg: rgba(30, 41, 59, 0.95);  /* MUCH darker smoke - slate-800 */
-  --nav-border: rgba(30, 41, 59, 0.98);
-  --nav-text: #22d3ee;  /* Cyan text */
-  --nav-text-hover: #06b6d4;  /* Darker cyan on hover */
-  --logo-color: #22d3ee;  /* Cyan logo */
+.border-theme {
+  border-color: var(--glass-border);
 }
 
-:root.light-mode body::before {
-  display: block !important;
-  background-image: url('/bg-sky-v3-heavy-blur.jpg') !important;
-  opacity: 1 !important;
+.bg-theme-glass {
+  background: var(--glass-bg);
 }
 
-:root.light-mode body {
-  background-color: #f3f4f6 !important;
-}
-
-:root.light-mode .fixed.inset-0.z-0 {
-  display: none !important;
-}
-
-:root.light-mode div[style*="bg-glow"] {
-  display: none !important;
-}
-
-:root.light-mode div[style*="backgroundImage"] {
-  background-image: none !important;
-}
-
-/* Nav styling - CYAN TEXT */
-:root.light-mode .nav-text {
-  color: #22d3ee !important;  /* Cyan */
-  font-weight: 600 !important;
-}
-
-:root.light-mode .nav-text:hover {
-  color: #06b6d4 !important;  /* Darker cyan */
-}
-
-:root.light-mode nav a {
-  color: #22d3ee !important;  /* Cyan */
-  font-weight: 600 !important;
-}
-
-:root.light-mode nav button:not(.login-btn) {
-  color: #22d3ee !important;  /* Cyan */
-  font-weight: 600 !important;
-}
-
-:root.light-mode .logo-color {
-  stroke: #22d3ee !important;  /* Cyan logo */
-}
-
-:root.light-mode nav .text-2xl,
-:root.light-mode nav .font-black {
-  color: #22d3ee !important;  /* Cyan */
-  font-weight: 800 !important;
-}
-
-:root.light-mode [style*="border-b-cyan"],
-:root.light-mode [style*="border-bottom"] {
-  border-bottom-color: #22d3ee !important;  /* Cyan arrow */
-  filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.6)) !important;
-}
-
-:root.light-mode .text-cyan-400 {
-  color: #22d3ee !important;  /* Cyan */
-}
-
-/* Dropdown - MUCH darker smoke to match nav */
-:root.light-mode .dropdown-menu,
-:root.light-mode nav .absolute.top-full {
-  background-color: rgba(30, 41, 59, 0.95) !important;  /* Dark slate-800 */
-  border-color: rgba(30, 41, 59, 0.98) !important;
-}
-
-:root.light-mode .dropdown-item {
-  color: #22d3ee !important;  /* Cyan text */
-  font-weight: 500 !important;
-}
-
-:root.light-mode .dropdown-item:hover {
-  background-color: rgba(51, 65, 85, 0.5) !important;  /* Lighter slate on hover */
-}
-
-/* Mobile menu - MUCH darker smoke */
-:root.light-mode .mobile-menu,
-:root.light-mode nav .lg\:hidden {
-  background-color: rgba(30, 41, 59, 0.95) !important;  /* Dark slate-800 */
-  border-color: rgba(30, 41, 59, 0.98) !important;
-}
-
-:root.light-mode .mobile-menu a {
-  color: #22d3ee !important;  /* Cyan text */
-  font-weight: 600 !important;
-}
-
-/* ALL CARDS DEFAULT TO SMOKE GLASS - 20% DARKER */
-:root.light-mode .backdrop-blur-xl,
-:root.light-mode [class*="backdrop-blur"],
-:root.light-mode .bg-white\/5,
-:root.light-mode .bg-white\/10,
-:root.light-mode .bg-black,
-:root.light-mode .bg-black\/40,
-:root.light-mode .bg-black\/60,
-:root.light-mode .bg-black\/80,
-:root.light-mode .bg-gray-900,
-:root.light-mode .bg-gray-800 {
-  background-color: rgba(100, 116, 139, 0.65) !important;  /* Was 0.45, now 0.65 */
-  border-color: rgba(100, 116, 139, 0.8) !important;  /* Was 0.6, now 0.8 */
-}
-
-:root.light-mode .border-white\/10,
-:root.light-mode .border-white\/20 {
-  border-color: rgba(100, 116, 139, 0.5) !important;
-}
-
-/* Login button - CYAN */
-:root.light-mode .login-btn {
-  background-color: #22d3ee;
-  color: #000000;
-  border: 1px solid #22d3ee;
-}
-
-:root.light-mode .login-btn:hover {
-  background-color: #06b6d4;
-  color: #000000;
-}
-
-/* TEXT COLORS - WHITE INSTEAD OF NAVY */
-:root.light-mode .text-white,
-:root.light-mode .text-gray-200,
-:root.light-mode .text-gray-300,
-:root.light-mode .text-gray-400,
-:root.light-mode .text-black {
-  color: #ffffff !important;  /* White text instead of navy */
-}
-
-/* Cyan text - NO OUTLINE */
-:root.light-mode .text-cyan-400,
-:root.light-mode .text-cyan-500 {
-  color: #22d3ee !important;  /* Just cyan, no stroke */
-}
-
-/* Green text - NO OUTLINE, just darker green */
-:root.light-mode .text-green-400,
-:root.light-mode .text-green-500,
-:root.light-mode .text-\[\#10b981\],
-:root.light-mode .text-emerald-400,
-:root.light-mode .text-emerald-500 {
-  color: #059669 !important;  /* Darker green - emerald-600, no stroke */
-  font-weight: 600 !important;
-}
-
-/* GREEN GLASS CARDS - 20% DARKER */
-:root.light-mode .bg-green-500\/10,
-:root.light-mode .bg-green-500\/20,
-:root.light-mode .bg-green-500\/30,
-:root.light-mode .border-green-400\/30,
-:root.light-mode .border-\[\#10b981\]\/30 {
-  background-color: rgba(16, 185, 129, 0.5) !important;  /* Was 0.3, now 0.5 */
-  border-color: rgba(16, 185, 129, 0.7) !important;  /* Was 0.5, now 0.7 */
-}
-
-/* GREEN GRADIENT CARDS - 20% DARKER */
-:root.light-mode .bg-gradient-to-br.from-green-500\/10,
-:root.light-mode [class*="bg-gradient"][class*="green"] {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.45) 0%, rgba(16, 185, 129, 0.55) 100%) !important;  /* Was 0.25-0.35, now 0.45-0.55 */
-}
-
-/* ICONS - Full opacity with 2px colored borders */
-:root.light-mode svg,
-:root.light-mode [class*="lucide"],
-:root.light-mode .icon {
-  opacity: 1 !important;
-  filter: drop-shadow(0 0 0 currentColor) drop-shadow(0 0 0 currentColor);
-}
-
-/* Icon borders - 2px matching their color */
-:root.light-mode svg {
-  stroke-width: 2.5 !important;
-}
-
-/* FOOTER - Extra dark smoke glass */
-:root.light-mode footer,
-:root.light-mode [class*="footer"] {
-  background-color: rgba(71, 85, 105, 0.8) !important;  /* Darker smoke - slate-600 */
-  border-color: rgba(71, 85, 105, 0.9) !important;
-}
-
-:root.light-mode footer *,
-:root.light-mode [class*="footer"] * {
-  color: #ffffff !important;  /* White text in footer */
-}
-
-:root.light-mode footer a:hover,
-:root.light-mode [class*="footer"] a:hover {
-  color: #22d3ee !important;  /* Cyan on hover */
+.shadow-theme {
+  box-shadow: 0 8px 32px var(--glass-shadow);
 }
 
 /* ============================================
-   LOGO FIXES - SOLID CYAN IN LIGHT MODE
+   TRANSITIONS
    ============================================ */
 
-/* Light mode - ALL logos should be SOLID cyan */
-:root.light-mode svg circle.logo-color,
-:root.light-mode .logo-color {
-  stroke: #22d3ee !important;
-  stroke-opacity: 1 !important;  /* Solid, not translucent */
-  opacity: 1 !important;
+/* Smooth theme transitions */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
-/* Homepage logo in light mode - solid cyan */
-:root.light-mode .stroke-cyan-400\/60 {
-  stroke: #22d3ee !important;
-  stroke-opacity: 1 !important;
-}
-
-/* Footer logo in light mode - solid cyan */
-:root.light-mode footer svg circle,
-:root.light-mode footer .logo-color {
-  stroke: #22d3ee !important;
-  stroke-opacity: 1 !important;
-}
-
-/* Dark mode - Nav logo should be translucent like homepage */
-:root nav svg circle.logo-color,
-:root nav .logo-color {
-  stroke-opacity: 0.6;  /* Translucent in dark mode */
+/* Disable transitions on page load */
+.no-transition,
+.no-transition * {
+  transition: none !important;
 }
 
 /* ============================================
-   PRICING PAGE SPECIFIC FIXES
+   GREEN ACCENT CARDS (for pricing, ROI, etc)
    ============================================ */
 
-/* GREEN GLASS CARDS - 1px borders */
-:root.light-mode .border-green-500\/50,
-:root.light-mode .border-green-400\/30,
-:root.light-mode [class*="border-green"] {
-  border-width: 1px !important;
+.glass-card-green {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
-/* Bottom CTA section - darker green text on green background */
-:root.light-mode .bg-gradient-to-br.from-green-500\/10 .text-cyan-400,
-:root.light-mode [class*="green"] .text-cyan-400 {
-  color: #047857 !important;  /* Darker green - emerald-700 for readability */
+.theme-midday .glass-card-green {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
 }
 
-/* CTA Button on green background - green with white text */
-:root.light-mode .bg-gradient-to-br.from-green-500\/10 button,
-:root.light-mode .bg-gradient-to-br.from-green-500\/10 .btn,
-:root.light-mode [class*="bg-gradient"][class*="green"] button {
-  background-color: #059669 !important;  /* Green button */
-  color: #ffffff !important;  /* White text */
-  border: 1px solid #047857 !important;
+/* ============================================
+   JAVASCRIPT HELPER - Add to your JS
+   ============================================
+   
+function setThemeByTime() {
+  const hour = new Date().getHours();
+  const body = document.body;
+  
+  // Remove all theme classes
+  body.classList.remove(
+    'theme-sunrise', 
+    'theme-midday', 
+    'theme-sunset', 
+    'theme-dusk', 
+    'theme-night', 
+    'theme-stormy'
+  );
+  
+  // Set theme based on time
+  if (hour >= 6 && hour < 9) {
+    body.classList.add('theme-sunrise');
+  } else if (hour >= 9 && hour < 17) {
+    body.classList.add('theme-midday');
+  } else if (hour >= 17 && hour < 19) {
+    body.classList.add('theme-sunset');
+  } else if (hour >= 19 && hour < 21) {
+    body.classList.add('theme-dusk');
+  } else {
+    body.classList.add('theme-night');
+  }
 }
 
-/* Comparison table checkmarks - brighter and larger */
-:root.light-mode .text-green-400,
-:root.light-mode .text-green-500,
-:root.light-mode svg.text-green-400,
-:root.light-mode svg.text-green-500 {
-  color: #10b981 !important;  /* Bright emerald-500 */
-  width: 24px !important;
-  height: 24px !important;
-}
+// Run on page load
+setThemeByTime();
 
-/* Red X marks - larger to match */
-:root.light-mode .text-red-400,
-:root.light-mode .text-red-500,
-:root.light-mode svg.text-red-400,
-:root.light-mode svg.text-red-500 {
-  width: 24px !important;
-  height: 24px !important;
-}
+// Optional: Update every minute
+setInterval(setThemeByTime, 60000);
 
-/* Top grey pricing box - darker green background */
-:root.light-mode .bg-gray-900\/50,
-:root.light-mode [class*="pricing"] .bg-gray-900 {
-  background-color: rgba(5, 150, 105, 0.3) !important;  /* Dark green tint */
-}
-
-/* Cyan text in green boxes - lighter green for contrast */
-:root.light-mode [class*="pricing"] .text-cyan-400 {
-  color: #6ee7b7 !important;  /* Light green - emerald-300 */
-}
-
-/* Green price boxes - darker green text */
-:root.light-mode [class*="pricing"] .text-green-400,
-:root.light-mode [class*="bg-green"] .text-green-400,
-:root.light-mode [class*="bg-green"] .text-green-500 {
-  color: #047857 !important;  /* Dark green - emerald-700 */
-  font-weight: 600 !important;
-}
-
-/* Individual green rectangles - glass effect with light border */
-:root.light-mode .bg-green-500\/10 > div,
-:root.light-mode [class*="pricing-example"] > div {
-  background-color: rgba(16, 185, 129, 0.15) !important;
-  border: 1px solid rgba(110, 231, 183, 0.4) !important;  /* Light green border */
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1) !important;  /* Raised glass effect */
-}
-
-/* Main green container border - 1px glass effect */
-:root.light-mode .border-green-500\/50 {
-  border-width: 1px !important;
-  border-color: rgba(16, 185, 129, 0.3) !important;
-}
-
-/* Grey box in pic 4 - much darker for readability */
-:root.light-mode [class*="pricing"] .bg-gray-900,
-:root.light-mode [class*="what-you-pay"] {
-  background-color: rgba(30, 41, 59, 0.8) !important;  /* Dark slate */
-  color: #ffffff !important;
-}
-
-/* Border around pricing tables - 1px glass effect */
-:root.light-mode [class*="pricing-card"],
-:root.light-mode [class*="pricing-table"] {
-  border-width: 1px !important;
-  border-color: rgba(100, 116, 139, 0.3) !important;
-}
+============================================ */
