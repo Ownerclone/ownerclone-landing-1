@@ -337,12 +337,12 @@ body::before {
    LIGHT MODE TEXT COLORS
    ============================================ */
 
-/* Cyan text becomes WHITE with NAVY BORDER */
+/* Cyan text becomes WHITE with 2PX NAVY BORDER */
 :root.light-mode .text-cyan-400,
 :root.light-mode .text-cyan-500 {
   color: #ffffff !important;
-  -webkit-text-stroke: 1px #0c4a6e;
-  text-stroke: 1px #0c4a6e;
+  -webkit-text-stroke: 2px #0c4a6e;
+  text-stroke: 2px #0c4a6e;
   paint-order: stroke fill;
 }
 
@@ -405,11 +405,11 @@ body::before {
    LIGHT MODE - DARKEN ICONS & GLASS
    ============================================ */
 
-/* All icons 30% darker (70% opacity) */
+/* All icons FULL OPACITY */
 :root.light-mode svg,
 :root.light-mode [class*="lucide"],
 :root.light-mode .icon {
-  opacity: 0.7 !important;
+  opacity: 1 !important;
 }
 
 /* Adjust glass opacity - 20% darker across the board */
@@ -455,4 +455,36 @@ body::before {
 :root.light-mode .dropdown-menu,
 :root.light-mode nav .absolute.top-full {
   background-color: rgba(34, 211, 238, 0.9) !important;
+}
+
+/* ============================================
+   GREEN TEXT & GREEN GLASS CARDS
+   ============================================ */
+
+/* Green text with 1px BLACK outline */
+:root.light-mode .text-green-400,
+:root.light-mode .text-green-500,
+:root.light-mode .text-\[\#10b981\],
+:root.light-mode .text-emerald-400,
+:root.light-mode .text-emerald-500 {
+  color: #10b981 !important;  /* Keep green color */
+  -webkit-text-stroke: 1px #000000;
+  text-stroke: 1px #000000;
+  paint-order: stroke fill;
+}
+
+/* Cards with green text become GREEN GLASS */
+:root.light-mode .bg-green-500\/10,
+:root.light-mode .border-green-400\/30,
+:root.light-mode .border-\[\#10b981\]\/30,
+:root.light-mode *:has(.text-green-400),
+:root.light-mode *:has(.text-green-500) {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Specific green-themed cards (pricing, success states) */
+:root.light-mode .bg-gradient-to-br:has(.text-green-400),
+:root.light-mode .bg-gradient-to-br:has(.text-\[\#10b981\]) {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.25) 100%) !important;
 }
