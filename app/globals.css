@@ -587,20 +587,20 @@
 
 /* ============================================
    DARK MODE (Original site design)
-   More transparent/glassy cards
+   BLUE GLASS - not smoke glass
    ============================================ */
 .dark-mode {
   --bg-image: none;
   --bg-color: #0a0e27;
   --bg-overlay: transparent;
   
-  /* FIXED: More transparent glass for dark mode */
-  --glass-bg: rgba(14, 20, 51, 0.45);
-  --glass-border: rgba(30, 159, 242, 0.2);
-  --glass-shadow: rgba(30, 159, 242, 0.15);
+  /* BLUE GLASS - transparent with blue tint */
+  --glass-bg: rgba(20, 60, 130, 0.35);
+  --glass-border: rgba(30, 159, 242, 0.25);
+  --glass-shadow: rgba(30, 159, 242, 0.2);
   
-  --nav-bg: rgba(10, 14, 39, 0.7);
-  --nav-border: rgba(30, 159, 242, 0.15);
+  --nav-bg: rgba(15, 50, 110, 0.5);
+  --nav-border: rgba(30, 159, 242, 0.2);
   
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
@@ -612,20 +612,20 @@
   
   --logo-color: #1E9FF2;
   
-  /* FIXED: More transparent cards */
-  --card-bg: rgba(14, 20, 51, 0.4);
-  --card-border: rgba(30, 159, 242, 0.15);
-  --card-shadow: 0 8px 32px rgba(30, 159, 242, 0.1);
+  /* BLUE GLASS cards */
+  --card-bg: rgba(20, 60, 130, 0.3);
+  --card-border: rgba(30, 159, 242, 0.2);
+  --card-shadow: 0 8px 32px rgba(30, 159, 242, 0.15);
   
   --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(14, 20, 51, 0.4);
+  --btn-secondary-bg: rgba(20, 60, 130, 0.4);
   --btn-secondary-text: #1E9FF2;
   --btn-secondary-border: rgba(30, 159, 242, 0.5);
   
-  --footer-bg: rgba(10, 14, 39, 0.85);
+  --footer-bg: rgba(10, 40, 90, 0.7);
   --footer-text: #94a3b8;
-  --footer-border: rgba(30, 159, 242, 0.15);
+  --footer-border: rgba(30, 159, 242, 0.2);
   
   --accent-red: #ef4444;
   --accent-yellow: #eab308;
@@ -932,61 +932,6 @@ body::before {
 }
 
 /* ============================================
-   THEME SLIDER STYLES
-   ============================================ */
-.theme-slider-container {
-  position: relative;
-  width: 200px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-}
-
-.theme-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(to right, 
-    #1e293b 0%,      /* Night */
-    #fbbf24 25%,     /* Sunrise */
-    #38bdf8 50%,     /* Midday */
-    #fb923c 75%,     /* Sunset */
-    #1e293b 100%     /* Night */
-  );
-  outline: none;
-  cursor: pointer;
-}
-
-.theme-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--brand-primary);
-  border: 2px solid white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.theme-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-}
-
-.theme-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--brand-primary);
-  border: 2px solid white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
-
-/* ============================================
    MOBILE: Force Dark Mode Only
    ============================================ */
 @media (max-width: 768px) {
@@ -1001,11 +946,11 @@ body::before {
     --bg-image: none !important;
     --bg-color: #0a0e27 !important;
     
-    --glass-bg: rgba(14, 20, 51, 0.45) !important;
-    --glass-border: rgba(30, 159, 242, 0.2) !important;
+    --glass-bg: rgba(20, 60, 130, 0.35) !important;
+    --glass-border: rgba(30, 159, 242, 0.25) !important;
     
-    --nav-bg: rgba(10, 14, 39, 0.7) !important;
-    --nav-border: rgba(30, 159, 242, 0.15) !important;
+    --nav-bg: rgba(15, 50, 110, 0.5) !important;
+    --nav-border: rgba(30, 159, 242, 0.2) !important;
     
     --text-primary: #ffffff !important;
     --text-secondary: #94a3b8 !important;
@@ -1017,13 +962,13 @@ body::before {
     
     --logo-color: #1E9FF2 !important;
     
-    --card-bg: rgba(14, 20, 51, 0.4) !important;
-    --card-border: rgba(30, 159, 242, 0.15) !important;
+    --card-bg: rgba(20, 60, 130, 0.3) !important;
+    --card-border: rgba(30, 159, 242, 0.2) !important;
     
     --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2) !important;
     --btn-primary-text: #ffffff !important;
     
-    --footer-bg: rgba(10, 14, 39, 0.85) !important;
+    --footer-bg: rgba(10, 40, 90, 0.7) !important;
     --footer-text: #94a3b8 !important;
   }
   
