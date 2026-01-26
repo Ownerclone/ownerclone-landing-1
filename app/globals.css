@@ -1,90 +1,91 @@
+/* ============================================
+   OWNERCLONE DYNAMIC SKY THEME SYSTEM
+   ============================================
+   
+   12 Theme Variations:
+   - 4 Times of Day: Sunrise, Midday, Sunset, Night
+   - 3 Weather Conditions: Clear, Rainy, Stormy
+   
+   Dark Mode: Your existing site (fallback/toggle)
+   
+============================================ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ============================================
-   OWNERCLONE DYNAMIC THEME SYSTEM
-   ============================================
-   
-   Themes available:
-   - theme-night (default/dark mode)
-   - theme-sunrise (6am-9am)
-   - theme-midday (9am-5pm) 
-   - theme-sunset (5pm-7pm)
-   - theme-dusk (7pm-9pm)
-   - theme-stormy (weather-based)
-   
-   Usage: Add theme class to <html> or <body>
-   Example: <body class="theme-sunrise">
-   
-============================================ */
-
-/* ============================================
-   BASE VARIABLES - NIGHT MODE (DEFAULT)
+   BASE VARIABLES - MIDDAY CLEAR AS DEFAULT
    ============================================ */
 :root {
   /* Background */
-  --bg-image: url('/images/sky-night.jpg');
-  --bg-color: #0a0a0a;
-  --bg-overlay: rgba(0, 0, 0, 0.3);
+  --bg-image: url('/images/sky/midday-clear.jpg');
+  --bg-color: #e0f2fe;
+  --bg-overlay: rgba(255, 255, 255, 0.05);
   
-  /* Glass cards - more transparent on dark backgrounds */
-  --glass-bg: rgba(10, 10, 25, 0.6);
-  --glass-border: rgba(139, 92, 246, 0.3);
-  --glass-shadow: rgba(139, 92, 246, 0.15);
-  --nav-bg: rgba(10, 10, 25, 0.7);
-  --nav-border: rgba(139, 92, 246, 0.25);
+  /* Glass cards */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: rgba(14, 165, 233, 0.15);
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --nav-border: rgba(14, 165, 233, 0.2);
   
   /* Text */
-  --text-primary: #f1f5f9;
-  --text-secondary: #c4b5fd;
-  --text-muted: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
   
-  /* Brand/Accent colors */
-  --brand-color: #a78bfa;
-  --brand-hover: #c4b5fd;
-  --gradient-start: #6366f1;
-  --gradient-end: #a855f7;
+  /* Brand/Accent */
+  --brand-color: #0284c7;
+  --brand-hover: #0369a1;
+  --gradient-start: #0ea5e9;
+  --gradient-end: #3b82f6;
   
   /* Stat cards */
-  --stat-1-from: #4f46e5;
-  --stat-1-to: #6366f1;
-  --stat-2-from: #7c3aed;
-  --stat-2-to: #8b5cf6;
-  --stat-3-from: #db2777;
-  --stat-3-to: #ec4899;
+  --stat-1-from: #0ea5e9;
+  --stat-1-to: #0284c7;
+  --stat-2-from: #06b6d4;
+  --stat-2-to: #0891b2;
+  --stat-3-from: #f43f5e;
+  --stat-3-to: #e11d48;
   
-  /* Alert boxes */
-  --alert-red-bg: rgba(127, 29, 29, 0.4);
-  --alert-red-border: rgba(239, 68, 68, 0.5);
-  --alert-red-text: #fca5a5;
-  --alert-amber-bg: rgba(120, 53, 15, 0.4);
-  --alert-amber-border: rgba(245, 158, 11, 0.5);
-  --alert-amber-text: #fcd34d;
-  --alert-blue-bg: rgba(30, 58, 138, 0.4);
-  --alert-blue-border: rgba(59, 130, 246, 0.5);
-  --alert-blue-text: #93c5fd;
+  /* Alerts */
+  --alert-red-bg: rgba(239, 68, 68, 0.1);
+  --alert-red-border: rgba(239, 68, 68, 0.3);
+  --alert-red-text: #dc2626;
+  --alert-green-bg: rgba(16, 185, 129, 0.1);
+  --alert-green-border: rgba(16, 185, 129, 0.3);
+  --alert-green-text: #059669;
   
   /* Footer */
-  --footer-bg: rgba(10, 10, 25, 0.8);
+  --footer-bg: rgba(15, 23, 42, 0.9);
+  --footer-text: #f1f5f9;
   
   /* Misc */
-  --logo-color: #a78bfa;
+  --logo-color: #0ea5e9;
   --button-text: #ffffff;
+  --input-bg: rgba(255, 255, 255, 0.9);
+  
+  /* Weather widget */
+  --weather-bg: rgba(255, 255, 255, 0.6);
+  --weather-text: #0f172a;
+  --weather-icon: #0284c7;
 }
 
 /* ============================================
-   THEME: SUNRISE (6am - 9am)
-   Warm pink/orange clouds, dark purple glass
+   SUNRISE THEMES (6am - 9am)
+   Orange → Blue gradient feel
    ============================================ */
-.theme-sunrise {
-  --bg-image: url('/images/sky-sunrise.jpg');
+
+/* Sunrise Clear - Warm orange/pink gradient */
+.theme-sunrise-clear {
+  --bg-image: url('/images/sky/sunrise-clear.jpg');
   --bg-color: #1e1b4b;
-  --bg-overlay: rgba(30, 15, 45, 0.2);
+  --bg-overlay: rgba(251, 146, 60, 0.05);
   
   --glass-bg: rgba(30, 15, 45, 0.72);
   --glass-border: rgba(251, 191, 36, 0.3);
-  --glass-shadow: rgba(234, 88, 12, 0.2);
+  --glass-shadow: rgba(251, 146, 60, 0.2);
   --nav-bg: rgba(30, 15, 45, 0.8);
   --nav-border: rgba(251, 191, 36, 0.25);
   
@@ -99,82 +100,233 @@
   
   --stat-1-from: #f97316;
   --stat-1-to: #ea580c;
-  --stat-2-from: #f59e0b;
-  --stat-2-to: #d97706;
+  --stat-2-from: #fbbf24;
+  --stat-2-to: #f59e0b;
   --stat-3-from: #ec4899;
   --stat-3-to: #db2777;
   
   --alert-red-bg: rgba(239, 68, 68, 0.25);
   --alert-red-border: rgba(248, 113, 113, 0.5);
   --alert-red-text: #fca5a5;
-  --alert-amber-bg: rgba(245, 158, 11, 0.25);
-  --alert-amber-border: rgba(252, 211, 77, 0.5);
-  --alert-amber-text: #fde68a;
-  --alert-blue-bg: rgba(236, 72, 153, 0.25);
-  --alert-blue-border: rgba(244, 114, 182, 0.5);
-  --alert-blue-text: #f9a8d4;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.5);
+  --alert-green-text: #6ee7b7;
   
   --footer-bg: rgba(30, 15, 45, 0.85);
+  --footer-text: #fde68a;
   --logo-color: #fbbf24;
   --button-text: #ffffff;
+  --input-bg: rgba(30, 15, 45, 0.6);
+  
+  --weather-bg: rgba(30, 15, 45, 0.6);
+  --weather-text: #fde68a;
+  --weather-icon: #fbbf24;
 }
 
-/* ============================================
-   THEME: MIDDAY (9am - 5pm)
-   Bright blue sky, white/frosted glass
-   Most opaque glass for readability
-   ============================================ */
-.theme-midday {
-  --bg-image: url('/images/sky-midday.jpg');
-  --bg-color: #e0f2fe;
-  --bg-overlay: rgba(255, 255, 255, 0.1);
+/* Sunrise Rainy - Muted soft morning */
+.theme-sunrise-rainy {
+  --bg-image: url('/images/sky/sunrise-rainy.jpg');
+  --bg-color: #374151;
+  --bg-overlay: rgba(100, 116, 139, 0.1);
   
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: rgba(14, 165, 233, 0.15);
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --nav-border: rgba(14, 165, 233, 0.2);
+  --glass-bg: rgba(51, 65, 85, 0.75);
+  --glass-border: rgba(148, 163, 184, 0.3);
+  --glass-shadow: rgba(100, 116, 139, 0.2);
+  --nav-bg: rgba(51, 65, 85, 0.82);
+  --nav-border: rgba(148, 163, 184, 0.25);
   
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
   
-  --brand-color: #0284c7;
-  --brand-hover: #0369a1;
-  --gradient-start: #0ea5e9;
-  --gradient-end: #3b82f6;
+  --brand-color: #fbbf24;
+  --brand-hover: #fcd34d;
+  --gradient-start: #f59e0b;
+  --gradient-end: #d97706;
   
-  --stat-1-from: #0ea5e9;
-  --stat-1-to: #0284c7;
-  --stat-2-from: #06b6d4;
-  --stat-2-to: #0891b2;
+  --stat-1-from: #f59e0b;
+  --stat-1-to: #d97706;
+  --stat-2-from: #64748b;
+  --stat-2-to: #475569;
   --stat-3-from: #f43f5e;
   --stat-3-to: #e11d48;
   
-  --alert-red-bg: rgba(239, 68, 68, 0.1);
-  --alert-red-border: rgba(239, 68, 68, 0.3);
-  --alert-red-text: #dc2626;
-  --alert-amber-bg: rgba(245, 158, 11, 0.1);
-  --alert-amber-border: rgba(245, 158, 11, 0.3);
-  --alert-amber-text: #d97706;
-  --alert-blue-bg: rgba(14, 165, 233, 0.1);
-  --alert-blue-border: rgba(14, 165, 233, 0.3);
-  --alert-blue-text: #0284c7;
+  --alert-red-bg: rgba(239, 68, 68, 0.25);
+  --alert-red-border: rgba(248, 113, 113, 0.4);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.4);
+  --alert-green-text: #6ee7b7;
   
-  --footer-bg: rgba(15, 23, 42, 0.9);
-  --logo-color: #0ea5e9;
+  --footer-bg: rgba(51, 65, 85, 0.88);
+  --footer-text: #cbd5e1;
+  --logo-color: #fbbf24;
+  --button-text: #0f172a;
+  --input-bg: rgba(51, 65, 85, 0.6);
+  
+  --weather-bg: rgba(51, 65, 85, 0.6);
+  --weather-text: #cbd5e1;
+  --weather-icon: #fbbf24;
+}
+
+/* Sunrise Stormy - Dark dramatic with orange hints */
+.theme-sunrise-stormy {
+  --bg-image: url('/images/sky/sunrise-stormy.jpg');
+  --bg-color: #1e293b;
+  --bg-overlay: rgba(15, 23, 42, 0.15);
+  
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(251, 146, 60, 0.25);
+  --glass-shadow: rgba(251, 146, 60, 0.15);
+  --nav-bg: rgba(15, 23, 42, 0.78);
+  --nav-border: rgba(251, 146, 60, 0.2);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #fed7aa;
+  --text-muted: #94a3b8;
+  
+  --brand-color: #fb923c;
+  --brand-hover: #fdba74;
+  --gradient-start: #ea580c;
+  --gradient-end: #dc2626;
+  
+  --stat-1-from: #ea580c;
+  --stat-1-to: #c2410c;
+  --stat-2-from: #475569;
+  --stat-2-to: #334155;
+  --stat-3-from: #dc2626;
+  --stat-3-to: #b91c1c;
+  
+  --alert-red-bg: rgba(220, 38, 38, 0.3);
+  --alert-red-border: rgba(248, 113, 113, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.4);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(15, 23, 42, 0.88);
+  --footer-text: #fed7aa;
+  --logo-color: #fb923c;
   --button-text: #ffffff;
+  --input-bg: rgba(15, 23, 42, 0.6);
+  
+  --weather-bg: rgba(15, 23, 42, 0.6);
+  --weather-text: #fed7aa;
+  --weather-icon: #fb923c;
 }
 
 /* ============================================
-   THEME: SUNSET (5pm - 7pm)
-   Fiery red/orange clouds, dark translucent glass
-   More transparent to see dramatic sky
+   MIDDAY THEMES (9am - 5pm)
+   Bright blues and whites
    ============================================ */
-.theme-sunset {
-  --bg-image: url('/images/sky-sunset.jpg');
+
+/* Midday Clear - Blue sky, white clouds (default) */
+.theme-midday-clear {
+  /* Uses :root defaults */
+}
+
+/* Midday Rainy - Grey overcast */
+.theme-midday-rainy {
+  --bg-image: url('/images/sky/midday-rainy.jpg');
+  --bg-color: #64748b;
+  --bg-overlay: rgba(100, 116, 139, 0.1);
+  
+  --glass-bg: rgba(71, 85, 105, 0.8);
+  --glass-border: rgba(148, 163, 184, 0.35);
+  --glass-shadow: rgba(71, 85, 105, 0.2);
+  --nav-bg: rgba(71, 85, 105, 0.85);
+  --nav-border: rgba(148, 163, 184, 0.3);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --brand-color: #38bdf8;
+  --brand-hover: #7dd3fc;
+  --gradient-start: #0ea5e9;
+  --gradient-end: #0284c7;
+  
+  --stat-1-from: #0ea5e9;
+  --stat-1-to: #0284c7;
+  --stat-2-from: #64748b;
+  --stat-2-to: #475569;
+  --stat-3-from: #f43f5e;
+  --stat-3-to: #e11d48;
+  
+  --alert-red-bg: rgba(239, 68, 68, 0.25);
+  --alert-red-border: rgba(248, 113, 113, 0.4);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.4);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(51, 65, 85, 0.9);
+  --footer-text: #cbd5e1;
+  --logo-color: #38bdf8;
+  --button-text: #ffffff;
+  --input-bg: rgba(71, 85, 105, 0.6);
+  
+  --weather-bg: rgba(71, 85, 105, 0.6);
+  --weather-text: #cbd5e1;
+  --weather-icon: #38bdf8;
+}
+
+/* Midday Stormy - Dark thunderstorm */
+.theme-midday-stormy {
+  --bg-image: url('/images/sky/midday-stormy.jpg');
+  --bg-color: #1e293b;
+  --bg-overlay: rgba(15, 23, 42, 0.2);
+  
+  --glass-bg: rgba(15, 30, 40, 0.72);
+  --glass-border: rgba(56, 189, 248, 0.25);
+  --glass-shadow: rgba(56, 189, 248, 0.15);
+  --nav-bg: rgba(15, 30, 40, 0.8);
+  --nav-border: rgba(56, 189, 248, 0.2);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --brand-color: #22d3ee;
+  --brand-hover: #67e8f9;
+  --gradient-start: #0891b2;
+  --gradient-end: #0e7490;
+  
+  --stat-1-from: #0891b2;
+  --stat-1-to: #0e7490;
+  --stat-2-from: #475569;
+  --stat-2-to: #334155;
+  --stat-3-from: #e11d48;
+  --stat-3-to: #be123c;
+  
+  --alert-red-bg: rgba(220, 38, 38, 0.3);
+  --alert-red-border: rgba(248, 113, 113, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.4);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(15, 30, 40, 0.9);
+  --footer-text: #94a3b8;
+  --logo-color: #22d3ee;
+  --button-text: #ffffff;
+  --input-bg: rgba(15, 30, 40, 0.6);
+  
+  --weather-bg: rgba(15, 30, 40, 0.6);
+  --weather-text: #94a3b8;
+  --weather-icon: #22d3ee;
+}
+
+/* ============================================
+   SUNSET THEMES (5pm - 7pm)
+   Fiery oranges, reds, pinks
+   ============================================ */
+
+/* Sunset Clear - Fiery orange/red */
+.theme-sunset-clear {
+  --bg-image: url('/images/sky/sunset-clear.jpg');
   --bg-color: #1c1917;
-  --bg-overlay: rgba(20, 10, 30, 0.15);
+  --bg-overlay: rgba(234, 88, 12, 0.05);
   
   --glass-bg: rgba(20, 10, 30, 0.65);
   --glass-border: rgba(251, 146, 60, 0.3);
@@ -201,130 +353,323 @@
   --alert-red-bg: rgba(239, 68, 68, 0.25);
   --alert-red-border: rgba(248, 113, 113, 0.5);
   --alert-red-text: #fca5a5;
-  --alert-amber-bg: rgba(245, 158, 11, 0.25);
-  --alert-amber-border: rgba(252, 211, 77, 0.5);
-  --alert-amber-text: #fde68a;
-  --alert-blue-bg: rgba(249, 115, 22, 0.25);
-  --alert-blue-border: rgba(251, 146, 60, 0.5);
-  --alert-blue-text: #fed7aa;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.5);
+  --alert-green-text: #6ee7b7;
   
   --footer-bg: rgba(20, 10, 30, 0.85);
+  --footer-text: #fed7aa;
   --logo-color: #fbbf24;
   --button-text: #ffffff;
+  --input-bg: rgba(20, 10, 30, 0.6);
+  
+  --weather-bg: rgba(20, 10, 30, 0.6);
+  --weather-text: #fed7aa;
+  --weather-icon: #fbbf24;
+}
+
+/* Sunset Rainy - Muted purple/grey evening */
+.theme-sunset-rainy {
+  --bg-image: url('/images/sky/sunset-rainy.jpg');
+  --bg-color: #374151;
+  --bg-overlay: rgba(88, 28, 135, 0.05);
+  
+  --glass-bg: rgba(55, 48, 75, 0.75);
+  --glass-border: rgba(167, 139, 250, 0.25);
+  --glass-shadow: rgba(139, 92, 246, 0.15);
+  --nav-bg: rgba(55, 48, 75, 0.82);
+  --nav-border: rgba(167, 139, 250, 0.2);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #c4b5fd;
+  --text-muted: #a78bfa;
+  
+  --brand-color: #a78bfa;
+  --brand-hover: #c4b5fd;
+  --gradient-start: #8b5cf6;
+  --gradient-end: #a855f7;
+  
+  --stat-1-from: #8b5cf6;
+  --stat-1-to: #7c3aed;
+  --stat-2-from: #64748b;
+  --stat-2-to: #475569;
+  --stat-3-from: #ec4899;
+  --stat-3-to: #db2777;
+  
+  --alert-red-bg: rgba(239, 68, 68, 0.25);
+  --alert-red-border: rgba(248, 113, 113, 0.4);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.4);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(55, 48, 75, 0.88);
+  --footer-text: #c4b5fd;
+  --logo-color: #a78bfa;
+  --button-text: #ffffff;
+  --input-bg: rgba(55, 48, 75, 0.6);
+  
+  --weather-bg: rgba(55, 48, 75, 0.6);
+  --weather-text: #c4b5fd;
+  --weather-icon: #a78bfa;
+}
+
+/* Sunset Stormy - Dark dramatic with orange glow */
+.theme-sunset-stormy {
+  --bg-image: url('/images/sky/sunset-stormy.jpg');
+  --bg-color: #1e1917;
+  --bg-overlay: rgba(15, 10, 20, 0.15);
+  
+  --glass-bg: rgba(15, 10, 20, 0.68);
+  --glass-border: rgba(234, 88, 12, 0.3);
+  --glass-shadow: rgba(234, 88, 12, 0.2);
+  --nav-bg: rgba(15, 10, 20, 0.75);
+  --nav-border: rgba(234, 88, 12, 0.25);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #fca5a5;
+  --text-muted: #f87171;
+  
+  --brand-color: #f97316;
+  --brand-hover: #fb923c;
+  --gradient-start: #dc2626;
+  --gradient-end: #991b1b;
+  
+  --stat-1-from: #dc2626;
+  --stat-1-to: #b91c1c;
+  --stat-2-from: #ea580c;
+  --stat-2-to: #c2410c;
+  --stat-3-from: #be123c;
+  --stat-3-to: #9f1239;
+  
+  --alert-red-bg: rgba(220, 38, 38, 0.35);
+  --alert-red-border: rgba(248, 113, 113, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(16, 185, 129, 0.25);
+  --alert-green-border: rgba(52, 211, 153, 0.4);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(15, 10, 20, 0.88);
+  --footer-text: #fca5a5;
+  --logo-color: #f97316;
+  --button-text: #ffffff;
+  --input-bg: rgba(15, 10, 20, 0.6);
+  
+  --weather-bg: rgba(15, 10, 20, 0.6);
+  --weather-text: #fca5a5;
+  --weather-icon: #f97316;
 }
 
 /* ============================================
-   THEME: DUSK (7pm - 9pm)
-   Twilight with moon, transitional glass
+   NIGHT THEMES (9pm - 6am)
+   Deep blues, purples, stars
    ============================================ */
-.theme-dusk {
-  --bg-image: url('/images/sky-dusk.jpg');
+
+/* Night Clear - Starry sky */
+.theme-night-clear {
+  --bg-image: url('/images/sky/night-clear.jpg');
+  --bg-color: #0a0a0a;
+  --bg-overlay: rgba(0, 0, 0, 0.2);
+  
+  --glass-bg: rgba(10, 10, 25, 0.6);
+  --glass-border: rgba(139, 92, 246, 0.3);
+  --glass-shadow: rgba(139, 92, 246, 0.15);
+  --nav-bg: rgba(10, 10, 25, 0.7);
+  --nav-border: rgba(139, 92, 246, 0.25);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #c4b5fd;
+  --text-muted: #94a3b8;
+  
+  --brand-color: #a78bfa;
+  --brand-hover: #c4b5fd;
+  --gradient-start: #6366f1;
+  --gradient-end: #a855f7;
+  
+  --stat-1-from: #4f46e5;
+  --stat-1-to: #6366f1;
+  --stat-2-from: #7c3aed;
+  --stat-2-to: #8b5cf6;
+  --stat-3-from: #db2777;
+  --stat-3-to: #ec4899;
+  
+  --alert-red-bg: rgba(127, 29, 29, 0.4);
+  --alert-red-border: rgba(239, 68, 68, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(6, 78, 59, 0.4);
+  --alert-green-border: rgba(16, 185, 129, 0.5);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(10, 10, 25, 0.8);
+  --footer-text: #c4b5fd;
+  --logo-color: #a78bfa;
+  --button-text: #ffffff;
+  --input-bg: rgba(10, 10, 25, 0.6);
+  
+  --weather-bg: rgba(10, 10, 25, 0.6);
+  --weather-text: #c4b5fd;
+  --weather-icon: #a78bfa;
+}
+
+/* Night Rainy - Dark cloudy */
+.theme-night-rainy {
+  --bg-image: url('/images/sky/night-rainy.jpg');
   --bg-color: #0f172a;
   --bg-overlay: rgba(15, 23, 42, 0.2);
   
   --glass-bg: rgba(15, 23, 42, 0.7);
-  --glass-border: rgba(251, 191, 36, 0.25);
-  --glass-shadow: rgba(251, 191, 36, 0.15);
+  --glass-border: rgba(71, 85, 105, 0.4);
+  --glass-shadow: rgba(30, 41, 59, 0.3);
   --nav-bg: rgba(15, 23, 42, 0.78);
-  --nav-border: rgba(251, 191, 36, 0.2);
+  --nav-border: rgba(71, 85, 105, 0.3);
   
-  --text-primary: #ffffff;
-  --text-secondary: #fde68a;
-  --text-muted: #fcd34d;
-  
-  --brand-color: #fbbf24;
-  --brand-hover: #fcd34d;
-  --gradient-start: #1e3a5f;
-  --gradient-end: #f97316;
-  
-  --stat-1-from: #1e40af;
-  --stat-1-to: #1d4ed8;
-  --stat-2-from: #d97706;
-  --stat-2-to: #b45309;
-  --stat-3-from: #e11d48;
-  --stat-3-to: #be123c;
-  
-  --alert-red-bg: rgba(239, 68, 68, 0.25);
-  --alert-red-border: rgba(248, 113, 113, 0.5);
-  --alert-red-text: #fca5a5;
-  --alert-amber-bg: rgba(245, 158, 11, 0.25);
-  --alert-amber-border: rgba(252, 211, 77, 0.5);
-  --alert-amber-text: #fde68a;
-  --alert-blue-bg: rgba(30, 64, 175, 0.3);
-  --alert-blue-border: rgba(59, 130, 246, 0.5);
-  --alert-blue-text: #93c5fd;
-  
-  --footer-bg: rgba(15, 23, 42, 0.88);
-  --logo-color: #fbbf24;
-  --button-text: #ffffff;
-}
-
-/* ============================================
-   THEME: NIGHT (9pm - 6am) - Same as default
-   Starry sky, most transparent glass
-   ============================================ */
-.theme-night {
-  /* Uses :root defaults - no overrides needed */
-}
-
-/* ============================================
-   THEME: STORMY (Weather-based)
-   Grey dramatic clouds, teal accents
-   ============================================ */
-.theme-stormy {
-  --bg-image: url('/images/sky-stormy.jpg');
-  --bg-color: #1e293b;
-  --bg-overlay: rgba(15, 30, 40, 0.2);
-  
-  --glass-bg: rgba(15, 30, 40, 0.7);
-  --glass-border: rgba(56, 189, 248, 0.25);
-  --glass-shadow: rgba(56, 189, 248, 0.15);
-  --nav-bg: rgba(15, 30, 40, 0.78);
-  --nav-border: rgba(56, 189, 248, 0.2);
-  
-  --text-primary: #f1f5f9;
+  --text-primary: #e2e8f0;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
-  --brand-color: #22d3ee;
-  --brand-hover: #06b6d4;
-  --gradient-start: #0891b2;
-  --gradient-end: #0ea5e9;
+  --brand-color: #38bdf8;
+  --brand-hover: #7dd3fc;
+  --gradient-start: #0284c7;
+  --gradient-end: #0369a1;
   
-  --stat-1-from: #0891b2;
-  --stat-1-to: #0e7490;
+  --stat-1-from: #0284c7;
+  --stat-1-to: #0369a1;
   --stat-2-from: #475569;
   --stat-2-to: #334155;
-  --stat-3-from: #e11d48;
-  --stat-3-to: #be123c;
+  --stat-3-from: #be123c;
+  --stat-3-to: #9f1239;
   
-  --alert-red-bg: rgba(127, 29, 29, 0.3);
+  --alert-red-bg: rgba(127, 29, 29, 0.35);
   --alert-red-border: rgba(239, 68, 68, 0.4);
   --alert-red-text: #fca5a5;
-  --alert-amber-bg: rgba(120, 53, 15, 0.3);
-  --alert-amber-border: rgba(245, 158, 11, 0.4);
-  --alert-amber-text: #fcd34d;
-  --alert-blue-bg: rgba(8, 145, 178, 0.3);
-  --alert-blue-border: rgba(34, 211, 238, 0.4);
-  --alert-blue-text: #67e8f9;
+  --alert-green-bg: rgba(6, 78, 59, 0.35);
+  --alert-green-border: rgba(16, 185, 129, 0.4);
+  --alert-green-text: #6ee7b7;
   
-  --footer-bg: rgba(15, 30, 40, 0.88);
-  --logo-color: #22d3ee;
+  --footer-bg: rgba(15, 23, 42, 0.85);
+  --footer-text: #94a3b8;
+  --logo-color: #38bdf8;
   --button-text: #ffffff;
+  --input-bg: rgba(15, 23, 42, 0.6);
+  
+  --weather-bg: rgba(15, 23, 42, 0.6);
+  --weather-text: #94a3b8;
+  --weather-icon: #38bdf8;
+}
+
+/* Night Stormy - Lightning/electric */
+.theme-night-stormy {
+  --bg-image: url('/images/sky/night-stormy.jpg');
+  --bg-color: #0a0a0f;
+  --bg-overlay: rgba(0, 0, 0, 0.25);
+  
+  --glass-bg: rgba(10, 15, 25, 0.65);
+  --glass-border: rgba(34, 211, 238, 0.3);
+  --glass-shadow: rgba(34, 211, 238, 0.2);
+  --nav-bg: rgba(10, 15, 25, 0.72);
+  --nav-border: rgba(34, 211, 238, 0.25);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #67e8f9;
+  --text-muted: #94a3b8;
+  
+  --brand-color: #22d3ee;
+  --brand-hover: #67e8f9;
+  --gradient-start: #06b6d4;
+  --gradient-end: #0891b2;
+  
+  --stat-1-from: #06b6d4;
+  --stat-1-to: #0891b2;
+  --stat-2-from: #1e40af;
+  --stat-2-to: #1e3a8a;
+  --stat-3-from: #dc2626;
+  --stat-3-to: #b91c1c;
+  
+  --alert-red-bg: rgba(127, 29, 29, 0.4);
+  --alert-red-border: rgba(239, 68, 68, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(6, 78, 59, 0.4);
+  --alert-green-border: rgba(16, 185, 129, 0.5);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(10, 15, 25, 0.85);
+  --footer-text: #67e8f9;
+  --logo-color: #22d3ee;
+  --button-text: #0f172a;
+  --input-bg: rgba(10, 15, 25, 0.6);
+  
+  --weather-bg: rgba(10, 15, 25, 0.6);
+  --weather-text: #67e8f9;
+  --weather-icon: #22d3ee;
+}
+
+/* ============================================
+   DARK MODE - Your Existing Site (Fallback)
+   ============================================ */
+.dark-mode {
+  --bg-image: none;
+  --bg-color: #000000;
+  --bg-overlay: none;
+  
+  --glass-bg: rgba(26, 26, 26, 0.9);
+  --glass-border: rgba(42, 42, 42, 1);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --nav-bg: rgba(0, 0, 0, 0.8);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  
+  --brand-color: #22d3ee;
+  --brand-hover: #06b6d4;
+  --gradient-start: #22d3ee;
+  --gradient-end: #06b6d4;
+  
+  --stat-1-from: #0ea5e9;
+  --stat-1-to: #0284c7;
+  --stat-2-from: #8b5cf6;
+  --stat-2-to: #7c3aed;
+  --stat-3-from: #ef4444;
+  --stat-3-to: #dc2626;
+  
+  --alert-red-bg: rgba(127, 29, 29, 0.5);
+  --alert-red-border: rgba(239, 68, 68, 0.5);
+  --alert-red-text: #fca5a5;
+  --alert-green-bg: rgba(6, 78, 59, 0.5);
+  --alert-green-border: rgba(16, 185, 129, 0.5);
+  --alert-green-text: #6ee7b7;
+  
+  --footer-bg: rgba(0, 0, 0, 0.8);
+  --footer-text: #a0a0a0;
+  --logo-color: #22d3ee;
+  --button-text: #000000;
+  --input-bg: rgba(26, 26, 26, 0.9);
+  
+  --weather-bg: rgba(26, 26, 26, 0.8);
+  --weather-text: #a0a0a0;
+  --weather-icon: #22d3ee;
+}
+
+/* Dark mode uses your existing bg-glow.svg */
+.dark-mode::before {
+  background-image: url('/bg-glow.svg') !important;
+  background-size: cover;
+  background-position: top center;
 }
 
 /* ============================================
    APPLY THEME VARIABLES TO ELEMENTS
    ============================================ */
 
-/* Body background */
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
+  min-height: 100vh;
   transition: background-color 0.5s ease, color 0.3s ease;
 }
 
-/* Background image */
+/* Background image layer */
 body::before {
   content: '';
   position: fixed;
@@ -338,9 +683,10 @@ body::before {
   background-attachment: fixed;
   z-index: -2;
   pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
-/* Optional overlay for better text readability */
+/* Overlay layer */
 body::after {
   content: '';
   position: fixed;
@@ -357,7 +703,6 @@ body::after {
    GLASS CARD COMPONENTS
    ============================================ */
 
-/* Primary glass card */
 .glass-card {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
@@ -367,9 +712,9 @@ body::after {
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Navigation */
 .glass-nav,
-nav {
+nav,
+header {
   background: var(--nav-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -377,43 +722,19 @@ nav {
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Apply to existing Tailwind glass classes */
-.backdrop-blur-xl,
-.backdrop-blur-lg,
-.backdrop-blur-md,
-.backdrop-blur,
-.bg-white\/5,
-.bg-white\/10,
-.bg-black\/40,
-.bg-black\/60,
-.bg-black\/80,
-.bg-gray-900,
-.bg-gray-800 {
-  background: var(--glass-bg);
-  border-color: var(--glass-border);
-}
-
 /* ============================================
    TEXT COLORS
    ============================================ */
 
-.text-theme-primary,
-.text-white,
-.text-gray-100 {
-  color: var(--text-primary);
-}
+.text-theme-primary { color: var(--text-primary); }
+.text-theme-secondary { color: var(--text-secondary); }
+.text-theme-muted { color: var(--text-muted); }
 
-.text-theme-secondary,
-.text-gray-300,
-.text-gray-400 {
-  color: var(--text-secondary);
-}
-
-.text-theme-muted,
-.text-gray-500,
-.text-gray-600 {
-  color: var(--text-muted);
-}
+/* Override Tailwind text colors */
+.text-white { color: var(--text-primary); }
+.text-gray-100, .text-gray-200 { color: var(--text-primary); }
+.text-gray-300, .text-gray-400 { color: var(--text-secondary); }
+.text-gray-500, .text-gray-600 { color: var(--text-muted); }
 
 /* ============================================
    BRAND/ACCENT COLORS
@@ -421,22 +742,15 @@ nav {
 
 .text-brand,
 .text-cyan-400,
-.text-cyan-500,
-.brand-color {
-  color: var(--brand-color);
-}
+.text-cyan-500 { color: var(--brand-color); }
 
-.hover\:text-brand:hover {
-  color: var(--brand-hover);
-}
+.hover\:text-brand:hover { color: var(--brand-hover); }
 
-/* Logo */
-.logo-color {
+.logo-stroke {
   stroke: var(--logo-color);
   transition: stroke 0.3s ease;
 }
 
-/* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   -webkit-background-clip: text;
@@ -444,29 +758,36 @@ nav {
   background-clip: text;
 }
 
-/* Gradient background (buttons, CTAs) */
-.gradient-bg {
+.gradient-bg,
+.btn-primary {
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   color: var(--button-text);
+  transition: all 0.3s ease;
+}
+
+.gradient-bg:hover,
+.btn-primary:hover {
+  box-shadow: 0 4px 20px var(--glass-shadow);
+  transform: translateY(-1px);
 }
 
 /* ============================================
    STAT CARDS
    ============================================ */
 
-.stat-card-1,
-.stat-1 {
+.stat-card-1, .stat-1 {
   background: linear-gradient(135deg, var(--stat-1-from), var(--stat-1-to));
+  color: #ffffff;
 }
 
-.stat-card-2,
-.stat-2 {
+.stat-card-2, .stat-2 {
   background: linear-gradient(135deg, var(--stat-2-from), var(--stat-2-to));
+  color: #ffffff;
 }
 
-.stat-card-3,
-.stat-3 {
+.stat-card-3, .stat-3 {
   background: linear-gradient(135deg, var(--stat-3-from), var(--stat-3-to));
+  color: #ffffff;
 }
 
 /* ============================================
@@ -479,51 +800,94 @@ nav {
   color: var(--alert-red-text);
 }
 
-.alert-amber {
-  background: var(--alert-amber-bg);
-  border: 1px solid var(--alert-amber-border);
-  color: var(--alert-amber-text);
-}
-
-.alert-blue {
-  background: var(--alert-blue-bg);
-  border: 1px solid var(--alert-blue-border);
-  color: var(--alert-blue-text);
+.alert-green {
+  background: var(--alert-green-bg);
+  border: 1px solid var(--alert-green-border);
+  color: var(--alert-green-text);
 }
 
 /* ============================================
-   FOOTER
+   WEATHER WIDGET
    ============================================ */
 
-footer,
-.footer {
-  background: var(--footer-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* ============================================
-   BUTTONS
-   ============================================ */
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  color: var(--button-text);
+.weather-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--weather-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-size: 14px;
+  color: var(--weather-text);
+  border: 1px solid var(--glass-border);
   transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
-  box-shadow: 0 4px 20px var(--glass-shadow);
-  transform: translateY(-1px);
+.weather-widget svg,
+.weather-widget .weather-icon {
+  color: var(--weather-icon);
+  width: 20px;
+  height: 20px;
 }
 
-.btn-secondary {
+.weather-temp {
+  font-weight: 600;
+  color: var(--weather-text);
+}
+
+.weather-condition {
+  color: var(--weather-text);
+  opacity: 0.8;
+}
+
+/* ============================================
+   GREETING SECTION
+   ============================================ */
+
+.greeting-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.greeting-text {
+  color: var(--brand-color);
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: color 0.3s ease;
+}
+
+.greeting-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--glass-border);
+}
+
+/* ============================================
+   THEME TOGGLE BUTTON
+   ============================================ */
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   color: var(--brand-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.btn-secondary:hover {
+.theme-toggle:hover {
+  transform: scale(1.05);
   background: var(--nav-bg);
 }
 
@@ -531,22 +895,18 @@ footer,
    FORM INPUTS
    ============================================ */
 
-input,
-textarea,
-select {
-  background: var(--glass-bg);
+input, textarea, select {
+  background: var(--input-bg);
   border: 1px solid var(--glass-border);
   color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder, textarea::placeholder {
   color: var(--text-muted);
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+input:focus, textarea:focus, select:focus {
   border-color: var(--brand-color);
   outline: none;
   box-shadow: 0 0 0 2px var(--glass-shadow);
@@ -555,19 +915,64 @@ select:focus {
 /* Autofill fix */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px var(--glass-bg) inset;
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset;
   -webkit-text-fill-color: var(--text-primary);
   transition: background-color 5000s ease-in-out 0s;
 }
 
 /* ============================================
-   DROPDOWN MENUS
+   BUTTONS
    ============================================ */
 
-.dropdown-menu {
+.btn-secondary {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--brand-color);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--nav-bg);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer, .footer {
+  background: var(--footer-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--footer-text);
+}
+
+footer a, .footer a {
+  color: var(--footer-text);
+  transition: color 0.3s ease;
+}
+
+footer a:hover, .footer a:hover {
+  color: var(--brand-color);
+}
+
+/* ============================================
+   GREEN ACCENT CARDS (pricing, ROI)
+   ============================================ */
+
+.glass-card-green {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ============================================
+   DROPDOWN & MOBILE MENUS
+   ============================================ */
+
+.dropdown-menu,
+.mobile-menu {
   background: var(--nav-bg);
   border: 1px solid var(--nav-border);
   backdrop-filter: blur(20px);
@@ -584,103 +989,33 @@ select:-webkit-autofill {
 }
 
 /* ============================================
-   MOBILE MENU
-   ============================================ */
-
-.mobile-menu {
-  background: var(--nav-bg);
-  border: 1px solid var(--nav-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* ============================================
    UTILITY CLASSES
    ============================================ */
 
-.border-theme {
-  border-color: var(--glass-border);
-}
-
-.bg-theme-glass {
-  background: var(--glass-bg);
-}
-
-.shadow-theme {
-  box-shadow: 0 8px 32px var(--glass-shadow);
-}
+.border-theme { border-color: var(--glass-border); }
+.bg-theme-glass { background: var(--glass-bg); }
+.shadow-theme { box-shadow: 0 8px 32px var(--glass-shadow); }
 
 /* ============================================
-   TRANSITIONS
+   MOBILE RESPONSIVE
    ============================================ */
 
-/* Smooth theme transitions */
-*,
-*::before,
-*::after {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-}
-
-/* Disable transitions on page load */
-.no-transition,
-.no-transition * {
-  transition: none !important;
-}
-
-/* ============================================
-   GREEN ACCENT CARDS (for pricing, ROI, etc)
-   ============================================ */
-
-.glass-card-green {
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.theme-midday .glass-card-green {
-  background: rgba(16, 185, 129, 0.2);
-  border: 1px solid rgba(16, 185, 129, 0.4);
-}
-
-/* ============================================
-   JAVASCRIPT HELPER - Add to your JS
-   ============================================
-   
-function setThemeByTime() {
-  const hour = new Date().getHours();
-  const body = document.body;
+@media (max-width: 768px) {
+  body::before {
+    background-attachment: scroll;
+  }
   
-  // Remove all theme classes
-  body.classList.remove(
-    'theme-sunrise', 
-    'theme-midday', 
-    'theme-sunset', 
-    'theme-dusk', 
-    'theme-night', 
-    'theme-stormy'
-  );
+  .weather-widget {
+    font-size: 13px;
+    padding: 5px 12px;
+  }
   
-  // Set theme based on time
-  if (hour >= 6 && hour < 9) {
-    body.classList.add('theme-sunrise');
-  } else if (hour >= 9 && hour < 17) {
-    body.classList.add('theme-midday');
-  } else if (hour >= 17 && hour < 19) {
-    body.classList.add('theme-sunset');
-  } else if (hour >= 19 && hour < 21) {
-    body.classList.add('theme-dusk');
-  } else {
-    body.classList.add('theme-night');
+  .greeting-section {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .greeting-divider {
+    display: none;
   }
 }
-
-// Run on page load
-setThemeByTime();
-
-// Optional: Update every minute
-setInterval(setThemeByTime, 60000);
-
-============================================ */
