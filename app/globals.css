@@ -928,6 +928,59 @@ body::before {
 }
 
 /* ============================================
+   GREEN GLASS CARD - More opaque for readability
+   (The "Honesty Advantage" card with green border)
+   ============================================ */
+/* Sky themes need more opaque green cards */
+body:not(.dark-mode) [class*="border-green"],
+body:not(.dark-mode) .border-green-400,
+body:not(.dark-mode) .border-green-500 {
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* Sunset/Dusk themes - even more opaque */
+.theme-sunset-clear [class*="border-green"],
+.theme-sunset-rainy [class*="border-green"],
+.theme-sunset-stormy [class*="border-green"] {
+  background: rgba(30, 20, 15, 0.9) !important;
+}
+
+/* ============================================
+   SUNSET/DUSK MODE - Orange Buttons
+   ============================================ */
+.theme-sunset-clear .btn-primary,
+.theme-sunset-clear .gradient-bg,
+.theme-sunset-clear button[class*="bg-cyan"],
+.theme-sunset-clear button[class*="bg-blue"],
+.theme-sunset-clear a[class*="bg-cyan"],
+.theme-sunset-clear a[class*="bg-blue"] {
+  background: linear-gradient(135deg, #f97316, #ea580c) !important;
+  color: #ffffff !important;
+}
+
+.theme-sunset-clear .btn-secondary,
+.theme-sunset-clear .btn-outline {
+  background: rgba(67, 20, 7, 0.6) !important;
+  color: #fdba74 !important;
+  border-color: rgba(251, 146, 60, 0.5) !important;
+}
+
+/* Override any cyan/blue buttons in sunset mode */
+.theme-sunset-clear [class*="border-cyan"],
+.theme-sunset-rainy [class*="border-cyan"],
+.theme-sunset-stormy [class*="border-cyan"] {
+  border-color: rgba(251, 146, 60, 0.5) !important;
+}
+
+.theme-sunset-clear [class*="text-cyan"],
+.theme-sunset-rainy [class*="text-cyan"],
+.theme-sunset-stormy [class*="text-cyan"] {
+  color: #fb923c !important;
+}
+
+/* ============================================
    MOBILE: Force Dark Mode Only
    ============================================ */
 @media (max-width: 768px) {
