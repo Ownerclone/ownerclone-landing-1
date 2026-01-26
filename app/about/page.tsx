@@ -102,49 +102,65 @@ export default function About() {
             
             <div className="space-y-6 text-gray-300">
               <p className="text-lg">
-                <strong className="text-white">I opened my first restaurant in 2015.</strong> It was an Italian place in Brooklyn—my dream come true. But within six months, I realized the dream was a nightmare.
+                <strong className="text-white">I started in restaurant kitchens at age 13.</strong> Dishwasher, prep cook, line cook, expo, server, bartender, manager—I did it all. By 22, I'd worked every position and learned the industry inside out.
               </p>
 
               <p>
-                My food costs were through the roof. I was working 80-hour weeks. And I had this nagging feeling that money was disappearing, but I couldn&apos;t prove it.
+                Then I left to chase a different dream: making movies.
               </p>
 
               <p>
-                <strong className="text-white">Then I caught my night manager stealing.</strong> He&apos;d been running a void scam for 18 months—ringing up orders, serving the food, voiding the transaction after the customer left, and pocketing the cash.
-              </p>
-
-              <p className="text-red-400 font-semibold">
-                $40,000. Gone.
+                <strong className="text-white">I spent 20 years in the film industry,</strong> working with some of the best cinematographers, directors, and producers in the world. I started my own independent rental company that grew into one of the largest owner-operator film equipment companies globally—with locations in LA, Atlanta, Pittsburgh, and New York.
               </p>
 
               <p>
-                That&apos;s when I realized something: <strong className="text-white">if you own a restaurant, you need three things to survive:</strong>
-              </p>
-
-              <ol className="list-decimal list-inside space-y-2 ml-4">
-                <li><strong className="text-cyan-400">A way to catch theft before it bankrupts you</strong></li>
-                <li><strong className="text-cyan-400">A way to know your actual food costs (not what you think they are)</strong></li>
-                <li><strong className="text-cyan-400">A way to predict busy and slow nights so you&apos;re not constantly over or understaffed</strong></li>
-              </ol>
-
-              <p>
-                I spent the next three years building those tools for myself. Spreadsheets. Scripts. Automations. And it worked. <strong className="text-white">My food costs dropped from 38% to 28%. I caught two more employees stealing. And I finally stopped working 80-hour weeks.</strong>
+                I built a 1,700-item web store selling equipment worldwide, added two sound stages, and was living the dream. I was building, scaling, and succeeding.
               </p>
 
               <p>
-                But here&apos;s the thing: <strong className="text-white">I shouldn&apos;t have had to build this myself.</strong>
+                Then I lost everything in a divorce.
+              </p>
+
+              <h3 className="text-2xl font-bold text-white mt-8">Back to My Roots</h3>
+
+              <p>
+                <strong className="text-white">So I reinvented myself</strong> by following my second passion: food. I started with a coffee truck serving the film community. That truck needed a home base, so I opened a restaurant. Then another. Then another.
               </p>
 
               <p>
-                So I built OwnerClone—the tool I wish I&apos;d had from day one. Not for big chains. Not for corporate restaurant groups. <strong className="text-cyan-400">For people like me. Independent owners trying to make it work.</strong>
+                Over 10 years, I owned and operated three restaurant concepts. I thought my years of business experience would make it easy.
               </p>
 
-              <p className="text-lg font-semibold text-white">
-                This isn&apos;t just software. It&apos;s a clone of everything I wish I&apos;d known, from someone who&apos;s been exactly where you are right now.
+              <p className="text-yellow-400 font-semibold text-xl">
+                I was wrong.
+              </p>
+
+              <p>
+                My night manager stole $40,000 from me running a void scam for 18 months. I only caught him because my food costs didn't make sense. It took weeks of investigation with my Sous Chef, a tip from a server about missing cash, and another week manually reviewing reports to find the pattern.
+              </p>
+
+              <p>
+                My food costs were out of control. Portions were inconsistent. My vendors were raising prices without me noticing. I was working 80-hour weeks and still losing money.
+              </p>
+
+              <p>
+                Eventually, I closed all three restaurants. The operational chaos, the theft, the burnout—it was too much.
+              </p>
+
+              <p>
+                <strong className="text-white">But here's what I realized:</strong> Big chains like Chipotle and McDonald's use AI to catch theft, predict demand, and optimize costs. Why couldn't independent restaurants have access to the same technology?
+              </p>
+
+              <p>
+                So I built OwnerClone. It does what I wish I could've cloned myself to do: watch every transaction 24/7, track every penny of food cost, and predict what's coming two weeks out.
+              </p>
+
+              <p className="text-cyan-400 font-semibold text-lg">
+                I'm building the tool I wish I had when I was in your shoes.
               </p>
 
               <p className="text-gray-400 italic">
-                — Matt, Founder & CEO
+                — Mateo Monti, Founder & CEO
               </p>
             </div>
           </div>
