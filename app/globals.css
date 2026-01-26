@@ -369,3 +369,34 @@ body::before {
 :root.light-mode [class*="footer"] a:hover {
   color: #22d3ee !important;  /* Cyan on hover */
 }
+
+/* ============================================
+   LOGO FIXES - SOLID CYAN IN LIGHT MODE
+   ============================================ */
+
+/* Light mode - ALL logos should be SOLID cyan */
+:root.light-mode svg circle.logo-color,
+:root.light-mode .logo-color {
+  stroke: #22d3ee !important;
+  stroke-opacity: 1 !important;  /* Solid, not translucent */
+  opacity: 1 !important;
+}
+
+/* Homepage logo in light mode - solid cyan */
+:root.light-mode .stroke-cyan-400\/60 {
+  stroke: #22d3ee !important;
+  stroke-opacity: 1 !important;
+}
+
+/* Footer logo in light mode - solid cyan */
+:root.light-mode footer svg circle,
+:root.light-mode footer .logo-color {
+  stroke: #22d3ee !important;
+  stroke-opacity: 1 !important;
+}
+
+/* Dark mode - Nav logo should be translucent like homepage */
+:root nav svg circle.logo-color,
+:root nav .logo-color {
+  stroke-opacity: 0.6;  /* Translucent in dark mode */
+}
