@@ -1024,74 +1024,24 @@ body:not(.dark-mode) [data-nextjs-scroll-focus-boundary] {
 }
 
 /* ============================================
-   MOBILE: Force Dark Mode Only
+   MOBILE: Responsive adjustments only
+   (No longer forcing dark mode - all themes work)
    ============================================ */
 @media (max-width: 768px) {
+  /* Fix background attachment for mobile scroll */
   body::before {
     background-attachment: scroll;
   }
   
-  /* Force dark mode on mobile */
-  body,
-  body.dark-mode,
-  body[class*="theme-"] {
-    --bg-image: none !important;
-    --bg-color: #0a0e27 !important;
-    
-    --glass-bg: rgba(30, 100, 180, 0.25) !important;
-    --glass-border: rgba(56, 189, 248, 0.3) !important;
-    
-    --nav-bg: rgba(20, 80, 150, 0.4) !important;
-    --nav-border: rgba(56, 189, 248, 0.25) !important;
-    
-    --text-primary: #ffffff !important;
-    --text-secondary: #94a3b8 !important;
-    --text-muted: #64748b !important;
-    
-    --brand-primary: #22d3ee !important;
-    --brand-secondary: #764BA2 !important;
-    --brand-accent: #67e8f9 !important;
-    
-    --logo-color: #22d3ee !important;
-    
-    --card-bg: rgba(30, 100, 180, 0.2) !important;
-    --card-border: rgba(56, 189, 248, 0.25) !important;
-    
-    --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2) !important;
-    --btn-primary-text: #ffffff !important;
-    
-    --footer-bg: rgba(15, 60, 120, 0.5) !important;
-    --footer-text: #94a3b8 !important;
+  /* Slightly more opaque glass for mobile readability */
+  body {
+    --glass-bg: rgba(15, 23, 42, 0.75);
+    --nav-bg: rgba(15, 23, 42, 0.85);
   }
   
-  /* Use bg-glow on mobile */
-  body::before {
-    background-image: url("/bg-glow.svg") !important;
-    background-size: cover !important;
-    background-position: center top !important;
-    opacity: 0.6 !important;
-  }
-  
-  /* Show bg-glow div on mobile */
-  body main > div[style*="background"] {
-    display: block !important;
-  }
-  
-  /* Reset text colors on mobile */
-  body .text-cyan-400,
-  body h1[class*="text-cyan"],
-  body h2[class*="text-cyan"] {
-    color: #1E9FF2 !important;
-  }
-  
-  body .text-red-400 { color: #ef4444 !important; }
-  body .text-yellow-400 { color: #eab308 !important; }
-  body .text-purple-400 { color: #a855f7 !important; }
-  body .text-green-400 { color: #22c55e !important; }
-  body .text-orange-400 { color: #f97316 !important; }
-  
-  /* Hide theme slider on mobile */
-  .theme-slider-container {
-    display: none !important;
+  /* Dark mode specific mobile adjustments */
+  body.dark-mode {
+    --glass-bg: rgba(30, 100, 180, 0.35);
+    --nav-bg: rgba(20, 80, 150, 0.5);
   }
 }
