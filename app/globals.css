@@ -244,19 +244,22 @@ body::before {
 
 :root.light-mode .nav-text {
   color: #0c4a6e !important;
+  font-weight: 600 !important; /* Make nav links bold */
 }
 
 :root.light-mode .nav-text:hover {
   color: #075985 !important;
 }
 
-/* All nav links navy */
+/* All nav links navy and bold */
 :root.light-mode nav a {
   color: #0c4a6e !important;
+  font-weight: 600 !important;
 }
 
 :root.light-mode nav button:not(.login-btn) {
   color: #0c4a6e !important;
+  font-weight: 600 !important;
 }
 
 /* Logo navy */
@@ -264,10 +267,11 @@ body::before {
   stroke: #0c4a6e !important;
 }
 
-/* OwnerClone text navy */
+/* OwnerClone text navy and bold */
 :root.light-mode nav .text-2xl,
 :root.light-mode nav .font-black {
   color: #0c4a6e !important;
+  font-weight: 800 !important;
 }
 
 /* Active nav arrow - navy */
@@ -277,12 +281,55 @@ body::before {
   filter: drop-shadow(0 0 4px rgba(12, 74, 110, 0.5)) !important;
 }
 
-/* Dropdown menu items navy */
-:root.light-mode .dropdown-item {
+/* Sun icon navy */
+:root.light-mode .text-cyan-400 {
   color: #0c4a6e !important;
 }
 
-/* Mobile menu links navy */
+/* Dropdown menu - BLUE GLASS instead of grey */
+:root.light-mode .dropdown-menu,
+:root.light-mode nav .absolute.top-full {
+  background-color: rgba(34, 211, 238, 0.9) !important;
+  border-color: rgba(34, 211, 238, 0.4) !important;
+}
+
+:root.light-mode .dropdown-item {
+  color: #0c4a6e !important;
+  font-weight: 500 !important;
+}
+
+:root.light-mode .dropdown-item:hover {
+  background-color: rgba(6, 182, 212, 0.3) !important;
+}
+
+/* Mobile menu - BLUE GLASS */
+:root.light-mode .mobile-menu,
+:root.light-mode nav .lg\:hidden {
+  background-color: rgba(34, 211, 238, 0.9) !important;
+  border-color: rgba(34, 211, 238, 0.4) !important;
+}
+
 :root.light-mode .mobile-menu a {
   color: #0c4a6e !important;
+  font-weight: 600 !important;
+}
+
+/* ALL GLASS CARDS - BLUE GLASS IN LIGHT MODE */
+:root.light-mode .backdrop-blur-xl,
+:root.light-mode [class*="backdrop-blur"] {
+  background-color: rgba(34, 211, 238, 0.15) !important;
+  border-color: rgba(34, 211, 238, 0.2) !important;
+}
+
+/* Glass cards with bg-white/5 - make them blue glass */
+:root.light-mode .bg-white\/5,
+:root.light-mode .bg-white\/10 {
+  background-color: rgba(34, 211, 238, 0.15) !important;
+  border-color: rgba(34, 211, 238, 0.2) !important;
+}
+
+/* Border colors - blue instead of white */
+:root.light-mode .border-white\/10,
+:root.light-mode .border-white\/20 {
+  border-color: rgba(34, 211, 238, 0.3) !important;
 }
