@@ -20,12 +20,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Theme initialization - runs before page renders to prevent flash */}
+        {/* DEFAULT IS DARK MODE */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                // Check for dark mode preference
-                const isDarkMode = localStorage.getItem('ownerclone-dark-mode') === 'true';
+                // Default to dark mode if no preference saved
+                const savedPref = localStorage.getItem('ownerclone-dark-mode');
+                const isDarkMode = savedPref === null ? true : savedPref === 'true';
+                
                 if (isDarkMode) {
                   document.documentElement.classList.add('dark-mode');
                 }
@@ -100,224 +103,177 @@ export default function RootLayout({
           </div>
         </footer>
 
-        {/* Theme System Script */}
+        {/* Simplified Theme System Script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               // ============================================
-              // OWNERCLONE DYNAMIC SKY THEME SYSTEM
+              // OWNERCLONE THEME SYSTEM - SIMPLIFIED
+              // Default: Dark Mode
+              // Toggle: Sky Themes (time + weather based)
               // ============================================
 
-              const THEME_CONFIG = {
-                weatherApiKey: '2e7d6101714e4db79e3170726262601',
-                weatherUpdateInterval: 30 * 60 * 1000,
-                
-                timeRanges: {
-                  sunrise: { start: 6, end: 9 },
-                  midday: { start: 9, end: 17 },
-                  sunset: { start: 17, end: 19 },
-                  night: { start: 19, end: 6 }
-                },
-                
-                weatherMappings: {
-                  clear: ['sunny', 'clear', 'partly cloudy', 'fair'],
-                  rainy: ['cloudy', 'overcast', 'mist', 'fog', 'light rain', 'light drizzle', 'patchy rain', 'haze'],
-                  stormy: ['rain', 'heavy rain', 'moderate rain', 'thunderstorm', 'thunder', 'heavy snow', 'blizzard', 'snow', 'sleet']
-                },
-                
-                greetings: {
-                  sunrise: '🌅 Good Morning',
-                  midday: '☀️ Good Afternoon',
-                  sunset: '🌇 Good Evening',
-                  night: '🌙 Good Night',
-                  dark: '👋 Welcome'
-                }
-              };
+              const WEATHER_API_KEY = '2e7d6101714e4db79e3170726262601';
 
               const ThemeManager = {
-                currentTheme: null,
-                currentWeather: 'clear',
-                isDarkMode: localStorage.getItem('ownerclone-dark-mode') === 'true',
-
                 init() {
-                  if (this.isDarkMode) {
+                  // Check saved preference, default to dark mode
+                  const savedPref = localStorage.getItem('ownerclone-dark-mode');
+                  const isDarkMode = savedPref === null ? true : savedPref === 'true';
+                  
+                  if (isDarkMode) {
                     this.enableDarkMode();
                   } else {
-                    this.updateTheme();
+                    this.enableSkyMode();
                   }
-                  setInterval(() => { if (!this.isDarkMode) this.updateTheme(); }, 60000);
-                },
-
-                getTimePeriod() {
-                  const hour = new Date().getHours();
-                  const { timeRanges } = THEME_CONFIG;
-                  if (hour >= timeRanges.sunrise.start && hour < timeRanges.sunrise.end) return 'sunrise';
-                  if (hour >= timeRanges.midday.start && hour < timeRanges.midday.end) return 'midday';
-                  if (hour >= timeRanges.sunset.start && hour < timeRanges.sunset.end) return 'sunset';
-                  return 'night';
-                },
-
-                mapWeatherCondition(condition) {
-                  if (!condition) return 'clear';
-                  const lower = condition.toLowerCase();
-                  if (THEME_CONFIG.weatherMappings.stormy.some(w => lower.includes(w))) return 'stormy';
-                  if (THEME_CONFIG.weatherMappings.rainy.some(w => lower.includes(w))) return 'rainy';
-                  return 'clear';
-                },
-
-                updateTheme() {
-                  const time = this.getTimePeriod();
-                  const weather = this.currentWeather || 'clear';
-                  const themeName = time + '-' + weather;
-                  if (this.currentTheme === themeName) return;
-                  this.setTheme(themeName);
-                },
-
-                setTheme(themeName) {
-                  const body = document.body;
-                  const classes = [
-                    'theme-sunrise-clear', 'theme-sunrise-rainy', 'theme-sunrise-stormy',
-                    'theme-midday-clear', 'theme-midday-rainy', 'theme-midday-stormy',
-                    'theme-sunset-clear', 'theme-sunset-rainy', 'theme-sunset-stormy',
-                    'theme-night-clear', 'theme-night-rainy', 'theme-night-stormy',
-                    'dark-mode'
-                  ];
-                  classes.forEach(c => body.classList.remove(c));
-                  body.classList.add('theme-' + themeName);
-                  this.currentTheme = themeName;
-                  this.updateGreeting(themeName.split('-')[0]);
-                },
-
-                setWeather(condition) {
-                  const mapped = this.mapWeatherCondition(condition);
-                  if (this.currentWeather !== mapped) {
-                    this.currentWeather = mapped;
-                    if (!this.isDarkMode) this.updateTheme();
-                  }
+                  
+                  // Fetch weather for sky themes
+                  this.fetchWeather();
                 },
 
                 enableDarkMode() {
-                  const classes = [
-                    'theme-sunrise-clear', 'theme-sunrise-rainy', 'theme-sunrise-stormy',
-                    'theme-midday-clear', 'theme-midday-rainy', 'theme-midday-stormy',
-                    'theme-sunset-clear', 'theme-sunset-rainy', 'theme-sunset-stormy',
-                    'theme-night-clear', 'theme-night-rainy', 'theme-night-stormy'
-                  ];
-                  classes.forEach(c => document.body.classList.remove(c));
+                  // Remove all theme classes
+                  const themeClasses = Array.from(document.body.classList).filter(c => c.startsWith('theme-'));
+                  themeClasses.forEach(c => document.body.classList.remove(c));
+                  
+                  // Add dark mode
                   document.body.classList.add('dark-mode');
-                  this.isDarkMode = true;
                   localStorage.setItem('ownerclone-dark-mode', 'true');
+                  
                   this.updateGreeting('dark');
-                  this.updateToggleIcon(true);
                 },
 
-                disableDarkMode() {
+                enableSkyMode() {
                   document.body.classList.remove('dark-mode');
-                  this.isDarkMode = false;
                   localStorage.setItem('ownerclone-dark-mode', 'false');
-                  this.updateTheme();
-                  this.updateToggleIcon(false);
+                  
+                  this.applyTimeBasedTheme();
                 },
 
-                toggleDarkMode() {
-                  this.isDarkMode ? this.disableDarkMode() : this.enableDarkMode();
+                applyTimeBasedTheme() {
+                  const hour = new Date().getHours();
+                  let timePeriod = 'midday';
+                  
+                  if (hour >= 6 && hour < 9) timePeriod = 'sunrise';
+                  else if (hour >= 9 && hour < 17) timePeriod = 'midday';
+                  else if (hour >= 17 && hour < 20) timePeriod = 'sunset';
+                  else timePeriod = 'night';
+                  
+                  // Get weather
+                  const weather = this.getCurrentWeather();
+                  
+                  // Remove old theme classes
+                  const oldClasses = Array.from(document.body.classList).filter(c => c.startsWith('theme-'));
+                  oldClasses.forEach(c => document.body.classList.remove(c));
+                  
+                  // Add new theme
+                  document.body.classList.add('theme-' + timePeriod + '-' + weather);
+                  
+                  this.updateGreeting(timePeriod);
                 },
 
-                updateGreeting(time) {
-                  const el = document.querySelector('.greeting-text');
-                  if (el) el.textContent = THEME_CONFIG.greetings[time] || THEME_CONFIG.greetings.midday;
-                },
-
-                updateToggleIcon(isDark) {
-                  const sun = document.querySelector('.theme-toggle .sun-icon');
-                  const moon = document.querySelector('.theme-toggle .moon-icon');
-                  if (sun && moon) {
-                    sun.style.display = isDark ? 'block' : 'none';
-                    moon.style.display = isDark ? 'none' : 'block';
-                  }
-                }
-              };
-
-              const WeatherWidget = {
-                data: null,
-
-                async init() {
-                  const cached = this.getCachedWeather();
-                  if (cached) {
-                    this.data = cached;
-                    this.render();
-                    ThemeManager.setWeather(cached.condition);
-                  }
-                  await this.fetchWeather();
-                  setInterval(() => this.fetchWeather(), THEME_CONFIG.weatherUpdateInterval);
+                getCurrentWeather() {
+                  try {
+                    const cached = localStorage.getItem('ownerclone-weather');
+                    if (cached) {
+                      const { data } = JSON.parse(cached);
+                      if (data?.condition) {
+                        const condition = data.condition.toLowerCase();
+                        if (condition.includes('storm') || condition.includes('thunder') || condition.includes('heavy')) {
+                          return 'stormy';
+                        } else if (condition.includes('rain') || condition.includes('cloud') || condition.includes('overcast') || condition.includes('mist') || condition.includes('fog')) {
+                          return 'rainy';
+                        }
+                      }
+                    }
+                  } catch (e) {}
+                  return 'clear';
                 },
 
                 async fetchWeather() {
-                  if (THEME_CONFIG.weatherApiKey === 'YOUR_NEW_API_KEY_HERE') return;
-                  
                   try {
-                    const url = 'https://api.weatherapi.com/v1/current.json?key=' + THEME_CONFIG.weatherApiKey + '&q=auto:ip';
-                    const res = await fetch(url);
-                    if (!res.ok) throw new Error('API error');
+                    const res = await fetch('https://api.weatherapi.com/v1/current.json?key=' + WEATHER_API_KEY + '&q=auto:ip');
+                    if (!res.ok) return;
                     const data = await res.json();
                     
-                    this.data = {
+                    const weatherData = {
                       temp: Math.round(data.current.temp_f),
                       condition: data.current.condition.text,
                       icon: data.current.condition.icon
                     };
                     
-                    localStorage.setItem('ownerclone-weather', JSON.stringify({ data: this.data, timestamp: Date.now() }));
-                    this.render();
-                    ThemeManager.setWeather(this.data.condition);
+                    localStorage.setItem('ownerclone-weather', JSON.stringify({ data: weatherData, timestamp: Date.now() }));
+                    
+                    // Update weather widget if exists
+                    this.updateWeatherWidget(weatherData);
+                    
+                    // If in sky mode, refresh theme
+                    if (!document.body.classList.contains('dark-mode')) {
+                      this.applyTimeBasedTheme();
+                    }
                   } catch (e) {
                     console.error('Weather fetch failed:', e);
                   }
                 },
 
-                render() {
-                  const el = document.querySelector('.weather-widget');
-                  if (!el || !this.data) return;
-                  el.innerHTML = '<img src="https:' + this.data.icon + '" alt="" width="24" height="24" style="width:24px;height:24px;"><span class="weather-temp">' + this.data.temp + '°F</span><span style="opacity:0.5">•</span><span class="weather-condition">' + this.data.condition + '</span>';
-                  el.style.display = 'inline-flex';
+                updateWeatherWidget(data) {
+                  const widget = document.querySelector('.weather-widget');
+                  if (!widget || !data) return;
+                  
+                  widget.innerHTML = '<img src="https:' + data.icon + '" alt="" width="24" height="24" style="width:24px;height:24px;"><span>' + data.temp + '°F</span><span style="opacity:0.5">•</span><span>' + this.simplifyCondition(data.condition) + '</span>';
+                  widget.style.display = 'inline-flex';
                 },
 
-                getCachedWeather() {
-                  try {
-                    const cached = localStorage.getItem('ownerclone-weather');
-                    if (!cached) return null;
-                    const { data, timestamp } = JSON.parse(cached);
-                    if (Date.now() - timestamp < THEME_CONFIG.weatherUpdateInterval) return data;
-                    return null;
-                  } catch { return null; }
+                simplifyCondition(condition) {
+                  if (!condition) return '';
+                  const lower = condition.toLowerCase();
+                  if (lower.includes('thunder') || lower.includes('storm')) return 'Stormy';
+                  if (lower.includes('heavy rain')) return 'Heavy Rain';
+                  if (lower.includes('rain') || lower.includes('drizzle')) return 'Rainy';
+                  if (lower.includes('snow') || lower.includes('blizzard')) return 'Snowy';
+                  if (lower.includes('overcast')) return 'Overcast';
+                  if (lower.includes('cloudy') || lower.includes('cloud')) return 'Cloudy';
+                  if (lower.includes('fog') || lower.includes('mist')) return 'Foggy';
+                  if (lower.includes('sunny') || lower.includes('clear')) return 'Clear';
+                  return condition.split(' ').slice(0, 2).join(' ');
+                },
+
+                updateGreeting(timePeriod) {
+                  const greetings = {
+                    sunrise: '🌅 Good Morning',
+                    midday: '☀️ Good Afternoon',
+                    sunset: '🌇 Good Evening',
+                    night: '🌙 Good Night',
+                    dark: '👋 Welcome'
+                  };
+                  
+                  const el = document.querySelector('.greeting-text');
+                  if (el) el.textContent = greetings[timePeriod] || greetings.midday;
+                },
+
+                toggleDarkMode() {
+                  if (document.body.classList.contains('dark-mode')) {
+                    this.enableSkyMode();
+                  } else {
+                    this.enableDarkMode();
+                  }
                 }
               };
 
               // Initialize on DOM ready
               if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
+                document.addEventListener('DOMContentLoaded', () => ThemeManager.init());
               } else {
-                init();
-              }
-
-              function init() {
                 ThemeManager.init();
-                WeatherWidget.init();
-                
-                const toggle = document.querySelector('.theme-toggle');
-                if (toggle) {
-                  toggle.addEventListener('click', () => ThemeManager.toggleDarkMode());
-                  ThemeManager.updateToggleIcon(ThemeManager.isDarkMode);
-                }
               }
 
+              // Expose for toggle button
               window.OwnerCloneTheme = {
                 toggleDarkMode: () => ThemeManager.toggleDarkMode(),
                 enableDarkMode: () => ThemeManager.enableDarkMode(),
-                disableDarkMode: () => ThemeManager.disableDarkMode(),
-                setTheme: (t) => ThemeManager.setTheme(t),
-                setWeather: (c) => ThemeManager.setWeather(c),
-                refresh: () => ThemeManager.updateTheme()
+                enableSkyMode: () => ThemeManager.enableSkyMode(),
+                disableDarkMode: () => ThemeManager.enableSkyMode(),
+                refresh: () => ThemeManager.applyTimeBasedTheme()
               };
             `,
           }}
