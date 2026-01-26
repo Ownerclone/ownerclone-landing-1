@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { AlertTriangle, TrendingDown, BarChart3, Plug, Brain, Bell, Shield, Zap, DollarSign, TrendingUp } from 'lucide-react'
+import WeatherGreeting from '@/components/WeatherGreeting'
 
 export default function Home() {
   return (
@@ -11,16 +12,19 @@ export default function Home() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }} />
-
+      
       {/* All content with relative z-10 */}
       <div className="relative z-10">
-
         {/* Hero Section with Logo + OwnerClone */}
         <section className="pt-32 pb-20 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-4xl mx-auto mb-16">
               {/* Logo + OwnerClone Name on Glass Card */}
               <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 mb-8">
+                
+                {/* Greeting + Weather Widget */}
+                <WeatherGreeting />
+                
                 <div className="flex items-center justify-center gap-3 mb-8">
                   {/* Glass-style logo matching navbar */}
                   <svg viewBox="-5 0 85 60" className="h-16 md:h-20 w-auto">
