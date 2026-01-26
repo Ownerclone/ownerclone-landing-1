@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import ThemeSlider from './ThemeSlider';
 import ThemeToggle from './ThemeToggle';
 import { 
   UtensilsCrossed, // Food Cost
@@ -228,16 +229,15 @@ export default function Navigation() {
                 </Link>
               ))}
 
-              {/* Theme Toggle */}
-              <ThemeToggle />
-
-              {/* Login Button - Glass Style */}
-              <button 
-                onClick={() => setLoginOpen(true)}
-                className="login-btn px-4 py-2 rounded-lg font-bold"
-              >
-                Login
-              </button>
+              {/* Theme Slider */}
+<ThemeSlider />
+{/* Login Button - Glass Style */}
+<button 
+  onClick={() => setLoginOpen(true)}
+  className="login-btn px-4 py-2 rounded-lg font-bold"
+>
+  Login
+</button>
             </div>
 
             {/* Mobile menu button */}
