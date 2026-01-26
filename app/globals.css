@@ -170,8 +170,8 @@ body::before {
   --text-secondary: #666666;
   --text-tertiary: #999999;
   --border: #e5e5e5;
-  --nav-bg: rgba(100, 116, 139, 0.95);  /* Smoke glass - 20% darker (was 0.85) */
-  --nav-border: rgba(100, 116, 139, 0.98);
+  --nav-bg: rgba(30, 41, 59, 0.95);  /* MUCH darker smoke - slate-800 */
+  --nav-border: rgba(30, 41, 59, 0.98);
   --nav-text: #22d3ee;  /* Cyan text */
   --nav-text-hover: #06b6d4;  /* Darker cyan on hover */
   --logo-color: #22d3ee;  /* Cyan logo */
@@ -239,31 +239,31 @@ body::before {
   color: #22d3ee !important;  /* Cyan */
 }
 
-/* Dropdown - smoke glass to match nav */
+/* Dropdown - MUCH darker smoke to match nav */
 :root.light-mode .dropdown-menu,
 :root.light-mode nav .absolute.top-full {
-  background-color: rgba(100, 116, 139, 0.9) !important;  /* Smoke glass */
-  border-color: rgba(100, 116, 139, 0.95) !important;
+  background-color: rgba(30, 41, 59, 0.95) !important;  /* Dark slate-800 */
+  border-color: rgba(30, 41, 59, 0.98) !important;
 }
 
 :root.light-mode .dropdown-item {
-  color: #0c4a6e !important;
+  color: #22d3ee !important;  /* Cyan text */
   font-weight: 500 !important;
 }
 
 :root.light-mode .dropdown-item:hover {
-  background-color: rgba(6, 182, 212, 0.3) !important;
+  background-color: rgba(51, 65, 85, 0.5) !important;  /* Lighter slate on hover */
 }
 
-/* Mobile menu - smoke glass */
+/* Mobile menu - MUCH darker smoke */
 :root.light-mode .mobile-menu,
 :root.light-mode nav .lg\:hidden {
-  background-color: rgba(100, 116, 139, 0.9) !important;  /* Smoke glass */
-  border-color: rgba(100, 116, 139, 0.95) !important;
+  background-color: rgba(30, 41, 59, 0.95) !important;  /* Dark slate-800 */
+  border-color: rgba(30, 41, 59, 0.98) !important;
 }
 
 :root.light-mode .mobile-menu a {
-  color: #0c4a6e !important;
+  color: #22d3ee !important;  /* Cyan text */
   font-weight: 600 !important;
 }
 
@@ -299,13 +299,13 @@ body::before {
   color: #000000;
 }
 
-/* TEXT COLORS */
+/* TEXT COLORS - WHITE INSTEAD OF NAVY */
 :root.light-mode .text-white,
 :root.light-mode .text-gray-200,
 :root.light-mode .text-gray-300,
 :root.light-mode .text-gray-400,
 :root.light-mode .text-black {
-  color: #0c4a6e !important;
+  color: #ffffff !important;  /* White text instead of navy */
 }
 
 /* Cyan text - NO OUTLINE */
