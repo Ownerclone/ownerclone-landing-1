@@ -169,16 +169,16 @@ body::before {
    LIGHT MODE - STEP 1: WHITE BACKGROUND ONLY
    ============================================ */
 
-/* Light mode overrides - STEP 2: BLUE NAV WITH DARK TEXT */
+/* Light mode overrides - STEP 2: BLUE NAV WITH MORNING SKY */
 :root.light-mode {
-  --bg-primary: #ffffff;
-  --bg-secondary: #ffffff;
+  --bg-primary: #f3f4f6;  /* Light grey to match sky bottom */
+  --bg-secondary: #e5e7eb;
   --bg-card: #ffffff;
   --text-primary: #000000;
   --text-secondary: #666666;
   --text-tertiary: #999999;
   --border: #e5e5e5;
-  --nav-bg: rgba(34, 211, 238, 0.7);  /* Cyan glass - 80% opacity */
+  --nav-bg: rgba(34, 211, 238, 0.7);  /* Cyan glass - 70% opacity */
   --nav-border: rgba(34, 211, 238, 0.3);  /* Cyan border */
   --nav-text: #0c4a6e;  /* Dark blue text - sky-900 */
   --nav-text-hover: #075985;  /* Even darker blue on hover - sky-950 */
@@ -187,14 +187,13 @@ body::before {
 
 /* KILL THE ORB BACKGROUND - Multiple approaches */
 :root.light-mode body::before {
-  display: none !important;
-  background-image: none !important;
-  opacity: 0 !important;
+  display: block !important;  /* Show the background */
+  background-image: url('/bg-sky-v3-heavy-blur.jpg') !important;  /* Morning sky photo */
+  opacity: 1 !important;
 }
 
 :root.light-mode body {
-  background-image: none !important;
-  background-color: #ffffff !important;
+  background-color: #f3f4f6 !important;  /* Match sky gradient bottom */
 }
 
 /* Kill any fixed background divs with inline styles */
@@ -289,8 +288,8 @@ body::before {
 /* Dropdown menu - BLUE GLASS instead of grey */
 :root.light-mode .dropdown-menu,
 :root.light-mode nav .absolute.top-full {
-  background-color: rgba(34, 211, 238, 0.4) !important;
-  border-color: rgba(34, 211, 238, 0.6) !important;
+  background-color: rgba(34, 211, 238, 0.9) !important;
+  border-color: rgba(34, 211, 238, 0.4) !important;
 }
 
 :root.light-mode .dropdown-item {
@@ -317,21 +316,21 @@ body::before {
 /* ALL GLASS CARDS - BLUE GLASS IN LIGHT MODE */
 :root.light-mode .backdrop-blur-xl,
 :root.light-mode [class*="backdrop-blur"] {
-  background-color: rgba(34, 211, 238, 0.25) !important;
-  border-color: rgba(34, 211, 238, 0.4) !important;
+  background-color: rgba(34, 211, 238, 0.15) !important;
+  border-color: rgba(34, 211, 238, 0.2) !important;
 }
 
 /* Glass cards with bg-white/5 - make them blue glass */
 :root.light-mode .bg-white\/5,
 :root.light-mode .bg-white\/10 {
-  background-color: rgba(34, 211, 238, 0.25) !important;
-  border-color: rgba(34, 211, 238, 0.4) !important;
+  background-color: rgba(34, 211, 238, 0.15) !important;
+  border-color: rgba(34, 211, 238, 0.2) !important;
 }
 
 /* Border colors - blue instead of white */
 :root.light-mode .border-white\/10,
 :root.light-mode .border-white\/20 {
-  border-color: rgba(34, 211, 238, 0.4) !important;
+  border-color: rgba(34, 211, 238, 0.3) !important;
 }
 
 /* ============================================
@@ -372,29 +371,29 @@ body::before {
 :root.light-mode .bg-\[--0a0a0a\],
 :root.light-mode .bg-gray-900,
 :root.light-mode .bg-gray-800 {
-  background-color: rgba(100, 116, 139, 0.25) !important; /* Smoke glass - slate-500 at 15% */
-  border-color: rgba(100, 116, 139, 0.4) !important;
+  background-color: rgba(100, 116, 139, 0.15) !important; /* Smoke glass - slate-500 at 15% */
+  border-color: rgba(100, 116, 139, 0.2) !important;
 }
 
 /* Black with opacity becomes smoke glass */
 :root.light-mode .bg-black\/40,
 :root.light-mode .bg-black\/60,
 :root.light-mode .bg-black\/80 {
-  background-color: rgba(100, 116, 139, 0.25) !important;
+  background-color: rgba(100, 116, 139, 0.15) !important;
 }
 
 /* Colored glass cards stay their color but with adjusted opacity */
 :root.light-mode .bg-cyan-500\/20,
 :root.light-mode .bg-cyan-500\/30 {
-  background-color: rgba(34, 211, 238, 0.4) !important;
+  background-color: rgba(34, 211, 238, 0.2) !important;
 }
 
 :root.light-mode .bg-green-500\/20,
 :root.light-mode .bg-green-500\/30 {
-  background-color: rgba(34, 197, 94, 0.4) !important;
+  background-color: rgba(34, 197, 94, 0.2) !important;
 }
 
 :root.light-mode .bg-purple-500\/20,
 :root.light-mode .bg-purple-500\/30 {
-  background-color: rgba(168, 85, 247, 0.4) !important;
+  background-color: rgba(168, 85, 247, 0.2) !important;
 }
