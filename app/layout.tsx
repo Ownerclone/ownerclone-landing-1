@@ -109,7 +109,7 @@ export default function RootLayout({
               // ============================================
 
               const THEME_CONFIG = {
-                weatherApiKey: 'YOUR_NEW_API_KEY_HERE',
+                weatherApiKey: '2e7d6101714e4db79e3170726262601',
                 weatherUpdateInterval: 30 * 60 * 1000,
                 
                 timeRanges: {
