@@ -125,14 +125,14 @@ export default function Navigation() {
   return (
     <>
       {/* GLASS NAVIGATION BAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 nav-bg border-b" style={{ borderColor: 'var(--nav-border)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2" onClick={closeMobileMenu}>
               <svg viewBox="-5 0 85 60" className="h-10 md:h-12 w-auto">
-                <circle cx="20" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10"/>
-                <circle cx="48" cy="30" r="18" fill="none" className="stroke-cyan-400/60" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
+                <circle cx="20" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10"/>
+                <circle cx="48" cy="30" r="18" fill="none" className="logo-color" strokeWidth="10" strokeDasharray="85 113" transform="rotate(40, 48, 30)"/>
               </svg>
               <span className="text-2xl font-black text-white">OwnerClone</span>
             </Link>
@@ -234,7 +234,7 @@ export default function Navigation() {
               {/* Login Button - Glass Style */}
               <button 
                 onClick={() => setLoginOpen(true)}
-                className="backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-4 py-2 rounded-lg font-bold"
+                className="login-btn px-4 py-2 rounded-lg font-bold"
               >
                 Login
               </button>
