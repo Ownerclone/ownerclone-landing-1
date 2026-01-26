@@ -333,3 +333,68 @@ body::before {
 :root.light-mode .border-white\/20 {
   border-color: rgba(34, 211, 238, 0.3) !important;
 }
+
+/* ============================================
+   LIGHT MODE TEXT COLORS
+   ============================================ */
+
+/* Cyan text stays cyan */
+:root.light-mode .text-cyan-400,
+:root.light-mode .text-cyan-500 {
+  color: #22d3ee !important;
+}
+
+/* White text becomes navy */
+:root.light-mode .text-white {
+  color: #0c4a6e !important;
+}
+
+/* Gray text becomes navy */
+:root.light-mode .text-gray-200,
+:root.light-mode .text-gray-300,
+:root.light-mode .text-gray-400 {
+  color: #0c4a6e !important;
+}
+
+/* Black text becomes navy */
+:root.light-mode .text-black {
+  color: #0c4a6e !important;
+}
+
+/* ============================================
+   LIGHT MODE GLASS CARDS
+   ============================================ */
+
+/* Clear glass (bg-white/5, bg-white/10) becomes BLUE GLASS - already done above */
+
+/* Non-clear glass (bg-black, bg-gray, colored backgrounds) becomes SMOKE GLASS */
+:root.light-mode .bg-black,
+:root.light-mode .bg-\[--0a0a0a\],
+:root.light-mode .bg-gray-900,
+:root.light-mode .bg-gray-800 {
+  background-color: rgba(100, 116, 139, 0.15) !important; /* Smoke glass - slate-500 at 15% */
+  border-color: rgba(100, 116, 139, 0.2) !important;
+}
+
+/* Black with opacity becomes smoke glass */
+:root.light-mode .bg-black\/40,
+:root.light-mode .bg-black\/60,
+:root.light-mode .bg-black\/80 {
+  background-color: rgba(100, 116, 139, 0.15) !important;
+}
+
+/* Colored glass cards stay their color but with adjusted opacity */
+:root.light-mode .bg-cyan-500\/20,
+:root.light-mode .bg-cyan-500\/30 {
+  background-color: rgba(34, 211, 238, 0.2) !important;
+}
+
+:root.light-mode .bg-green-500\/20,
+:root.light-mode .bg-green-500\/30 {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+}
+
+:root.light-mode .bg-purple-500\/20,
+:root.light-mode .bg-purple-500\/30 {
+  background-color: rgba(168, 85, 247, 0.2) !important;
+}
