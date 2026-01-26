@@ -4,7 +4,7 @@
 
 /* ============================================
    OWNERCLONE DYNAMIC SKY THEME SYSTEM
-   Fixed: Changed /images/sky/ to /images/
+   Version 3: Fixed colors, glass effects, logo
    ============================================ */
 
 /* ============================================
@@ -16,108 +16,112 @@
   --bg-color: #e0f2fe;
   --bg-overlay: rgba(255, 255, 255, 0.05);
   
-  /* Glass morphism */
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.6);
+  /* Glass morphism - consistent style */
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(56, 189, 248, 0.2);
   --glass-shadow: rgba(14, 165, 233, 0.15);
   
   /* Navigation */
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --nav-border: rgba(14, 165, 233, 0.2);
+  --nav-bg: rgba(15, 23, 42, 0.85);
+  --nav-border: rgba(56, 189, 248, 0.15);
   
   /* Text colors */
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
   
-  /* Brand colors */
-  --brand-primary: #0ea5e9;
-  --brand-secondary: #0284c7;
-  --brand-accent: #38bdf8;
+  /* Brand/accent colors - changes per theme */
+  --brand-primary: #38bdf8;
+  --brand-secondary: #0ea5e9;
+  --brand-accent: #7dd3fc;
+  
+  /* Logo color */
+  --logo-color: #38bdf8;
   
   /* Cards */
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(14, 165, 233, 0.15);
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --card-border: rgba(56, 189, 248, 0.15);
   --card-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
   
   /* Buttons */
   --btn-primary-bg: linear-gradient(135deg, #0ea5e9, #0284c7);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(255, 255, 255, 0.9);
-  --btn-secondary-text: #0ea5e9;
-  --btn-secondary-border: rgba(14, 165, 233, 0.3);
+  --btn-secondary-bg: rgba(15, 23, 42, 0.8);
+  --btn-secondary-text: #38bdf8;
+  --btn-secondary-border: rgba(56, 189, 248, 0.4);
   
   /* Footer */
   --footer-bg: rgba(15, 23, 42, 0.95);
   --footer-text: #cbd5e1;
-  --footer-border: rgba(14, 165, 233, 0.2);
+  --footer-border: rgba(56, 189, 248, 0.2);
   
-  /* Accent colors for cards */
-  --accent-red: #ef4444;
-  --accent-yellow: #eab308;
-  --accent-purple: #a855f7;
-  --accent-green: #22c55e;
-  --accent-orange: #f97316;
+  /* Accent colors for feature cards */
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
+  --accent-cyan: #22d3ee;
 }
 
 /* ============================================
    SUNRISE THEMES (6am - 9am)
+   Colors: Warm golds, soft pinks, light greys
    ============================================ */
 
 /* Sunrise Clear - Golden hour warmth */
 .theme-sunrise-clear {
-  --bg-image: url(/images/sunrise-rainy.jpg);
-  --bg-color: #1e1b4b;
-  --bg-overlay: rgba(251, 146, 60, 0.05);
+  --bg-image: url(/images/sunrise-clear.jpg);
+  --bg-color: #1c1917;
   
-  --glass-bg: rgba(30, 15, 45, 0.72);
-  --glass-border: rgba(251, 191, 36, 0.3);
+  --glass-bg: rgba(28, 25, 23, 0.75);
+  --glass-border: rgba(251, 191, 36, 0.25);
   --glass-shadow: rgba(251, 146, 60, 0.2);
   
-  --nav-bg: rgba(30, 15, 45, 0.8);
-  --nav-border: rgba(251, 191, 36, 0.25);
+  --nav-bg: rgba(28, 25, 23, 0.88);
+  --nav-border: rgba(251, 191, 36, 0.2);
   
   --text-primary: #fef3c7;
-  --text-secondary: #fcd34d;
-  --text-muted: #fbbf24;
+  --text-secondary: #fde68a;
+  --text-muted: #fcd34d;
   
-  --brand-primary: #f59e0b;
-  --brand-secondary: #d97706;
-  --brand-accent: #fbbf24;
+  --brand-primary: #fbbf24;
+  --brand-secondary: #f59e0b;
+  --brand-accent: #fcd34d;
   
-  --card-bg: rgba(30, 15, 45, 0.7);
+  --logo-color: #fbbf24;
+  
+  --card-bg: rgba(28, 25, 23, 0.72);
   --card-border: rgba(251, 191, 36, 0.2);
-  --card-shadow: 0 8px 32px rgba(251, 146, 60, 0.15);
   
   --btn-primary-bg: linear-gradient(135deg, #f59e0b, #d97706);
-  --btn-primary-text: #1e1b4b;
-  --btn-secondary-bg: rgba(30, 15, 45, 0.8);
+  --btn-primary-text: #1c1917;
+  --btn-secondary-bg: rgba(28, 25, 23, 0.8);
   --btn-secondary-text: #fbbf24;
   --btn-secondary-border: rgba(251, 191, 36, 0.4);
   
-  --footer-bg: rgba(30, 15, 45, 0.95);
-  --footer-text: #fcd34d;
-  --footer-border: rgba(251, 191, 36, 0.2);
+  --footer-bg: rgba(28, 25, 23, 0.95);
+  --footer-text: #fde68a;
   
   --accent-red: #fb923c;
   --accent-yellow: #fbbf24;
-  --accent-purple: #d97706;
+  --accent-purple: #f59e0b;
   --accent-green: #a3e635;
-  --accent-orange: #f59e0b;
+  --accent-orange: #f97316;
+  --accent-cyan: #fcd34d;
 }
 
-/* Sunrise Rainy - Soft morning overcast */
+/* Sunrise Rainy - Soft grey morning */
 .theme-sunrise-rainy {
   --bg-image: url(/images/sunrise-rainy.jpg);
-  --bg-color: #374151;
-  --bg-overlay: rgba(100, 116, 139, 0.1);
+  --bg-color: #1e293b;
   
-  --glass-bg: rgba(51, 65, 85, 0.75);
-  --glass-border: rgba(148, 163, 184, 0.3);
+  --glass-bg: rgba(30, 41, 59, 0.78);
+  --glass-border: rgba(148, 163, 184, 0.25);
   --glass-shadow: rgba(100, 116, 139, 0.2);
   
-  --nav-bg: rgba(51, 65, 85, 0.82);
-  --nav-border: rgba(148, 163, 184, 0.25);
+  --nav-bg: rgba(30, 41, 59, 0.88);
+  --nav-border: rgba(148, 163, 184, 0.2);
   
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
@@ -127,67 +131,68 @@
   --brand-secondary: #64748b;
   --brand-accent: #cbd5e1;
   
-  --card-bg: rgba(51, 65, 85, 0.72);
+  --logo-color: #94a3b8;
+  
+  --card-bg: rgba(30, 41, 59, 0.75);
   --card-border: rgba(148, 163, 184, 0.2);
-  --card-shadow: 0 8px 32px rgba(100, 116, 139, 0.15);
   
   --btn-primary-bg: linear-gradient(135deg, #64748b, #475569);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(51, 65, 85, 0.8);
+  --btn-secondary-bg: rgba(30, 41, 59, 0.8);
   --btn-secondary-text: #cbd5e1;
   --btn-secondary-border: rgba(148, 163, 184, 0.4);
   
-  --footer-bg: rgba(30, 41, 59, 0.95);
+  --footer-bg: rgba(15, 23, 42, 0.95);
   --footer-text: #cbd5e1;
-  --footer-border: rgba(148, 163, 184, 0.2);
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
   --accent-purple: #a78bfa;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #94a3b8;
 }
 
-/* Sunrise Stormy - Dramatic morning sky */
+/* Sunrise Stormy - Red/grey dramatic sky */
 .theme-sunrise-stormy {
   --bg-image: url(/images/sunrise-stormy.jpg);
-  --bg-color: #1e293b;
-  --bg-overlay: rgba(99, 102, 241, 0.05);
+  --bg-color: #1c1917;
   
-  --glass-bg: rgba(30, 41, 59, 0.78);
-  --glass-border: rgba(129, 140, 248, 0.25);
-  --glass-shadow: rgba(99, 102, 241, 0.2);
+  --glass-bg: rgba(28, 25, 23, 0.78);
+  --glass-border: rgba(248, 113, 113, 0.25);
+  --glass-shadow: rgba(239, 68, 68, 0.15);
   
-  --nav-bg: rgba(30, 41, 59, 0.85);
-  --nav-border: rgba(129, 140, 248, 0.2);
+  --nav-bg: rgba(28, 25, 23, 0.88);
+  --nav-border: rgba(248, 113, 113, 0.2);
   
-  --text-primary: #e0e7ff;
-  --text-secondary: #a5b4fc;
-  --text-muted: #818cf8;
+  --text-primary: #fef2f2;
+  --text-secondary: #fecaca;
+  --text-muted: #fca5a5;
   
-  --brand-primary: #818cf8;
-  --brand-secondary: #6366f1;
-  --brand-accent: #a5b4fc;
+  --brand-primary: #f87171;
+  --brand-secondary: #ef4444;
+  --brand-accent: #fca5a5;
   
-  --card-bg: rgba(30, 41, 59, 0.75);
-  --card-border: rgba(129, 140, 248, 0.2);
-  --card-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+  --logo-color: #f87171;
   
-  --btn-primary-bg: linear-gradient(135deg, #6366f1, #4f46e5);
+  --card-bg: rgba(28, 25, 23, 0.75);
+  --card-border: rgba(248, 113, 113, 0.2);
+  
+  --btn-primary-bg: linear-gradient(135deg, #ef4444, #dc2626);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(30, 41, 59, 0.8);
-  --btn-secondary-text: #a5b4fc;
-  --btn-secondary-border: rgba(129, 140, 248, 0.4);
+  --btn-secondary-bg: rgba(28, 25, 23, 0.8);
+  --btn-secondary-text: #fca5a5;
+  --btn-secondary-border: rgba(248, 113, 113, 0.4);
   
-  --footer-bg: rgba(15, 23, 42, 0.95);
-  --footer-text: #a5b4fc;
-  --footer-border: rgba(129, 140, 248, 0.2);
+  --footer-bg: rgba(28, 25, 23, 0.95);
+  --footer-text: #fecaca;
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
-  --accent-purple: #a78bfa;
+  --accent-purple: #fb7185;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #f87171;
 }
 
 /* ============================================
@@ -197,96 +202,53 @@
 /* Midday Clear - Bright blue sky */
 .theme-midday-clear {
   --bg-image: url(/images/midday-clear.jpg);
-  --bg-color: #e0f2fe;
-  --bg-overlay: rgba(255, 255, 255, 0.05);
+  --bg-color: #0c4a6e;
   
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: rgba(14, 165, 233, 0.15);
+  --glass-bg: rgba(12, 74, 110, 0.75);
+  --glass-border: rgba(56, 189, 248, 0.25);
+  --glass-shadow: rgba(14, 165, 233, 0.2);
   
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --nav-border: rgba(14, 165, 233, 0.2);
+  --nav-bg: rgba(12, 74, 110, 0.88);
+  --nav-border: rgba(56, 189, 248, 0.2);
   
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  
-  --brand-primary: #0ea5e9;
-  --brand-secondary: #0284c7;
-  --brand-accent: #38bdf8;
-  
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(14, 165, 233, 0.15);
-  --card-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
-  
-  --btn-primary-bg: linear-gradient(135deg, #0ea5e9, #0284c7);
-  --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(255, 255, 255, 0.9);
-  --btn-secondary-text: #0ea5e9;
-  --btn-secondary-border: rgba(14, 165, 233, 0.3);
-  
-  --footer-bg: rgba(15, 23, 42, 0.95);
-  --footer-text: #cbd5e1;
-  --footer-border: rgba(14, 165, 233, 0.2);
-  
-  --accent-red: #ef4444;
-  --accent-yellow: #eab308;
-  --accent-purple: #a855f7;
-  --accent-green: #22c55e;
-  --accent-orange: #f97316;
-}
-
-/* Midday Rainy - Overcast afternoon */
-.theme-midday-rainy {
-  --bg-image: url(/images/midday-rainy.jpg);
-  --bg-color: #475569;
-  --bg-overlay: rgba(148, 163, 184, 0.08);
-  
-  --glass-bg: rgba(71, 85, 105, 0.78);
-  --glass-border: rgba(203, 213, 225, 0.3);
-  --glass-shadow: rgba(148, 163, 184, 0.2);
-  
-  --nav-bg: rgba(71, 85, 105, 0.85);
-  --nav-border: rgba(203, 213, 225, 0.25);
-  
-  --text-primary: #f8fafc;
-  --text-secondary: #e2e8f0;
-  --text-muted: #cbd5e1;
+  --text-primary: #f0f9ff;
+  --text-secondary: #bae6fd;
+  --text-muted: #7dd3fc;
   
   --brand-primary: #38bdf8;
   --brand-secondary: #0ea5e9;
   --brand-accent: #7dd3fc;
   
-  --card-bg: rgba(71, 85, 105, 0.75);
-  --card-border: rgba(203, 213, 225, 0.2);
-  --card-shadow: 0 8px 32px rgba(148, 163, 184, 0.15);
+  --logo-color: #38bdf8;
+  
+  --card-bg: rgba(12, 74, 110, 0.72);
+  --card-border: rgba(56, 189, 248, 0.2);
   
   --btn-primary-bg: linear-gradient(135deg, #0ea5e9, #0284c7);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(71, 85, 105, 0.8);
+  --btn-secondary-bg: rgba(12, 74, 110, 0.8);
   --btn-secondary-text: #7dd3fc;
   --btn-secondary-border: rgba(56, 189, 248, 0.4);
   
-  --footer-bg: rgba(30, 41, 59, 0.95);
-  --footer-text: #cbd5e1;
-  --footer-border: rgba(56, 189, 248, 0.2);
+  --footer-bg: rgba(7, 47, 71, 0.95);
+  --footer-text: #bae6fd;
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
   --accent-purple: #a78bfa;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #22d3ee;
 }
 
-/* Midday Stormy - Dark dramatic clouds */
-.theme-midday-stormy {
-  --bg-image: url(/images/midday-stormy.jpg);
+/* Midday Rainy - Overcast afternoon */
+.theme-midday-rainy {
+  --bg-image: url(/images/midday-rainy.jpg);
   --bg-color: #1e293b;
-  --bg-overlay: rgba(71, 85, 105, 0.1);
   
-  --glass-bg: rgba(30, 41, 59, 0.82);
+  --glass-bg: rgba(30, 41, 59, 0.78);
   --glass-border: rgba(148, 163, 184, 0.25);
-  --glass-shadow: rgba(71, 85, 105, 0.25);
+  --glass-shadow: rgba(100, 116, 139, 0.2);
   
   --nav-bg: rgba(30, 41, 59, 0.88);
   --nav-border: rgba(148, 163, 184, 0.2);
@@ -295,89 +257,131 @@
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
   
-  --brand-primary: #60a5fa;
-  --brand-secondary: #3b82f6;
-  --brand-accent: #93c5fd;
+  --brand-primary: #64748b;
+  --brand-secondary: #475569;
+  --brand-accent: #94a3b8;
   
-  --card-bg: rgba(30, 41, 59, 0.8);
+  --logo-color: #64748b;
+  
+  --card-bg: rgba(30, 41, 59, 0.75);
   --card-border: rgba(148, 163, 184, 0.2);
-  --card-shadow: 0 8px 32px rgba(71, 85, 105, 0.2);
   
-  --btn-primary-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+  --btn-primary-bg: linear-gradient(135deg, #475569, #334155);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(30, 41, 59, 0.85);
-  --btn-secondary-text: #93c5fd;
-  --btn-secondary-border: rgba(96, 165, 250, 0.4);
+  --btn-secondary-bg: rgba(30, 41, 59, 0.8);
+  --btn-secondary-text: #94a3b8;
+  --btn-secondary-border: rgba(148, 163, 184, 0.4);
   
   --footer-bg: rgba(15, 23, 42, 0.95);
   --footer-text: #94a3b8;
-  --footer-border: rgba(96, 165, 250, 0.2);
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
   --accent-purple: #a78bfa;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #64748b;
+}
+
+/* Midday Stormy - Dark dramatic clouds */
+.theme-midday-stormy {
+  --bg-image: url(/images/midday-stormy.jpg);
+  --bg-color: #1e293b;
+  
+  --glass-bg: rgba(30, 41, 59, 0.8);
+  --glass-border: rgba(148, 163, 184, 0.25);
+  --glass-shadow: rgba(71, 85, 105, 0.25);
+  
+  --nav-bg: rgba(30, 41, 59, 0.9);
+  --nav-border: rgba(148, 163, 184, 0.2);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --brand-primary: #94a3b8;
+  --brand-secondary: #64748b;
+  --brand-accent: #cbd5e1;
+  
+  --logo-color: #94a3b8;
+  
+  --card-bg: rgba(30, 41, 59, 0.78);
+  --card-border: rgba(148, 163, 184, 0.2);
+  
+  --btn-primary-bg: linear-gradient(135deg, #64748b, #475569);
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: rgba(30, 41, 59, 0.85);
+  --btn-secondary-text: #cbd5e1;
+  --btn-secondary-border: rgba(148, 163, 184, 0.4);
+  
+  --footer-bg: rgba(15, 23, 42, 0.95);
+  --footer-text: #94a3b8;
+  
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-purple: #a78bfa;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
+  --accent-cyan: #94a3b8;
 }
 
 /* ============================================
    SUNSET THEMES (5pm - 8pm)
    ============================================ */
 
-/* Sunset Clear - Golden hour magic */
+/* Sunset Clear - Golden/orange hour */
 .theme-sunset-clear {
   --bg-image: url(/images/sunset-clear.jpg);
-  --bg-color: #1c1917;
-  --bg-overlay: rgba(249, 115, 22, 0.05);
+  --bg-color: #431407;
   
-  --glass-bg: rgba(28, 25, 23, 0.72);
-  --glass-border: rgba(251, 146, 60, 0.35);
+  --glass-bg: rgba(67, 20, 7, 0.75);
+  --glass-border: rgba(251, 146, 60, 0.3);
   --glass-shadow: rgba(249, 115, 22, 0.25);
   
-  --nav-bg: rgba(28, 25, 23, 0.8);
-  --nav-border: rgba(251, 146, 60, 0.3);
+  --nav-bg: rgba(67, 20, 7, 0.88);
+  --nav-border: rgba(251, 146, 60, 0.25);
   
   --text-primary: #ffedd5;
   --text-secondary: #fed7aa;
   --text-muted: #fdba74;
   
-  --brand-primary: #f97316;
-  --brand-secondary: #ea580c;
-  --brand-accent: #fb923c;
+  --brand-primary: #fb923c;
+  --brand-secondary: #f97316;
+  --brand-accent: #fdba74;
   
-  --card-bg: rgba(28, 25, 23, 0.7);
-  --card-border: rgba(251, 146, 60, 0.25);
-  --card-shadow: 0 8px 32px rgba(249, 115, 22, 0.2);
+  --logo-color: #fb923c;
+  
+  --card-bg: rgba(67, 20, 7, 0.72);
+  --card-border: rgba(251, 146, 60, 0.2);
   
   --btn-primary-bg: linear-gradient(135deg, #f97316, #ea580c);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(28, 25, 23, 0.8);
-  --btn-secondary-text: #fb923c;
+  --btn-secondary-bg: rgba(67, 20, 7, 0.8);
+  --btn-secondary-text: #fdba74;
   --btn-secondary-border: rgba(251, 146, 60, 0.45);
   
-  --footer-bg: rgba(28, 25, 23, 0.95);
+  --footer-bg: rgba(67, 20, 7, 0.95);
   --footer-text: #fed7aa;
-  --footer-border: rgba(251, 146, 60, 0.25);
   
   --accent-red: #fb923c;
   --accent-yellow: #fbbf24;
   --accent-purple: #f97316;
   --accent-green: #a3e635;
   --accent-orange: #f97316;
+  --accent-cyan: #fb923c;
 }
 
 /* Sunset Rainy - Moody evening */
 .theme-sunset-rainy {
   --bg-image: url(/images/sunset-rainy.jpg);
   --bg-color: #292524;
-  --bg-overlay: rgba(168, 162, 158, 0.08);
   
   --glass-bg: rgba(41, 37, 36, 0.78);
-  --glass-border: rgba(214, 211, 209, 0.25);
-  --glass-shadow: rgba(168, 162, 158, 0.2);
+  --glass-border: rgba(168, 162, 158, 0.25);
+  --glass-shadow: rgba(120, 113, 108, 0.2);
   
-  --nav-bg: rgba(41, 37, 36, 0.85);
-  --nav-border: rgba(214, 211, 209, 0.2);
+  --nav-bg: rgba(41, 37, 36, 0.88);
+  --nav-border: rgba(168, 162, 158, 0.2);
   
   --text-primary: #fafaf9;
   --text-secondary: #e7e5e4;
@@ -387,127 +391,127 @@
   --brand-secondary: #78716c;
   --brand-accent: #d6d3d1;
   
+  --logo-color: #a8a29e;
+  
   --card-bg: rgba(41, 37, 36, 0.75);
-  --card-border: rgba(214, 211, 209, 0.2);
-  --card-shadow: 0 8px 32px rgba(168, 162, 158, 0.15);
+  --card-border: rgba(168, 162, 158, 0.2);
   
   --btn-primary-bg: linear-gradient(135deg, #78716c, #57534e);
   --btn-primary-text: #ffffff;
   --btn-secondary-bg: rgba(41, 37, 36, 0.8);
   --btn-secondary-text: #d6d3d1;
-  --btn-secondary-border: rgba(214, 211, 209, 0.35);
+  --btn-secondary-border: rgba(168, 162, 158, 0.35);
   
   --footer-bg: rgba(28, 25, 23, 0.95);
   --footer-text: #d6d3d1;
-  --footer-border: rgba(214, 211, 209, 0.2);
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
   --accent-purple: #a78bfa;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #a8a29e;
 }
 
-/* Sunset Stormy - Dramatic purple sky */
+/* Sunset Stormy - Pink/purple dramatic */
 .theme-sunset-stormy {
   --bg-image: url(/images/sunset-stormy.jpg);
-  --bg-color: #1e1b4b;
-  --bg-overlay: rgba(167, 139, 250, 0.05);
+  --bg-color: #4c1d3d;
   
-  --glass-bg: rgba(30, 27, 75, 0.75);
-  --glass-border: rgba(196, 181, 253, 0.3);
-  --glass-shadow: rgba(167, 139, 250, 0.2);
+  --glass-bg: rgba(76, 29, 61, 0.75);
+  --glass-border: rgba(244, 114, 182, 0.25);
+  --glass-shadow: rgba(236, 72, 153, 0.2);
   
-  --nav-bg: rgba(30, 27, 75, 0.82);
-  --nav-border: rgba(196, 181, 253, 0.25);
+  --nav-bg: rgba(76, 29, 61, 0.88);
+  --nav-border: rgba(244, 114, 182, 0.2);
   
-  --text-primary: #ede9fe;
-  --text-secondary: #c4b5fd;
-  --text-muted: #a78bfa;
+  --text-primary: #fdf2f8;
+  --text-secondary: #fbcfe8;
+  --text-muted: #f9a8d4;
   
-  --brand-primary: #a78bfa;
-  --brand-secondary: #8b5cf6;
-  --brand-accent: #c4b5fd;
+  --brand-primary: #f472b6;
+  --brand-secondary: #ec4899;
+  --brand-accent: #f9a8d4;
   
-  --card-bg: rgba(30, 27, 75, 0.72);
-  --card-border: rgba(196, 181, 253, 0.2);
-  --card-shadow: 0 8px 32px rgba(167, 139, 250, 0.15);
+  --logo-color: #f472b6;
   
-  --btn-primary-bg: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  --card-bg: rgba(76, 29, 61, 0.72);
+  --card-border: rgba(244, 114, 182, 0.2);
+  
+  --btn-primary-bg: linear-gradient(135deg, #ec4899, #db2777);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(30, 27, 75, 0.8);
-  --btn-secondary-text: #c4b5fd;
-  --btn-secondary-border: rgba(167, 139, 250, 0.4);
+  --btn-secondary-bg: rgba(76, 29, 61, 0.8);
+  --btn-secondary-text: #f9a8d4;
+  --btn-secondary-border: rgba(244, 114, 182, 0.4);
   
-  --footer-bg: rgba(15, 13, 51, 0.95);
-  --footer-text: #c4b5fd;
-  --footer-border: rgba(167, 139, 250, 0.2);
+  --footer-bg: rgba(76, 29, 61, 0.95);
+  --footer-text: #fbcfe8;
   
-  --accent-red: #f87171;
+  --accent-red: #fb7185;
   --accent-yellow: #fbbf24;
-  --accent-purple: #c4b5fd;
+  --accent-purple: #f472b6;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #f472b6;
 }
 
 /* ============================================
    NIGHT THEMES (8pm - 6am)
    ============================================ */
 
-/* Night Clear - Starry sky with aurora */
+/* Night Clear - Aurora/starry sky */
 .theme-night-clear {
   --bg-image: url(/images/night-clear.jpg);
   --bg-color: #020617;
-  --bg-overlay: rgba(34, 211, 238, 0.03);
   
-  --glass-bg: rgba(2, 6, 23, 0.7);
+  --glass-bg: rgba(2, 6, 23, 0.75);
   --glass-border: rgba(34, 211, 238, 0.25);
-  --glass-shadow: rgba(34, 211, 238, 0.15);
+  --glass-shadow: rgba(6, 182, 212, 0.15);
   
-  --nav-bg: rgba(2, 6, 23, 0.8);
+  --nav-bg: rgba(2, 6, 23, 0.88);
   --nav-border: rgba(34, 211, 238, 0.2);
   
-  --text-primary: #e0f2fe;
-  --text-secondary: #7dd3fc;
-  --text-muted: #38bdf8;
+  --text-primary: #ecfeff;
+  --text-secondary: #a5f3fc;
+  --text-muted: #67e8f9;
   
   --brand-primary: #22d3ee;
   --brand-secondary: #06b6d4;
   --brand-accent: #67e8f9;
   
-  --card-bg: rgba(2, 6, 23, 0.68);
+  --logo-color: #22d3ee;
+  
+  --card-bg: rgba(2, 6, 23, 0.72);
   --card-border: rgba(34, 211, 238, 0.2);
-  --card-shadow: 0 8px 32px rgba(34, 211, 238, 0.1);
   
   --btn-primary-bg: linear-gradient(135deg, #06b6d4, #0891b2);
   --btn-primary-text: #020617;
-  --btn-secondary-bg: rgba(2, 6, 23, 0.75);
+  --btn-secondary-bg: rgba(2, 6, 23, 0.8);
   --btn-secondary-text: #67e8f9;
   --btn-secondary-border: rgba(34, 211, 238, 0.35);
   
   --footer-bg: rgba(2, 6, 23, 0.95);
-  --footer-text: #7dd3fc;
-  --footer-border: rgba(34, 211, 238, 0.15);
+  --footer-text: #a5f3fc;
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
   --accent-purple: #a78bfa;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #22d3ee;
 }
 
-/* Night Rainy - Moody night rain */
+/* Night Rainy - Moody night */
 .theme-night-rainy {
   --bg-image: url(/images/night-rainy.jpg);
   --bg-color: #0f172a;
-  --bg-overlay: rgba(100, 116, 139, 0.08);
   
-  --glass-bg: rgba(15, 23, 42, 0.78);
-  --glass-border: rgba(148, 163, 184, 0.2);
-  --glass-shadow: rgba(100, 116, 139, 0.2);
+  --glass-bg: rgba(15, 23, 42, 0.8);
+  --glass-border: rgba(100, 116, 139, 0.25);
+  --glass-shadow: rgba(71, 85, 105, 0.2);
   
-  --nav-bg: rgba(15, 23, 42, 0.85);
-  --nav-border: rgba(148, 163, 184, 0.15);
+  --nav-bg: rgba(15, 23, 42, 0.9);
+  --nav-border: rgba(100, 116, 139, 0.2);
   
   --text-primary: #e2e8f0;
   --text-secondary: #94a3b8;
@@ -517,71 +521,72 @@
   --brand-secondary: #475569;
   --brand-accent: #94a3b8;
   
-  --card-bg: rgba(15, 23, 42, 0.75);
-  --card-border: rgba(148, 163, 184, 0.15);
-  --card-shadow: 0 8px 32px rgba(100, 116, 139, 0.15);
+  --logo-color: #64748b;
+  
+  --card-bg: rgba(15, 23, 42, 0.78);
+  --card-border: rgba(100, 116, 139, 0.2);
   
   --btn-primary-bg: linear-gradient(135deg, #475569, #334155);
   --btn-primary-text: #f1f5f9;
-  --btn-secondary-bg: rgba(15, 23, 42, 0.8);
+  --btn-secondary-bg: rgba(15, 23, 42, 0.85);
   --btn-secondary-text: #94a3b8;
-  --btn-secondary-border: rgba(148, 163, 184, 0.3);
+  --btn-secondary-border: rgba(100, 116, 139, 0.35);
   
   --footer-bg: rgba(2, 6, 23, 0.95);
   --footer-text: #94a3b8;
-  --footer-border: rgba(148, 163, 184, 0.15);
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
   --accent-purple: #a78bfa;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #64748b;
 }
 
 /* Night Stormy - Electric storm */
 .theme-night-stormy {
   --bg-image: url(/images/night-stormy.jpg);
   --bg-color: #0c0a1d;
-  --bg-overlay: rgba(139, 92, 246, 0.05);
   
-  --glass-bg: rgba(12, 10, 29, 0.75);
-  --glass-border: rgba(167, 139, 250, 0.25);
-  --glass-shadow: rgba(139, 92, 246, 0.2);
+  --glass-bg: rgba(12, 10, 29, 0.78);
+  --glass-border: rgba(139, 92, 246, 0.25);
+  --glass-shadow: rgba(124, 58, 237, 0.2);
   
-  --nav-bg: rgba(12, 10, 29, 0.82);
-  --nav-border: rgba(167, 139, 250, 0.2);
+  --nav-bg: rgba(12, 10, 29, 0.88);
+  --nav-border: rgba(139, 92, 246, 0.2);
   
   --text-primary: #ede9fe;
-  --text-secondary: #a78bfa;
-  --text-muted: #8b5cf6;
+  --text-secondary: #c4b5fd;
+  --text-muted: #a78bfa;
   
   --brand-primary: #8b5cf6;
   --brand-secondary: #7c3aed;
   --brand-accent: #a78bfa;
   
-  --card-bg: rgba(12, 10, 29, 0.72);
-  --card-border: rgba(167, 139, 250, 0.2);
-  --card-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+  --logo-color: #8b5cf6;
+  
+  --card-bg: rgba(12, 10, 29, 0.75);
+  --card-border: rgba(139, 92, 246, 0.2);
   
   --btn-primary-bg: linear-gradient(135deg, #7c3aed, #6d28d9);
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: rgba(12, 10, 29, 0.8);
+  --btn-secondary-bg: rgba(12, 10, 29, 0.85);
   --btn-secondary-text: #a78bfa;
-  --btn-secondary-border: rgba(167, 139, 250, 0.4);
+  --btn-secondary-border: rgba(139, 92, 246, 0.4);
   
   --footer-bg: rgba(6, 5, 15, 0.95);
-  --footer-text: #a78bfa;
-  --footer-border: rgba(167, 139, 250, 0.15);
+  --footer-text: #c4b5fd;
   
   --accent-red: #f87171;
   --accent-yellow: #fbbf24;
-  --accent-purple: #c4b5fd;
+  --accent-purple: #a78bfa;
   --accent-green: #4ade80;
   --accent-orange: #fb923c;
+  --accent-cyan: #8b5cf6;
 }
 
 /* ============================================
-   DARK MODE (Existing site design)
+   DARK MODE (Original site design)
    ============================================ */
 .dark-mode {
   --bg-image: none;
@@ -603,6 +608,8 @@
   --brand-secondary: #764BA2;
   --brand-accent: #22d3ee;
   
+  --logo-color: #1E9FF2;
+  
   --card-bg: rgba(14, 20, 51, 0.6);
   --card-border: rgba(30, 159, 242, 0.15);
   --card-shadow: 0 8px 32px rgba(30, 159, 242, 0.1);
@@ -622,6 +629,7 @@
   --accent-purple: #a855f7;
   --accent-green: #22c55e;
   --accent-orange: #f97316;
+  --accent-cyan: #22d3ee;
 }
 
 /* ============================================
@@ -650,20 +658,7 @@ body::before {
   transition: background-image 0.5s ease-in-out;
 }
 
-/* Overlay layer for readability */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--bg-overlay);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Dark mode uses bg-glow.svg instead */
+/* Dark mode uses bg-glow.svg */
 .dark-mode::before {
   background-image: url("/bg-glow.svg");
   background-size: cover;
@@ -671,15 +666,9 @@ body::after {
   opacity: 0.6;
 }
 
-.dark-mode::after {
-  display: none;
-}
-
 /* ============================================
-   OVERRIDE: Hide hardcoded bg-glow.svg divs on pages
-   Only target divs that have inline background styles (the bg-glow divs)
+   OVERRIDE: Hide hardcoded bg-glow divs
    ============================================ */
-
 body:not(.dark-mode) main > div[style*="background"] {
   display: none !important;
 }
@@ -693,24 +682,85 @@ body.dark-mode main > div[style*="background"] {
 }
 
 /* ============================================
-   GLASS MORPHISM COMPONENTS
+   LOGO STYLING - Theme Aware
    ============================================ */
+.logo-color,
+.logo-stroke {
+  stroke: var(--logo-color) !important;
+}
 
-/* Navigation */
+/* Logo in navigation */
+nav .logo-color,
+nav .logo-stroke,
+nav svg circle,
+nav svg path {
+  stroke: var(--logo-color) !important;
+}
+
+/* Logo in footer */
+footer .logo-color,
+footer .logo-stroke,
+footer svg circle {
+  stroke: var(--logo-color) !important;
+}
+
+/* Logo in hero section */
+section svg circle[class*="stroke-cyan"] {
+  stroke: var(--logo-color) !important;
+}
+
+/* ============================================
+   NAVIGATION - Theme Aware
+   ============================================ */
 nav, .nav, header {
   background: var(--nav-bg) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--nav-border);
+  border-bottom: 1px solid var(--nav-border) !important;
 }
 
-/* Glass cards */
+/* Nav links */
+nav a {
+  color: var(--text-secondary) !important;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--brand-primary) !important;
+}
+
+/* Nav logo text */
+nav .text-brand,
+nav span[class*="font-bold"],
+nav span[class*="font-black"] {
+  color: var(--brand-primary) !important;
+}
+
+/* Login button in nav */
+nav button,
+nav [class*="Login"],
+nav a[href*="login"] {
+  color: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+}
+
+nav button:hover,
+nav a[href*="login"]:hover {
+  background: var(--brand-primary) !important;
+  color: var(--bg-color) !important;
+}
+
+/* ============================================
+   GLASS MORPHISM COMPONENTS
+   ============================================ */
 .glass-card,
-.card {
+.card,
+.backdrop-blur-xl[class*="bg-white"],
+[class*="bg-white\\/5"] {
   background: var(--glass-bg) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--glass-border) !important;
   box-shadow: var(--card-shadow);
 }
 
@@ -720,17 +770,9 @@ nav, .nav, header {
 .text-theme-primary { color: var(--text-primary); }
 .text-theme-secondary { color: var(--text-secondary); }
 .text-theme-muted { color: var(--text-muted); }
-
-/* Brand colors */
 .text-brand { color: var(--brand-primary) !important; }
-.text-brand-secondary { color: var(--brand-secondary) !important; }
-.text-brand-accent { color: var(--brand-accent) !important; }
 
-/* ============================================
-   THEME-AWARE COLOR OVERRIDES (Sky themes only)
-   ============================================ */
-
-/* Override text colors in sky themes */
+/* Override Tailwind text colors in sky themes */
 body:not(.dark-mode) .text-white,
 body:not(.dark-mode) .text-gray-100,
 body:not(.dark-mode) .text-gray-200,
@@ -743,7 +785,7 @@ body:not(.dark-mode) .text-gray-500 {
   color: var(--text-secondary) !important; 
 }
 
-/* Cyan becomes brand color */
+/* Cyan text becomes brand color */
 body:not(.dark-mode) .text-cyan-400,
 body:not(.dark-mode) .text-cyan-500,
 body:not(.dark-mode) h1[class*="text-cyan"],
@@ -751,98 +793,30 @@ body:not(.dark-mode) h2[class*="text-cyan"] {
   color: var(--brand-primary) !important;
 }
 
-/* Logo stroke color */
-body:not(.dark-mode) svg circle[class*="stroke-cyan"] {
-  stroke: var(--brand-primary) !important;
-}
+/* Feature card accent colors */
+body:not(.dark-mode) .text-red-400 { color: var(--accent-red) !important; }
+body:not(.dark-mode) .text-yellow-400 { color: var(--accent-yellow) !important; }
+body:not(.dark-mode) .text-purple-400 { color: var(--accent-purple) !important; }
+body:not(.dark-mode) .text-green-400 { color: var(--accent-green) !important; }
+body:not(.dark-mode) .text-orange-400 { color: var(--accent-orange) !important; }
 
-/* Red accents */
-body:not(.dark-mode) .text-red-400 {
-  color: var(--accent-red) !important;
-}
+/* Border colors */
+body:not(.dark-mode) [class*="border-red-400"] { border-color: var(--accent-red) !important; }
+body:not(.dark-mode) [class*="border-yellow-400"] { border-color: var(--accent-yellow) !important; }
+body:not(.dark-mode) [class*="border-purple-400"] { border-color: var(--accent-purple) !important; }
+body:not(.dark-mode) [class*="border-green-400"] { border-color: var(--accent-green) !important; }
+body:not(.dark-mode) [class*="border-orange-400"] { border-color: var(--accent-orange) !important; }
+body:not(.dark-mode) [class*="border-cyan-400"] { border-color: var(--brand-primary) !important; }
+body:not(.dark-mode) [class*="border-white"] { border-color: var(--glass-border) !important; }
 
-body:not(.dark-mode) [class*="border-red-400"] {
-  border-color: var(--accent-red) !important;
-}
-
-body:not(.dark-mode) [class*="bg-red-400"] {
-  background-color: rgba(239, 68, 68, 0.2) !important;
-}
-
-/* Yellow accents */
-body:not(.dark-mode) .text-yellow-400 {
-  color: var(--accent-yellow) !important;
-}
-
-body:not(.dark-mode) [class*="border-yellow-400"] {
-  border-color: var(--accent-yellow) !important;
-}
-
-body:not(.dark-mode) [class*="bg-yellow-400"] {
-  background-color: rgba(234, 179, 8, 0.2) !important;
-}
-
-/* Purple accents */
-body:not(.dark-mode) .text-purple-400 {
-  color: var(--accent-purple) !important;
-}
-
-body:not(.dark-mode) [class*="border-purple-400"] {
-  border-color: var(--accent-purple) !important;
-}
-
-body:not(.dark-mode) [class*="bg-purple-400"] {
-  background-color: rgba(168, 85, 247, 0.2) !important;
-}
-
-/* Green accents */
-body:not(.dark-mode) .text-green-400 {
-  color: var(--accent-green) !important;
-}
-
-body:not(.dark-mode) [class*="border-green-400"] {
-  border-color: var(--accent-green) !important;
-}
-
-body:not(.dark-mode) [class*="bg-green-400"] {
-  background-color: rgba(34, 197, 94, 0.15) !important;
-}
-
-/* Orange accents */
-body:not(.dark-mode) .text-orange-400 {
-  color: var(--accent-orange) !important;
-}
-
-body:not(.dark-mode) [class*="border-orange-400"] {
-  border-color: var(--accent-orange) !important;
-}
-
-body:not(.dark-mode) [class*="bg-orange-400"] {
-  background-color: rgba(249, 115, 22, 0.2) !important;
-}
-
-/* Cyan accents */
-body:not(.dark-mode) [class*="border-cyan-400"],
-body:not(.dark-mode) [class*="border-cyan-300"] {
-  border-color: var(--brand-primary) !important;
-}
-
-body:not(.dark-mode) [class*="bg-cyan-500"],
-body:not(.dark-mode) [class*="bg-cyan-400"] {
-  background-color: rgba(14, 165, 233, 0.2) !important;
-}
-
-/* Glass card backgrounds */
-body:not(.dark-mode) [class*="bg-white\\/5"],
-body:not(.dark-mode) .backdrop-blur-xl[class*="bg-white"] {
-  background: var(--glass-bg) !important;
-}
-
-/* Glass card borders */
-body:not(.dark-mode) [class*="border-white\\/10"],
-body:not(.dark-mode) .backdrop-blur-xl[class*="border-white"] {
-  border-color: var(--glass-border) !important;
-}
+/* Background colors for icon circles */
+body:not(.dark-mode) [class*="bg-red-400"] { background-color: rgba(248, 113, 113, 0.2) !important; }
+body:not(.dark-mode) [class*="bg-yellow-400"] { background-color: rgba(251, 191, 36, 0.2) !important; }
+body:not(.dark-mode) [class*="bg-purple-400"] { background-color: rgba(167, 139, 250, 0.2) !important; }
+body:not(.dark-mode) [class*="bg-green-400"] { background-color: rgba(74, 222, 128, 0.15) !important; }
+body:not(.dark-mode) [class*="bg-orange-400"] { background-color: rgba(251, 146, 60, 0.2) !important; }
+body:not(.dark-mode) [class*="bg-cyan-400"],
+body:not(.dark-mode) [class*="bg-cyan-500"] { background-color: rgba(34, 211, 238, 0.2) !important; }
 
 /* ============================================
    BUTTON STYLES
@@ -867,14 +841,16 @@ body:not(.dark-mode) .backdrop-blur-xl[class*="border-white"] {
 footer, .footer {
   background: var(--footer-bg) !important;
   color: var(--footer-text);
-  border-top: 1px solid var(--footer-border);
+  border-top: 1px solid var(--glass-border);
 }
 
-/* ============================================
-   BORDER UTILITIES
-   ============================================ */
-.border-theme { border-color: var(--glass-border); }
-.border-brand { border-color: var(--brand-primary); }
+footer a {
+  color: var(--text-secondary) !important;
+}
+
+footer a:hover {
+  color: var(--brand-primary) !important;
+}
 
 /* ============================================
    FORM ELEMENTS
@@ -909,32 +885,22 @@ body::before {
 }
 
 /* ============================================
-   RESPONSIVE ADJUSTMENTS
+   MOBILE: Force Dark Mode Only
    ============================================ */
 @media (max-width: 768px) {
   body::before {
     background-attachment: scroll;
   }
-}
-
-/* ============================================
-   MOBILE: Force Dark Mode Only
-   On mobile, we always show dark mode regardless
-   of theme class - simpler and faster
-   ============================================ */
-@media (max-width: 768px) {
   
-  /* Force dark mode styles on ALL bodies on mobile */
+  /* Force dark mode on mobile */
   body,
   body.dark-mode,
   body[class*="theme-"] {
     --bg-image: none !important;
     --bg-color: #0a0e27 !important;
-    --bg-overlay: transparent !important;
     
     --glass-bg: rgba(14, 20, 51, 0.8) !important;
     --glass-border: rgba(30, 159, 242, 0.2) !important;
-    --glass-shadow: rgba(30, 159, 242, 0.15) !important;
     
     --nav-bg: rgba(10, 14, 39, 0.95) !important;
     --nav-border: rgba(30, 159, 242, 0.15) !important;
@@ -947,28 +913,19 @@ body::before {
     --brand-secondary: #764BA2 !important;
     --brand-accent: #22d3ee !important;
     
+    --logo-color: #1E9FF2 !important;
+    
     --card-bg: rgba(14, 20, 51, 0.6) !important;
     --card-border: rgba(30, 159, 242, 0.15) !important;
-    --card-shadow: 0 8px 32px rgba(30, 159, 242, 0.1) !important;
     
     --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2) !important;
     --btn-primary-text: #ffffff !important;
-    --btn-secondary-bg: transparent !important;
-    --btn-secondary-text: #1E9FF2 !important;
-    --btn-secondary-border: rgba(30, 159, 242, 0.5) !important;
     
     --footer-bg: rgba(10, 14, 39, 0.98) !important;
     --footer-text: #94a3b8 !important;
-    --footer-border: rgba(30, 159, 242, 0.15) !important;
-    
-    --accent-red: #ef4444 !important;
-    --accent-yellow: #eab308 !important;
-    --accent-purple: #a855f7 !important;
-    --accent-green: #22c55e !important;
-    --accent-orange: #f97316 !important;
   }
   
-  /* Hide sky background completely on mobile */
+  /* Use bg-glow on mobile */
   body::before {
     background-image: url("/bg-glow.svg") !important;
     background-size: cover !important;
@@ -976,35 +933,21 @@ body::before {
     opacity: 0.6 !important;
   }
   
-  /* Always show the bg-glow div on mobile (only if it has inline style) */
+  /* Show bg-glow div on mobile */
   body main > div[style*="background"] {
     display: block !important;
   }
   
-  /* Reset text color overrides on mobile - keep original dark mode colors */
-  body .text-white,
-  body .text-gray-100,
-  body .text-gray-200,
-  body .text-gray-300,
-  body .text-gray-400 {
-    color: inherit !important;
-  }
-  
+  /* Reset text colors on mobile */
   body .text-cyan-400,
   body h1[class*="text-cyan"],
   body h2[class*="text-cyan"] {
     color: #1E9FF2 !important;
   }
   
-  /* Reset card colors on mobile */
   body .text-red-400 { color: #ef4444 !important; }
   body .text-yellow-400 { color: #eab308 !important; }
   body .text-purple-400 { color: #a855f7 !important; }
   body .text-green-400 { color: #22c55e !important; }
   body .text-orange-400 { color: #f97316 !important; }
-  
-  /* Hide theme toggle dropdown on mobile (optional - just show moon icon) */
-  .theme-dropdown {
-    display: none !important;
-  }
 }
