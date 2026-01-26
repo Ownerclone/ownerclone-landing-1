@@ -931,20 +931,20 @@ body::before {
    GREEN GLASS CARD - More opaque for readability
    (The "Honesty Advantage" card with green border)
    ============================================ */
-/* Sky themes need more opaque green cards */
+/* Sky themes need more opaque green cards - KEEP IT GREEN */
 body:not(.dark-mode) [class*="border-green"],
 body:not(.dark-mode) .border-green-400,
 body:not(.dark-mode) .border-green-500 {
-  background: rgba(15, 23, 42, 0.85) !important;
+  background: rgba(20, 80, 40, 0.8) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
 }
 
-/* Sunset/Dusk themes - even more opaque */
+/* Sunset/Dusk themes - darker green glass */
 .theme-sunset-clear [class*="border-green"],
 .theme-sunset-rainy [class*="border-green"],
 .theme-sunset-stormy [class*="border-green"] {
-  background: rgba(30, 20, 15, 0.9) !important;
+  background: rgba(20, 70, 35, 0.85) !important;
 }
 
 /* ============================================
@@ -978,6 +978,49 @@ body:not(.dark-mode) .border-green-500 {
 .theme-sunset-rainy [class*="text-cyan"],
 .theme-sunset-stormy [class*="text-cyan"] {
   color: #fb923c !important;
+}
+
+/* ============================================
+   ACTIVE PAGE TRIANGLE - Orange in Sunset/Dusk
+   ============================================ */
+.theme-sunset-clear nav .active-indicator,
+.theme-sunset-clear nav [class*="triangle"],
+.theme-sunset-clear nav [class*="arrow"],
+.theme-sunset-clear nav a[aria-current="page"]::after,
+.theme-sunset-rainy nav .active-indicator,
+.theme-sunset-stormy nav .active-indicator {
+  border-color: transparent transparent #fb923c transparent !important;
+  color: #fb923c !important;
+}
+
+/* Active nav link color in sunset mode */
+.theme-sunset-clear nav a[aria-current="page"],
+.theme-sunset-clear nav a.active,
+.theme-sunset-rainy nav a[aria-current="page"],
+.theme-sunset-stormy nav a[aria-current="page"] {
+  color: #fb923c !important;
+}
+
+/* ============================================
+   CALCULATOR PAGES - Force sky background
+   ============================================ */
+body:not(.dark-mode) [class*="bg-gray-900"],
+body:not(.dark-mode) [class*="bg-slate-900"],
+body:not(.dark-mode) [class*="bg-zinc-900"],
+body:not(.dark-mode) [class*="bg-neutral-900"],
+body:not(.dark-mode) [class*="bg-stone-900"],
+body:not(.dark-mode) .calculator-page,
+body:not(.dark-mode) main[class*="bg-"],
+body:not(.dark-mode) div[class*="min-h-screen"][class*="bg-"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Ensure body background shows through */
+body:not(.dark-mode) main,
+body:not(.dark-mode) #__next,
+body:not(.dark-mode) [data-nextjs-scroll-focus-boundary] {
+  background: transparent !important;
 }
 
 /* ============================================
