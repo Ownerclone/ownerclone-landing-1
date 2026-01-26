@@ -592,6 +592,33 @@ body::after {
 }
 
 /* ============================================
+   OVERRIDE: Hide hardcoded bg-glow.svg divs on pages
+   This targets the inline-styled divs that block sky themes
+   ============================================ */
+
+/* Hide the fixed bg-glow div when in sky theme mode (not dark mode) */
+body:not(.dark-mode) > main > div[style*="bg-glow"],
+body:not(.dark-mode) > main > div[style*="background-image"]:first-child,
+body:not(.dark-mode) div.fixed.inset-0.z-0[style*="background"] {
+  display: none !important;
+}
+
+/* More specific selector for Next.js rendered pages */
+body:not(.dark-mode) main > div:first-child[class*="fixed"][class*="inset-0"] {
+  display: none !important;
+}
+
+/* Ensure sky themes show through by making content wrappers transparent */
+body:not(.dark-mode) main {
+  background: transparent !important;
+}
+
+/* In dark mode, show the bg-glow div */
+body.dark-mode div.fixed.inset-0.z-0 {
+  display: block;
+}
+
+/* ============================================
    GLASS MORPHISM COMPONENTS
    ============================================ */
 
