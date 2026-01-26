@@ -38,11 +38,11 @@ textarea:-webkit-autofill:active {
   --text-secondary: #a0a0a0;
   --text-tertiary: #666666;
   --border: #2a2a2a;
-  --nav-bg: rgba(0, 0, 0, 0.4);  /* Dark glass */
-  --nav-border: rgba(255, 255, 255, 0.1);  /* Light border */
-  --nav-text: #d1d5db;  /* Gray text */
-  --nav-text-hover: #ffffff;  /* White on hover */
-  --logo-color: #22d3ee;  /* Cyan logo */
+  --nav-bg: rgba(0, 0, 0, 0.4);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --nav-text: #d1d5db;
+  --nav-text-hover: #ffffff;
+  --logo-color: #22d3ee;
 }
 
 /* Apply theme colors */
@@ -136,17 +136,12 @@ body::before {
   border-color: var(--nav-border);
 }
 
-/* ============================================
-   PERFORMANCE OPTIMIZATIONS - NO ANIMATIONS
-   ============================================ */
-
-/* KILL ALL ORBS - Both modes */
+/* Performance optimizations */
 .animate-pulse,
 [class*="animate-"] {
   display: none !important;
 }
 
-/* Remove all backdrop blur - massive performance drain */
 .backdrop-blur-xl,
 .backdrop-blur-lg,
 .backdrop-blur-md,
@@ -155,53 +150,47 @@ body::before {
   backdrop-filter: none !important;
 }
 
-/* Remove ALL glowing shadows - static shadows only */
 [class*="shadow-[0_0_"] {
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1) !important;
 }
 
-/* Simple hover shadows */
 [class*="hover:shadow-"]:hover {
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
 }
 
 /* ============================================
-   LIGHT MODE - STEP 1: WHITE BACKGROUND ONLY
+   LIGHT MODE
    ============================================ */
 
-/* Light mode overrides - STEP 2: BLUE NAV WITH MORNING SKY */
 :root.light-mode {
-  --bg-primary: #f3f4f6;  /* Light grey to match sky bottom */
+  --bg-primary: #f3f4f6;
   --bg-secondary: #e5e7eb;
   --bg-card: #ffffff;
   --text-primary: #000000;
   --text-secondary: #666666;
   --text-tertiary: #999999;
   --border: #e5e5e5;
-  --nav-bg: rgba(34, 211, 238, 0.7);  /* Cyan glass - 70% opacity */
-  --nav-border: rgba(34, 211, 238, 0.3);  /* Cyan border */
-  --nav-text: #0c4a6e;  /* Dark blue text - sky-900 */
-  --nav-text-hover: #075985;  /* Even darker blue on hover - sky-950 */
-  --logo-color: #0c4a6e;  /* Dark blue logo */
+  --nav-bg: rgba(34, 211, 238, 0.7);
+  --nav-border: rgba(34, 211, 238, 0.3);
+  --nav-text: #0c4a6e;
+  --nav-text-hover: #075985;
+  --logo-color: #0c4a6e;
 }
 
-/* KILL THE ORB BACKGROUND - Multiple approaches */
 :root.light-mode body::before {
-  display: block !important;  /* Show the background */
-  background-image: url('/bg-sky-v3-heavy-blur.jpg') !important;  /* Morning sky photo */
+  display: block !important;
+  background-image: url('/bg-sky-v3-heavy-blur.jpg') !important;
   opacity: 1 !important;
 }
 
 :root.light-mode body {
-  background-color: #f3f4f6 !important;  /* Match sky gradient bottom */
+  background-color: #f3f4f6 !important;
 }
 
-/* Kill any fixed background divs with inline styles */
 :root.light-mode .fixed.inset-0.z-0 {
   display: none !important;
 }
 
-/* Kill background on any div with style attribute containing bg-glow */
 :root.light-mode div[style*="bg-glow"] {
   display: none !important;
 }
@@ -210,47 +199,16 @@ body::before {
   background-image: none !important;
 }
 
-/* Light mode nav active arrow - white to show through blue glass */
-:root.light-mode .nav-text {
-  color: #ffffff !important;
-}
-
-:root.light-mode .nav-text:hover {
-  color: rgba(255, 255, 255, 0.8) !important;
-}
-
-/* Active nav arrow - dark blue to match text */
-:root.light-mode [style*="border-b-cyan"] {
-  border-bottom-color: #0c4a6e !important;
-  filter: drop-shadow(0 0 4px rgba(12, 74, 110, 0.5)) !important;
-}
-
-/* Login button in light mode nav - dark blue text on transparent */
-:root.light-mode .login-btn {
-  background-color: rgba(12, 74, 110, 0.15);
-  color: #0c4a6e;
-  border: 1px solid rgba(12, 74, 110, 0.3);
-}
-
-:root.light-mode .login-btn:hover {
-  background-color: rgba(12, 74, 110, 0.25);
-  color: #075985;
-}
-
-/* ============================================
-   LIGHT MODE NAV - ALL TEXT NAVY BLUE
-   ============================================ */
-
+/* Nav styling */
 :root.light-mode .nav-text {
   color: #0c4a6e !important;
-  font-weight: 600 !important; /* Make nav links bold */
+  font-weight: 600 !important;
 }
 
 :root.light-mode .nav-text:hover {
   color: #075985 !important;
 }
 
-/* All nav links navy and bold */
 :root.light-mode nav a {
   color: #0c4a6e !important;
   font-weight: 600 !important;
@@ -261,35 +219,31 @@ body::before {
   font-weight: 600 !important;
 }
 
-/* Logo navy */
 :root.light-mode .logo-color {
   stroke: #0c4a6e !important;
 }
 
-/* OwnerClone text navy and bold */
 :root.light-mode nav .text-2xl,
 :root.light-mode nav .font-black {
   color: #0c4a6e !important;
   font-weight: 800 !important;
 }
 
-/* Active nav arrow - navy */
 :root.light-mode [style*="border-b-cyan"],
 :root.light-mode [style*="border-bottom"] {
   border-bottom-color: #0c4a6e !important;
   filter: drop-shadow(0 0 4px rgba(12, 74, 110, 0.5)) !important;
 }
 
-/* Sun icon navy */
 :root.light-mode .text-cyan-400 {
   color: #0c4a6e !important;
 }
 
-/* Dropdown menu - BLUE GLASS instead of grey */
+/* Dropdown - blue glass */
 :root.light-mode .dropdown-menu,
 :root.light-mode nav .absolute.top-full {
   background-color: rgba(34, 211, 238, 0.9) !important;
-  border-color: rgba(34, 211, 238, 0.4) !important;
+  border-color: rgba(34, 211, 238, 0.9) !important;
 }
 
 :root.light-mode .dropdown-item {
@@ -301,11 +255,11 @@ body::before {
   background-color: rgba(6, 182, 212, 0.3) !important;
 }
 
-/* Mobile menu - BLUE GLASS */
+/* Mobile menu - blue glass */
 :root.light-mode .mobile-menu,
 :root.light-mode nav .lg\:hidden {
   background-color: rgba(34, 211, 238, 0.9) !important;
-  border-color: rgba(34, 211, 238, 0.4) !important;
+  border-color: rgba(34, 211, 238, 0.6) !important;
 }
 
 :root.light-mode .mobile-menu a {
@@ -313,31 +267,48 @@ body::before {
   font-weight: 600 !important;
 }
 
-/* ALL GLASS CARDS - BLUE GLASS IN LIGHT MODE */
+/* ALL CARDS DEFAULT TO SMOKE GLASS */
 :root.light-mode .backdrop-blur-xl,
-:root.light-mode [class*="backdrop-blur"] {
-  background-color: rgba(34, 211, 238, 0.15) !important;
-  border-color: rgba(34, 211, 238, 0.2) !important;
-}
-
-/* Glass cards with bg-white/5 - make them blue glass */
+:root.light-mode [class*="backdrop-blur"],
 :root.light-mode .bg-white\/5,
-:root.light-mode .bg-white\/10 {
-  background-color: rgba(34, 211, 238, 0.15) !important;
-  border-color: rgba(34, 211, 238, 0.2) !important;
+:root.light-mode .bg-white\/10,
+:root.light-mode .bg-black,
+:root.light-mode .bg-black\/40,
+:root.light-mode .bg-black\/60,
+:root.light-mode .bg-black\/80,
+:root.light-mode .bg-gray-900,
+:root.light-mode .bg-gray-800 {
+  background-color: rgba(100, 116, 139, 0.45) !important;
+  border-color: rgba(100, 116, 139, 0.6) !important;
 }
 
-/* Border colors - blue instead of white */
 :root.light-mode .border-white\/10,
 :root.light-mode .border-white\/20 {
-  border-color: rgba(34, 211, 238, 0.3) !important;
+  border-color: rgba(100, 116, 139, 0.5) !important;
 }
 
-/* ============================================
-   LIGHT MODE TEXT COLORS
-   ============================================ */
+/* Login button */
+:root.light-mode .login-btn {
+  background-color: rgba(12, 74, 110, 0.25);
+  color: #0c4a6e;
+  border: 1px solid rgba(12, 74, 110, 0.4);
+}
 
-/* Cyan text becomes WHITE with 2PX NAVY BORDER */
+:root.light-mode .login-btn:hover {
+  background-color: rgba(12, 74, 110, 0.35);
+  color: #075985;
+}
+
+/* TEXT COLORS */
+:root.light-mode .text-white,
+:root.light-mode .text-gray-200,
+:root.light-mode .text-gray-300,
+:root.light-mode .text-gray-400,
+:root.light-mode .text-black {
+  color: #0c4a6e !important;
+}
+
+/* Cyan text - white with 2px navy outline */
 :root.light-mode .text-cyan-400,
 :root.light-mode .text-cyan-500 {
   color: #ffffff !important;
@@ -346,145 +317,44 @@ body::before {
   paint-order: stroke fill;
 }
 
-/* White text becomes navy */
-:root.light-mode .text-white {
-  color: #0c4a6e !important;
-}
-
-/* Gray text becomes navy */
-:root.light-mode .text-gray-200,
-:root.light-mode .text-gray-300,
-:root.light-mode .text-gray-400 {
-  color: #0c4a6e !important;
-}
-
-/* Black text becomes navy */
-:root.light-mode .text-black {
-  color: #0c4a6e !important;
-}
-
-/* ============================================
-   LIGHT MODE GLASS CARDS
-   ============================================ */
-
-/* Clear glass (bg-white/5, bg-white/10) becomes BLUE GLASS - already done above */
-
-/* Non-clear glass (bg-black, bg-gray, colored backgrounds) becomes SMOKE GLASS */
-:root.light-mode .bg-black,
-:root.light-mode .bg-\[--0a0a0a\],
-:root.light-mode .bg-gray-900,
-:root.light-mode .bg-gray-800 {
-  background-color: rgba(100, 116, 139, 0.15) !important; /* Smoke glass - slate-500 at 15% */
-  border-color: rgba(100, 116, 139, 0.2) !important;
-}
-
-/* Black with opacity becomes smoke glass */
-:root.light-mode .bg-black\/40,
-:root.light-mode .bg-black\/60,
-:root.light-mode .bg-black\/80 {
-  background-color: rgba(100, 116, 139, 0.15) !important;
-}
-
-/* Colored glass cards stay their color but with adjusted opacity */
-:root.light-mode .bg-cyan-500\/20,
-:root.light-mode .bg-cyan-500\/30 {
-  background-color: rgba(34, 211, 238, 0.2) !important;
-}
-
-:root.light-mode .bg-green-500\/20,
-:root.light-mode .bg-green-500\/30 {
-  background-color: rgba(34, 197, 94, 0.2) !important;
-}
-
-:root.light-mode .bg-purple-500\/20,
-:root.light-mode .bg-purple-500\/30 {
-  background-color: rgba(168, 85, 247, 0.2) !important;
-}
-
-/* ============================================
-   LIGHT MODE - DARKEN ICONS & GLASS
-   ============================================ */
-
-/* All icons FULL OPACITY */
-:root.light-mode svg,
-:root.light-mode [class*="lucide"],
-:root.light-mode .icon {
-  opacity: 1 !important;
-}
-
-/* Adjust glass opacity - 20% darker across the board */
-
-/* Blue glass cards - increase from 0.35 to 0.55 (20% darker) */
-:root.light-mode .backdrop-blur-xl,
-:root.light-mode [class*="backdrop-blur"],
-:root.light-mode .bg-white\/5,
-:root.light-mode .bg-white\/10 {
-  background-color: rgba(34, 211, 238, 0.55) !important;
-  border-color: rgba(34, 211, 238, 0.7) !important;
-}
-
-/* Smoke glass - increase from 0.45 to 0.65 (20% darker) */
-:root.light-mode .bg-black,
-:root.light-mode .bg-\[--0a0a0a\],
-:root.light-mode .bg-gray-900,
-:root.light-mode .bg-gray-800,
-:root.light-mode .bg-black\/40,
-:root.light-mode .bg-black\/60,
-:root.light-mode .bg-black\/80 {
-  background-color: rgba(100, 116, 139, 0.65) !important;
-  border-color: rgba(100, 116, 139, 0.7) !important;
-}
-
-/* Colored glass - increase from 0.5 to 0.7 (20% darker) */
-:root.light-mode .bg-cyan-500\/20,
-:root.light-mode .bg-cyan-500\/30 {
-  background-color: rgba(34, 211, 238, 0.7) !important;
-}
-
-:root.light-mode .bg-green-500\/20,
-:root.light-mode .bg-green-500\/30 {
-  background-color: rgba(34, 197, 94, 0.7) !important;
-}
-
-:root.light-mode .bg-purple-500\/20,
-:root.light-mode .bg-purple-500\/30 {
-  background-color: rgba(168, 85, 247, 0.7) !important;
-}
-
-/* Nav dropdown - increase from 0.7 to 0.9 (20% darker) */
-:root.light-mode .dropdown-menu,
-:root.light-mode nav .absolute.top-full {
-  background-color: rgba(34, 211, 238, 0.9) !important;
-}
-
-/* ============================================
-   GREEN TEXT & GREEN GLASS CARDS
-   ============================================ */
-
-/* Green text with 1px BLACK outline */
+/* Green text - DARKER green with 1px black outline */
 :root.light-mode .text-green-400,
 :root.light-mode .text-green-500,
 :root.light-mode .text-\[\#10b981\],
 :root.light-mode .text-emerald-400,
 :root.light-mode .text-emerald-500 {
-  color: #10b981 !important;  /* Keep green color */
+  color: #059669 !important;  /* Darker green - emerald-600 */
   -webkit-text-stroke: 1px #000000;
   text-stroke: 1px #000000;
   paint-order: stroke fill;
+  font-weight: 600 !important;
 }
 
-/* Cards with green text become GREEN GLASS */
+/* GREEN GLASS CARDS */
 :root.light-mode .bg-green-500\/10,
+:root.light-mode .bg-green-500\/20,
+:root.light-mode .bg-green-500\/30,
 :root.light-mode .border-green-400\/30,
-:root.light-mode .border-\[\#10b981\]\/30,
-:root.light-mode *:has(.text-green-400),
-:root.light-mode *:has(.text-green-500) {
-  background-color: rgba(16, 185, 129, 0.2) !important;
-  border-color: rgba(16, 185, 129, 0.4) !important;
+:root.light-mode .border-\[\#10b981\]\/30 {
+  background-color: rgba(16, 185, 129, 0.3) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
 }
 
-/* Specific green-themed cards (pricing, success states) */
-:root.light-mode .bg-gradient-to-br:has(.text-green-400),
-:root.light-mode .bg-gradient-to-br:has(.text-\[\#10b981\]) {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.25) 100%) !important;
+/* GREEN GRADIENT CARDS */
+:root.light-mode .bg-gradient-to-br.from-green-500\/10,
+:root.light-mode [class*="bg-gradient"][class*="green"] {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.35) 100%) !important;
+}
+
+/* ICONS - Full opacity with 2px colored borders */
+:root.light-mode svg,
+:root.light-mode [class*="lucide"],
+:root.light-mode .icon {
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 0 currentColor) drop-shadow(0 0 0 currentColor);
+}
+
+/* Icon borders - 2px matching their color */
+:root.light-mode svg {
+  stroke-width: 2.5 !important;
 }
