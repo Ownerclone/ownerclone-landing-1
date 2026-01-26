@@ -296,7 +296,7 @@ export default function SignupPage() {
                 Restaurant Website <span className="text-xs font-normal" style={{ color: 'var(--text-muted)' }}>(optional)</span>
               </label>
               <input
-                type="url"
+                type="text"
                 name="restaurantWebsite"
                 value={formData.restaurantWebsite}
                 onChange={handleChange}
@@ -306,20 +306,19 @@ export default function SignupPage() {
                   borderColor: 'var(--glass-border)',
                   color: 'var(--text-primary)'
                 }}
-                placeholder="https://joesdiner.com"
+                placeholder="joesdiner.com"
               />
             </div>
 
             <div>
               <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-secondary)' }}>
-                Phone Number
+                Phone Number <span className="text-xs font-normal" style={{ color: 'var(--text-muted)' }}>(optional)</span>
               </label>
               <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                required
                 className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none transition-colors"
                 style={{ 
                   background: 'rgba(0,0,0,0.4)', 
