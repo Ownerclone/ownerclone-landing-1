@@ -23,118 +23,113 @@ export default function Pricing() {
       <div className="relative z-10">
 
         {/* Hero Section */}
-        <section className="pt-32 pb-16 px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Main Heading Card */}
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 text-center mb-8">
-              <h1 className="text-5xl md:text-6xl font-black mb-6 text-gray-200">
-                Pricing Built for <span className="text-cyan-400">Independent Owners</span>
-              </h1>
-              <p className="text-xl text-gray-300 mb-6">
-                No complicated tiers. No hidden fees. Just simple, transparent pricing that scales with your business.
-              </p>
-            </div>
+<section className="pt-32 pb-16 px-4">
+  <div className="max-w-4xl mx-auto">
+    {/* Main Heading Card - Matching Homepage */}
+    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 text-center mb-8">
+      <h1 className="text-5xl md:text-6xl font-black mb-6 text-gray-200">
+        Pricing Built for <span className="text-cyan-400">Independent Owners</span>
+      </h1>
+      <p className="text-xl text-gray-300 mb-6">
+        No complicated tiers. No hidden fees. Just simple, transparent pricing that scales with your business.
+      </p>
+    </div>
 
-            {/* Early Adopter Badge & Info Card */}
-            <div className="backdrop-blur-xl border rounded-2xl p-8" style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.4) 100%)',
-              borderColor: 'rgba(16, 185, 129, 0.5)',
-              borderWidth: '1px'
-            }}>
-              <div className="mb-6 text-center">
-                <span className="inline-flex items-center px-6 py-3 rounded-full text-lg font-bold uppercase tracking-wide" style={{
-                  background: 'rgba(16, 185, 129, 0.6)',
-                  border: '1px solid rgba(16, 185, 129, 0.8)',
-                  color: '#ffffff'
-                }}>
-                  <DollarSign className="inline-block w-5 h-5 mr-2" style={{ color: '#047857' }} />
-                  Early Adopter Pricing - Limited Time
-                </span>
-              </div>
-              <p className="text-xl font-bold mb-3 text-center" style={{ color: '#10b981' }}>
-                <TrendingUp className="inline-block w-6 h-6 mr-2" />
-                Lock in This Pricing Forever!
-              </p>
-              <p className="text-white mb-6 text-center">
-                These prices are for early adopters only. In the future, new customers will pay more - but you&apos;ll keep your early adopter rate forever. Join now and help us build your modules faster while locking in incredible pricing.
-              </p>
-              <div className="mt-6 pt-6" style={{ borderTop: '1px solid rgba(16, 185, 129, 0.4)' }}>
-                <p className="text-white font-bold mb-3 text-center">
-                  <DollarSign className="inline-block w-6 h-6 mr-2" />
-                  Want OwnerClone for FREE?
-                </p>
-                <p className="text-white text-sm mb-4 text-center">
-                  Upgrade your POS system and get OwnerClone included at no cost.
-                </p>
-                <div className="text-center">
-                  <Link 
-                    href="/contact" 
-                    className="inline-block px-8 py-3 rounded-lg font-bold transition-all"
-                    style={{
-                      backgroundColor: '#22d3ee',
-                      color: '#000000',
-                      border: '1px solid #06b6d4'
-                    }}
-                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#06b6d4'}
-                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#22d3ee'}
-                  >
-                    Ask Us How to Get Free Access
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+    {/* Early Adopter Badge & Info Card */}
+    <div className="backdrop-blur-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 rounded-2xl p-8" style={{ borderWidth: '1px' }}>
+      <div className="mb-6 text-center">
+        <span className="bg-green-500/20 border border-green-400/30 text-green-400 px-6 py-3 rounded-full text-lg font-bold uppercase tracking-wide inline-block">
+          <Zap className="inline-block w-5 h-5 mr-2" />
+          Early Adopter Pricing - Limited Time
+        </span>
+      </div>
+      <p className="text-xl text-cyan-400 font-bold mb-3 text-center">
+        <TrendingUp className="inline-block w-6 h-6 mr-2" />
+        Lock in This Pricing Forever!
+      </p>
+      <p className="text-gray-300 mb-6 text-center">
+        These prices are for early adopters only. In the future, new customers will pay more - but you&apos;ll keep your early adopter rate forever. Join now and help us build your modules faster while locking in incredible pricing.
+      </p>
+      <div className="mt-6 pt-6 border-t border-cyan-400/30">
+        <p className="text-gray-200 font-bold mb-3 text-center">
+          <DollarSign className="inline-block w-6 h-6 mr-2" />
+          Want OwnerClone for FREE?
+        </p>
+        <p className="text-gray-300 text-sm mb-4 text-center">
+          Upgrade your POS system and get OwnerClone included at no cost.
+        </p>
+        <div className="text-center">
+          <Link 
+            href="/contact" 
+            className="inline-block backdrop-blur-xl bg-cyan-500/20 border border-cyan-300/30 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition-all px-8 py-3 rounded-lg font-bold"
+          >
+            Ask Us How to Get Free Access
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* Main Pricing Section */}
         <section className="py-16 px-4">
           <div className="max-w-4xl mx-auto">
-            {/* Pricing Card - GREEN */}
-            <div className="backdrop-blur-xl rounded-3xl p-8 md:p-12 mb-12" style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0.45) 100%)',
-              border: '1px solid rgba(16, 185, 129, 0.6)'
-            }}>
+            {/* Pricing Card - GREEN GLASS with 1px border */}
+            <div className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-400/50 rounded-3xl p-8 md:p-12 mb-12" style={{ borderWidth: '1px' }}>
               <div className="text-center mb-8">
-                <div className="text-6xl md:text-7xl font-bold mb-2" style={{ color: '#10b981' }}>
-                  $0.20
-                </div>
-                <div className="text-2xl text-white mb-4">per customer visit per month</div>
-                <p className="text-lg text-white">
+                <div className="text-6xl md:text-7xl font-bold text-green-400 mb-2">$0.20</div>
+                <div className="text-2xl text-gray-300 mb-4">per customer visit per month</div>
+                <p className="text-lg text-gray-400">
                   That&apos;s it. No hidden fees. No setup costs. No long-term contracts.
                 </p>
               </div>
 
-              {/* Pricing Examples */}
-              <div className="rounded-xl p-6 mb-8" style={{ 
-                backgroundColor: 'rgba(30, 41, 59, 0.9)',
-                border: '1px solid rgba(51, 65, 85, 0.6)'
+              {/* Pricing Examples - DARKER background for better text readability */}
+              <div className="backdrop-blur-xl border border-white/10 rounded-xl p-6 mb-8" style={{ 
+                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                borderWidth: '1px' 
               }}>
                 <h3 className="text-xl font-bold mb-6 text-center text-white">What You&apos;ll Pay Based on Your Traffic</h3>
                 <div className="space-y-4">
-                  {[
-                    { customers: '500 customers per month', price: '$100/mo' },
-                    { customers: '1,000 customers per month', price: '$200/mo' },
-                    { customers: '1,500 customers per month', price: '$300/mo' },
-                    { customers: '2,000 customers per month', price: '$400/mo' }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center px-4 py-3 rounded-lg" style={{
-                      backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                      border: '1px solid rgba(110, 231, 183, 0.5)',
-                      boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1)'
-                    }}>
-                      <span className="text-white font-medium">{item.customers}</span>
-                      <span className="text-2xl font-bold" style={{ color: '#10b981' }}>{item.price}</span>
-                    </div>
-                  ))}
+                  {/* Individual price boxes - GLASS EFFECT with light green border */}
+                  <div className="flex justify-between items-center border-b border-white/10 pb-3 px-4 py-3 rounded-lg" style={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                    border: '1px solid rgba(110, 231, 183, 0.4)',
+                    boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1)'
+                  }}>
+                    <span className="text-white font-medium">500 customers per month</span>
+                    <span className="text-2xl font-bold text-green-400">$100/mo</span>
+                  </div>
+                  <div className="flex justify-between items-center border-b border-white/10 pb-3 px-4 py-3 rounded-lg" style={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                    border: '1px solid rgba(110, 231, 183, 0.4)',
+                    boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1)'
+                  }}>
+                    <span className="text-white font-medium">1,000 customers per month</span>
+                    <span className="text-2xl font-bold text-green-400">$200/mo</span>
+                  </div>
+                  <div className="flex justify-between items-center border-b border-white/10 pb-3 px-4 py-3 rounded-lg" style={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                    border: '1px solid rgba(110, 231, 183, 0.4)',
+                    boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1)'
+                  }}>
+                    <span className="text-white font-medium">1,500 customers per month</span>
+                    <span className="text-2xl font-bold text-green-400">$300/mo</span>
+                  </div>
+                  <div className="flex justify-between items-center px-4 py-3 rounded-lg" style={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                    border: '1px solid rgba(110, 231, 183, 0.4)',
+                    boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1)'
+                  }}>
+                    <span className="text-white font-medium">2,000 customers per month</span>
+                    <span className="text-2xl font-bold text-green-400">$400/mo</span>
+                  </div>
                 </div>
               </div>
 
               {/* What's Included */}
-              <div className="rounded-xl p-6 mb-8" style={{
-                backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                border: '1px solid rgba(16, 185, 129, 0.4)'
-              }}>
-                <h3 className="text-xl font-bold mb-6 text-white">Everything Included</h3>
+              <div className="backdrop-blur-xl bg-green-500/10 border border-green-400/30 rounded-xl p-6 mb-8" style={{ borderWidth: '1px' }}>
+                <h3 className="text-xl font-bold mb-6 text-gray-200">Everything Included</h3>
                 <div className="grid md:grid-cols-2 gap-3">
                   {[
                     'Food cost tracking & alerts',
@@ -157,28 +152,28 @@ export default function Pricing() {
                     'Regular feature updates'
                   ].map((feature, idx) => (
                     <div key={idx} className="flex items-start">
-                      <Check className="text-green-400 mr-3 mt-1 flex-shrink-0" style={{ width: '24px', height: '24px', color: '#10b981' }} />
-                      <span className="text-white">{feature}</span>
+                      {/* LARGER, BRIGHTER checkmarks */}
+                      <Check className="text-green-400 mr-3 mt-1 flex-shrink-0" style={{ width: '24px', height: '24px' }} />
+                      <span className="text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* CTA Button */}
+              {/* CTA Button - GREEN with WHITE text */}
               <div className="text-center">
                 <Link 
                   href="/contact" 
-                  className="inline-block px-10 py-4 rounded-lg font-bold text-lg text-white transition-all"
+                  className="inline-block px-10 py-4 rounded-lg font-bold text-lg text-white border transition-all hover:opacity-90"
                   style={{
                     backgroundColor: '#059669',
-                    border: '1px solid #047857'
+                    borderColor: '#047857',
+                    borderWidth: '1px'
                   }}
-                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#047857'}
-                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#059669'}
                 >
                   Get Started Today
                 </Link>
-                <p className="mt-4 text-white">
+                <p className="mt-4 text-gray-400">
                   No credit card required • Cancel anytime • 30-day money-back guarantee
                 </p>
               </div>
@@ -209,68 +204,56 @@ export default function Pricing() {
               </h2>
             </div>
             
-            <div className="backdrop-blur-xl rounded-2xl p-8 mb-8" style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0.45) 100%)',
-              border: '1px solid rgba(16, 185, 129, 0.5)'
-            }}>
-              <h3 className="text-2xl font-bold mb-6 text-white">Average Restaurant Serving 1,000 Customers/Month</h3>
+            <div className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-400/30 rounded-2xl p-8 mb-8" style={{ borderWidth: '1px' }}>
+              <h3 className="text-2xl font-bold mb-6 text-gray-200">Average Restaurant Serving 1,000 Customers/Month</h3>
               
               <div className="space-y-6">
-                <div className="rounded-r-xl p-6" style={{
-                  backgroundColor: 'rgba(5, 150, 105, 0.4)',
-                  borderLeft: '4px solid #6ee7b7'
+                {/* Top pricing box - DARKER GREEN background instead of cyan */}
+                <div className="backdrop-blur-xl border-l-4 rounded-r-xl p-6" style={{
+                  backgroundColor: 'rgba(5, 150, 105, 0.3)',
+                  borderLeftColor: '#6ee7b7'
                 }}>
                   <div className="font-semibold text-white mb-1">Your OwnerClone Cost</div>
+                  {/* LIGHTER GREEN text for better contrast on dark green */}
                   <div className="text-3xl font-bold" style={{ color: '#6ee7b7' }}>$200/month</div>
-                  <div className="text-white">($2,400 per year)</div>
+                  <div className="text-gray-300">($2,400 per year)</div>
                 </div>
 
-                <div className="rounded-r-xl p-6" style={{
-                  backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                  borderLeft: '4px solid #10b981'
-                }}>
-                  <div className="font-semibold text-white mb-1">Reduce Food Costs by Just 2%</div>
-                  <div className="text-lg text-white mb-2">
+                <div className="backdrop-blur-xl bg-green-500/10 border-l-4 border-green-400 rounded-r-xl p-6">
+                  <div className="font-semibold text-gray-300 mb-1">Reduce Food Costs by Just 2%</div>
+                  <div className="text-lg text-gray-300 mb-2">
                     Average restaurant: $800,000 annual revenue × 30% food cost = $240,000/year
                   </div>
-                  <div className="text-3xl font-bold" style={{ color: '#10b981' }}>Save $4,800/year</div>
+                  {/* DARKER GREEN for better readability */}
+                  <div className="text-3xl font-bold" style={{ color: '#047857' }}>Save $4,800/year</div>
                 </div>
 
-                <div className="rounded-r-xl p-6" style={{
-                  backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                  borderLeft: '4px solid #10b981'
-                }}>
-                  <div className="font-semibold text-white mb-1">Catch Theft Early</div>
-                  <div className="text-lg text-white mb-2">
+                <div className="backdrop-blur-xl bg-green-500/10 border-l-4 border-green-400 rounded-r-xl p-6">
+                  <div className="font-semibold text-gray-300 mb-1">Catch Theft Early</div>
+                  <div className="text-lg text-gray-300 mb-2">
                     I lost $40,000 to a manager void scam before I caught it. If you catch theft just once:
                   </div>
-                  <div className="text-3xl font-bold" style={{ color: '#10b981' }}>Save $10,000 - $40,000</div>
+                  <div className="text-3xl font-bold" style={{ color: '#047857' }}>Save $10,000 - $40,000</div>
                 </div>
 
-                <div className="rounded-r-xl p-6" style={{
-                  backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                  borderLeft: '4px solid #10b981'
-                }}>
-                  <div className="font-semibold text-white mb-1">Optimize Labor Scheduling</div>
-                  <div className="text-lg text-white mb-2">
+                <div className="backdrop-blur-xl bg-green-500/10 border-l-4 border-green-400 rounded-r-xl p-6">
+                  <div className="font-semibold text-gray-300 mb-1">Optimize Labor Scheduling</div>
+                  <div className="text-lg text-gray-300 mb-2">
                     Reduce unnecessary overtime and improve scheduling efficiency by 3%
                   </div>
-                  <div className="text-lg text-white mb-2">
+                  <div className="text-lg text-gray-300 mb-2">
                     $800,000 revenue × 30% labor cost = $240,000/year
                   </div>
-                  <div className="text-3xl font-bold" style={{ color: '#10b981' }}>Save $7,200/year</div>
+                  <div className="text-3xl font-bold" style={{ color: '#047857' }}>Save $7,200/year</div>
                 </div>
 
-                <div className="rounded-xl p-6 mt-6" style={{
-                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.4) 100%)',
-                  border: '2px solid rgba(16, 185, 129, 0.7)'
-                }}>
+                <div className="backdrop-blur-xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-2 border-green-400 rounded-xl p-6 mt-6">
                   <div className="text-center">
-                    <div className="text-lg font-semibold text-white mb-2">Conservative Total Annual Savings</div>
-                    <div className="text-5xl font-bold mb-2" style={{ color: '#10b981' }}>$22,000+</div>
-                    <div className="text-lg text-white mb-4">minus $2,400 software cost</div>
-                    <div className="text-3xl font-bold text-white">Net Benefit: $19,600/year</div>
-                    <div className="text-xl mt-2" style={{ color: '#10b981' }}>ROI: 817%</div>
+                    <div className="text-lg font-semibold text-gray-300 mb-2">Conservative Total Annual Savings</div>
+                    <div className="text-5xl font-bold text-green-400 mb-2">$22,000+</div>
+                    <div className="text-lg text-gray-400 mb-4">minus $2,400 software cost</div>
+                    <div className="text-3xl font-bold text-gray-200">Net Benefit: $19,600/year</div>
+                    <div className="text-xl text-cyan-400 mt-2">ROI: 817%</div>
                   </div>
                 </div>
               </div>
@@ -293,7 +276,7 @@ export default function Pricing() {
               </h2>
             </div>
             
-            <div className="overflow-x-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
+            <div className="overflow-x-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6" style={{ borderWidth: '1px' }}>
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-white/10">
@@ -319,85 +302,87 @@ export default function Pricing() {
                   <tr>
                     <td className="border border-white/10 p-4 font-semibold text-gray-300">Food Cost Tracking</td>
                     <td className="border border-white/10 p-4 text-center bg-cyan-500/10">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      {/* LARGER BRIGHTER checkmarks */}
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                   </tr>
                   <tr className="bg-white/5">
                     <td className="border border-white/10 p-4 font-semibold text-gray-300">Labor Management</td>
                     <td className="border border-white/10 p-4 text-center bg-cyan-500/10">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      {/* LARGER red X */}
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                   </tr>
                   <tr>
                     <td className="border border-white/10 p-4 font-semibold text-gray-300">Theft Detection</td>
                     <td className="border border-white/10 p-4 text-center bg-cyan-500/10">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                   </tr>
                   <tr className="bg-white/5">
                     <td className="border border-white/10 p-4 font-semibold text-gray-300">Demand Forecasting</td>
                     <td className="border border-white/10 p-4 text-center bg-cyan-500/10">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                   </tr>
                   <tr>
                     <td className="border border-white/10 p-4 font-semibold text-gray-300">Marketing Automation</td>
                     <td className="border border-white/10 p-4 text-center bg-cyan-500/10">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                   </tr>
                   <tr className="bg-white/5">
                     <td className="border border-white/10 p-4 font-semibold text-gray-300">AI Phone Assistant</td>
                     <td className="border border-white/10 p-4 text-center bg-cyan-500/10">
-                      <Check className="inline-block" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                   </tr>
                   <tr>
                     <td className="border border-white/10 p-4 font-semibold text-gray-300">Built by Restaurant Owners</td>
                     <td className="border border-white/10 p-4 text-center bg-cyan-500/10">
-                      <Check className="inline-block font-bold" style={{ width: '24px', height: '24px', color: '#10b981' }} />
+                      <Check className="inline-block text-green-400 font-bold" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                     <td className="border border-white/10 p-4 text-center">
-                      <X className="inline-block" style={{ width: '24px', height: '24px', color: '#ef4444' }} />
+                      <X className="inline-block text-red-400" style={{ width: '24px', height: '24px' }} />
                     </td>
                   </tr>
                 </tbody>
@@ -495,32 +480,28 @@ export default function Pricing() {
           </div>
         </section>
 
-        {/* Final CTA */}
+        {/* Final CTA - DARKER GREEN TEXT on green bg, GREEN BUTTON */}
         <section className="py-20 px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="backdrop-blur-xl rounded-3xl p-12 text-center" style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0.45) 100%)',
-              border: '1px solid rgba(16, 185, 129, 0.6)'
-            }}>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#10b981' }}>
+            <div className="backdrop-blur-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-400/50 rounded-3xl p-12 text-center" style={{ borderWidth: '1px' }}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#047857' }}>
                 Ready to Stop Guessing and Start Knowing?
               </h2>
-              <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Join independent restaurant owners who are finally running profitable businesses with real data instead of spreadsheets and gut feelings.
               </p>
               <Link 
                 href="/contact" 
-                className="inline-block px-10 py-4 rounded-lg font-bold text-lg text-white transition-all"
+                className="inline-block px-10 py-4 rounded-lg font-bold text-lg text-white border transition-all hover:opacity-90"
                 style={{
                   backgroundColor: '#059669',
-                  border: '1px solid #047857'
+                  borderColor: '#047857',
+                  borderWidth: '1px'
                 }}
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#047857'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#059669'}
               >
                 Get Started Today
               </Link>
-              <p className="mt-6 text-white">
+              <p className="mt-6 text-gray-400">
                 Questions? Send us an email - info@ownerclone.com
               </p>
             </div>
