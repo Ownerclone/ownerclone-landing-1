@@ -169,7 +169,7 @@ body::before {
    LIGHT MODE - STEP 1: WHITE BACKGROUND ONLY
    ============================================ */
 
-/* Light mode overrides - STEP 2: BLUE GLASS NAV */
+/* Light mode overrides - STEP 2: BLUE NAV WITH DARK TEXT */
 :root.light-mode {
   --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
@@ -180,9 +180,9 @@ body::before {
   --border: #e5e5e5;
   --nav-bg: rgba(34, 211, 238, 0.7);  /* Cyan glass - 70% opacity */
   --nav-border: rgba(34, 211, 238, 0.3);  /* Cyan border */
-  --nav-text: #ffffff;  /* White text */
-  --nav-text-hover: #ffffff;  /* White on hover */
-  --logo-color: #ffffff;  /* White logo */
+  --nav-text: #0c4a6e;  /* Dark blue text - sky-900 */
+  --nav-text-hover: #075985;  /* Even darker blue on hover - sky-950 */
+  --logo-color: #0c4a6e;  /* Dark blue logo */
 }
 
 /* KILL THE ORB BACKGROUND - Multiple approaches */
@@ -220,19 +220,20 @@ body::before {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
-/* Active nav arrow - make it white/bright to show through blue */
+/* Active nav arrow - dark blue to match text */
 :root.light-mode [style*="border-b-cyan"] {
-  border-bottom-color: rgba(255, 255, 255, 0.9) !important;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
+  border-bottom-color: #0c4a6e !important;
+  filter: drop-shadow(0 0 4px rgba(12, 74, 110, 0.5)) !important;
 }
 
-/* Login button in light mode nav - white/transparent */
+/* Login button in light mode nav - dark blue text on transparent */
 :root.light-mode .login-btn {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(12, 74, 110, 0.15);
+  color: #0c4a6e;
+  border: 1px solid rgba(12, 74, 110, 0.3);
 }
 
 :root.light-mode .login-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(12, 74, 110, 0.25);
+  color: #075985;
 }
