@@ -606,22 +606,22 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
-  --brand-primary: #1E9FF2;
+  --brand-primary: #38bdf8;
   --brand-secondary: #764BA2;
   --brand-accent: #22d3ee;
   
-  --logo-color: #1E9FF2;
+  --logo-color: #38bdf8;
   
   /* BLUE GLASS cards */
   --card-bg: rgba(20, 60, 130, 0.3);
   --card-border: rgba(30, 159, 242, 0.2);
   --card-shadow: 0 8px 32px rgba(30, 159, 242, 0.15);
   
-  --btn-primary-bg: linear-gradient(135deg, #1E9FF2, #764BA2);
+  --btn-primary-bg: linear-gradient(135deg, #38bdf8, #764BA2);
   --btn-primary-text: #ffffff;
   --btn-secondary-bg: rgba(20, 60, 130, 0.4);
-  --btn-secondary-text: #1E9FF2;
-  --btn-secondary-border: rgba(30, 159, 242, 0.5);
+  --btn-secondary-text: #38bdf8;
+  --btn-secondary-border: rgba(56, 189, 248, 0.5);
   
   --footer-bg: rgba(10, 40, 90, 0.7);
   --footer-text: #94a3b8;
@@ -685,21 +685,19 @@ body.dark-mode main > div[style*="background"] {
 }
 
 /* ============================================
-   LOGO STYLING - FIXED: Tighter blur
+   LOGO STYLING - Clean, no blur bleed
    ============================================ */
 .logo-color,
 .logo-stroke {
   stroke: var(--logo-color) !important;
-  filter: drop-shadow(0 0 2px var(--logo-color));
 }
 
-/* Logo in navigation - FIXED: smaller blur */
+/* Logo in navigation - clean, no blur */
 nav .logo-color,
 nav .logo-stroke,
 nav svg circle,
 nav svg path {
   stroke: var(--logo-color) !important;
-  filter: drop-shadow(0 0 2px var(--logo-color));
 }
 
 /* Logo in footer */
@@ -708,14 +706,12 @@ footer .logo-stroke,
 footer svg circle,
 footer svg path {
   stroke: var(--logo-color) !important;
-  filter: drop-shadow(0 0 2px var(--logo-color));
 }
 
-/* Logo in hero section - slightly larger glow allowed */
+/* Logo in hero section - subtle glow only */
 section svg circle[class*="stroke-cyan"],
 section svg path[class*="stroke-cyan"] {
   stroke: var(--logo-color) !important;
-  filter: drop-shadow(0 0 4px var(--logo-color));
 }
 
 /* ============================================
@@ -956,11 +952,11 @@ body::before {
     --text-secondary: #94a3b8 !important;
     --text-muted: #64748b !important;
     
-    --brand-primary: #1E9FF2 !important;
+    --brand-primary: #38bdf8 !important;
     --brand-secondary: #764BA2 !important;
     --brand-accent: #22d3ee !important;
     
-    --logo-color: #1E9FF2 !important;
+    --logo-color: #38bdf8 !important;
     
     --card-bg: rgba(20, 60, 130, 0.3) !important;
     --card-border: rgba(30, 159, 242, 0.2) !important;
