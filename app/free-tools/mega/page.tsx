@@ -51,9 +51,9 @@ export default function MegaCalculator() {
     sales: true, food: true, labor: true, prime: true, breakeven: true, thirdparty: true, whatif: true
   })
 
-  const toggleSection = (section: string) => {
-    setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }))
-  }
+  const toggleSection = (section: keyof typeof expandedSections) => {
+  setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }))
+}
 
   const conversions: Record<string, number> = { g: 1, kg: 1000, oz: 28.3495, lb: 453.592 }
 
