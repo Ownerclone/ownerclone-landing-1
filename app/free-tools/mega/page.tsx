@@ -60,7 +60,7 @@ export default function MegaCalculator() {
     whatif: true
   })
 
-  const toggleSection = (section) => {
+  const toggleSection = (section: keyof typeof expandedSections) => {
     setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }))
   }
 
