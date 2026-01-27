@@ -23,7 +23,7 @@ export default function PerPlateFoodCostingCalculator() {
   const [targetFoodCost, setTargetFoodCost] = useState('30')
   const [platesPerWeek, setPlatesPerWeek] = useState('100')
 
-  const conversions = { g: 1, kg: 1000, oz: 28.3495, lb: 453.592 }
+  const conversions: Record<string, number> = { g: 1, kg: 1000, oz: 28.3495, lb: 453.592 }
 
   const addIngredient = () => {
     const newId = Math.max(...ingredients.map(i => i.id), 0) + 1
@@ -32,13 +32,13 @@ export default function PerPlateFoodCostingCalculator() {
     }])
   }
 
-  const removeIngredient = (id) => {
+  const removeIngredient = (id: number) => {
     if (ingredients.length > 1) {
       setIngredients(ingredients.filter(i => i.id !== id))
     }
   }
 
-  const updateIngredient = (id, field, value) => {
+  const updateIngredient = (id: number, field: string, value: string) => {
     setIngredients(ingredients.map(ing => {
       if (ing.id === id) {
         const updated = { ...ing, [field]: value }
@@ -54,7 +54,7 @@ export default function PerPlateFoodCostingCalculator() {
     }))
   }
 
-  const adjustPortion = (id, percentage) => {
+  const adjustPortion = (id: number, percentage: number) => {
     setIngredients(ingredients.map(ing => {
       if (ing.id === id && ing.plateAmount) {
         const currentQty = parseFloat(ing.plateAmount)
@@ -65,7 +65,7 @@ export default function PerPlateFoodCostingCalculator() {
     }))
   }
 
-  const calculatePricePerUnit = (ing) => {
+  const calculatePricePerUnit = (ing: any) => {
     const casePrice = parseFloat(ing.casePrice) || 0
     const caseQty = parseFloat(ing.caseQuantity) || 0
     const dozenPerCase = parseFloat(ing.dozenPerCase) || 0
@@ -84,7 +84,7 @@ export default function PerPlateFoodCostingCalculator() {
     return null
   }
 
-  const calculateIngredientCost = (ing) => {
+  const calculateIngredientCost = (ing: any) => {
     const plateAmount = parseFloat(ing.plateAmount) || 0
     if (plateAmount === 0) return 0
     const priceInfo = calculatePricePerUnit(ing)
@@ -113,7 +113,7 @@ export default function PerPlateFoodCostingCalculator() {
   const calculateProfit = (price) => price - totalPlateCost
   const platesWeek = parseFloat(platesPerWeek) || 0
 
-  const getFoodCostStatus = (pct) => {
+  const getFoodCostStatus = (pct: number) => {
     if (pct === 0) return { color: 'text-gray-500', bg: 'backdrop-blur-xl bg-white/5', border: 'border-white/10', message: 'Enter your numbers above' }
     if (pct < 28) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Excellent! Maximizing profit.' }
     if (pct < 32) return { color: 'text-[#10b981]', bg: 'backdrop-blur-xl bg-[#10b981]/10', border: 'border-[#10b981]', message: 'Great! Ideal range.' }
