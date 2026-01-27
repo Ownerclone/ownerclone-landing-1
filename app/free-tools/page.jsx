@@ -80,8 +80,8 @@ export default function FreeToolsHub() {
     }
   ]
 
-  const getColorClasses = (color: string) => {
-    const colors: Record<string, string> = {
+  const getColorClasses = (color) => {
+    const colors = {
       emerald: 'border-[#10b981]/30 hover:border-[#10b981] hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]',
       cyan: 'border-[#06b6d4]/30 hover:border-[#06b6d4] hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]',
       purple: 'border-[#a855f7]/30 hover:border-[#a855f7] hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]',
@@ -95,8 +95,8 @@ export default function FreeToolsHub() {
     return colors[color] || colors.cyan
   }
 
-  const getIconColor = (color: string) => {
-    const colors: Record<string, string> = {
+  const getIconColor = (color) => {
+    const colors = {
       emerald: 'text-[#10b981]',
       cyan: 'text-[#06b6d4]',
       purple: 'text-[#a855f7]',
