@@ -91,13 +91,13 @@ export default function MegaCalculator() {
     }])
   }
 
-  const removeIngredient = (id) => {
+  const removeIngredient = (id: number) => {
     if (ingredients.length > 1) {
       setIngredients(ingredients.filter(i => i.id !== id))
     }
   }
 
-  const updateIngredient = (id, field, value) => {
+  const updateIngredient = (id: number, field: string, value: string) => {
     setIngredients(ingredients.map(ing => {
       if (ing.id === id) {
         const updated = { ...ing, [field]: value }
@@ -117,7 +117,7 @@ export default function MegaCalculator() {
     }))
   }
 
-  const calculatePricePerUnit = (ing) => {
+  const calculatePricePerUnit = (ing: any) => {
     const casePrice = parseFloat(ing.casePrice) || 0
     const caseQty = parseFloat(ing.caseQuantity) || 0
     const dozenPerCase = parseFloat(ing.dozenPerCase) || 0
@@ -152,7 +152,7 @@ export default function MegaCalculator() {
     return null
   }
 
-  const calculateIngredientCost = (ing) => {
+  const calculateIngredientCost = (ing: any) => {
     const plateAmount = parseFloat(ing.plateAmount) || 0
     if (plateAmount === 0) return 0
 
@@ -235,7 +235,7 @@ export default function MegaCalculator() {
   // ============================================
   // STATUS HELPERS
   // ============================================
-  const getFoodCostStatus = (pct) => {
+  const getFoodCostStatus = (pct: number) => {
     if (pct === 0) return { color: 'text-gray-500', label: '—' }
     if (pct < 28) return { color: 'text-[#10b981]', label: '✓ Excellent' }
     if (pct < 32) return { color: 'text-[#10b981]', label: '✓ Good' }
@@ -243,7 +243,7 @@ export default function MegaCalculator() {
     return { color: 'text-[#ef4444]', label: '✗ Critical' }
   }
 
-  const getLaborCostStatus = (pct) => {
+  const getLaborCostStatus = (pct: number) => {
     if (pct === 0) return { color: 'text-gray-500', label: '—' }
     if (pct < 25) return { color: 'text-[#10b981]', label: '✓ Excellent' }
     if (pct < 30) return { color: 'text-[#10b981]', label: '✓ Good' }
@@ -251,7 +251,7 @@ export default function MegaCalculator() {
     return { color: 'text-[#ef4444]', label: '✗ Critical' }
   }
 
-  const getPrimeCostStatus = (pct) => {
+  const getPrimeCostStatus = (pct: number) => {
     if (pct === 0) return { color: 'text-gray-500', label: '—' }
     if (pct < 55) return { color: 'text-[#10b981]', label: '✓ Excellent' }
     if (pct < 60) return { color: 'text-[#10b981]', label: '✓ Good' }
