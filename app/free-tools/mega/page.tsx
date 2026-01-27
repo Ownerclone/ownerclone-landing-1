@@ -842,42 +842,659 @@ export default function MegaCalculator() {
               </div>
             )}
           </div>
--center">TOTAL PROJECTED IMPACT</h4>
-                      <div className="grid md:grid-cols-3 gap-4 text-center">
-                        <div className="p-4 bg-black/30 rounded-lg">
-                          <p className="text-sm text-gray-400">Weekly</p>
-                          <p className="text-3xl font-bold text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { 
+  UtensilsCrossed, Users, PieChart, Target, Lightbulb, TrendingUp,
+  DollarSign, CreditCard, Calendar, Music, ChevronDown,
+  Plus, ArrowLeft, Rocket, Smartphone, AlertTriangle
+} from 'lucide-react'
+
+export default function MegaCalculator() {
+  const [weeklySales, setWeeklySales] = useState('')
+  const [ppa, setPpa] = useState('')
+  const [dishName, setDishName] = useState('')
+  const [menuPrice, setMenuPrice] = useState('')
+  const [quickMode, setQuickMode] = useState(true)
+  const [quickFoodCostPercent, setQuickFoodCostPercent] = useState('')
+  const [ingredients, setIngredients] = useState([
+    { id: 1, name: '', soldBy: 'weight', dozenPerCase: '', caseQuantity: '', casePrice: '', plateAmount: '', plateUnit: 'oz' }
+  ])
+  const [grossWages, setGrossWages] = useState('')
+  const [tipPercent, setTipPercent] = useState('20')
+  const [payrollTaxRate, setPayrollTaxRate] = useState('11')
+  const [benefits, setBenefits] = useState('')
+  const [payrollProcessing, setPayrollProcessing] = useState('')
+  const [rent, setRent] = useState('')
+  const [utilities, setUtilities] = useState('')
+  const [insurance, setInsurance] = useState('')
+  const [loanPayments, setLoanPayments] = useState('')
+  const [ccPayments, setCcPayments] = useState('')
+  const [ccFeePercent, setCcFeePercent] = useState('2.9')
+  const [ccSalesPercent, setCcSalesPercent] = useState('80')
+  const [posSystem, setPosSystem] = useState('')
+  const [entertainment, setEntertainment] = useState('')
+  const [trivia, setTrivia] = useState('')
+  const [linens, setLinens] = useState('')
+  const [advertising, setAdvertising] = useState('')
+  const [greaseTrap, setGreaseTrap] = useState('')
+  const [hoodCleaning, setHoodCleaning] = useState('')
+  const [alcoholLicense, setAlcoholLicense] = useState('')
+  const [thirdPartySales, setThirdPartySales] = useState('')
+  const [thirdPartyFeePercent, setThirdPartyFeePercent] = useState('30')
+  const [thirdPartyPriceIncrease, setThirdPartyPriceIncrease] = useState('20')
+  const [thirdPartyPromoPercent, setThirdPartyPromoPercent] = useState('15')
+  const [whatIfFoodCostPercentReduction, setWhatIfFoodCostPercentReduction] = useState('')
+  const [whatIfFoodSpendReduction, setWhatIfFoodSpendReduction] = useState('')
+  const [activeWhatIfInput, setActiveWhatIfInput] = useState(null)
+  const [priceIncreasePercent, setPriceIncreasePercent] = useState('')
+  const [laborReductionPercent, setLaborReductionPercent] = useState('')
+  const [expandedSections, setExpandedSections] = useState({
+    sales: true, food: true, labor: true, prime: true, breakeven: true, thirdparty: true, whatif: true
+  })
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }))
+  }
+
+  const conversions = { g: 1, kg: 1000, oz: 28.3495, lb: 453.592 }
+
+  const addIngredient = () => {
+    const newId = Math.max(...ingredients.map(i => i.id), 0) + 1
+    setIngredients([...ingredients, { id: newId, name: '', soldBy: 'weight', dozenPerCase: '', caseQuantity: '', casePrice: '', plateAmount: '', plateUnit: 'oz' }])
+  }
+
+  const removeIngredient = (id) => {
+    if (ingredients.length > 1) setIngredients(ingredients.filter(i => i.id !== id))
+  }
+
+  const updateIngredient = (id, field, value) => {
+    setIngredients(ingredients.map(ing => {
+      if (ing.id === id) {
+        const updated = { ...ing, [field]: value }
+        if (field === 'soldBy') {
+          updated.dozenPerCase = ''; updated.caseQuantity = ''; updated.casePrice = ''
+          updated.plateUnit = (value === 'each' || value === 'dozen' || value === 'case') ? 'each' : 'oz'
+        }
+        return updated
+      }
+      return ing
+    }))
+  }
+
+  const calculatePricePerUnit = (ing) => {
+    const casePrice = parseFloat(ing.casePrice) || 0
+    const caseQty = parseFloat(ing.caseQuantity) || 0
+    const dozenPerCase = parseFloat(ing.dozenPerCase) || 0
+    if (casePrice === 0) return null
+    if (ing.soldBy === 'each') return { value: casePrice, unit: 'each' }
+    if (ing.soldBy === 'dozen' && dozenPerCase > 0) {
+      const totalItems = dozenPerCase * 12
+      return { value: casePrice / totalItems, unit: 'each', totalItems }
+    }
+    if (ing.soldBy === 'case' && caseQty > 0) return { value: casePrice / caseQty, unit: 'each' }
+    if (ing.soldBy === 'weight' && caseQty > 0) {
+      const pricePerLb = casePrice / caseQty
+      return { value: pricePerLb, unit: 'lb', perOz: pricePerLb / 16, perGram: pricePerLb / 453.592 }
+    }
+    return null
+  }
+
+  const calculateIngredientCost = (ing) => {
+    const plateAmount = parseFloat(ing.plateAmount) || 0
+    if (plateAmount === 0) return 0
+    const priceInfo = calculatePricePerUnit(ing)
+    if (!priceInfo) return 0
+    if (ing.plateUnit === 'each' || ing.plateUnit === '1/2 each' || ing.plateUnit === '1/4 each') {
+      let multiplier = ing.plateUnit === '1/2 each' ? 0.5 : ing.plateUnit === '1/4 each' ? 0.25 : 1
+      return priceInfo.value * plateAmount * multiplier
+    }
+    if (priceInfo.perGram) return priceInfo.perGram * plateAmount * conversions[ing.plateUnit]
+    return 0
+  }
+
+  const sales = parseFloat(weeklySales) || 0
+  const perPersonAvg = parseFloat(ppa) || 0
+  const weeklyCovers = perPersonAvg > 0 ? Math.round(sales / perPersonAvg) : 0
+  const thirdPartySalesWeekly = parseFloat(thirdPartySales) || 0
+  const inHouseSalesWeekly = sales - thirdPartySalesWeekly
+  const currentMenuPrice = parseFloat(menuPrice) || 0
+  const quickFoodCostPct = parseFloat(quickFoodCostPercent) || 0
+  const quickPlateCostDollar = quickMode && currentMenuPrice > 0 ? currentMenuPrice * (quickFoodCostPct / 100) : 0
+  const fullModePlateCost = ingredients.reduce((sum, ing) => sum + calculateIngredientCost(ing), 0)
+  const totalPlateCost = quickMode ? quickPlateCostDollar : fullModePlateCost
+  const foodCostPercent = quickMode ? quickFoodCostPct : (currentMenuPrice > 0 ? (totalPlateCost / currentMenuPrice) * 100 : 0)
+  const suggestedPrice28 = totalPlateCost > 0 ? totalPlateCost / 0.28 : 0
+  const suggestedPrice30 = totalPlateCost > 0 ? totalPlateCost / 0.30 : 0
+  const wages = parseFloat(grossWages) || 0
+  const tipPercentValue = parseFloat(tipPercent) || 0
+  const tipsAmount = sales > 0 ? sales * (tipPercentValue / 100) : 0
+  const taxRate = parseFloat(payrollTaxRate) / 100
+  const wagesTax = wages * taxRate
+  const tipsTax = tipsAmount * taxRate
+  const benefitsCost = parseFloat(benefits) || 0
+  const processingFees = parseFloat(payrollProcessing) || 0
+  const totalLaborCost = wages + wagesTax + tipsTax + benefitsCost + processingFees
+  const laborCostPercent = sales > 0 ? (totalLaborCost / sales) * 100 : 0
+  const estimatedFoodCostPercent = foodCostPercent > 0 ? foodCostPercent : 30
+  const primeCostPercent = estimatedFoodCostPercent + laborCostPercent
+  const monthlySales = sales * 4.33
+  const ccSales = monthlySales * ((parseFloat(ccSalesPercent) || 80) / 100)
+  const ccProcessingFees = ccSales * ((parseFloat(ccFeePercent) || 2.9) / 100)
+  const quarterlyToMonthly = ((parseFloat(greaseTrap) || 0) + (parseFloat(hoodCleaning) || 0)) / 3
+  const yearlyToMonthly = (parseFloat(alcoholLicense) || 0) / 12
+  const totalMonthlyFixedCosts = (parseFloat(rent) || 0) + (parseFloat(utilities) || 0) + (parseFloat(insurance) || 0) + (parseFloat(loanPayments) || 0) + (parseFloat(ccPayments) || 0) + ccProcessingFees + (parseFloat(posSystem) || 0) + quarterlyToMonthly + yearlyToMonthly
+  const weeklyVariableCosts = (parseFloat(entertainment) || 0) + (parseFloat(trivia) || 0) + (parseFloat(linens) || 0) + (parseFloat(advertising) || 0)
+  const monthlyVariableCosts = weeklyVariableCosts * 4.33
+  const tpFeePercent = parseFloat(thirdPartyFeePercent) || 30
+  const tpPriceIncreasePercent = parseFloat(thirdPartyPriceIncrease) || 20
+  const tpPromoPercent = parseFloat(thirdPartyPromoPercent) || 15
+  const tpFeesWeekly = thirdPartySalesWeekly * (tpFeePercent / 100)
+  const tpMarkupRecoveryWeekly = thirdPartySalesWeekly * (tpPriceIncreasePercent / (100 + tpPriceIncreasePercent))
+  const tpPromoCostWeekly = thirdPartySalesWeekly * (tpPromoPercent / 100)
+  const tpNetCostWeekly = tpFeesWeekly - tpMarkupRecoveryWeekly + tpPromoCostWeekly
+  const tpNetCostMonthly = tpNetCostWeekly * 4.33
+  const tpFoodCostWeekly = thirdPartySalesWeekly * (estimatedFoodCostPercent / 100)
+  const tpProfitWeekly = thirdPartySalesWeekly - tpFoodCostWeekly - tpNetCostWeekly
+  const tpProfitMarginPercent = thirdPartySalesWeekly > 0 ? (tpProfitWeekly / thirdPartySalesWeekly) * 100 : 0
+  const totalMonthlyOperatingCosts = totalMonthlyFixedCosts + monthlyVariableCosts + tpNetCostMonthly
+  const contributionMarginPercent = 100 - primeCostPercent
+  const breakEvenMonthly = contributionMarginPercent > 0 ? (totalMonthlyOperatingCosts / (contributionMarginPercent / 100)) : 0
+  const breakEvenWeekly = breakEvenMonthly / 4.33
+  const coversToBreakEvenWeekly = perPersonAvg > 0 ? Math.ceil(breakEvenWeekly / perPersonAvg) : 0
+  const monthlyRevenue = sales * 4.33
+  const monthlyCOGS = monthlyRevenue * (estimatedFoodCostPercent / 100)
+  const monthlyLabor = totalLaborCost * 4.33
+  const monthlyProfit = monthlyRevenue - monthlyCOGS - monthlyLabor - totalMonthlyOperatingCosts
+  const weeklyProfit = monthlyProfit / 4.33
+  const annualProfit = monthlyProfit * 12
+  const inHouseProfitMarginPercent = inHouseSalesWeekly > 0 ? ((inHouseSalesWeekly - (inHouseSalesWeekly * estimatedFoodCostPercent / 100) - (totalLaborCost * inHouseSalesWeekly / (sales || 1)) - ((totalMonthlyOperatingCosts / 4.33) * inHouseSalesWeekly / (sales || 1))) / inHouseSalesWeekly) * 100 : 0
+  const blendedProfitMarginPercent = sales > 0 ? (weeklyProfit / sales) * 100 : 0
+  const marginDropPercent = inHouseProfitMarginPercent - blendedProfitMarginPercent
+  const currentWeeklyFoodSpend = sales * (estimatedFoodCostPercent / 100)
+  const whatIfFoodPctReduction = parseFloat(whatIfFoodCostPercentReduction) || 0
+  const whatIfFoodSpendDollarReduction = parseFloat(whatIfFoodSpendReduction) || 0
+  const whatIfPriceIncrease = parseFloat(priceIncreasePercent) || 0
+  const whatIfLaborReduction = parseFloat(laborReductionPercent) || 0
+  const linkedFoodSpendFromPercent = sales > 0 ? sales * (whatIfFoodPctReduction / 100) : 0
+  const linkedFoodPercentFromSpend = currentWeeklyFoodSpend > 0 ? (whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100 : 0
+
+  useEffect(() => {
+    if (activeWhatIfInput === 'percent' && whatIfFoodPctReduction > 0 && sales > 0) {
+      setWhatIfFoodSpendReduction((sales * (whatIfFoodPctReduction / 100)).toFixed(0))
+    }
+  }, [whatIfFoodPctReduction, activeWhatIfInput, sales])
+
+  useEffect(() => {
+    if (activeWhatIfInput === 'dollar' && whatIfFoodSpendDollarReduction > 0 && currentWeeklyFoodSpend > 0) {
+      setWhatIfFoodCostPercentReduction(((whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100).toFixed(1))
+    }
+  }, [whatIfFoodSpendDollarReduction, activeWhatIfInput, currentWeeklyFoodSpend])
+
+  const effectiveFoodSavingsWeekly = whatIfFoodPctReduction > 0 ? linkedFoodSpendFromPercent : whatIfFoodSpendDollarReduction
+  const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100)
+  const laborSavingsWeekly = totalLaborCost * (whatIfLaborReduction / 100)
+  const grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly
+  const grandTotalSavingsMonthly = grandTotalSavingsWeekly * 4.33
+  const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
+  const whatIfAdjustedFoodCostPercent = estimatedFoodCostPercent - (whatIfFoodPctReduction || (currentWeeklyFoodSpend > 0 ? (whatIfFoodSpendDollarReduction / sales) * 100 : 0))
+  const whatIfAdjustedLaborCostPercent = laborCostPercent * (1 - whatIfLaborReduction / 100)
+  const whatIfAdjustedPrimeCostPercent = whatIfAdjustedFoodCostPercent + whatIfAdjustedLaborCostPercent
+  const whatIfAdjustedWeeklyProfit = weeklyProfit + grandTotalSavingsWeekly
+  const whatIfContributionMarginPercent = 100 - whatIfAdjustedPrimeCostPercent
+  const whatIfBreakEvenMonthly = whatIfContributionMarginPercent > 0 ? (totalMonthlyOperatingCosts / (whatIfContributionMarginPercent / 100)) : 0
+  const whatIfBreakEvenWeekly = whatIfBreakEvenMonthly / 4.33
+  const hasActiveWhatIf = whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0 || whatIfPriceIncrease > 0 || whatIfLaborReduction > 0
+
+  const getFoodCostStatus = (pct) => {
+    if (pct === 0) return { color: 'text-gray-500', label: '-' }
+    if (pct < 28) return { color: 'text-[#10b981]', label: 'Excellent' }
+    if (pct < 32) return { color: 'text-[#10b981]', label: 'Good' }
+    if (pct < 35) return { color: 'text-[#fbbf24]', label: 'High' }
+    return { color: 'text-[#ef4444]', label: 'Critical' }
+  }
+  const getLaborCostStatus = (pct) => {
+    if (pct === 0) return { color: 'text-gray-500', label: '-' }
+    if (pct < 25) return { color: 'text-[#10b981]', label: 'Excellent' }
+    if (pct < 30) return { color: 'text-[#10b981]', label: 'Good' }
+    if (pct < 35) return { color: 'text-[#fbbf24]', label: 'High' }
+    return { color: 'text-[#ef4444]', label: 'Critical' }
+  }
+  const getPrimeCostStatus = (pct) => {
+    if (pct === 0) return { color: 'text-gray-500', label: '-' }
+    if (pct < 55) return { color: 'text-[#10b981]', label: 'Excellent' }
+    if (pct < 60) return { color: 'text-[#10b981]', label: 'Good' }
+    if (pct < 65) return { color: 'text-[#fbbf24]', label: 'High' }
+    return { color: 'text-[#ef4444]', label: 'Critical' }
+  }
+
+  const displayFoodCostPercent = hasActiveWhatIf ? whatIfAdjustedFoodCostPercent : estimatedFoodCostPercent
+  const displayLaborCostPercent = hasActiveWhatIf ? whatIfAdjustedLaborCostPercent : laborCostPercent
+  const displayPrimeCostPercent = hasActiveWhatIf ? whatIfAdjustedPrimeCostPercent : primeCostPercent
+  const displayBreakEvenWeekly = hasActiveWhatIf ? whatIfBreakEvenWeekly : breakEvenWeekly
+  const displayWeeklyProfit = hasActiveWhatIf ? whatIfAdjustedWeeklyProfit : weeklyProfit
+  const foodStatus = getFoodCostStatus(displayFoodCostPercent)
+  const laborStatus = getLaborCostStatus(displayLaborCostPercent)
+  const primeStatus = getPrimeCostStatus(displayPrimeCostPercent)
+
+  return (
+    <div className="min-h-screen text-white">
+      <style jsx global>{`
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type="number"] { -moz-appearance: textfield; }
+      `}</style>
+
+      <section className="relative pt-24 pb-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <Link href="/free-tools" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors">
+            <ArrowLeft className="w-5 h-5" />Back to Free Tools
+          </Link>
+          <div className="backdrop-blur-xl bg-gradient-to-r from-[#f59e0b]/10 to-[#fbbf24]/10 border border-[#f59e0b]/30 rounded-2xl p-8 shadow-[0_0_50px_rgba(245,158,11,0.15)]">
+            <div className="flex items-center gap-3 mb-4">
+              <Rocket className="w-10 h-10 text-[#f59e0b]" />
+              <h1 className="text-4xl md:text-5xl font-black">MEGA <span className="text-[#f59e0b]">Calculator</span></h1>
+            </div>
+            <p className="text-xl text-gray-300">See how Food Cost, Labor, Prime Cost, Break-Even and Pricing all work together in real-time</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative pb-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          
+          <div className="backdrop-blur-xl bg-black/80 border border-white/20 rounded-2xl p-6 mb-8 sticky top-20 z-10 shadow-2xl">
+            {hasActiveWhatIf && (
+              <div className="mb-4 px-4 py-2 bg-[#f59e0b]/20 border border-[#f59e0b]/50 rounded-lg text-center">
+                <span className="text-[#f59e0b] font-semibold text-sm">What-If Mode Active - Showing projected numbers</span>
+              </div>
+            )}
+            <div className="grid grid-cols-2 md:grid-cols-7 gap-4 text-center">
+              <div>
+                <p className="text-xs text-gray-400 mb-1">Food Cost</p>
+                <p className={`text-xl font-bold ${foodStatus.color}`}>{displayFoodCostPercent > 0 ? `${displayFoodCostPercent.toFixed(1)}%` : '-'}</p>
+                {hasActiveWhatIf && whatIfFoodPctReduction > 0 && <p className="text-xs text-[#10b981]">-{whatIfFoodPctReduction.toFixed(1)}%</p>}
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 mb-1">Labor Cost</p>
+                <p className={`text-xl font-bold ${laborStatus.color}`}>{displayLaborCostPercent > 0 ? `${displayLaborCostPercent.toFixed(1)}%` : '-'}</p>
+                {hasActiveWhatIf && whatIfLaborReduction > 0 && <p className="text-xs text-[#10b981]">-{whatIfLaborReduction}%</p>}
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 mb-1">Prime Cost</p>
+                <p className={`text-xl font-bold ${primeStatus.color}`}>{displayPrimeCostPercent > 0 ? `${displayPrimeCostPercent.toFixed(1)}%` : '-'}</p>
+              </div>
+              <div className="border-l border-r border-white/10 px-2">
+                <p className="text-xs text-gray-400 mb-1">Break-Even/wk</p>
+                <p className="text-xl font-bold text-[#06b6d4]">{displayBreakEvenWeekly > 0 ? `$${Math.round(displayBreakEvenWeekly).toLocaleString()}` : '-'}</p>
+                {hasActiveWhatIf && breakEvenWeekly > 0 && whatIfBreakEvenWeekly < breakEvenWeekly && <p className="text-xs text-[#10b981]">-${Math.round(breakEvenWeekly - whatIfBreakEvenWeekly).toLocaleString()}</p>}
+              </div>
+              <div>
+                <p className="text-xs text-green-400 mb-1">In-House Margin</p>
+                <p className={`text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>{sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '-'}</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 mb-1">Blended Margin</p>
+                <p className={`text-xl font-bold ${blendedProfitMarginPercent >= 10 ? 'text-[#10b981]' : blendedProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>{sales > 0 ? `${blendedProfitMarginPercent.toFixed(1)}%` : '-'}</p>
+                {marginDropPercent > 0.5 && <p className="text-xs text-red-400">-{marginDropPercent.toFixed(1)}%</p>}
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 mb-1">Weekly Profit</p>
+                <p className={`text-xl font-bold ${displayWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>{sales > 0 ? `$${Math.round(displayWeeklyProfit).toLocaleString()}` : '-'}</p>
+                {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && <p className="text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>}
+              </div>
+            </div>
+          </div>
+
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl mb-6 overflow-hidden">
+            <button onClick={() => toggleSection('sales')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3"><TrendingUp className="w-6 h-6 text-[#f59e0b]" /><h2 className="text-xl font-bold">Sales and Revenue</h2></div>
+              <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections.sales ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedSections.sales && (
+              <div className="px-6 pb-6 border-t border-white/10">
+                <div className="grid md:grid-cols-3 gap-4 pt-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Weekly Sales ($)</label>
+                    <input type="number" value={weeklySales} onChange={(e) => setWeeklySales(e.target.value)} placeholder="20000" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Per Person Average ($)</label>
+                    <input type="number" value={ppa} onChange={(e) => setPpa(e.target.value)} placeholder="25" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" />
+                    <p className="text-xs text-gray-500 mt-1">Average spend per person</p>
+                  </div>
+                  <div className="flex items-end">
+                    <div className="w-full p-4 bg-[#f59e0b]/10 border border-[#f59e0b]/30 rounded-lg text-center">
+                      <p className="text-xs text-gray-400">Weekly Covers</p>
+                      <p className="text-2xl font-bold text-[#f59e0b]">{weeklyCovers > 0 ? weeklyCovers.toLocaleString() : '-'}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="backdrop-blur-xl bg-white/5 border border-[#10b981]/30 rounded-2xl mb-6 overflow-hidden">
+            <button onClick={() => toggleSection('food')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3"><UtensilsCrossed className="w-6 h-6 text-[#10b981]" /><h2 className="text-xl font-bold">Per Plate Food Costing</h2>
+                {foodCostPercent > 0 && <span className={`ml-2 px-3 py-1 rounded-full text-sm font-bold ${foodStatus.color} bg-black/30`}>{foodCostPercent.toFixed(1)}% {foodStatus.label}</span>}
+              </div>
+              <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections.food ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedSections.food && (
+              <div className="px-6 pb-6 border-t border-white/10">
+                <div className="flex items-center gap-4 pt-6 mb-6">
+                  <span className="text-sm text-gray-400">Mode:</span>
+                  <button onClick={() => setQuickMode(true)} className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${quickMode ? 'bg-[#10b981] text-white' : 'bg-white/10 text-gray-400 hover:bg-white/20'}`}>Quick (Known %)</button>
+                  <button onClick={() => setQuickMode(false)} className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${!quickMode ? 'bg-[#10b981] text-white' : 'bg-white/10 text-gray-400 hover:bg-white/20'}`}>Full (Build Recipe)</button>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Dish Name</label>
+                    <input type="text" value={dishName} onChange={(e) => setDishName(e.target.value)} placeholder="Buffalo Wings" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Menu Price ($)</label>
+                    <input type="number" value={menuPrice} onChange={(e) => setMenuPrice(e.target.value)} placeholder="14.99" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors" />
+                  </div>
+                </div>
+                {quickMode ? (
+                  <div className="mb-6">
+                    <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg mb-4">
+                      <p className="text-sm text-gray-300"><strong>Quick Mode:</strong> Enter your known food cost percentage and we will calculate the plate cost in dollars.</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">Known Food Cost %</label>
+                        <div className="relative">
+                          <input type="number" value={quickFoodCostPercent} onChange={(e) => setQuickFoodCostPercent(e.target.value)} placeholder="28" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white transition-colors" />
+                          <span className="absolute right-4 top-3.5 text-gray-500">%</span>
                         </div>
-                        <div className="p-4 bg-black/30 rounded-lg">
-                          <p className="text-sm text-gray-400">Monthly</p>
-                          <p className="text-3xl font-bold text-[#10b981]">+${Math.round(grandTotalSavingsMonthly).toLocaleString()}</p>
-                        </div>
-                        <div className="p-4 bg-black/30 rounded-lg border-2 border-[#10b981]">
-                          <p className="text-sm text-gray-400">YEARLY</p>
-                          <p className="text-4xl font-bold text-[#10b981]">+${Math.round(grandTotalSavingsYearly).toLocaleString()}</p>
+                        <p className="text-xs text-gray-500 mt-1">Industry target: 28-32%</p>
+                      </div>
+                      <div className="flex items-end">
+                        <div className="w-full p-4 bg-[#10b981]/20 border-2 border-[#10b981] rounded-lg text-center">
+                          <p className="text-xs text-gray-400 mb-1">Calculated Plate Cost</p>
+                          <p className="text-3xl font-bold text-[#10b981]">{quickPlateCostDollar > 0 ? `$${quickPlateCostDollar.toFixed(2)}` : '-'}</p>
+                          {currentMenuPrice > 0 && quickFoodCostPct > 0 && <p className="text-xs text-gray-400 mt-1">{quickFoodCostPct}% of ${currentMenuPrice}</p>}
                         </div>
                       </div>
-                      <p className="text-center text-sm text-gray-400 mt-4">
-                        New projected weekly profit: <strong className="text-[#10b981]">${Math.round(whatIfAdjustedWeeklyProfit).toLocaleString()}</strong> (was ${Math.round(weeklyProfit).toLocaleString()})
-                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mb-6">
+                    <div className="mb-4 p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg">
+                      <p className="text-sm text-gray-300"><strong>How to use:</strong> Enter how you buy each ingredient, we auto-calculate the price per unit, then enter how much goes on the plate.</p>
+                    </div>
+                    <div className="space-y-4">
+                      {ingredients.map((ing) => {
+                        const cost = calculateIngredientCost(ing)
+                        const priceInfo = calculatePricePerUnit(ing)
+                        return (
+                          <div key={ing.id} className="border border-white/10 rounded-lg p-4 bg-black/20">
+                            <div className="grid md:grid-cols-6 gap-3">
+                              <div className="md:col-span-2">
+                                <label className="block text-xs text-gray-400 mb-1">Ingredient</label>
+                                <input type="text" value={ing.name} onChange={(e) => updateIngredient(ing.id, 'name', e.target.value)} placeholder="Chicken Wings" className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm" />
+                              </div>
+                              <div>
+                                <label className="block text-xs text-gray-400 mb-1">Sold By</label>
+                                <select value={ing.soldBy} onChange={(e) => updateIngredient(ing.id, 'soldBy', e.target.value)} className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm">
+                                  <option value="each">Each</option><option value="dozen">Dozen</option><option value="case">Case</option><option value="weight">Weight (lb)</option>
+                                </select>
+                              </div>
+                              {ing.soldBy === 'dozen' && <div><label className="block text-xs text-gray-400 mb-1">Doz/Case</label><input type="number" value={ing.dozenPerCase} onChange={(e) => updateIngredient(ing.id, 'dozenPerCase', e.target.value)} placeholder="30" className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm" /></div>}
+                              {ing.soldBy === 'case' && <div><label className="block text-xs text-gray-400 mb-1">Items/Case</label><input type="number" value={ing.caseQuantity} onChange={(e) => updateIngredient(ing.id, 'caseQuantity', e.target.value)} placeholder="263" className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm" /></div>}
+                              {ing.soldBy === 'weight' && <div><label className="block text-xs text-gray-400 mb-1">Case (lb)</label><input type="number" value={ing.caseQuantity} onChange={(e) => updateIngredient(ing.id, 'caseQuantity', e.target.value)} placeholder="40" className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm" /></div>}
+                              {ing.soldBy === 'each' && <div></div>}
+                              <div>
+                                <label className="block text-xs text-gray-400 mb-1">{ing.soldBy === 'each' ? 'Price/Each' : 'Case Price'}</label>
+                                <input type="number" value={ing.casePrice} onChange={(e) => updateIngredient(ing.id, 'casePrice', e.target.value)} placeholder="80.00" className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm" />
+                              </div>
+                              <div className="flex items-end">
+                                {priceInfo ? <div className="w-full p-2 bg-[#10b981]/20 border border-[#10b981]/50 rounded-lg text-center"><p className="text-xs text-gray-400">${priceInfo.value.toFixed(3)}/{priceInfo.unit}</p></div> : <div className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-center"><p className="text-xs text-gray-500">-</p></div>}
+                              </div>
+                            </div>
+                            <div className="grid md:grid-cols-6 gap-3 mt-3">
+                              <div className="md:col-span-2"></div>
+                              <div><label className="block text-xs text-gray-400 mb-1">On Plate</label><input type="number" value={ing.plateAmount} onChange={(e) => updateIngredient(ing.id, 'plateAmount', e.target.value)} placeholder="8" className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm" /></div>
+                              <div><label className="block text-xs text-gray-400 mb-1">Unit</label>
+                                <select value={ing.plateUnit} onChange={(e) => updateIngredient(ing.id, 'plateUnit', e.target.value)} className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white text-sm">
+                                  {(ing.soldBy === 'each' || ing.soldBy === 'dozen' || ing.soldBy === 'case') ? <><option value="each">each</option><option value="1/2 each">1/2 each</option><option value="1/4 each">1/4 each</option></> : <><option value="oz">oz</option><option value="g">g</option><option value="lb">lb</option></>}
+                                </select>
+                              </div>
+                              <div className="flex items-end">{cost > 0 && <div className="w-full p-2 bg-[#10b981]/20 border border-[#10b981]/50 rounded-lg text-center"><p className="text-sm font-bold text-[#10b981]">${cost.toFixed(2)}</p></div>}</div>
+                              <div className="flex items-end">{ingredients.length > 1 && <button onClick={() => removeIngredient(ing.id)} className="text-red-400 hover:text-red-300 text-xs">Remove</button>}</div>
+                            </div>
+                          </div>
+                        )
+                      })}
+                      <button onClick={addIngredient} className="w-full py-3 border-2 border-dashed border-[#10b981]/50 rounded-lg text-[#10b981] hover:bg-[#10b981]/10 transition-colors flex items-center justify-center gap-2"><Plus className="w-5 h-5" />Add Ingredient</button>
+                    </div>
+                  </div>
+                )}
+                {totalPlateCost > 0 && (
+                  <div className="grid md:grid-cols-4 gap-4 p-4 bg-black/20 rounded-lg">
+                    <div className="text-center"><p className="text-xs text-gray-400">Plate Cost</p><p className="text-2xl font-bold text-[#10b981]">${totalPlateCost.toFixed(2)}</p></div>
+                    <div className="text-center"><p className="text-xs text-gray-400">Food Cost %</p><p className={`text-2xl font-bold ${foodStatus.color}`}>{foodCostPercent.toFixed(1)}%</p></div>
+                    <div className="text-center border-l border-white/10"><p className="text-xs text-gray-400">Price @ 30%</p><p className="text-2xl font-bold text-white">${suggestedPrice30.toFixed(2)}</p></div>
+                    <div className="text-center"><p className="text-xs text-gray-400">Price @ 28%</p><p className="text-2xl font-bold text-white">${suggestedPrice28.toFixed(2)}</p></div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="backdrop-blur-xl bg-white/5 border border-[#06b6d4]/30 rounded-2xl mb-6 overflow-hidden">
+            <button onClick={() => toggleSection('labor')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3"><Users className="w-6 h-6 text-[#06b6d4]" /><h2 className="text-xl font-bold">Labor Cost</h2>
+                {laborCostPercent > 0 && <span className={`ml-2 px-3 py-1 rounded-full text-sm font-bold ${laborStatus.color} bg-black/30`}>{laborCostPercent.toFixed(1)}% {laborStatus.label}</span>}
+              </div>
+              <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections.labor ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedSections.labor && (
+              <div className="px-6 pb-6 border-t border-white/10">
+                <div className="grid md:grid-cols-3 gap-4 pt-6">
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Gross Wages (Weekly $)</label><input type="number" value={grossWages} onChange={(e) => setGrossWages(e.target.value)} placeholder="5000" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white transition-colors" /></div>
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Average Tip % on Sales</label><div className="relative"><input type="number" value={tipPercent} onChange={(e) => setTipPercent(e.target.value)} placeholder="20" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white transition-colors" /><span className="absolute right-4 top-3.5 text-gray-500">%</span></div>{sales > 0 && tipsAmount > 0 && <p className="text-xs text-[#06b6d4] mt-1">{tipPercent}% = ${tipsAmount.toLocaleString(undefined, {maximumFractionDigits: 0})}/week</p>}</div>
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Payroll Tax Rate (%)</label><div className="relative"><input type="number" value={payrollTaxRate} onChange={(e) => setPayrollTaxRate(e.target.value)} placeholder="11" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white transition-colors" /><span className="absolute right-4 top-3.5 text-gray-500">%</span></div></div>
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Benefits and Other ($)</label><input type="number" value={benefits} onChange={(e) => setBenefits(e.target.value)} placeholder="500" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white transition-colors" /></div>
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Payroll Processing ($)</label><input type="number" value={payrollProcessing} onChange={(e) => setPayrollProcessing(e.target.value)} placeholder="100" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white transition-colors" /></div>
+                  <div className="flex items-end"><div className="w-full p-4 bg-[#06b6d4]/10 border border-[#06b6d4]/30 rounded-lg text-center"><p className="text-xs text-gray-400">Total Labor Cost (Weekly)</p><p className="text-2xl font-bold text-[#06b6d4]">${totalLaborCost.toLocaleString(undefined, {maximumFractionDigits: 0})}</p></div></div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="backdrop-blur-xl bg-white/5 border border-[#a855f7]/30 rounded-2xl mb-6 overflow-hidden">
+            <button onClick={() => toggleSection('prime')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3"><PieChart className="w-6 h-6 text-[#a855f7]" /><h2 className="text-xl font-bold">Prime Cost</h2>
+                {primeCostPercent > 0 && <span className={`ml-2 px-3 py-1 rounded-full text-sm font-bold ${primeStatus.color} bg-black/30`}>{primeCostPercent.toFixed(1)}% {primeStatus.label}</span>}
+              </div>
+              <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections.prime ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedSections.prime && (
+              <div className="px-6 pb-6 border-t border-white/10 pt-6">
+                <div className="p-6 bg-black/20 rounded-lg">
+                  <div className="flex items-center justify-center gap-4 text-center flex-wrap">
+                    <div><p className="text-sm text-gray-400">Food Cost</p><p className={`text-3xl font-bold ${foodStatus.color}`}>{estimatedFoodCostPercent.toFixed(1)}%</p></div>
+                    <span className="text-3xl text-gray-500">+</span>
+                    <div><p className="text-sm text-gray-400">Labor Cost</p><p className={`text-3xl font-bold ${laborStatus.color}`}>{laborCostPercent.toFixed(1)}%</p></div>
+                    <span className="text-3xl text-gray-500">=</span>
+                    <div><p className="text-sm text-gray-400">Prime Cost</p><p className={`text-4xl font-bold ${primeStatus.color}`}>{primeCostPercent.toFixed(1)}%</p></div>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <p className="text-sm text-gray-400">Target: <span className="text-[#10b981] font-semibold">under 60%</span> | 
+                      {primeCostPercent > 0 && primeCostPercent < 60 ? <span className="text-[#10b981]"> You are {(60 - primeCostPercent).toFixed(1)}% under target!</span> : primeCostPercent >= 60 ? <span className="text-[#ef4444]"> You are {(primeCostPercent - 60).toFixed(1)}% over target</span> : <span className="text-gray-500"> Enter data above</span>}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="backdrop-blur-xl bg-white/5 border border-[#f59e0b]/30 rounded-2xl mb-6 overflow-hidden">
+            <button onClick={() => toggleSection('breakeven')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3"><Target className="w-6 h-6 text-[#f59e0b]" /><h2 className="text-xl font-bold">Break-Even and Profit</h2></div>
+              <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections.breakeven ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedSections.breakeven && (
+              <div className="px-6 pb-6 border-t border-white/10">
+                <div className="pt-6 mb-6">
+                  <h3 className="text-lg font-semibold text-gray-300 mb-4 flex items-center gap-2"><DollarSign className="w-5 h-5 text-[#f59e0b]" />Fixed Costs (Monthly)</h3>
+                  <div className="grid md:grid-cols-4 gap-4">
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Rent ($)</label><input type="number" value={rent} onChange={(e) => setRent(e.target.value)} placeholder="5000" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Utilities ($)</label><input type="number" value={utilities} onChange={(e) => setUtilities(e.target.value)} placeholder="1500" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Insurance ($)</label><input type="number" value={insurance} onChange={(e) => setInsurance(e.target.value)} placeholder="800" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Loan Payments ($)</label><input type="number" value={loanPayments} onChange={(e) => setLoanPayments(e.target.value)} placeholder="2000" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">CC Debt Payments ($)</label><input type="number" value={ccPayments} onChange={(e) => setCcPayments(e.target.value)} placeholder="500" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">CC Processing Fee (%)</label><div className="relative"><input type="number" value={ccFeePercent} onChange={(e) => setCcFeePercent(e.target.value)} placeholder="2.9" step="0.1" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /><span className="absolute right-4 top-3.5 text-gray-500">%</span></div></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">% Sales on CC</label><div className="relative"><input type="number" value={ccSalesPercent} onChange={(e) => setCcSalesPercent(e.target.value)} placeholder="80" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /><span className="absolute right-4 top-3.5 text-gray-500">%</span></div>{ccProcessingFees > 0 && <p className="text-xs text-[#f59e0b] mt-1">= ${ccProcessingFees.toLocaleString(undefined, {maximumFractionDigits: 0})}/mo in CC fees</p>}</div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">POS System ($)</label><input type="number" value={posSystem} onChange={(e) => setPosSystem(e.target.value)} placeholder="200" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-300 mb-4 flex items-center gap-2"><Music className="w-5 h-5 text-[#f59e0b]" />Variable Costs (Weekly)</h3>
+                  <div className="grid md:grid-cols-4 gap-4">
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Entertainment ($)</label><input type="number" value={entertainment} onChange={(e) => setEntertainment(e.target.value)} placeholder="300" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Trivia ($)</label><input type="number" value={trivia} onChange={(e) => setTrivia(e.target.value)} placeholder="150" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Linens ($)</label><input type="number" value={linens} onChange={(e) => setLinens(e.target.value)} placeholder="200" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Advertising ($)</label><input type="number" value={advertising} onChange={(e) => setAdvertising(e.target.value)} placeholder="250" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-300 mb-4 flex items-center gap-2"><Calendar className="w-5 h-5 text-[#f59e0b]" />Periodic Costs</h3>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Grease Trap (Quarterly $)</label><input type="number" value={greaseTrap} onChange={(e) => setGreaseTrap(e.target.value)} placeholder="400" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Hood Cleaning (Quarterly $)</label><input type="number" value={hoodCleaning} onChange={(e) => setHoodCleaning(e.target.value)} placeholder="600" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                    <div><label className="block text-sm font-semibold text-gray-300 mb-2">Alcohol License (Yearly $)</label><input type="number" value={alcoholLicense} onChange={(e) => setAlcoholLicense(e.target.value)} placeholder="1200" className="w-full px-4 py-3 bg-black/40 border-2 border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white transition-colors" /></div>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="p-6 bg-black/20 rounded-lg">
+                    <h4 className="text-lg font-bold text-[#f59e0b] mb-4">Break-Even</h4>
+                    <div className="space-y-3">
+                      <div className="flex justify-between"><span className="text-gray-400">Monthly Operating Costs:</span><span className="font-bold">${Math.round(totalMonthlyOperatingCosts).toLocaleString()}</span></div>
+                      <div className="flex justify-between"><span className="text-gray-400">Break-Even (Monthly):</span><span className="font-bold text-white">${Math.round(breakEvenMonthly).toLocaleString()}</span></div>
+                      <div className="flex justify-between"><span className="text-gray-400">Break-Even (Weekly):</span><span className="font-bold text-white">${Math.round(breakEvenWeekly).toLocaleString()}</span></div>
+                      <div className="flex justify-between border-t border-white/10 pt-3"><span className="text-gray-400">Covers/Week to Break Even:</span><span className="font-bold text-[#f59e0b]">{coversToBreakEvenWeekly > 0 ? coversToBreakEvenWeekly.toLocaleString() : '-'}</span></div>
+                    </div>
+                  </div>
+                  <div className="p-6 bg-black/20 rounded-lg">
+                    <h4 className="text-lg font-bold text-[#10b981] mb-4">Profit</h4>
+                    <div className="space-y-3">
+                      <div className="flex justify-between"><span className="text-gray-400">Weekly Profit:</span><span className={`font-bold ${weeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>${Math.round(weeklyProfit).toLocaleString()}</span></div>
+                      <div className="flex justify-between"><span className="text-gray-400">Monthly Profit:</span><span className={`font-bold ${monthlyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>${Math.round(monthlyProfit).toLocaleString()}</span></div>
+                      <div className="flex justify-between border-t border-white/10 pt-3"><span className="text-gray-400">Annual Profit:</span><span className={`font-bold text-xl ${annualProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>${Math.round(annualProfit).toLocaleString()}</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="backdrop-blur-xl bg-gradient-to-r from-[#ef4444]/10 to-[#f97316]/10 border-2 border-[#ef4444]/50 rounded-2xl mb-6 overflow-hidden">
+            <button onClick={() => toggleSection('thirdparty')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3"><Smartphone className="w-6 h-6 text-[#ef4444]" /><h2 className="text-xl font-bold">Third Party Reality Check</h2><AlertTriangle className="w-5 h-5 text-[#fbbf24]" /></div>
+              <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections.thirdparty ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedSections.thirdparty && (
+              <div className="px-6 pb-6 border-t border-white/10">
+                <div className="mt-6 p-4 bg-[#10b981]/20 border border-[#10b981]/50 rounded-lg">
+                  <p className="text-sm text-white flex items-start gap-2"><TrendingUp className="w-5 h-5 text-[#10b981] flex-shrink-0 mt-0.5" /><span><strong>Delivery can boost your bottom line!</strong> Since labor and overhead are largely fixed, third-party orders add incremental profit. The key is understanding your TRUE margins after fees.</span></p>
+                </div>
+                <div className="grid md:grid-cols-4 gap-4 mt-6">
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Third Party Sales (Weekly $)</label><input type="number" value={thirdPartySales} onChange={(e) => setThirdPartySales(e.target.value)} placeholder="2000" className="w-full px-4 py-3 bg-black/40 border-2 border-[#ef4444]/30 rounded-lg focus:border-[#ef4444] focus:outline-none text-white transition-colors" /></div>
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Third Party Fee (%)</label><div className="relative"><input type="number" value={thirdPartyFeePercent} onChange={(e) => setThirdPartyFeePercent(e.target.value)} placeholder="30" className="w-full px-4 py-3 bg-black/40 border-2 border-[#ef4444]/30 rounded-lg focus:border-[#ef4444] focus:outline-none text-white transition-colors" /><span className="absolute right-4 top-3.5 text-gray-500">%</span></div><p className="text-xs text-gray-500 mt-1">DoorDash/UberEats typically 15-30%</p></div>
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Your Price Increase (%)</label><div className="relative"><input type="number" value={thirdPartyPriceIncrease} onChange={(e) => setThirdPartyPriceIncrease(e.target.value)} placeholder="20" className="w-full px-4 py-3 bg-black/40 border-2 border-[#ef4444]/30 rounded-lg focus:border-[#ef4444] focus:outline-none text-white transition-colors" /><span className="absolute right-4 top-3.5 text-gray-500">%</span></div><p className="text-xs text-gray-500 mt-1">How much you mark up delivery prices</p></div>
+                  <div><label className="block text-sm font-semibold text-gray-300 mb-2">Promo/Deal Cost (%)</label><div className="relative"><input type="number" value={thirdPartyPromoPercent} onChange={(e) => setThirdPartyPromoPercent(e.target.value)} placeholder="15" className="w-full px-4 py-3 bg-black/40 border-2 border-[#ef4444]/30 rounded-lg focus:border-[#ef4444] focus:outline-none text-white transition-colors" /><span className="absolute right-4 top-3.5 text-gray-500">%</span></div><p className="text-xs text-gray-500 mt-1">BOGO, $5 off, free delivery costs</p></div>
+                </div>
+                {thirdPartySalesWeekly > 0 && (
+                  <div className="mt-6 grid md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg text-center"><p className="text-sm text-gray-400 mb-2">In-House Profit Margin</p><p className="text-3xl font-bold text-[#10b981]">{inHouseProfitMarginPercent.toFixed(1)}%</p><p className="text-xs text-gray-500 mt-1">What you keep from dine-in/pickup</p></div>
+                    <div className="p-4 bg-[#ef4444]/10 border border-[#ef4444]/30 rounded-lg text-center"><p className="text-sm text-gray-400 mb-2">Third Party Profit Margin</p><p className="text-3xl font-bold text-[#ef4444]">{tpProfitMarginPercent.toFixed(1)}%</p><p className="text-xs text-gray-500 mt-1">What you keep from DoorDash/UberEats</p></div>
+                  </div>
+                )}
+                <div className="mt-6 p-4 bg-[#f59e0b]/10 border border-[#f59e0b]/30 rounded-lg">
+                  <p className="text-sm text-gray-300"><strong className="text-[#f59e0b]">Want the full breakdown?</strong> Use our dedicated <Link href="/free-tools/third-party-fees" className="text-[#f59e0b] underline hover:text-[#fbbf24]">Third Party Fees Calculator</Link> for a complete comparison of DoorDash vs your own ordering system vs Indy Eats.</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="backdrop-blur-xl bg-gradient-to-r from-[#f59e0b]/10 to-[#10b981]/10 border border-[#f59e0b]/30 rounded-2xl mb-6 overflow-hidden">
+            <button onClick={() => toggleSection('whatif')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3"><Lightbulb className="w-6 h-6 text-[#fbbf24]" /><h2 className="text-xl font-bold">What-If Scenarios</h2>{hasActiveWhatIf && <span className="ml-2 px-3 py-1 rounded-full text-sm font-bold text-[#10b981] bg-[#10b981]/20">Active</span>}</div>
+              <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections.whatif ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedSections.whatif && (
+              <div className="px-6 pb-6 border-t border-white/10">
+                <div className="pt-6 mb-6">
+                  <div className="p-4 mb-6 bg-[#f59e0b]/10 border border-[#f59e0b]/30 rounded-lg">
+                    <p className="text-sm text-gray-300"><strong>How it works:</strong> Enter values below and watch the top dashboard update in real-time with your projected numbers.</p>
+                  </div>
+                  
+                  <div className="p-6 bg-black/20 rounded-lg border-2 border-[#10b981]/30 mb-6">
+                    <h4 className="text-lg font-bold text-[#10b981] mb-4">Reduce Food Cost</h4>
+                    <p className="text-sm text-gray-400 mb-4">Enter either value - the other will auto-calculate. Current weekly food spend: <strong className="text-white">${Math.round(currentWeeklyFoodSpend).toLocaleString()}</strong> ({estimatedFoodCostPercent.toFixed(1)}% of ${sales.toLocaleString()})</p>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Food Cost by ___% of sales</label>
+                        <p className="text-xs text-gray-500 mb-3">Example: Reduce from 30% to 28% = enter 2</p>
+                        <div className="flex gap-2">
+                          <input type="number" value={whatIfFoodCostPercentReduction} onChange={(e) => { setActiveWhatIfInput('percent'); setWhatIfFoodCostPercentReduction(e.target.value) }} onFocus={() => setActiveWhatIfInput('percent')} placeholder="2" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" />
+                          <span className="py-2 text-gray-400">% points</span>
+                        </div>
+                        {whatIfFoodPctReduction > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">Weekly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent).toLocaleString()}</strong></p><p className="text-sm text-gray-300">Yearly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent * 52).toLocaleString()}</strong></p></div>}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">OR Reduce Food Spend by $___/week</label>
+                        <p className="text-xs text-gray-500 mb-3">Direct dollar savings on food purchases</p>
+                        <div className="flex gap-2">
+                          <span className="py-2 text-gray-400">$</span>
+                          <input type="number" value={whatIfFoodSpendReduction} onChange={(e) => { setActiveWhatIfInput('dollar'); setWhatIfFoodSpendReduction(e.target.value) }} onFocus={() => setActiveWhatIfInput('dollar')} placeholder="500" className="w-28 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" />
+                          <span className="py-2 text-gray-400">/week</span>
+                        </div>
+                        {whatIfFoodSpendDollarReduction > 0 && currentWeeklyFoodSpend > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">That is <strong className="text-[#10b981]">{linkedFoodPercentFromSpend.toFixed(1)}%</strong> of your food spend</p><p className="text-sm text-gray-300">Yearly savings: <strong className="text-[#10b981]">+${Math.round(whatIfFoodSpendDollarReduction * 52).toLocaleString()}</strong></p></div>}
+                      </div>
+                    </div>
+                    <div className="mt-4 p-3 bg-[#fbbf24]/10 border border-[#fbbf24]/30 rounded-lg">
+                      <p className="text-xs text-gray-300"><strong className="text-[#fbbf24]">Vendor Promises:</strong> When vendors promise 10% savings they mean 10% off your spend - NOT reducing your food cost percentage by 10 points. A 10% spend reduction on ${Math.round(currentWeeklyFoodSpend).toLocaleString()}/week = ${Math.round(currentWeeklyFoodSpend * 0.1).toLocaleString()}/week saved.</p>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">Raise Prices by ___%</label>
+                      <p className="text-xs text-gray-500 mb-3">Menu price increase across the board</p>
+                      <div className="flex gap-2 mb-4"><input type="number" value={priceIncreasePercent} onChange={(e) => setPriceIncreasePercent(e.target.value)} placeholder="5" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">%</span></div>
+                      {whatIfPriceIncrease > 0 && <div className="space-y-1 text-sm"><p className="text-gray-400">Weekly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly).toLocaleString()}</span></p><p className="text-gray-400">Yearly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly * 52).toLocaleString()}</span></p></div>}
+                    </div>
+                    <div className="p-4 bg-black/20 rounded-lg border border-white/10">
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Labor by ___%</label>
+                      <p className="text-xs text-gray-500 mb-3">Scheduling efficiency, cross-training</p>
+                      <div className="flex gap-2 mb-4"><input type="number" value={laborReductionPercent} onChange={(e) => setLaborReductionPercent(e.target.value)} placeholder="2" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">%</span></div>
+                      {whatIfLaborReduction > 0 && <div className="space-y-1 text-sm"><p className="text-gray-400">Weekly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly).toLocaleString()}</span></p><p className="text-gray-400">Yearly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly * 52).toLocaleString()}</span></p></div>}
+                    </div>
+                  </div>
+
+                  {sales > 0 && hasActiveWhatIf && (
+                    <div className="mt-6 p-6 bg-gradient-to-r from-[#10b981]/20 to-[#06b6d4]/20 border-2 border-[#10b981] rounded-xl">
+                      <h4 className="text-xl font-bold text-[#10b981] mb-4 text-center">TOTAL PROJECTED IMPACT</h4>
+                      <div className="grid md:grid-cols-3 gap-4 text-center">
+                        <div className="p-4 bg-black/30 rounded-lg"><p className="text-sm text-gray-400">Weekly</p><p className="text-3xl font-bold text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p></div>
+                        <div className="p-4 bg-black/30 rounded-lg"><p className="text-sm text-gray-400">Monthly</p><p className="text-3xl font-bold text-[#10b981]">+${Math.round(grandTotalSavingsMonthly).toLocaleString()}</p></div>
+                        <div className="p-4 bg-black/30 rounded-lg border-2 border-[#10b981]"><p className="text-sm text-gray-400">YEARLY</p><p className="text-4xl font-bold text-[#10b981]">+${Math.round(grandTotalSavingsYearly).toLocaleString()}</p></div>
+                      </div>
+                      <p className="text-center text-sm text-gray-400 mt-4">New projected weekly profit: <strong className="text-[#10b981]">${Math.round(whatIfAdjustedWeeklyProfit).toLocaleString()}</strong> (was ${Math.round(weeklyProfit).toLocaleString()})</p>
                     </div>
                   )}
 
-                  {/* Clear What-If Button */}
                   {hasActiveWhatIf && (
                     <div className="mt-4 text-center">
-                      <button 
-                        onClick={() => {
-                          setWhatIfFoodCostPercentReduction('')
-                          setWhatIfFoodSpendReduction('')
-                          setPriceIncreasePercent('')
-                          setLaborReductionPercent('')
-                          setActiveWhatIfInput(null)
-                        }}
-                        className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-gray-300 text-sm transition-colors"
-                      >
-                        Clear All What-If Values
-                      </button>
+                      <button onClick={() => { setWhatIfFoodCostPercentReduction(''); setWhatIfFoodSpendReduction(''); setPriceIncreasePercent(''); setLaborReductionPercent(''); setActiveWhatIfInput(null) }} className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-gray-300 text-sm transition-colors">Clear All What-If Values</button>
                     </div>
                   )}
                 </div>
@@ -885,6 +1502,20 @@ export default function MegaCalculator() {
             )}
           </div>
 
+          <div className="backdrop-blur-xl bg-gradient-to-r from-[#f59e0b]/20 to-[#fbbf24]/20 border-2 border-[#f59e0b] rounded-3xl p-8 text-center">
+            <h2 className="text-2xl font-bold mb-4">Want This <span className="text-[#f59e0b]">Automated Daily</span>?</h2>
+            <p className="text-lg text-gray-300 mb-6">OwnerClone connects to your POS and calculates all of this automatically - food cost, labor, prime cost, and profit - updated in real-time.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/pricing" className="bg-[#f59e0b] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#fbbf24] transition-colors">Join Early Access</Link>
+              <Link href="/demo" className="border-2 border-[#f59e0b] text-[#f59e0b] px-8 py-3 rounded-lg font-bold hover:bg-[#f59e0b]/10 transition-colors">See Demo</Link>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  )
+}
           {/* CTA */}
           <div className="backdrop-blur-xl bg-gradient-to-r from-[#f59e0b]/20 to-[#fbbf24]/20 border-2 border-[#f59e0b] rounded-3xl p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">Want This <span className="text-[#f59e0b]">Automated Daily</span>?</h2>
