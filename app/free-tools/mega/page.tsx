@@ -67,7 +67,7 @@ export default function MegaCalculator() {
   // ============================================
   // CONVERSION RATES
   // ============================================
-  const conversions = {
+  const conversions: Record<string, number> = {
     g: 1,
     kg: 1000,
     oz: 28.3495,
