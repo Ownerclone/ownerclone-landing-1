@@ -1,76 +1,87 @@
 'use client'
 
 import Link from 'next/link'
+import { 
+  UtensilsCrossed, 
+  Users, 
+  TrendingUp, 
+  Scale, 
+  Calculator, 
+  Rocket, 
+  Star, 
+  Smartphone,
+  Beer
+} from 'lucide-react'
 
 export default function FreeToolsHub() {
   const calculators = [
     {
       name: 'Per Plate Food Costing',
       description: 'Build recipes ingredient-by-ingredient or quick-check a known cost. See exact plate costs and optimal pricing.',
-      icon: '🍽️',
+      icon: UtensilsCrossed,
       color: 'emerald',
       href: '/free-tools/per-plate-food-costing'
     },
     {
       name: 'Labor Cost Calculator',
       description: 'Calculate TRUE labor costs including taxes on tips, benefits, and processing fees. Get accurate labor %.',
-      icon: '👥',
+      icon: Users,
       color: 'cyan',
       href: '/free-tools/labor-cost'
     },
     {
       name: 'Prime Cost Calculator',
       description: 'Track your most important profitability metric: Food + Labor. Target is 60% or less.',
-      icon: '📊',
+      icon: TrendingUp,
       color: 'purple',
       href: '/free-tools/prime-cost'
     },
     {
       name: 'Break-Even Calculator',
       description: 'Find out exactly how much revenue you need to cover all costs and start making profit.',
-      icon: '🎯',
+      icon: Scale,
       color: 'green',
       href: '/free-tools/break-even'
     },
     {
       name: 'Menu Pricing Calculator',
       description: 'Price your menu items for maximum profit using cost-plus, competitive, and value-based strategies.',
-      icon: '💵',
+      icon: Calculator,
       color: 'violet',
       href: '/free-tools/menu-pricing'
     },
     {
       name: 'Startup Cost Calculator',
       description: 'Estimate total costs to open your restaurant based on size, location, and concept type.',
-      icon: '🏗️',
+      icon: Rocket,
       color: 'orange',
       href: '/free-tools/startup-cost'
     },
     {
       name: 'Google Review Calculator',
       description: 'See how negative reviews impact your rating and plan your recovery strategy to reach your goal.',
-      icon: '⭐',
+      icon: Star,
       color: 'pink',
       href: '/free-tools/google-review'
     },
     {
       name: 'Third Party Fees Calculator',
       description: 'Calculate the TRUE cost of DoorDash, Uber Eats, and GrubHub. See your real profit after all fees.',
-      icon: '📱',
+      icon: Smartphone,
       color: 'red',
       href: '/free-tools/third-party-fees'
     },
     {
       name: 'Draft Beer Cost Calculator',
       description: 'Calculate pour cost per pint, profit per keg, and see how foam waste impacts your bottom line.',
-      icon: '🍺',
+      icon: Beer,
       color: 'gold',
       href: '/free-tools/beer-cost'
     }
   ]
 
-  const getColorClasses = (color) => {
-    const colors = {
+  const getColorClasses = (color: string) => {
+    const colors: Record<string, string> = {
       emerald: 'border-[#10b981]/30 hover:border-[#10b981] hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]',
       cyan: 'border-[#06b6d4]/30 hover:border-[#06b6d4] hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]',
       purple: 'border-[#a855f7]/30 hover:border-[#a855f7] hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]',
@@ -84,8 +95,8 @@ export default function FreeToolsHub() {
     return colors[color] || colors.cyan
   }
 
-  const getAccentColor = (color) => {
-    const colors = {
+  const getIconColor = (color: string) => {
+    const colors: Record<string, string> = {
       emerald: 'text-[#10b981]',
       cyan: 'text-[#06b6d4]',
       purple: 'text-[#a855f7]',
@@ -122,7 +133,9 @@ export default function FreeToolsHub() {
               <span className="text-xs font-bold text-[#f59e0b] bg-[#f59e0b]/20 px-3 py-1 rounded-full">✨ NEW</span>
             </div>
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-5xl">🚀</span>
+              <div className="p-3 bg-[#f59e0b]/20 rounded-xl">
+                <Rocket className="w-10 h-10 text-[#f59e0b]" />
+              </div>
               <div>
                 <h2 className="text-3xl md:text-4xl font-black group-hover:text-[#f59e0b] transition">
                   MEGA Calculator
@@ -152,29 +165,34 @@ export default function FreeToolsHub() {
           </div>
         </div>
 
-        {/* Calculator Grid */}
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {calculators.map((calc) => (
-            <Link
-              key={calc.href}
-              href={calc.href}
-              className={`backdrop-blur-xl bg-white/5 border ${getColorClasses(calc.color)} rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group`}
-            >
-              <div className="text-4xl mb-3">{calc.icon}</div>
-              <h3 className={`text-xl font-bold mb-2 group-hover:${getAccentColor(calc.color)} transition`}>
-                {calc.name}
-              </h3>
-              <p className="text-gray-400 text-sm mb-4">
-                {calc.description}
-              </p>
-              <div className={`flex items-center ${getAccentColor(calc.color)} font-semibold text-sm`}>
-                <span>Try Calculator</span>
-                <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
-          ))}
+        {/* Calculator Grid - 3 columns */}
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {calculators.map((calc) => {
+            const Icon = calc.icon
+            return (
+              <Link
+                key={calc.href}
+                href={calc.href}
+                className={`backdrop-blur-xl bg-white/5 border ${getColorClasses(calc.color)} rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group`}
+              >
+                <div className={`inline-flex p-3 rounded-xl mb-4 bg-white/5 border border-white/10 group-hover:border-current ${getIconColor(calc.color)}`}>
+                  <Icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-[#38bdf8] transition">
+                  {calc.name}
+                </h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  {calc.description}
+                </p>
+                <div className={`flex items-center ${getIconColor(calc.color)} font-semibold text-sm`}>
+                  <span>Try Calculator</span>
+                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+            )
+          })}
         </div>
 
         {/* CTA Section */}
