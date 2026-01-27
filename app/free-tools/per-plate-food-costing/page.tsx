@@ -110,7 +110,7 @@ export default function PerPlateFoodCostingCalculator() {
     { label: '32% Food Cost', percent: 32, price: getSuggestedPrice(32) }
   ]
   const customPrice = getSuggestedPrice(parseFloat(targetFoodCost) || 30)
-  const calculateProfit = (price) => price - totalPlateCost
+  const calculateProfit = (price: number) => price - totalPlateCost
   const platesWeek = parseFloat(platesPerWeek) || 0
 
   const getFoodCostStatus = (pct: number) => {
