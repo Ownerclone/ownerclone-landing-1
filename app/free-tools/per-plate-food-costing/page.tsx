@@ -103,7 +103,7 @@ export default function PerPlateFoodCostingCalculator() {
   const totalPlateCost = quickMode ? (parseFloat(quickPlateCost) || 0) : ingredients.reduce((sum, ing) => sum + calculateIngredientCost(ing), 0)
   const currentMenuPrice = parseFloat(menuPrice) || 0
   const foodCostPercent = currentMenuPrice > 0 ? (totalPlateCost / currentMenuPrice) * 100 : 0
-  const getSuggestedPrice = (pct) => totalPlateCost > 0 ? totalPlateCost / (pct / 100) : 0
+  const getSuggestedPrice = (pct: number) => totalPlateCost > 0 ? totalPlateCost / (pct / 100) : 0
   const prices = [
     { label: '28% Food Cost', percent: 28, price: getSuggestedPrice(28) },
     { label: '30% Food Cost', percent: 30, price: getSuggestedPrice(30) },
