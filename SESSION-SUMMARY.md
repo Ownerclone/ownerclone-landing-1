@@ -2690,3 +2690,370 @@ Professional, modern, performant design
 Mobile-optimized (fixed backgrounds work on iOS)
 
 The site now has a cohesive, premium aesthetic that differentiates OwnerClone from competitors while maintaining excellent performance. 🎨✨Claude is AI and can make mistakes. Please double-check responses. Sonnet 4.5
+# OwnerClone AWS Email & Document Vault Setup
+## Complete Reference Guide - January 26, 2026
+
+---
+
+## What Was Built Tonight
+
+### 1. AWS WorkMail - Staff Email ($4/user/month)
+- **Organization:** ownerclone
+- **User:** Mateo Monti
+- **Webmail URL:** https://ownerclone.awsapps.com/mail
+- **Status:** Waiting for domain verification
+
+### 2. AWS SES - Email Receiving
+- **Rule Set:** INBOUND_MAIL
+- **Rule:** ownerclone-document-ingestion
+- **Catches:** clone@ownerclone.com (and all clone+*@ variants)
+- **Action:** Saves to S3 bucket
+
+### 3. AWS S3 - Document Vault
+- **Bucket:** ownerclone-documents
+- **Region:** us-east-1 (N. Virginia)
+- **Incoming emails stored in:** `incoming/` folder
+
+### 4. DNS Records (Added to Webador)
+All records configured and waiting for propagation.
+
+---
+
+## Tomorrow's Checklist
+
+### Step 1: Check Domain Verification
+1. Go to AWS Console → WorkMail
+2. Click **Organizations** → **ownerclone**
+3. Click **Domains**
+4. Check if ownerclone.com shows **"Verified"** ✅
+
+### Step 2: Set Default Domain (Once Verified)
+1. In Domains, select **ownerclone.com**
+2. Click **"Set as default"**
+
+### Step 3: Add Your Real Email Address
+1. Go to **Users** → Click **Mateo**
+2. Click **"Edit"** or look for email aliases section
+3. Add `mateo@ownerclone.com` as primary email
+
+### Step 4: Add Email Aliases (Free)
+Add these as aliases to your Mateo user:
+- press@ownerclone.com
+- hello@ownerclone.com
+- info@ownerclone.com
+- sales@ownerclone.com
+- support@ownerclone.com
+
+You'll receive all these in one inbox and can reply as any of them.
+
+### Step 5: Set Up Mac Mail
+See detailed instructions below.
+
+### Step 6: Set Up iPhone Mail
+See detailed instructions below.
+
+### Step 7: Test Everything
+- Send email TO mateo@ownerclone.com
+- Send email FROM mateo@ownerclone.com
+- Send email to clone+test@ownerclone.com
+- Check S3 bucket for the test email
+
+---
+
+## Mac Mail Setup
+
+### Add Account
+1. Open **Mail** app
+2. Menu: **Mail** → **Add Account**
+3. Select **Other Mail Account**
+4. Click **Continue**
+
+### Account Information
+- **Name:** Mateo Monti (or OwnerClone)
+- **Email:** mateo@ownerclone.com
+- **Password:** [your WorkMail password]
+
+### Server Settings (Manual)
+
+**Incoming Mail Server (IMAP):**
+| Setting | Value |
+|---------|-------|
+| Server | `imap.mail.us-east-1.awsapps.com` |
+| Port | `993` |
+| Security | SSL/TLS |
+| Username | `mateo@ownerclone.com` |
+| Password | [your WorkMail password] |
+
+**Outgoing Mail Server (SMTP):**
+| Setting | Value |
+|---------|-------|
+| Server | `smtp.mail.us-east-1.awsapps.com` |
+| Port | `465` |
+| Security | SSL/TLS |
+| Username | `mateo@ownerclone.com` |
+| Password | [your WorkMail password] |
+| Authentication | Password |
+
+---
+
+## iPhone Mail Setup
+
+### Add Account
+1. **Settings** → **Mail** → **Accounts**
+2. Tap **Add Account**
+3. Tap **Other**
+4. Tap **Add Mail Account**
+
+### Account Information
+- **Name:** Mateo Monti
+- **Email:** mateo@ownerclone.com
+- **Password:** [your WorkMail password]
+- **Description:** OwnerClone
+
+### Server Settings
+Tap **IMAP** (not POP)
+
+**Incoming Mail Server:**
+- Host Name: `imap.mail.us-east-1.awsapps.com`
+- User Name: `mateo@ownerclone.com`
+- Password: [your WorkMail password]
+
+**Outgoing Mail Server:**
+- Host Name: `smtp.mail.us-east-1.awsapps.com`
+- User Name: `mateo@ownerclone.com`
+- Password: [your WorkMail password]
+
+Tap **Next** → Tap **Save**
+
+---
+
+## Email Addresses Explained
+
+### Staff Email (WorkMail)
+Real mailboxes with passwords, accessible via Mail apps.
+
+| Address | Purpose | Cost |
+|---------|---------|------|
+| mateo@ownerclone.com | Your main inbox | $4/mo |
+| [future employee]@ownerclone.com | Add as needed | $4/mo each |
+
+### Alias Addresses (Free)
+Forward to your inbox, can reply-as.
+
+| Address | Purpose |
+|---------|---------|
+| press@ownerclone.com | Media inquiries |
+| hello@ownerclone.com | General contact |
+| info@ownerclone.com | Information requests |
+| sales@ownerclone.com | Sales inquiries |
+| support@ownerclone.com | Customer support |
+
+### Automated System Addresses (SES → S3)
+For restaurant document ingestion. No mailbox - goes straight to processing.
+
+| Pattern | Purpose |
+|---------|---------|
+| clone+reports-{slug}@ownerclone.com | POS daily reports |
+| clone+invoices-{slug}@ownerclone.com | Vendor invoices |
+| clone+docs-{slug}@ownerclone.com | Documents, licenses, certs |
+
+**Example for a restaurant "Bella's Italian":**
+```
+clone+reports-bellas-italian@ownerclone.com
+clone+invoices-bellas-italian@ownerclone.com
+clone+docs-bellas-italian@ownerclone.com
+```
+
+---
+
+## How the Document Vault Works
+
+### Restaurant Setup (One Time)
+1. Restaurant signs up for OwnerClone
+2. Gets unique slug: `bellas-italian-abc123`
+3. Gets email addresses:
+   - `clone+reports-bellas-italian-abc123@ownerclone.com`
+   - `clone+invoices-bellas-italian-abc123@ownerclone.com`
+
+### POS Report Flow (Automatic Daily)
+```
+4:00 AM - Toast/Square/Clover sends daily report
+    ↓
+Email arrives at clone+reports-bellas-italian@ownerclone.com
+    ↓
+SES receives email
+    ↓
+SES saves to S3: ownerclone-documents/incoming/[message-id]
+    ↓
+(Future: Lambda parses PDF, extracts data, updates database)
+    ↓
+Owner sees data in dashboard
+```
+
+### Invoice Flow (Forwarded by Owner)
+```
+Sysco sends invoice to owner's personal email
+    ↓
+Owner forwards to clone+invoices-bellas-italian@ownerclone.com
+    ↓
+SES saves to S3
+    ↓
+(Future: Lambda extracts line items, matches to vendor)
+    ↓
+Owner sees invoice in Document Vault
+```
+
+---
+
+## AWS Resources Created
+
+### WorkMail
+- **Organization ID:** m-94c61aa62ed54b549e57af312314058e
+- **Directory ID:** d-90661c3f52
+- **Region:** us-east-1
+
+### S3 Bucket
+- **Name:** ownerclone-documents
+- **Region:** us-east-1
+- **Policy:** Allows SES to write
+
+### SES
+- **Rule Set:** INBOUND_MAIL (shared with WorkMail)
+- **Rule:** ownerclone-document-ingestion
+- **Recipient:** clone@ownerclone.com
+- **Action:** Deliver to S3 bucket (ownerclone-documents, prefix: incoming/)
+
+---
+
+## DNS Records in Webador
+
+### MX Record (Email Routing)
+```
+Type: MX
+Name: (blank)
+Value: 10 inbound-smtp.us-east-1.amazonaws.com
+Priority: 10
+```
+
+### SPF Record (Send Authorization)
+```
+Type: TXT
+Name: (blank)
+Value: v=spf1 include:_spf.webador.com include:amazonses.com ~all
+```
+
+### Domain Verification
+```
+Type: TXT
+Name: _amazonses
+Value: v4HsTxDGzioBUJrrGmFLPKGCh5w2Qn9YYSQ1jkUdKHk=
+```
+
+### DKIM Records (3 CNAMEs)
+```
+CNAME 1:
+Name: ojfqpwijiw646oyh3k5tc2foee3zdjkn._domainkey
+Value: ojfqpwijiw646oyh3k5tc2foee3zdjkn.dkim.amazonses.com
+
+CNAME 2:
+Name: ffs4j6kxlbzf7mrpnknpz3sxxaizu4n4._domainkey
+Value: ffs4j6kxlbzf7mrpnknpz3sxxaizu4n4.dkim.amazonses.com
+
+CNAME 3:
+Name: 2k2a2pgbff6vcfepg7g3enf34dc5kfq2._domainkey
+Value: 2k2a2pgbff6vcfepg7g3enf34dc5kfq2.dkim.amazonses.com
+```
+
+### Autodiscover (Email Client Auto-Config)
+```
+Type: CNAME
+Name: autodiscover
+Value: autodiscover.mail.us-east-1.awsapps.com
+```
+
+---
+
+## Monthly Costs
+
+| Service | Usage | Cost |
+|---------|-------|------|
+| WorkMail | 1 user | $4.00 |
+| SES Inbound | ~1,000 emails | ~$0.10 |
+| S3 Storage | ~10 GB | ~$0.23 |
+| Lambda | (future) | ~$0.00 (free tier) |
+| **Total** | | **~$5/month** |
+
+Scales to hundreds of restaurants for under $50/month.
+
+---
+
+## Future Enhancements
+
+### Phase 2: Lambda Processing
+- Parse PDF attachments
+- Extract sales data from POS reports
+- Extract line items from invoices
+- Auto-categorize documents
+- Update database
+
+### Phase 3: Document Vault UI
+- Browse documents by restaurant
+- Filter by type, date, vendor
+- Full-text search (OCR)
+- Download originals
+- Sharing with accountants
+
+### Phase 4: AI Classification
+- Auto-detect document type
+- Extract key dates (expiration, due dates)
+- Flag anomalies
+- Connect to compliance calendar
+
+---
+
+## Troubleshooting
+
+### Domain Still Not Verified?
+- DNS can take up to 48 hours (usually much faster)
+- Double-check all records in Webador
+- Use https://dnschecker.org to verify propagation
+- Look for typos in record values
+
+### Email Not Arriving?
+- Check spam/junk folder
+- Verify MX record is correct
+- Check SES → Email receiving → rule is enabled
+- Check S3 bucket for incoming emails
+
+### Can't Connect Mail App?
+- Double-check server addresses
+- Ensure port numbers are correct
+- Verify SSL/TLS is enabled
+- Try username with full email address
+
+### S3 Not Receiving Emails?
+- Check SES rule is in position 1 (before WorkMail rule)
+- Verify bucket policy allows SES
+- Check CloudWatch logs for errors
+
+---
+
+## Important Links
+
+- **AWS Console:** https://console.aws.amazon.com
+- **WorkMail Webmail:** https://ownerclone.awsapps.com/mail
+- **Webador DNS:** https://webador.com/v2/website/7260158/dns/ownerclone.com
+- **S3 Bucket:** https://s3.console.aws.amazon.com/s3/buckets/ownerclone-documents
+
+---
+
+## Support Contacts
+
+- **AWS Support:** Via AWS Console
+- **Webador Support:** Via Webador dashboard
+- **DNS Propagation Check:** https://dnschecker.org
+
+---
+
+*Document created: January 26, 2026*
+*Setup completed by: Claude + Matt*
