@@ -287,7 +287,26 @@ export default function MegaCalculator() {
        (totalLaborCost * inHouseSalesWeekly / (sales || 1)) - 
        ((totalMonthlyOperatingCosts / 4.33) * inHouseSalesWeekly / (sales || 1))) / inHouseSalesWeekly) * 100 
     : 0
-  const blendedProfitMarginPercent = sales > 0 ? (weeklyProfit / sales) * 100 : 0
+  
+  // Calculate delivery margins for blended calculation
+  const ddLaborForBlend = selectedLaborScenario === 'best' ? 0 
+    : selectedLaborScenario === 'worst' ? laborCostPercent 
+    : laborCostPercent * tpLaborRate
+  const ddOverheadForBlend = overheadPercent * (ddLaborForBlend > 0 && laborCostPercent > 0 ? ddLaborForBlend / laborCostPercent : 0)
+  const ddMarginForBlend = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLaborForBlend - ddOverheadForBlend - estimatedFoodCostPercent
+  
+  const webMarkupForBlend = parseFloat(websiteMarkupPercent) || 0
+  const webMarginForBlend = webMarkupForBlend - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+  
+  const indyMarkupForBlend = parseFloat(indyMarkupPercent) || 0
+  const indyMarginForBlend = indyMarkupForBlend - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+  
+  const bestDeliveryMargin = Math.max(ddMarginForBlend, webMarginForBlend, indyMarginForBlend)
+  
+  // Blended margin: weighted average of in-house and best delivery margin
+  const blendedProfitMarginPercent = sales > 0 && thirdPartySalesWeekly > 0
+    ? ((inHouseProfitMarginPercent * (inHouseSalesWeekly / sales)) + (bestDeliveryMargin * (thirdPartySalesWeekly / sales)))
+    : inHouseProfitMarginPercent
   const marginDropPercent = inHouseProfitMarginPercent - blendedProfitMarginPercent
   
   // What-If Calculations
@@ -432,27 +451,35 @@ export default function MegaCalculator() {
                 {thirdPartySalesWeekly > 0 ? (
                   <div className="space-y-0">
                     {(() => {
-                      // Calculate delivery margins for each channel
+                      // Calculate profit margins for each channel (what you keep / order value)
+                      const orderBase = 25
+                      
                       const ddLabor = ddSelectedLaborPercent
                       const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
-                      const ddMargin = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
+                      const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
+                      const ddYouKeep = orderBase * (1 + ddNetImpact / 100)
+                      const ddProfitMargin = (ddYouKeep / orderBase) * 100
                       
                       const webMarkup = parseFloat(websiteMarkupPercent) || 0
-                      const webMargin = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const webYouKeep = orderBase * (1 + webNetImpact / 100)
+                      const webProfitMargin = (webYouKeep / orderBase) * 100
                       
                       const indyMarkup = parseFloat(indyMarkupPercent) || 0
-                      const indyMargin = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const indyNetImpact = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const indyYouKeep = orderBase * (1 + indyNetImpact / 100)
+                      const indyProfitMargin = (indyYouKeep / orderBase) * 100
                       
                       return (
                         <>
-                          <p className={`text-[10px] md:text-xs font-bold ${ddMargin >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                            DD: {ddMargin.toFixed(0)}%
+                          <p className={`text-[10px] md:text-xs font-bold ${ddProfitMargin >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                            DoorDash: {ddProfitMargin.toFixed(0)}%
                           </p>
-                          <p className={`text-[10px] md:text-xs font-bold ${webMargin >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
-                            Web: {webMargin.toFixed(0)}%
+                          <p className={`text-[10px] md:text-xs font-bold ${webProfitMargin >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                            Website: {webProfitMargin.toFixed(0)}%
                           </p>
-                          <p className={`text-[10px] md:text-xs font-bold ${indyMargin >= 0 ? 'text-[#06b6d4]' : 'text-[#ef4444]'}`}>
-                            Indy: {indyMargin.toFixed(0)}%
+                          <p className={`text-[10px] md:text-xs font-bold ${indyProfitMargin >= 0 ? 'text-[#06b6d4]' : 'text-[#ef4444]'}`}>
+                            IndyEats: {indyProfitMargin.toFixed(0)}%
                           </p>
                         </>
                       )
@@ -465,22 +492,29 @@ export default function MegaCalculator() {
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Blended</p>
                 {(() => {
-                  // Calculate blended margin: (in-house sales × in-house margin + 3P sales × best 3P margin) / total sales
+                  // Calculate blended margin using profit margins (not net impact)
+                  const orderBase = 25
                   let blendedMargin = inHouseProfitMarginPercent
                   
                   if (thirdPartySalesWeekly > 0 && sales > 0) {
-                    // Get best 3P margin
+                    // Get profit margins for each delivery channel
                     const ddLabor = ddSelectedLaborPercent
                     const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
-                    const ddMargin = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
+                    const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
+                    const ddYouKeep = orderBase * (1 + ddNetImpact / 100)
+                    const ddProfitMargin = (ddYouKeep / orderBase) * 100
                     
                     const webMarkup = parseFloat(websiteMarkupPercent) || 0
-                    const webMargin = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const webYouKeep = orderBase * (1 + webNetImpact / 100)
+                    const webProfitMargin = (webYouKeep / orderBase) * 100
                     
                     const indyMarkup = parseFloat(indyMarkupPercent) || 0
-                    const indyMargin = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const indyNetImpact = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const indyYouKeep = orderBase * (1 + indyNetImpact / 100)
+                    const indyProfitMargin = (indyYouKeep / orderBase) * 100
                     
-                    const bestDeliveryMargin = Math.max(ddMargin, webMargin, indyMargin)
+                    const bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
                     
                     // Weighted average
                     const inHouseWeight = inHouseSalesWeekly / sales
@@ -494,8 +528,8 @@ export default function MegaCalculator() {
                     </p>
                   )
                 })()}
-                {thirdPartySalesWeekly > 0 && marginDropPercent > 0.5 && (
-                  <p className="text-[10px] md:text-xs text-gray-500">vs best 3P</p>
+                {thirdPartySalesWeekly > 0 && (
+                  <p className="text-[10px] md:text-xs text-gray-500">w/ best 3P</p>
                 )}
               </div>
               <div className="border-l border-white/10 pl-2">
