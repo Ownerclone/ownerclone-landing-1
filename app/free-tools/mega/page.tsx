@@ -184,7 +184,8 @@ export default function MegaCalculator() {
   const perPersonAvg = parseFloat(ppa) || 0
   const weeklyCovers = perPersonAvg > 0 ? Math.round(sales / perPersonAvg) : 0
   const thirdPartySalesWeekly = parseFloat(thirdPartySales) || 0
-  const inHouseSalesWeekly = sales - thirdPartySalesWeekly
+  const inHouseSalesWeekly = sales  // In-house sales = the weekly sales input (3P is additional)
+  const totalWeeklySales = sales + thirdPartySalesWeekly  // Total = in-house + 3P
   
   // Food Cost
   const currentMenuPrice = parseFloat(menuPrice) || 0
@@ -441,8 +442,8 @@ export default function MegaCalculator() {
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Overhead</p>
                 {(() => {
                   // Calculate overhead based on total sales (in-house + 3P)
-                  const totalWeeklySales = sales > 0 ? sales : 0
-                  const overheadPct = totalWeeklySales > 0 ? (totalMonthlyOperatingCosts / (totalWeeklySales * 4.33)) * 100 : 0
+                  const totalSales = sales + thirdPartySalesWeekly
+                  const overheadPct = totalSales > 0 ? (totalMonthlyOperatingCosts / (totalSales * 4.33)) * 100 : 0
                   return (
                     <p className={`text-sm md:text-xl font-bold ${overheadPct <= 15 ? 'text-[#10b981]' : overheadPct <= 20 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
                       {totalWeeklySales > 0 ? `${overheadPct.toFixed(1)}%` : '-'}
@@ -536,8 +537,9 @@ export default function MegaCalculator() {
                     const bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
                     
                     // Weighted average based on actual sales split
-                    const inHouseWeight = inHouseSalesWeekly > 0 ? inHouseSalesWeekly / sales : 0
-                    const deliveryWeight = thirdPartySalesWeekly / sales
+                    const totalSales = inHouseSalesWeekly + thirdPartySalesWeekly
+                    const inHouseWeight = totalSales > 0 ? inHouseSalesWeekly / totalSales : 1
+                    const deliveryWeight = totalSales > 0 ? thirdPartySalesWeekly / totalSales : 0
                     blendedMargin = (inHouseProfitMarginPercent * inHouseWeight) + (bestDeliveryMargin * deliveryWeight)
                   }
                   
@@ -557,12 +559,13 @@ export default function MegaCalculator() {
                   // Calculate weekly profit: in-house profit + best delivery profit
                   const orderBase = 25
                   
-                  // Base in-house profit (when no 3P or calculating in-house portion)
-                  const inHouseProfit = inHouseSalesWeekly > 0 
-                    ? inHouseSalesWeekly * (inHouseProfitMarginPercent / 100) 
+                  // In-house profit (weekly sales input × in-house margin)
+                  const inHouseProfit = sales > 0 
+                    ? sales * (inHouseProfitMarginPercent / 100) 
                     : 0
                   
                   let totalWeeklyProfit = inHouseProfit
+                  let bestDeliveryMargin = 0
                   
                   if (thirdPartySalesWeekly > 0) {
                     const ddLabor = ddSelectedLaborPercent
@@ -581,7 +584,7 @@ export default function MegaCalculator() {
                     const indyYouKeep = orderBase * (1 + indyNetImpact / 100)
                     const indyProfitMargin = (indyYouKeep / orderBase) * 100
                     
-                    const bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
+                    bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
                     const deliveryProfit = thirdPartySalesWeekly * (bestDeliveryMargin / 100)
                     
                     totalWeeklyProfit = inHouseProfit + deliveryProfit
@@ -605,8 +608,6 @@ export default function MegaCalculator() {
                   )
                 })()}
               </div>
-            </div>
-          </div>
 
           {/* SALES & REVENUE */}
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl mb-6 overflow-hidden">
