@@ -367,7 +367,7 @@ export default function MegaCalculator() {
   const laborStatus = getLaborCostStatus(displayLaborCostPercent)
   const primeStatus = getPrimeCostStatus(displayPrimeCostPercent)
 
-return (
+  return (
     <div className="min-h-screen text-white">
       <style jsx global>{`
         input[type="number"]::-webkit-inner-spin-button,
