@@ -289,8 +289,8 @@ export default function MegaCalculator() {
   const annualProfit = monthlyProfit * 12
   
   // Profit Margins
-  // In-house margin uses ONLY in-house sales for overhead calculation (independent of 3P)
-  const inHouseOnlyOverheadWeekly = sales > 0 ? totalMonthlyOperatingCosts / 4.33 : 0
+  // In-house margin uses ONLY base operating costs (independent of 3P fees)
+  const inHouseOnlyOverheadWeekly = sales > 0 ? baseMonthlyOperatingCosts / 4.33 : 0
   const inHouseProfitMarginPercent = sales > 0 
     ? ((sales - (sales * estimatedFoodCostPercent / 100) - totalLaborCost - inHouseOnlyOverheadWeekly) / sales) * 100 
     : 0
@@ -1298,7 +1298,7 @@ export default function MegaCalculator() {
                       {/* DoorDash/UberEats Column */}
                       {(() => {
                         const ddLabor = ddSelectedLaborPercent
-                        const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
+                        const ddOverhead = inHouseOverheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
                         const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
                         
                         // Per $25 order calculations
@@ -1430,7 +1430,7 @@ export default function MegaCalculator() {
                         const webMarkupRate = webMarkup / 100
                         const webCCFeePercent = ccFeeRateTP * 100
                         const webLabor = laborCostPercent
-                        const webOverhead = overheadPercent
+                        const webOverhead = inHouseOverheadPercent
                         const webNetImpact = webMarkup - webCCFeePercent - webLabor - webOverhead - estimatedFoodCostPercent
                         
                         // Per $25 order calculations
@@ -1553,7 +1553,7 @@ export default function MegaCalculator() {
                         const indyMarkup = parseFloat(indyMarkupPercent) || 0
                         const indyMarkupRate = indyMarkup / 100
                         const indyLabor = laborCostPercent
-                        const indyOverhead = overheadPercent
+                        const indyOverhead = inHouseOverheadPercent
                         const indyNetImpact = indyMarkup - indyLabor - indyOverhead - estimatedFoodCostPercent
                         
                         // Per $25 order calculations
