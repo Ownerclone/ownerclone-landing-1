@@ -381,66 +381,130 @@ export default function MegaCalculator() {
         <div className="max-w-6xl mx-auto">
           
           {/* STICKY DASHBOARD */}
-          <div className="backdrop-blur-xl bg-black/80 border border-white/20 rounded-2xl p-6 mb-8 sticky top-20 z-10 shadow-2xl">
+          <div className="backdrop-blur-xl bg-black/80 border border-white/20 rounded-2xl p-4 md:p-6 mb-8 sticky top-16 z-10 shadow-2xl">
             {hasActiveWhatIf && (
-              <div className="mb-4 px-4 py-2 bg-[#f59e0b]/20 border border-[#f59e0b]/50 rounded-lg text-center">
-                <span className="text-[#f59e0b] font-semibold text-sm">*  What-If Mode Active - Showing projected numbers</span>
+              <div className="mb-3 px-3 py-1.5 bg-[#f59e0b]/20 border border-[#f59e0b]/50 rounded-lg text-center">
+                <span className="text-[#f59e0b] font-semibold text-xs md:text-sm">✨ What-If Mode Active - Showing projected numbers</span>
               </div>
             )}
-            <div className="grid grid-cols-2 md:grid-cols-7 gap-4 text-center">
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-2 md:gap-4 text-center">
               <div>
-                <p className="text-xs text-gray-400 mb-1">Food Cost</p>
-                <p className={`text-xl font-bold ${foodStatus.color}`}>
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Food Cost</p>
+                <p className={`text-base md:text-xl font-bold ${foodStatus.color}`}>
                   {displayFoodCostPercent !== 0 ? `${displayFoodCostPercent.toFixed(1)}%` : '-'}
                 </p>
                 {hasActiveWhatIf && foodPercentReductionForCalc > 0 && (
-                  <p className="text-xs text-[#10b981]">-{foodPercentReductionForCalc.toFixed(1)}%</p>
+                  <p className="text-[10px] md:text-xs text-[#10b981]">-{foodPercentReductionForCalc.toFixed(1)}%</p>
                 )}
               </div>
               <div>
-                <p className="text-xs text-gray-400 mb-1">Labor Cost</p>
-                <p className={`text-xl font-bold ${laborStatus.color}`}>
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Labor Cost</p>
+                <p className={`text-base md:text-xl font-bold ${laborStatus.color}`}>
                   {displayLaborCostPercent > 0 ? `${displayLaborCostPercent.toFixed(1)}%` : '-'}
                 </p>
                 {hasActiveWhatIf && whatIfLaborReduction > 0 && (
-                  <p className="text-xs text-[#10b981]">-{whatIfLaborReduction}%</p>
+                  <p className="text-[10px] md:text-xs text-[#10b981]">-{whatIfLaborReduction}%</p>
                 )}
               </div>
               <div>
-                <p className="text-xs text-gray-400 mb-1">Prime Cost</p>
-                <p className={`text-xl font-bold ${primeStatus.color}`}>
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Prime Cost</p>
+                <p className={`text-base md:text-xl font-bold ${primeStatus.color}`}>
                   {displayPrimeCostPercent > 0 ? `${displayPrimeCostPercent.toFixed(1)}%` : '-'}
                 </p>
               </div>
-              <div className="border-l border-r border-white/10 px-2">
-                <p className="text-xs text-gray-400 mb-1">Break-Even/wk</p>
-                <p className="text-xl font-bold text-[#06b6d4]">
+              <div className="border-l border-white/10 pl-2">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Break-Even/wk</p>
+                <p className="text-base md:text-xl font-bold text-[#06b6d4]">
                   {displayBreakEvenWeekly > 0 ? `$${Math.round(displayBreakEvenWeekly).toLocaleString()}` : '-'}
                 </p>
                 {hasActiveWhatIf && breakEvenWeekly > 0 && whatIfBreakEvenWeekly < breakEvenWeekly && (
-                  <p className="text-xs text-[#10b981]">-${Math.round(breakEvenWeekly - whatIfBreakEvenWeekly).toLocaleString()}</p>
+                  <p className="text-[10px] md:text-xs text-[#10b981]">-${Math.round(breakEvenWeekly - whatIfBreakEvenWeekly).toLocaleString()}</p>
                 )}
               </div>
-              <div>
-                <p className="text-xs text-green-400 mb-1">In-House Margin</p>
-                <p className={`text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+              <div className="border-l border-white/10 pl-2">
+                <p className="text-[10px] md:text-xs text-[#10b981] mb-0.5 md:mb-1">In-House</p>
+                <p className={`text-base md:text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
                   {sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '-'}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-400 mb-1">Blended Margin</p>
-                <p className={`text-xl font-bold ${blendedProfitMarginPercent >= 10 ? 'text-[#10b981]' : blendedProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                  {sales > 0 ? `${blendedProfitMarginPercent.toFixed(1)}%` : '-'}
-                </p>
-                {marginDropPercent > 0.5 && <p className="text-xs text-red-400">-{marginDropPercent.toFixed(1)}%</p>}
+              <div className="border-l border-white/10 pl-2">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Delivery</p>
+                {thirdPartySalesWeekly > 0 ? (
+                  <div className="space-y-0">
+                    {(() => {
+                      // Calculate delivery margins for each channel
+                      const ddLabor = ddSelectedLaborPercent
+                      const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
+                      const ddMargin = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
+                      
+                      const webMarkup = parseFloat(websiteMarkupPercent) || 0
+                      const webMargin = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      
+                      const indyMarkup = parseFloat(indyMarkupPercent) || 0
+                      const indyMargin = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      
+                      return (
+                        <>
+                          <p className={`text-[10px] md:text-xs font-bold ${ddMargin >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                            DD: {ddMargin.toFixed(0)}%
+                          </p>
+                          <p className={`text-[10px] md:text-xs font-bold ${webMargin >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                            Web: {webMargin.toFixed(0)}%
+                          </p>
+                          <p className={`text-[10px] md:text-xs font-bold ${indyMargin >= 0 ? 'text-[#06b6d4]' : 'text-[#ef4444]'}`}>
+                            Indy: {indyMargin.toFixed(0)}%
+                          </p>
+                        </>
+                      )
+                    })()}
+                  </div>
+                ) : (
+                  <p className="text-base md:text-xl font-bold text-gray-500">-</p>
+                )}
               </div>
-              <div>
-                <p className="text-xs text-gray-400 mb-1">Weekly Profit</p>
-                <p className={`text-xl font-bold ${displayWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+              <div className="border-l border-white/10 pl-2">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Blended</p>
+                {(() => {
+                  // Calculate blended margin: (in-house sales × in-house margin + 3P sales × best 3P margin) / total sales
+                  let blendedMargin = inHouseProfitMarginPercent
+                  
+                  if (thirdPartySalesWeekly > 0 && sales > 0) {
+                    // Get best 3P margin
+                    const ddLabor = ddSelectedLaborPercent
+                    const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
+                    const ddMargin = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
+                    
+                    const webMarkup = parseFloat(websiteMarkupPercent) || 0
+                    const webMargin = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    
+                    const indyMarkup = parseFloat(indyMarkupPercent) || 0
+                    const indyMargin = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    
+                    const bestDeliveryMargin = Math.max(ddMargin, webMargin, indyMargin)
+                    
+                    // Weighted average
+                    const inHouseWeight = inHouseSalesWeekly / sales
+                    const deliveryWeight = thirdPartySalesWeekly / sales
+                    blendedMargin = (inHouseProfitMarginPercent * inHouseWeight) + (bestDeliveryMargin * deliveryWeight)
+                  }
+                  
+                  return (
+                    <p className={`text-base md:text-xl font-bold ${blendedMargin >= 10 ? 'text-[#10b981]' : blendedMargin >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                      {sales > 0 ? `${blendedMargin.toFixed(1)}%` : '-'}
+                    </p>
+                  )
+                })()}
+                {thirdPartySalesWeekly > 0 && marginDropPercent > 0.5 && (
+                  <p className="text-[10px] md:text-xs text-gray-500">vs best 3P</p>
+                )}
+              </div>
+              <div className="border-l border-white/10 pl-2">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Weekly Profit</p>
+                <p className={`text-base md:text-xl font-bold ${displayWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
                   {sales > 0 ? `$${Math.round(displayWeeklyProfit).toLocaleString()}` : '-'}
                 </p>
                 {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && (
-                  <p className="text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>
+                  <p className="text-[10px] md:text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>
                 )}
               </div>
             </div>
@@ -1237,10 +1301,16 @@ export default function MegaCalculator() {
                               {/* Scenario-specific message */}
                               <div className="mt-3 p-2 rounded text-xs">
                                 {selectedLaborScenario === 'best' && (
-                                  <p className="text-[#fbbf24]">🦄 <strong>The fairy tale scenario.</strong> DoorDash wants you to believe this, but someone still preps, cooks, packs, and hands off every order. This rarely happens in reality.</p>
+                                  <p className="text-[#fbbf24]">🦄 <strong>The fairy tale scenario.</strong> DoorDash wants you to believe this, but someone still preps, cooks, packs, and hands off every order. This almost never happens in reality.</p>
                                 )}
-                                {selectedLaborScenario === 'estimate' && (
-                                  <p className="text-[#06b6d4]">📊 <strong>Your realistic estimate:</strong> {thirdPartyLaborImpact}% of your labor going to third party orders. Adjust the slider above if this doesn't match your kitchen reality.</p>
+                                {selectedLaborScenario === 'estimate' && parseFloat(thirdPartyLaborImpact) < 25 && (
+                                  <p className="text-[#fbbf24]">🦄 <strong>Still a fairy tale.</strong> At {thirdPartyLaborImpact}% labor, you're assuming delivery orders almost run themselves. Be honest with yourself — move that slider up.</p>
+                                )}
+                                {selectedLaborScenario === 'estimate' && parseFloat(thirdPartyLaborImpact) >= 25 && parseFloat(thirdPartyLaborImpact) < 50 && (
+                                  <p className="text-[#fbbf24]">⚠️ <strong>Optimistic estimate.</strong> At {thirdPartyLaborImpact}% labor, you're betting delivery barely impacts your kitchen. Most operators find the real number is higher.</p>
+                                )}
+                                {selectedLaborScenario === 'estimate' && parseFloat(thirdPartyLaborImpact) >= 50 && (
+                                  <p className="text-[#06b6d4]">📊 <strong>Realistic estimate.</strong> At {thirdPartyLaborImpact}% labor, you're accounting for real kitchen impact. This is where most operators land.</p>
                                 )}
                                 {selectedLaborScenario === 'worst' && (
                                   <p className="text-[#ef4444]">💀 <strong>The ugly truth</strong> when delivery rushes hit during peak hours and you're adding staff or paying overtime to keep up.</p>
@@ -1515,7 +1585,7 @@ export default function MegaCalculator() {
                       
                     </div>
                     
-                    {/* Bottom Coaching Box - Full Width */}
+                   {/* Bottom Coaching Box - Full Width */}
                     {(() => {
                       // DoorDash calculations (using selected scenario)
                       const ddLabor = ddSelectedLaborPercent
@@ -1550,6 +1620,12 @@ export default function MegaCalculator() {
                       const bestMarkupMargin = Math.max(webNetImpact, indyNetImpact)
                       const deliveryBeatsDineIn = bestMarkupMargin > inHouseProfitMarginPercent
                       
+                      // Check if labor scenario is unrealistically low
+                      const effectiveLaborPercent = selectedLaborScenario === 'best' ? 0 
+                        : selectedLaborScenario === 'worst' ? 100 
+                        : parseFloat(thirdPartyLaborImpact) || 0
+                      const isUnrealisticScenario = effectiveLaborPercent < 50
+                      
                       return (
                         <div className="mt-6 p-6 bg-gradient-to-r from-[#f59e0b]/20 to-[#10b981]/20 border-2 border-[#f59e0b] rounded-xl">
                           <h4 className="text-xl font-bold text-[#f59e0b] mb-4 flex items-center gap-2">
@@ -1557,51 +1633,77 @@ export default function MegaCalculator() {
                           </h4>
                           
                           <div className="space-y-4 text-sm">
-                            <p className="text-gray-300">
-                              Third party apps like DoorDash take a massive cut — you're keeping just{' '}
-                              <span className={`font-bold ${ddYouKeepPerOrder >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                                ${ddYouKeepPerOrder.toFixed(2)}/order
-                              </span>. 
-                              But look at your other options:
-                            </p>
-                            
-                            <div className="grid md:grid-cols-2 gap-4">
-                              <div className="p-3 bg-black/30 rounded-lg">
-                                <p className="text-[#10b981] font-bold">Your Website keeps ${webYouKeepPerOrder.toFixed(2)}/order</p>
-                                <p className="text-gray-400 text-xs">That's <span className="text-[#10b981] font-bold">${Math.round(webVsDd).toLocaleString()}/week</span> more than DoorDash</p>
-                              </div>
-                              <div className="p-3 bg-black/30 rounded-lg">
-                                <p className="text-[#06b6d4] font-bold">Indy Eats keeps ${indyYouKeepPerOrder.toFixed(2)}/order</p>
-                                <p className="text-gray-400 text-xs">That's <span className="text-[#06b6d4] font-bold">${Math.round(indyVsDd).toLocaleString()}/week</span> more than DoorDash</p>
-                              </div>
-                            </div>
-                            
-                            <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg">
-                              <p className="text-[#10b981] font-bold mb-2">💡 Pro Move: Add a markup to your own ordering channels!</p>
-                              <p className="text-gray-300">
-                                Customers expect to pay a little more for delivery convenience. Try adding 10-15% using the markup fields on Your Website and Indy Eats cards above.
-                              </p>
-                              {hasMarkup && deliveryBeatsDineIn && (
-                                <p className="text-[#10b981] font-bold mt-2">
-                                  🔥 LOOK AT THAT! With your markup, delivery orders are now <span className="underline">MORE profitable than dine-in</span> — no table to bus, no server to tip out, no refills!
+                            {isUnrealisticScenario ? (
+                              <>
+                                <div className="p-4 bg-[#fbbf24]/20 border border-[#fbbf24] rounded-lg">
+                                  <p className="text-[#fbbf24] font-bold mb-2">⚠️ Warning: You're viewing an optimistic scenario</p>
+                                  <p className="text-gray-300">
+                                    At {effectiveLaborPercent}% labor impact, these DoorDash numbers assume delivery orders barely touch your kitchen costs. 
+                                    Most operators find this isn't reality. <strong>Move the labor slider above 50%</strong> to see more realistic numbers.
+                                  </p>
+                                </div>
+                                
+                                <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg">
+                                  <p className="text-[#10b981] font-bold mb-2">💡 Here's a better question to ask yourself:</p>
+                                  <p className="text-gray-300">
+                                    You're marking up DoorDash prices by <span className="text-[#fbbf24] font-bold">{tpPriceIncreasePercent}%</span>. 
+                                    What if you added that same <span className="text-[#10b981] font-bold">{tpPriceIncreasePercent}%</span> markup to your own website and Indy Eats orders?
+                                  </p>
+                                  <p className="text-gray-400 mt-2 text-xs">
+                                    Try it — type <span className="text-[#10b981] font-bold">{tpPriceIncreasePercent}</span> in the markup fields on the Website and Indy Eats cards above and watch what happens to your margins.
+                                  </p>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <p className="text-gray-300">
+                                  Third party apps like DoorDash take a massive cut — you're keeping just{' '}
+                                  <span className={`font-bold ${ddYouKeepPerOrder >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                                    ${ddYouKeepPerOrder.toFixed(2)}/order
+                                  </span>. 
+                                  But look at your other options:
                                 </p>
-                              )}
-                              {hasMarkup && !deliveryBeatsDineIn && (
-                                <p className="text-[#fbbf24] mt-2">
-                                  You're getting closer! Try increasing your markup a bit more to make delivery MORE profitable than dine-in ({inHouseProfitMarginPercent.toFixed(1)}% margin).
-                                </p>
-                              )}
-                            </div>
-                            
-                            <div className="text-center pt-2 border-t border-white/10">
-                              <p className="text-gray-400">
-                                The math is clear: choosing the right channels puts{' '}
-                                <span className="text-[#10b981] font-bold text-lg">${Math.round(bestAltVsDd).toLocaleString()}/week</span> more in your pocket.
-                              </p>
-                              <p className="text-[#10b981] font-bold text-xl mt-1">
-                                That's ${Math.round(bestAltVsDd * 52).toLocaleString()}/year!
-                              </p>
-                            </div>
+                                
+                                <div className="grid md:grid-cols-2 gap-4">
+                                  <div className="p-3 bg-black/30 rounded-lg">
+                                    <p className="text-[#10b981] font-bold">Your Website keeps ${webYouKeepPerOrder.toFixed(2)}/order</p>
+                                    <p className="text-gray-400 text-xs">That's <span className="text-[#10b981] font-bold">${Math.round(webVsDd).toLocaleString()}/week</span> more than DoorDash</p>
+                                  </div>
+                                  <div className="p-3 bg-black/30 rounded-lg">
+                                    <p className="text-[#06b6d4] font-bold">Indy Eats keeps ${indyYouKeepPerOrder.toFixed(2)}/order</p>
+                                    <p className="text-gray-400 text-xs">That's <span className="text-[#06b6d4] font-bold">${Math.round(indyVsDd).toLocaleString()}/week</span> more than DoorDash</p>
+                                  </div>
+                                </div>
+                                
+                                <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg">
+                                  <p className="text-[#10b981] font-bold mb-2">💡 Pro Move: Add a markup to your own ordering channels!</p>
+                                  <p className="text-gray-300">
+                                    You're already marking up DoorDash by {tpPriceIncreasePercent}%. Customers expect to pay more for delivery. 
+                                    Try adding 10-15% to Your Website and Indy Eats using the markup fields above.
+                                  </p>
+                                  {hasMarkup && deliveryBeatsDineIn && (
+                                    <p className="text-[#10b981] font-bold mt-2">
+                                      🔥 LOOK AT THAT! With your markup, delivery orders are now <span className="underline">MORE profitable than dine-in</span> — no table to bus, no server to tip out, no refills!
+                                    </p>
+                                  )}
+                                  {hasMarkup && !deliveryBeatsDineIn && (
+                                    <p className="text-[#fbbf24] mt-2">
+                                      You're getting closer! Try increasing your markup a bit more to make delivery MORE profitable than dine-in ({inHouseProfitMarginPercent.toFixed(1)}% margin).
+                                    </p>
+                                  )}
+                                </div>
+                                
+                                <div className="text-center pt-2 border-t border-white/10">
+                                  <p className="text-gray-400">
+                                    The math is clear: choosing the right channels puts{' '}
+                                    <span className="text-[#10b981] font-bold text-lg">${Math.round(bestAltVsDd).toLocaleString()}/week</span> more in your pocket.
+                                  </p>
+                                  <p className="text-[#10b981] font-bold text-xl mt-1">
+                                    That's ${Math.round(bestAltVsDd * 52).toLocaleString()}/year!
+                                  </p>
+                                </div>
+                              </>
+                            )}
                           </div>
                         </div>
                       )
