@@ -10,48 +10,48 @@ import {
 
 export default function MegaCalculator() {
   // Sales & Revenue
-  const [weeklySales, setWeeklySales] = useState('20000')
-  const [ppa, setPpa] = useState('25')
+  const [weeklySales, setWeeklySales] = useState('')
+  const [ppa, setPpa] = useState('')
   
   // Food Costing
-  const [dishName, setDishName] = useState('Buffalo Wings')
-  const [menuPrice, setMenuPrice] = useState('16')
+  const [dishName, setDishName] = useState('')
+  const [menuPrice, setMenuPrice] = useState('')
   const [quickMode, setQuickMode] = useState(true)
-  const [quickFoodCostPercent, setQuickFoodCostPercent] = useState('30')
+  const [quickFoodCostPercent, setQuickFoodCostPercent] = useState('')
   const [ingredients, setIngredients] = useState([
     { id: 1, name: '', soldBy: 'weight', dozenPerCase: '', caseQuantity: '', casePrice: '', plateAmount: '', plateUnit: 'oz' }
   ])
   
   // Labor
-  const [grossWages, setGrossWages] = useState('5000')
+  const [grossWages, setGrossWages] = useState('')
   const [tipPercent, setTipPercent] = useState('20')
   const [payrollTaxRate, setPayrollTaxRate] = useState('11')
-  const [benefits, setBenefits] = useState('0')
-  const [payrollProcessing, setPayrollProcessing] = useState('100')
+  const [benefits, setBenefits] = useState('')
+  const [payrollProcessing, setPayrollProcessing] = useState('')
   
   // Fixed Costs (Monthly)
-  const [rent, setRent] = useState('6000')
-  const [utilities, setUtilities] = useState('3000')
-  const [insurance, setInsurance] = useState('1000')
-  const [loanPayments, setLoanPayments] = useState('0')
-  const [ccPayments, setCcPayments] = useState('0')
-  const [ccFeePercent, setCcFeePercent] = useState('3.25')
+  const [rent, setRent] = useState('')
+  const [utilities, setUtilities] = useState('')
+  const [insurance, setInsurance] = useState('')
+  const [loanPayments, setLoanPayments] = useState('')
+  const [ccPayments, setCcPayments] = useState('')
+  const [ccFeePercent, setCcFeePercent] = useState('2.9')
   const [ccSalesPercent, setCcSalesPercent] = useState('80')
-  const [posSystem, setPosSystem] = useState('400')
+  const [posSystem, setPosSystem] = useState('')
   
   // Variable Costs (Weekly)
-  const [entertainment, setEntertainment] = useState('200')
-  const [trivia, setTrivia] = useState('200')
-  const [linens, setLinens] = useState('150')
-  const [advertising, setAdvertising] = useState('100')
+  const [entertainment, setEntertainment] = useState('')
+  const [trivia, setTrivia] = useState('')
+  const [linens, setLinens] = useState('')
+  const [advertising, setAdvertising] = useState('')
   
   // Periodic Costs
-  const [greaseTrap, setGreaseTrap] = useState('400')
-  const [hoodCleaning, setHoodCleaning] = useState('400')
-  const [alcoholLicense, setAlcoholLicense] = useState('6000')
+  const [greaseTrap, setGreaseTrap] = useState('')
+  const [hoodCleaning, setHoodCleaning] = useState('')
+  const [alcoholLicense, setAlcoholLicense] = useState('')
   
   // Third Party
-  const [thirdPartySales, setThirdPartySales] = useState('1000')
+  const [thirdPartySales, setThirdPartySales] = useState('')
   const [thirdPartyFeePercent, setThirdPartyFeePercent] = useState('30')
   const [thirdPartyPriceIncrease, setThirdPartyPriceIncrease] = useState('20')
   const [thirdPartyPromoPercent, setThirdPartyPromoPercent] = useState('15')
@@ -1158,6 +1158,10 @@ return (
                                 <span className="text-[#ef4444]">-{ddLabor.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * ddLabor / 100).toLocaleString()})</span></span>
                               </div>
                               <div className="flex justify-between">
+                                <span className="text-gray-400">Food Cost:</span>
+                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(ddFoodCostDollars).toLocaleString()})</span></span>
+                              </div>
+                              <div className="flex justify-between">
                                 <span className="text-gray-400">Overhead:</span>
                                 <span className="text-[#ef4444]">-{ddOverhead.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * ddOverhead / 100).toLocaleString()})</span></span>
                               </div>
@@ -1166,14 +1170,6 @@ return (
                                 <span className={`font-bold ${ddNetImpact >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
                                   {ddNetImpact >= 0 ? '+' : ''}{ddNetImpact.toFixed(1)}% <span className="text-gray-500">({ddNetImpact >= 0 ? '+' : ''}${Math.round(ddNetImpactDollars).toLocaleString()})</span>
                                 </span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-gray-400">Food Cost:</span>
-                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(ddFoodCostDollars).toLocaleString()})</span></span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-gray-400">Sales Tax:</span>
-                                <span className="text-[#fbbf24]">{ddTaxNote}</span>
                               </div>
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-400">Customer Pays ($25):</span>
@@ -1233,6 +1229,10 @@ return (
                                 <span className="text-[#ef4444]">-{webLabor.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * webLabor / 100).toLocaleString()})</span></span>
                               </div>
                               <div className="flex justify-between">
+                                <span className="text-gray-400">Food Cost:</span>
+                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(webFoodCostDollars).toLocaleString()})</span></span>
+                              </div>
+                              <div className="flex justify-between">
                                 <span className="text-gray-400">Overhead:</span>
                                 <span className="text-[#ef4444]">-{webOverhead.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * webOverhead / 100).toLocaleString()})</span></span>
                               </div>
@@ -1241,14 +1241,6 @@ return (
                                 <span className="text-[#ef4444] font-bold">
                                   {webNetImpact.toFixed(1)}% <span className="text-gray-500">(${Math.round(webNetImpactDollars).toLocaleString()})</span>
                                 </span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-gray-400">Food Cost:</span>
-                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(webFoodCostDollars).toLocaleString()})</span></span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-gray-400">Sales Tax:</span>
-                                <span className="text-[#fbbf24]">{webTaxNote}</span>
                               </div>
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-400">Customer Pays ($25):</span>
@@ -1302,6 +1294,10 @@ return (
                                 <span className="text-[#ef4444]">-{indyLabor.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * indyLabor / 100).toLocaleString()})</span></span>
                               </div>
                               <div className="flex justify-between">
+                                <span className="text-gray-400">Food Cost:</span>
+                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(indyFoodCostDollars).toLocaleString()})</span></span>
+                              </div>
+                              <div className="flex justify-between">
                                 <span className="text-gray-400">Overhead:</span>
                                 <span className="text-[#ef4444]">-{indyOverhead.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * indyOverhead / 100).toLocaleString()})</span></span>
                               </div>
@@ -1310,14 +1306,6 @@ return (
                                 <span className="text-[#ef4444] font-bold">
                                   {indyNetImpact.toFixed(1)}% <span className="text-gray-500">(${Math.round(indyNetImpactDollars).toLocaleString()})</span>
                                 </span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-gray-400">Food Cost:</span>
-                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(indyFoodCostDollars).toLocaleString()})</span></span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-gray-400">Sales Tax:</span>
-                                <span className="text-[#10b981]">Customer pays</span>
                               </div>
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-400">Customer Pays ($25, 3 items):</span>
