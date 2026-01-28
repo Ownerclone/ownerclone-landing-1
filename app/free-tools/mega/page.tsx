@@ -608,6 +608,8 @@ export default function MegaCalculator() {
                   )
                 })()}
               </div>
+            </div>
+          </div>
 
           {/* SALES & REVENUE */}
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl mb-6 overflow-hidden">
