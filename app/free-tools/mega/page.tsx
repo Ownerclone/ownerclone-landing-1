@@ -267,13 +267,18 @@ export default function MegaCalculator() {
   const tpNetCostMonthly = tpNetCostWeekly * 4.33
   
   // Operating Costs & Break-Even
-  const totalMonthlyOperatingCosts = totalMonthlyFixedCosts + monthlyVariableCosts + tpNetCostMonthly
+  const baseMonthlyOperatingCosts = totalMonthlyFixedCosts + monthlyVariableCosts
+  const totalMonthlyOperatingCosts = baseMonthlyOperatingCosts + tpNetCostMonthly
   const contributionMarginPercent = 100 - primeCostPercent
-  const breakEvenMonthly = contributionMarginPercent > 0 ? (totalMonthlyOperatingCosts / (contributionMarginPercent / 100)) : 0
+  // Break-even uses base costs (without 3P fees) - 3P fees are variable, not fixed overhead
+  const breakEvenMonthly = contributionMarginPercent > 0 ? (baseMonthlyOperatingCosts / (contributionMarginPercent / 100)) : 0
   const breakEvenWeekly = breakEvenMonthly / 4.33
   const coversToBreakEvenWeekly = perPersonAvg > 0 ? Math.ceil(breakEvenWeekly / perPersonAvg) : 0
   const totalMonthlySales = (sales + thirdPartySalesWeekly) * 4.33
-  const overheadPercent = totalMonthlySales > 0 ? (totalMonthlyOperatingCosts / totalMonthlySales) * 100 : 10
+  // Overhead % for dashboard display - spread across total sales (goes down with more sales)
+  const overheadPercent = totalMonthlySales > 0 ? (baseMonthlyOperatingCosts / totalMonthlySales) * 100 : 10
+  // Fixed overhead % for delivery margin calculations - based on in-house sales only (stays constant)
+  const inHouseOverheadPercent = sales > 0 ? (baseMonthlyOperatingCosts / (sales * 4.33)) * 100 : 10
   
   // Profit
   const monthlyRevenue = sales * 4.33
@@ -284,10 +289,10 @@ export default function MegaCalculator() {
   const annualProfit = monthlyProfit * 12
   
   // Profit Margins
-  const inHouseProfitMarginPercent = inHouseSalesWeekly > 0 
-    ? ((inHouseSalesWeekly - (inHouseSalesWeekly * estimatedFoodCostPercent / 100) - 
-       (totalLaborCost * inHouseSalesWeekly / (sales || 1)) - 
-       ((totalMonthlyOperatingCosts / 4.33) * inHouseSalesWeekly / (sales || 1))) / inHouseSalesWeekly) * 100 
+  // In-house margin uses ONLY in-house sales for overhead calculation (independent of 3P)
+  const inHouseOnlyOverheadWeekly = sales > 0 ? totalMonthlyOperatingCosts / 4.33 : 0
+  const inHouseProfitMarginPercent = sales > 0 
+    ? ((sales - (sales * estimatedFoodCostPercent / 100) - totalLaborCost - inHouseOnlyOverheadWeekly) / sales) * 100 
     : 0
   
   // Calculate delivery margins for blended calculation
@@ -441,16 +446,9 @@ export default function MegaCalculator() {
               </div>
               <div>
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Overhead</p>
-                {(() => {
-                  // Calculate overhead based on total sales (in-house + 3P)
-                  const totalSales = sales + thirdPartySalesWeekly
-                  const overheadPct = totalSales > 0 ? (totalMonthlyOperatingCosts / (totalSales * 4.33)) * 100 : 0
-                  return (
-                    <p className={`text-sm md:text-xl font-bold ${overheadPct <= 15 ? 'text-[#10b981]' : overheadPct <= 20 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                      {totalSales > 0 ? `${overheadPct.toFixed(1)}%` : '-'}
-                    </p>
-                  )
-                })()}
+                <p className={`text-sm md:text-xl font-bold ${inHouseOverheadPercent <= 15 ? 'text-[#10b981]' : inHouseOverheadPercent <= 20 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                  {sales > 0 ? `${inHouseOverheadPercent.toFixed(1)}%` : '-'}
+                </p>
               </div>
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Break-Even</p>
@@ -464,7 +462,7 @@ export default function MegaCalculator() {
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-[#10b981] mb-0.5 md:mb-1">In-House</p>
                 <p className={`text-sm md:text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : inHouseProfitMarginPercent > 0 ? 'text-[#ef4444]' : 'text-gray-500'}`}>
-                  {sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : sales > 0 ? '0%' : '-'}
+                  {sales > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '-'}
                 </p>
               </div>
               <div className="border-l border-white/10 pl-2">
@@ -473,21 +471,22 @@ export default function MegaCalculator() {
                   <div className="space-y-0">
                     {(() => {
                       // Calculate profit margins for each channel (what you keep / order value)
+                      // Uses fixed inHouseOverheadPercent so margins don't change with 3P volume
                       const orderBase = 25
                       
                       const ddLabor = ddSelectedLaborPercent
-                      const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
+                      const ddOverhead = inHouseOverheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
                       const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
                       const ddYouKeep = orderBase * (1 + ddNetImpact / 100)
                       const ddProfitMargin = (ddYouKeep / orderBase) * 100
                       
                       const webMarkup = parseFloat(websiteMarkupPercent) || 0
-                      const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - inHouseOverheadPercent - estimatedFoodCostPercent
                       const webYouKeep = orderBase * (1 + webNetImpact / 100)
                       const webProfitMargin = (webYouKeep / orderBase) * 100
                       
                       const indyMarkup = parseFloat(indyMarkupPercent) || 0
-                      const indyNetImpact = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const indyNetImpact = indyMarkup - laborCostPercent - inHouseOverheadPercent - estimatedFoodCostPercent
                       const indyYouKeep = orderBase * (1 + indyNetImpact / 100)
                       const indyProfitMargin = (indyYouKeep / orderBase) * 100
                       
@@ -513,33 +512,34 @@ export default function MegaCalculator() {
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Blended</p>
                 {(() => {
-                  // Calculate blended margin using profit margins (not net impact)
+                  // Calculate blended margin using profit margins
+                  // Uses fixed inHouseOverheadPercent so margins don't change with 3P volume
                   const orderBase = 25
                   let blendedMargin = inHouseProfitMarginPercent
                   
                   if (thirdPartySalesWeekly > 0 && sales > 0) {
                     // Get profit margins for each delivery channel
                     const ddLabor = ddSelectedLaborPercent
-                    const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
+                    const ddOverhead = inHouseOverheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
                     const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
                     const ddYouKeep = orderBase * (1 + ddNetImpact / 100)
                     const ddProfitMargin = (ddYouKeep / orderBase) * 100
                     
                     const webMarkup = parseFloat(websiteMarkupPercent) || 0
-                    const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - inHouseOverheadPercent - estimatedFoodCostPercent
                     const webYouKeep = orderBase * (1 + webNetImpact / 100)
                     const webProfitMargin = (webYouKeep / orderBase) * 100
                     
                     const indyMarkup = parseFloat(indyMarkupPercent) || 0
-                    const indyNetImpact = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const indyNetImpact = indyMarkup - laborCostPercent - inHouseOverheadPercent - estimatedFoodCostPercent
                     const indyYouKeep = orderBase * (1 + indyNetImpact / 100)
                     const indyProfitMargin = (indyYouKeep / orderBase) * 100
                     
                     const bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
                     
                     // Weighted average based on actual sales split
-                    const totalSales = inHouseSalesWeekly + thirdPartySalesWeekly
-                    const inHouseWeight = totalSales > 0 ? inHouseSalesWeekly / totalSales : 1
+                    const totalSales = sales + thirdPartySalesWeekly
+                    const inHouseWeight = totalSales > 0 ? sales / totalSales : 1
                     const deliveryWeight = totalSales > 0 ? thirdPartySalesWeekly / totalSales : 0
                     blendedMargin = (inHouseProfitMarginPercent * inHouseWeight) + (bestDeliveryMargin * deliveryWeight)
                   }
@@ -558,6 +558,7 @@ export default function MegaCalculator() {
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Profit/wk</p>
                 {(() => {
                   // Calculate weekly profit: in-house profit + best delivery profit
+                  // Uses fixed inHouseOverheadPercent so margins don't change with 3P volume
                   const orderBase = 25
                   
                   // In-house profit (weekly sales input × in-house margin)
@@ -570,18 +571,18 @@ export default function MegaCalculator() {
                   
                   if (thirdPartySalesWeekly > 0) {
                     const ddLabor = ddSelectedLaborPercent
-                    const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
+                    const ddOverhead = inHouseOverheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
                     const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
                     const ddYouKeep = orderBase * (1 + ddNetImpact / 100)
                     const ddProfitMargin = (ddYouKeep / orderBase) * 100
                     
                     const webMarkup = parseFloat(websiteMarkupPercent) || 0
-                    const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - inHouseOverheadPercent - estimatedFoodCostPercent
                     const webYouKeep = orderBase * (1 + webNetImpact / 100)
                     const webProfitMargin = (webYouKeep / orderBase) * 100
                     
                     const indyMarkup = parseFloat(indyMarkupPercent) || 0
-                    const indyNetImpact = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const indyNetImpact = indyMarkup - laborCostPercent - inHouseOverheadPercent - estimatedFoodCostPercent
                     const indyYouKeep = orderBase * (1 + indyNetImpact / 100)
                     const indyProfitMargin = (indyYouKeep / orderBase) * 100
                     
