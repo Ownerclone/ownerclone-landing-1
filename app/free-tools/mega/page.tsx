@@ -1131,9 +1131,6 @@ export default function MegaCalculator() {
                         const ddLabor = ddSelectedLaborPercent
                         const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
                         const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
-                        const ddNetImpactDollars = thirdPartySalesWeekly * (ddNetImpact / 100)
-                        const ddFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                        const ddYouKeepWeekly = thirdPartySalesWeekly + ddNetImpactDollars - ddFoodCostDollars
                         
                         // Per $25 order calculations
                         const orderBase = 25
@@ -1141,6 +1138,11 @@ export default function MegaCalculator() {
                         const ddMarkupDollars = orderBase * tpMarkupRate
                         const ddCustomerTotal = orderBase + ddDeliveryFee + ddMarkupDollars
                         const ddYouKeepPerOrder = orderBase * (1 + ddNetImpact / 100)
+                        const ddProfitMargin = (ddYouKeepPerOrder / orderBase) * 100
+                        
+                        // Weekly calculations (based on per-order math)
+                        const numOrders = thirdPartySalesWeekly / orderBase
+                        const ddYouKeepWeekly = ddYouKeepPerOrder * numOrders
                         
                         return (
                           <div className="p-5 bg-black/80 border-2 border-[#ef4444]/50 rounded-xl">
@@ -1164,7 +1166,7 @@ export default function MegaCalculator() {
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Food Cost:</span>
-                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(ddFoodCostDollars).toLocaleString()})</span></span>
+                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * estimatedFoodCostPercent / 100).toLocaleString()})</span></span>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Overhead:</span>
@@ -1206,6 +1208,14 @@ export default function MegaCalculator() {
                                 </span>
                               </div>
                               
+                              {/* Profit margin */}
+                              <div className="flex justify-between items-center">
+                                <span className="text-gray-400">Profit Margin:</span>
+                                <span className={`font-bold ${ddProfitMargin >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                                  {ddProfitMargin.toFixed(1)}%
+                                </span>
+                              </div>
+                              
                               {/* Warning if losing money */}
                               {ddYouKeepPerOrder < 0 && (
                                 <p className="text-xs text-[#ef4444] mt-2 p-2 bg-[#ef4444]/20 rounded font-bold">You are losing money on every Third Party Order. Make changes immediately!</p>
@@ -1225,22 +1235,24 @@ export default function MegaCalculator() {
                           </div>
                         )
                       })()}
-
+                      
                       {/* Your Website Column */}
                       {(() => {
                         const webCCFeePercent = ccFeeRateTP * 100
                         const webLabor = laborCostPercent
                         const webOverhead = overheadPercent
                         const webNetImpact = -webCCFeePercent - webLabor - webOverhead - estimatedFoodCostPercent
-                        const webNetImpactDollars = thirdPartySalesWeekly * (webNetImpact / 100)
-                        const webFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                        const webYouKeepWeekly = thirdPartySalesWeekly + webNetImpactDollars - webFoodCostDollars
                         
                         // Per $25 order calculations
                         const orderBase = 25
                         const webDeliveryFee = 7
                         const webCustomerTotal = orderBase + webDeliveryFee
                         const webYouKeepPerOrder = orderBase * (1 + webNetImpact / 100)
+                        const webProfitMargin = (webYouKeepPerOrder / orderBase) * 100
+                        
+                        // Weekly calculations (based on per-order math)
+                        const numOrders = thirdPartySalesWeekly / orderBase
+                        const webYouKeepWeekly = webYouKeepPerOrder * numOrders
                         
                         return (
                           <div className="p-5 bg-black/80 border-2 border-[#10b981]/50 rounded-xl">
@@ -1268,7 +1280,7 @@ export default function MegaCalculator() {
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Food Cost:</span>
-                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(webFoodCostDollars).toLocaleString()})</span></span>
+                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * estimatedFoodCostPercent / 100).toLocaleString()})</span></span>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Overhead:</span>
@@ -1306,6 +1318,14 @@ export default function MegaCalculator() {
                                 </span>
                               </div>
                               
+                              {/* Profit margin */}
+                              <div className="flex justify-between items-center">
+                                <span className="text-gray-400">Profit Margin:</span>
+                                <span className={`font-bold ${webProfitMargin >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                                  {webProfitMargin.toFixed(1)}%
+                                </span>
+                              </div>
+                              
                               {/* Weekly totals */}
                               <div className="border-t border-white/10 pt-3 mt-3">
                                 <p className="text-gray-300 font-semibold mb-2">WEEKLY TOTALS on ${thirdPartySalesWeekly.toLocaleString()}/week:</p>
@@ -1320,15 +1340,12 @@ export default function MegaCalculator() {
                           </div>
                         )
                       })()}
-
+                      
                       {/* Indy Eats Column */}
                       {(() => {
                         const indyLabor = laborCostPercent
                         const indyOverhead = overheadPercent
                         const indyNetImpact = -indyLabor - indyOverhead - estimatedFoodCostPercent
-                        const indyNetImpactDollars = thirdPartySalesWeekly * (indyNetImpact / 100)
-                        const indyFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                        const indyYouKeepWeekly = thirdPartySalesWeekly + indyNetImpactDollars - indyFoodCostDollars
                         
                         // Per $25 order calculations
                         const orderBase = 25
@@ -1337,6 +1354,11 @@ export default function MegaCalculator() {
                         const indyCCFee = orderBase * ccFeeRateTP  // CC fee customer pays
                         const indyCustomerTotal = orderBase + indyDeliveryFee + indyItemFee + indyCCFee
                         const indyYouKeepPerOrder = orderBase * (1 + indyNetImpact / 100)
+                        const indyProfitMargin = (indyYouKeepPerOrder / orderBase) * 100
+                        
+                        // Weekly calculations (based on per-order math)
+                        const numOrders = thirdPartySalesWeekly / orderBase
+                        const indyYouKeepWeekly = indyYouKeepPerOrder * numOrders
                         
                         return (
                           <div className="p-5 bg-black/80 border-2 border-[#06b6d4]/50 rounded-xl">
@@ -1368,7 +1390,7 @@ export default function MegaCalculator() {
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Food Cost:</span>
-                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(indyFoodCostDollars).toLocaleString()})</span></span>
+                                <span className="text-[#ef4444]">-{estimatedFoodCostPercent.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * estimatedFoodCostPercent / 100).toLocaleString()})</span></span>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Overhead:</span>
@@ -1411,6 +1433,14 @@ export default function MegaCalculator() {
                                 <span className="text-gray-300 font-bold">YOU KEEP (per order):</span>
                                 <span className={`text-xl font-bold ${indyYouKeepPerOrder >= 0 ? 'text-[#06b6d4]' : 'text-[#ef4444]'}`}>
                                   ${indyYouKeepPerOrder.toFixed(2)}
+                                </span>
+                              </div>
+                              
+                              {/* Profit margin */}
+                              <div className="flex justify-between items-center">
+                                <span className="text-gray-400">Profit Margin:</span>
+                                <span className={`font-bold ${indyProfitMargin >= 0 ? 'text-[#06b6d4]' : 'text-[#ef4444]'}`}>
+                                  {indyProfitMargin.toFixed(1)}%
                                 </span>
                               </div>
                               
