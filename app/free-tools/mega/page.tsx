@@ -336,7 +336,13 @@ export default function MegaCalculator() {
   // What-If useEffects - REMOVED: Methods A and B are now independent, no auto-sync needed
 
   // What-If Savings
-  const effectiveFoodSavingsWeekly = whatIfFoodPctReduction > 0 ? linkedFoodSpendFromPercent : whatIfFoodSpendDollarReduction
+  // Method A savings (menu engineering - % of sales reduction)
+  const methodASavingsWeekly = linkedFoodSpendFromPercent
+  // Method B savings (vendor/purchasing - % of spend reduction)
+  const methodBSavingsWeekly = whatIfFoodSpendDollarReduction
+  // Combined food savings (both methods can stack)
+  const effectiveFoodSavingsWeekly = methodASavingsWeekly + methodBSavingsWeekly
+  
   const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100)
   const laborSavingsWeekly = totalLaborCost * (whatIfLaborReduction / 100)
   const grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly + coversProfitWeekly
@@ -344,9 +350,12 @@ export default function MegaCalculator() {
   const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
   
   // What-If Adjusted Metrics
-  const foodPercentReductionForCalc = whatIfFoodPctReduction > 0 
-    ? whatIfFoodPctReduction 
-    : (currentWeeklyFoodSpend > 0 && whatIfFoodSpendDollarReduction > 0 ? (whatIfFoodSpendDollarReduction / sales) * 100 : 0)
+  // Method A reduces food cost % directly, Method B reduces it based on spend reduction relative to sales
+  const methodAPercentReduction = whatIfFoodPctReduction
+  const methodBPercentReduction = currentWeeklyFoodSpend > 0 && whatIfFoodSpendDollarReduction > 0 
+    ? (whatIfFoodSpendDollarReduction / sales) * 100 
+    : 0
+  const foodPercentReductionForCalc = methodAPercentReduction + methodBPercentReduction
   const whatIfAdjustedFoodCostPercent = estimatedFoodCostPercent - foodPercentReductionForCalc
   const whatIfAdjustedLaborCostPercent = laborCostPercent * (1 - whatIfLaborReduction / 100)
   const whatIfAdjustedPrimeCostPercent = whatIfAdjustedFoodCostPercent + whatIfAdjustedLaborCostPercent
@@ -1849,14 +1858,13 @@ export default function MegaCalculator() {
                           <input 
                             type="number" 
                             value={whatIfFoodCostPercentReduction} 
-                            onChange={(e) => { setActiveWhatIfInput('percent'); setWhatIfFoodCostPercentReduction(e.target.value); setWhatIfFoodSpendReduction('') }} 
-                            onFocus={() => setActiveWhatIfInput('percent')} 
+                            onChange={(e) => setWhatIfFoodCostPercentReduction(e.target.value)} 
                             placeholder="2" 
                             className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" 
                           />
                           <span className="py-2 text-gray-400">% points</span>
                         </div>
-                        {whatIfFoodPctReduction > 0 && activeWhatIfInput === 'percent' && (
+                        {whatIfFoodPctReduction > 0 && (
                           <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg">
                             <p className="text-sm text-gray-300">
                               Weekly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent).toLocaleString()}</strong>
@@ -1882,18 +1890,15 @@ export default function MegaCalculator() {
                             type="number" 
                             value={whatIfFoodSpendReduction && currentWeeklyFoodSpend > 0 ? ((parseFloat(whatIfFoodSpendReduction) / currentWeeklyFoodSpend) * 100).toFixed(0) : ''} 
                             onChange={(e) => { 
-                              setActiveWhatIfInput('dollar'); 
                               const pct = parseFloat(e.target.value) || 0;
                               setWhatIfFoodSpendReduction((currentWeeklyFoodSpend * pct / 100).toFixed(0));
-                              setWhatIfFoodCostPercentReduction('');
                             }} 
-                            onFocus={() => setActiveWhatIfInput('dollar')} 
                             placeholder="10" 
                             className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white" 
                           />
                           <span className="py-2 text-gray-400">%</span>
                         </div>
-                        {whatIfFoodSpendDollarReduction > 0 && activeWhatIfInput === 'dollar' && (
+                        {whatIfFoodSpendDollarReduction > 0 && (
                           <div className="mt-3 p-3 bg-[#06b6d4]/10 rounded-lg">
                             <p className="text-sm text-gray-300">
                               Weekly savings: <strong className="text-[#06b6d4]">+${Math.round(parseFloat(whatIfFoodSpendReduction) || 0).toLocaleString()}</strong>
