@@ -406,6 +406,12 @@ export default function MegaCalculator() {
                 <span className="text-[#f59e0b] font-semibold text-xs md:text-sm">✨ What-If Mode Active - Showing projected numbers</span>
               </div>
             )}
+            {/* Section Labels */}
+            <div className="grid grid-cols-3 mb-2 text-[10px] md:text-xs font-bold">
+              <div className="text-left text-[#ef4444]">COSTS</div>
+              <div className="text-center text-[#06b6d4]">EVEN</div>
+              <div className="text-right text-[#10b981]">PROFITS</div>
+            </div>
             <div className="grid grid-cols-5 md:grid-cols-9 gap-2 md:gap-3 text-center">
               <div>
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Food Cost</p>
@@ -433,9 +439,16 @@ export default function MegaCalculator() {
               </div>
               <div>
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Overhead</p>
-                <p className={`text-sm md:text-xl font-bold ${overheadPercent <= 15 ? 'text-[#10b981]' : overheadPercent <= 20 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                  {sales > 0 ? `${overheadPercent.toFixed(1)}%` : '-'}
-                </p>
+                {(() => {
+                  // Calculate overhead based on total sales (in-house + 3P)
+                  const totalWeeklySales = sales > 0 ? sales : 0
+                  const overheadPct = totalWeeklySales > 0 ? (totalMonthlyOperatingCosts / (totalWeeklySales * 4.33)) * 100 : 0
+                  return (
+                    <p className={`text-sm md:text-xl font-bold ${overheadPct <= 15 ? 'text-[#10b981]' : overheadPct <= 20 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                      {totalWeeklySales > 0 ? `${overheadPct.toFixed(1)}%` : '-'}
+                    </p>
+                  )
+                })()}
               </div>
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Break-Even</p>
@@ -448,8 +461,8 @@ export default function MegaCalculator() {
               </div>
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-[#10b981] mb-0.5 md:mb-1">In-House</p>
-                <p className={`text-sm md:text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                  {sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '-'}
+                <p className={`text-sm md:text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : inHouseProfitMarginPercent > 0 ? 'text-[#ef4444]' : 'text-gray-500'}`}>
+                  {sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : sales > 0 ? '0%' : '-'}
                 </p>
               </div>
               <div className="border-l border-white/10 pl-2">
@@ -522,8 +535,8 @@ export default function MegaCalculator() {
                     
                     const bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
                     
-                    // Weighted average
-                    const inHouseWeight = inHouseSalesWeekly / sales
+                    // Weighted average based on actual sales split
+                    const inHouseWeight = inHouseSalesWeekly > 0 ? inHouseSalesWeekly / sales : 0
                     const deliveryWeight = thirdPartySalesWeekly / sales
                     blendedMargin = (inHouseProfitMarginPercent * inHouseWeight) + (bestDeliveryMargin * deliveryWeight)
                   }
@@ -541,11 +554,17 @@ export default function MegaCalculator() {
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Profit/wk</p>
                 {(() => {
-                  // Calculate weekly profit with best 3P margin
+                  // Calculate weekly profit: in-house profit + best delivery profit
                   const orderBase = 25
-                  let adjustedWeeklyProfit = displayWeeklyProfit
                   
-                  if (thirdPartySalesWeekly > 0 && sales > 0) {
+                  // Base in-house profit (when no 3P or calculating in-house portion)
+                  const inHouseProfit = inHouseSalesWeekly > 0 
+                    ? inHouseSalesWeekly * (inHouseProfitMarginPercent / 100) 
+                    : 0
+                  
+                  let totalWeeklyProfit = inHouseProfit
+                  
+                  if (thirdPartySalesWeekly > 0) {
                     const ddLabor = ddSelectedLaborPercent
                     const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
                     const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
@@ -563,27 +582,28 @@ export default function MegaCalculator() {
                     const indyProfitMargin = (indyYouKeep / orderBase) * 100
                     
                     const bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
-                    
-                    // In-house profit + best delivery profit
-                    const inHouseProfit = inHouseSalesWeekly * (inHouseProfitMarginPercent / 100)
                     const deliveryProfit = thirdPartySalesWeekly * (bestDeliveryMargin / 100)
-                    adjustedWeeklyProfit = inHouseProfit + deliveryProfit
+                    
+                    totalWeeklyProfit = inHouseProfit + deliveryProfit
                   }
+                  
+                  // Apply what-if adjustments if active
+                  const finalProfit = hasActiveWhatIf ? totalWeeklyProfit + grandTotalSavingsWeekly : totalWeeklyProfit
                   
                   return (
                     <>
-                      <p className={`text-sm md:text-xl font-bold ${adjustedWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
-                        ${Math.round(adjustedWeeklyProfit).toLocaleString()}
+                      <p className={`text-sm md:text-xl font-bold ${finalProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                        ${Math.round(finalProfit).toLocaleString()}
                       </p>
                       {thirdPartySalesWeekly > 0 && (
                         <p className="text-[10px] md:text-xs text-gray-500">w/ best 3P</p>
                       )}
+                      {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && (
+                        <p className="text-[10px] md:text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>
+                      )}
                     </>
                   )
                 })()}
-                {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && (
-                  <p className="text-[10px] md:text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>
-                )}
               </div>
             </div>
           </div>
@@ -1705,7 +1725,7 @@ export default function MegaCalculator() {
                       const isUnrealisticScenario = effectiveLaborPercent < 50
                       
                       return (
-                        <div className="mt-6 p-6 bg-gradient-to-r from-[#f59e0b]/20 to-[#10b981]/20 border-2 border-[#f59e0b] rounded-xl">
+                        <div className="mt-6 p-6 bg-gradient-to-r from-[#f59e0b]/10 to-[#10b981]/10 border border-[#f59e0b]/50 rounded-xl">
                           <h4 className="text-xl font-bold text-[#f59e0b] mb-4 flex items-center gap-2">
                             🎯 Here's Your Play
                           </h4>
