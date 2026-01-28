@@ -41,6 +41,7 @@ export default function MegaCalculator() {
   const [activeWhatIfInput, setActiveWhatIfInput] = useState<string | null>(null)
   const [priceIncreasePercent, setPriceIncreasePercent] = useState('')
   const [laborReductionPercent, setLaborReductionPercent] = useState('')
+  const [coversIncreasePercent, setCoversIncreasePercent] = useState('')
   const [expandedSections, setExpandedSections] = useState({ sales: true, food: true, labor: true, prime: true, breakeven: true, thirdparty: true, whatif: true })
 
   const toggleSection = (section: keyof typeof expandedSections) => setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }))
@@ -128,7 +129,9 @@ export default function MegaCalculator() {
   const tpNetCostWeekly = tpFeesWeekly - tpMarkupRecoveryWeekly + tpPromoCostWeekly
   const tpNetCostMonthly = tpNetCostWeekly * 4.33
   const tpFoodCostWeekly = thirdPartySalesWeekly * (estimatedFoodCostPercent / 100)
-  const tpProfitWeekly = thirdPartySalesWeekly - tpFoodCostWeekly - tpNetCostWeekly
+  // Third party still needs labor - allocate proportionally
+  const tpLaborCostWeekly = sales > 0 ? totalLaborCost * (thirdPartySalesWeekly / sales) : 0
+  const tpProfitWeekly = thirdPartySalesWeekly - tpFoodCostWeekly - tpLaborCostWeekly - tpNetCostWeekly
   const tpProfitMarginPercent = thirdPartySalesWeekly > 0 ? (tpProfitWeekly / thirdPartySalesWeekly) * 100 : 0
   const totalMonthlyOperatingCosts = totalMonthlyFixedCosts + monthlyVariableCosts + tpNetCostMonthly
   const contributionMarginPercent = 100 - primeCostPercent
@@ -150,10 +153,18 @@ export default function MegaCalculator() {
   const whatIfFoodPctReduction = parseFloat(whatIfFoodCostPercentReduction) || 0
   const whatIfFoodSpendDollarReduction = parseFloat(whatIfFoodSpendReduction) || 0
   const whatIfPriceIncrease = parseFloat(priceIncreasePercent) || 0
-  const whatIfLaborPctReduction = parseFloat(laborReductionPercent) || 0 // Now % POINTS, not % of labor
-  const hasActiveWhatIf = whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0 || whatIfPriceIncrease > 0 || whatIfLaborPctReduction > 0
+  const whatIfLaborPctReduction = parseFloat(laborReductionPercent) || 0
+  const whatIfCoversIncrease = parseFloat(coversIncreasePercent) || 0
+  const hasActiveWhatIf = whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0 || whatIfPriceIncrease > 0 || whatIfLaborPctReduction > 0 || whatIfCoversIncrease > 0
   const linkedFoodSpendFromPercent = sales > 0 ? sales * (whatIfFoodPctReduction / 100) : 0
   const linkedFoodPercentFromSpend = currentWeeklyFoodSpend > 0 ? (whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100 : 0
+  
+  // Covers increase calculations
+  const extraCovers = Math.round(weeklyCovers * (whatIfCoversIncrease / 100))
+  const newTotalCovers = weeklyCovers + extraCovers
+  const extraRevenueFromCovers = extraCovers * perPersonAvg
+  // Extra covers profit = extra revenue * in-house margin (volume growth uses margin, not pure profit)
+  const extraProfitFromCovers = extraRevenueFromCovers * (inHouseProfitMarginPercent / 100)
 
   useEffect(() => {
     if (activeWhatIfInput === 'percent' && whatIfFoodPctReduction > 0 && sales > 0) {
@@ -169,14 +180,28 @@ export default function MegaCalculator() {
     }
   }, [whatIfFoodSpendDollarReduction, activeWhatIfInput, sales])
 
-  // Clear the OTHER box when focusing on one
+  // Clear the OTHER box when focusing on one - use callback to ensure state updates
   const handleFoodPercentFocus = () => {
-    setActiveWhatIfInput('percent')
-    setWhatIfFoodSpendReduction('')
+    if (activeWhatIfInput !== 'percent') {
+      setWhatIfFoodSpendReduction('')
+      setActiveWhatIfInput('percent')
+    }
   }
   const handleFoodDollarFocus = () => {
+    if (activeWhatIfInput !== 'dollar') {
+      setWhatIfFoodCostPercentReduction('')
+      setActiveWhatIfInput('dollar')
+    }
+  }
+  
+  // Handle changes with proper state management
+  const handleFoodPercentChange = (value: string) => {
+    setActiveWhatIfInput('percent')
+    setWhatIfFoodCostPercentReduction(value)
+  }
+  const handleFoodDollarChange = (value: string) => {
     setActiveWhatIfInput('dollar')
-    setWhatIfFoodCostPercentReduction('')
+    setWhatIfFoodSpendReduction(value)
   }
 
   // Calculate what-if adjusted sales (price increase means more revenue)
@@ -196,9 +221,10 @@ export default function MegaCalculator() {
   
   // Calculate savings - all based on % points (the single source of truth)
   const foodSavingsWeekly = sales * (whatIfFoodPctReduction / 100)
-  const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100)
+  const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100) // Pure profit - same food, higher price
   const laborSavingsWeekly = sales * (whatIfLaborPctReduction / 100)
-  const grandTotalSavingsWeekly = foodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly
+  const coversSavingsWeekly = extraProfitFromCovers // Volume growth - uses margin rate
+  const grandTotalSavingsWeekly = foodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly + coversSavingsWeekly
   const grandTotalSavingsMonthly = grandTotalSavingsWeekly * 4.33
   const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
   
@@ -243,7 +269,7 @@ export default function MegaCalculator() {
   const foodStatus = getFoodCostStatus(displayFoodCostPercent)
   const laborStatus = getLaborCostStatus(displayLaborCostPercent)
   const primeStatus = getPrimeCostStatus(displayPrimeCostPercent)
-  const clearWhatIf = () => { setWhatIfFoodCostPercentReduction(''); setWhatIfFoodSpendReduction(''); setPriceIncreasePercent(''); setLaborReductionPercent(''); setActiveWhatIfInput(null) }
+  const clearWhatIf = () => { setWhatIfFoodCostPercentReduction(''); setWhatIfFoodSpendReduction(''); setPriceIncreasePercent(''); setLaborReductionPercent(''); setCoversIncreasePercent(''); setActiveWhatIfInput(null) }
 
   return (
     <div className="min-h-screen text-white">
@@ -556,33 +582,45 @@ export default function MegaCalculator() {
                     <p className="text-sm text-gray-400 mb-4">Enter either value - the other will auto-calculate. Current weekly food spend: <strong className="text-white">${Math.round(currentWeeklyFoodSpend).toLocaleString()}</strong> ({estimatedFoodCostPercent.toFixed(1)}% of ${sales.toLocaleString()})</p>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Food Cost by ___% of sales</label>
-                        <p className="text-xs text-gray-500 mb-3">Example: Reduce from 30% to 28% = enter 2</p>
-                        <div className="flex gap-2"><input type="number" value={whatIfFoodCostPercentReduction} onChange={(e) => setWhatIfFoodCostPercentReduction(e.target.value)} onFocus={handleFoodPercentFocus} placeholder="2" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">% points</span></div>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">Drop Food Cost % by ___ points</label>
+                        <p className="text-xs text-gray-500 mb-3">Example: 30% → 28% = enter 2</p>
+                        <div className="flex gap-2"><input type="number" value={whatIfFoodCostPercentReduction} onChange={(e) => handleFoodPercentChange(e.target.value)} onFocus={handleFoodPercentFocus} placeholder="2" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">% pts</span></div>
                         {whatIfFoodPctReduction > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">Weekly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent).toLocaleString()}</strong></p><p className="text-sm text-gray-300">Yearly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent * 52).toLocaleString()}</strong></p></div>}
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-gray-300 mb-2">OR Reduce Food Spend by $___/week</label>
-                        <p className="text-xs text-gray-500 mb-3">Direct dollar savings on food purchases</p>
-                        <div className="flex gap-2"><span className="py-2 text-gray-400">$</span><input type="number" value={whatIfFoodSpendReduction} onChange={(e) => setWhatIfFoodSpendReduction(e.target.value)} onFocus={handleFoodDollarFocus} placeholder="500" className="w-28 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">/week</span></div>
-                        {whatIfFoodSpendDollarReduction > 0 && sales > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">That's <strong className="text-[#10b981]">{((whatIfFoodSpendDollarReduction / sales) * 100).toFixed(1)}%</strong> points off your food cost</p><p className="text-sm text-gray-300">Yearly savings: <strong className="text-[#10b981]">+${Math.round(whatIfFoodSpendDollarReduction * 52).toLocaleString()}</strong></p></div>}
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">OR Cut Food Spend by $___/week</label>
+                        <p className="text-xs text-gray-500 mb-3">Direct dollar savings on purchases</p>
+                        <div className="flex gap-2"><span className="py-2 text-gray-400">$</span><input type="number" value={whatIfFoodSpendReduction} onChange={(e) => handleFoodDollarChange(e.target.value)} onFocus={handleFoodDollarFocus} placeholder="500" className="w-28 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">/wk</span></div>
+                        {whatIfFoodSpendDollarReduction > 0 && sales > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">= <strong className="text-[#10b981]">{((whatIfFoodSpendDollarReduction / sales) * 100).toFixed(1)}%</strong> pts off food cost</p><p className="text-sm text-gray-300">Yearly: <strong className="text-[#10b981]">+${Math.round(whatIfFoodSpendDollarReduction * 52).toLocaleString()}</strong></p></div>}
                       </div>
                     </div>
                     <div className="mt-4 p-3 bg-[#fbbf24]/10 border border-[#fbbf24]/30 rounded-lg"><p className="text-xs text-gray-300"><strong className="text-[#fbbf24]">Vendor Promises:</strong> When vendors promise 10% savings they mean 10% off your spend - NOT reducing your food cost percentage by 10 points. A 10% spend reduction on ${Math.round(currentWeeklyFoodSpend).toLocaleString()}/week = ${Math.round(currentWeeklyFoodSpend * 0.1).toLocaleString()}/week saved.</p></div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-3 gap-6">
                     <div className="p-4 bg-black/20 rounded-lg border border-white/10">
                       <label className="block text-sm font-semibold text-gray-300 mb-2">Raise Prices by ___%</label>
-                      <p className="text-xs text-gray-500 mb-3">Menu price increase across the board</p>
+                      <p className="text-xs text-gray-500 mb-3">Same food, higher price = pure profit</p>
                       <div className="flex gap-2 mb-4"><input type="number" value={priceIncreasePercent} onChange={(e) => setPriceIncreasePercent(e.target.value)} placeholder="5" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">%</span></div>
                       {whatIfPriceIncrease > 0 && <div className="space-y-1 text-sm"><p className="text-gray-400">Weekly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly).toLocaleString()}</span></p><p className="text-gray-400">Yearly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly * 52).toLocaleString()}</span></p></div>}
                     </div>
                     <div className="p-4 bg-black/20 rounded-lg border border-white/10">
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">Drop Labor % by ___ points</label>
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">Drop Labor % by ___ pts</label>
                       <p className="text-xs text-gray-500 mb-3">Example: 30% → 27% = enter 3</p>
                       <div className="flex gap-2 mb-4"><input type="number" value={laborReductionPercent} onChange={(e) => setLaborReductionPercent(e.target.value)} placeholder="3" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">% pts</span></div>
                       {whatIfLaborPctReduction > 0 && <div className="space-y-1 text-sm"><p className="text-gray-400">Weekly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly).toLocaleString()}</span></p><p className="text-gray-400">Yearly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly * 52).toLocaleString()}</span></p></div>}
+                    </div>
+                    <div className="p-4 bg-black/20 rounded-lg border border-[#06b6d4]/30">
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">Increase Covers by ___%</label>
+                      <p className="text-xs text-gray-500 mb-3">More customers = margin-based profit</p>
+                      <div className="flex gap-2 mb-4"><input type="number" value={coversIncreasePercent} onChange={(e) => setCoversIncreasePercent(e.target.value)} placeholder="10" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white" /><span className="py-2 text-gray-400">%</span></div>
+                      {whatIfCoversIncrease > 0 && weeklyCovers > 0 && (
+                        <div className="space-y-1 text-sm">
+                          <p className="text-gray-400">{weeklyCovers.toLocaleString()} → <span className="text-[#06b6d4] font-bold">{newTotalCovers.toLocaleString()}</span> covers (+{extraCovers})</p>
+                          <p className="text-gray-400">Extra revenue: <span className="text-white">${Math.round(extraRevenueFromCovers).toLocaleString()}</span></p>
+                          <p className="text-gray-400">Extra profit: <span className="text-[#10b981] font-bold">+${Math.round(extraProfitFromCovers).toLocaleString()}</span> <span className="text-xs">({inHouseProfitMarginPercent.toFixed(1)}% margin)</span></p>
+                        </div>
+                      )}
                     </div>
                   </div>
 
