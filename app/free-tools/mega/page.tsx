@@ -272,7 +272,8 @@ export default function MegaCalculator() {
   const breakEvenMonthly = contributionMarginPercent > 0 ? (totalMonthlyOperatingCosts / (contributionMarginPercent / 100)) : 0
   const breakEvenWeekly = breakEvenMonthly / 4.33
   const coversToBreakEvenWeekly = perPersonAvg > 0 ? Math.ceil(breakEvenWeekly / perPersonAvg) : 0
-  const overheadPercent = sales > 0 ? (totalMonthlyOperatingCosts / monthlySales) * 100 : 10
+  const totalMonthlySales = (sales + thirdPartySalesWeekly) * 4.33
+  const overheadPercent = totalMonthlySales > 0 ? (totalMonthlyOperatingCosts / totalMonthlySales) * 100 : 10
   
   // Profit
   const monthlyRevenue = sales * 4.33
@@ -446,7 +447,7 @@ export default function MegaCalculator() {
                   const overheadPct = totalSales > 0 ? (totalMonthlyOperatingCosts / (totalSales * 4.33)) * 100 : 0
                   return (
                     <p className={`text-sm md:text-xl font-bold ${overheadPct <= 15 ? 'text-[#10b981]' : overheadPct <= 20 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                      {totalWeeklySales > 0 ? `${overheadPct.toFixed(1)}%` : '-'}
+                      {totalSales > 0 ? `${overheadPct.toFixed(1)}%` : '-'}
                     </p>
                   )
                 })()}
