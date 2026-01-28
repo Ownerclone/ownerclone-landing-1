@@ -1130,12 +1130,17 @@ return (
                       {(() => {
                         const ddLabor = ddSelectedLaborPercent
                         const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
-                        const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead
+                        const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
                         const ddNetImpactDollars = thirdPartySalesWeekly * (ddNetImpact / 100)
                         const ddFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                        const ddYouKeep = thirdPartySalesWeekly + ddNetImpactDollars - ddFoodCostDollars
-                        const ddCustomerPays = 25 * (1 + tpMarkupRate) + 7
-                        const ddTaxNote = "You handle"
+                        const ddYouKeepWeekly = thirdPartySalesWeekly + ddNetImpactDollars - ddFoodCostDollars
+                        
+                        // Per $25 order calculations
+                        const orderBase = 25
+                        const ddDeliveryFee = 7
+                        const ddMarkupDollars = orderBase * tpMarkupRate
+                        const ddCustomerTotal = orderBase + ddDeliveryFee + ddMarkupDollars
+                        const ddYouKeepPerOrder = orderBase * (1 + ddNetImpact / 100)
                         
                         return (
                           <div className="p-5 bg-black/80 border-2 border-[#ef4444]/50 rounded-xl">
@@ -1168,25 +1173,54 @@ return (
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-300 font-semibold">Net Impact:</span>
                                 <span className={`font-bold ${ddNetImpact >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
-                                  {ddNetImpact >= 0 ? '+' : ''}{ddNetImpact.toFixed(1)}% <span className="text-gray-500">({ddNetImpact >= 0 ? '+' : ''}${Math.round(ddNetImpactDollars).toLocaleString()})</span>
+                                  {ddNetImpact >= 0 ? '+' : ''}{ddNetImpact.toFixed(1)}%
                                 </span>
                               </div>
-                              <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
-                                <span className="text-gray-400">Customer Pays ($25):</span>
-                                <span className="text-white">${ddCustomerPays.toFixed(2)}</span>
+                              
+                              {/* Customer pays breakdown */}
+                              <div className="border-t border-white/10 pt-3 mt-3">
+                                <p className="text-gray-300 font-semibold mb-2">On a $25 order, customer pays:</p>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">$25 order</span>
+                                  <span className="text-[#10b981]">${orderBase.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">$7 delivery</span>
+                                  <span className="text-[#10b981]">${ddDeliveryFee.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">+{tpPriceIncreasePercent}% markup</span>
+                                  <span className="text-[#10b981]">${ddMarkupDollars.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
+                                  <span className="text-gray-300 font-semibold">Customer Total:</span>
+                                  <span className="text-white font-bold">${ddCustomerTotal.toFixed(2)}</span>
+                                </div>
                               </div>
+                              
+                              {/* You keep per order */}
                               <div className="flex justify-between items-center pt-2">
-                                <span className="text-gray-300 font-bold">YOU KEEP:</span>
-                                <span className={`text-xl font-bold ${ddYouKeep >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                                  ${Math.round(ddYouKeep).toLocaleString()}
+                                <span className="text-gray-300 font-bold">YOU KEEP (per order):</span>
+                                <span className={`text-xl font-bold ${ddYouKeepPerOrder >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                                  ${ddYouKeepPerOrder.toFixed(2)}
                                 </span>
                               </div>
-                              {ddYouKeep < 0 && (
-                                <p className="text-xs text-[#ef4444] mt-2 p-2 bg-[#ef4444]/20 rounded">Third party can lose money. Try a different approach.</p>
+                              
+                              {/* Warning if losing money */}
+                              {ddYouKeepPerOrder < 0 && (
+                                <p className="text-xs text-[#ef4444] mt-2 p-2 bg-[#ef4444]/20 rounded font-bold">You are losing money on every Third Party Order. Make changes immediately!</p>
                               )}
-                              {ddYouKeep > 0 && selectedLaborScenario === 'best' && (
-                                <p className="text-xs text-[#fbbf24] mt-2 p-2 bg-[#fbbf24]/20 rounded">Best case only common with restaurants set up for delivery.</p>
-                              )}
+                              
+                              {/* Weekly totals */}
+                              <div className="border-t border-white/10 pt-3 mt-3">
+                                <p className="text-gray-300 font-semibold mb-2">WEEKLY TOTALS on ${thirdPartySalesWeekly.toLocaleString()}/week:</p>
+                                <div className="flex justify-between items-center">
+                                  <span className="text-gray-300 font-bold">You Keep:</span>
+                                  <span className={`text-xl font-bold ${ddYouKeepWeekly >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                                    ${Math.round(ddYouKeepWeekly).toLocaleString()}
+                                  </span>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         )
@@ -1197,12 +1231,16 @@ return (
                         const webCCFeePercent = ccFeeRateTP * 100
                         const webLabor = laborCostPercent
                         const webOverhead = overheadPercent
-                        const webNetImpact = -webCCFeePercent - webLabor - webOverhead
+                        const webNetImpact = -webCCFeePercent - webLabor - webOverhead - estimatedFoodCostPercent
                         const webNetImpactDollars = thirdPartySalesWeekly * (webNetImpact / 100)
                         const webFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                        const webYouKeep = thirdPartySalesWeekly + webNetImpactDollars - webFoodCostDollars
-                        const webCustomerPays = 25 + 7
-                        const webTaxNote = "You handle"
+                        const webYouKeepWeekly = thirdPartySalesWeekly + webNetImpactDollars - webFoodCostDollars
+                        
+                        // Per $25 order calculations
+                        const orderBase = 25
+                        const webDeliveryFee = 7
+                        const webCustomerTotal = orderBase + webDeliveryFee
+                        const webYouKeepPerOrder = orderBase * (1 + webNetImpact / 100)
                         
                         return (
                           <div className="p-5 bg-black/80 border-2 border-[#10b981]/50 rounded-xl">
@@ -1239,18 +1277,44 @@ return (
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-300 font-semibold">Net Impact:</span>
                                 <span className="text-[#ef4444] font-bold">
-                                  {webNetImpact.toFixed(1)}% <span className="text-gray-500">(${Math.round(webNetImpactDollars).toLocaleString()})</span>
+                                  {webNetImpact.toFixed(1)}%
                                 </span>
                               </div>
-                              <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
-                                <span className="text-gray-400">Customer Pays ($25):</span>
-                                <span className="text-white">${webCustomerPays.toFixed(2)}</span>
+                              
+                              {/* Customer pays breakdown */}
+                              <div className="border-t border-white/10 pt-3 mt-3">
+                                <p className="text-gray-300 font-semibold mb-2">On a $25 order, customer pays:</p>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">$25 order</span>
+                                  <span className="text-[#10b981]">${orderBase.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">$7 delivery</span>
+                                  <span className="text-[#10b981]">${webDeliveryFee.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
+                                  <span className="text-gray-300 font-semibold">Customer Total:</span>
+                                  <span className="text-white font-bold">${webCustomerTotal.toFixed(2)}</span>
+                                </div>
                               </div>
+                              
+                              {/* You keep per order */}
                               <div className="flex justify-between items-center pt-2">
-                                <span className="text-gray-300 font-bold">YOU KEEP:</span>
-                                <span className={`text-xl font-bold ${webYouKeep >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
-                                  ${Math.round(webYouKeep).toLocaleString()}
+                                <span className="text-gray-300 font-bold">YOU KEEP (per order):</span>
+                                <span className={`text-xl font-bold ${webYouKeepPerOrder >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                                  ${webYouKeepPerOrder.toFixed(2)}
                                 </span>
+                              </div>
+                              
+                              {/* Weekly totals */}
+                              <div className="border-t border-white/10 pt-3 mt-3">
+                                <p className="text-gray-300 font-semibold mb-2">WEEKLY TOTALS on ${thirdPartySalesWeekly.toLocaleString()}/week:</p>
+                                <div className="flex justify-between items-center">
+                                  <span className="text-gray-300 font-bold">You Keep:</span>
+                                  <span className={`text-xl font-bold ${webYouKeepWeekly >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                                    ${Math.round(webYouKeepWeekly).toLocaleString()}
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -1261,13 +1325,18 @@ return (
                       {(() => {
                         const indyLabor = laborCostPercent
                         const indyOverhead = overheadPercent
-                        const indyNetImpact = -indyLabor - indyOverhead
+                        const indyNetImpact = -indyLabor - indyOverhead - estimatedFoodCostPercent
                         const indyNetImpactDollars = thirdPartySalesWeekly * (indyNetImpact / 100)
                         const indyFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                        const indyYouKeep = thirdPartySalesWeekly + indyNetImpactDollars - indyFoodCostDollars
-                        const indyItemFee = Math.min(3 * 0.20, 1.00)
-                        const indySalesTax = 25 * 0.035
-                        const indyCustomerPays = 25 + indyItemFee + 6 + indySalesTax
+                        const indyYouKeepWeekly = thirdPartySalesWeekly + indyNetImpactDollars - indyFoodCostDollars
+                        
+                        // Per $25 order calculations
+                        const orderBase = 25
+                        const indyDeliveryFee = 6
+                        const indyItemFee = 2 * 0.20  // 2 items at $0.20 each
+                        const indyCCFee = orderBase * ccFeeRateTP  // CC fee customer pays
+                        const indyCustomerTotal = orderBase + indyDeliveryFee + indyItemFee + indyCCFee
+                        const indyYouKeepPerOrder = orderBase * (1 + indyNetImpact / 100)
                         
                         return (
                           <div className="p-5 bg-black/80 border-2 border-[#06b6d4]/50 rounded-xl">
@@ -1290,6 +1359,10 @@ return (
                                 <span className="text-[#10b981]">$0 <span className="text-gray-500">(Customer pays)</span></span>
                               </div>
                               <div className="flex justify-between">
+                                <span className="text-gray-400">CC Fees:</span>
+                                <span className="text-[#10b981]">$0 <span className="text-gray-500">(Customer pays)</span></span>
+                              </div>
+                              <div className="flex justify-between">
                                 <span className="text-gray-400">Labor:</span>
                                 <span className="text-[#ef4444]">-{indyLabor.toFixed(1)}% <span className="text-gray-500">(-${Math.round(thirdPartySalesWeekly * indyLabor / 100).toLocaleString()})</span></span>
                               </div>
@@ -1304,37 +1377,70 @@ return (
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-300 font-semibold">Net Impact:</span>
                                 <span className="text-[#ef4444] font-bold">
-                                  {indyNetImpact.toFixed(1)}% <span className="text-gray-500">(${Math.round(indyNetImpactDollars).toLocaleString()})</span>
+                                  {indyNetImpact.toFixed(1)}%
                                 </span>
                               </div>
-                              <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
-                                <span className="text-gray-400">Customer Pays ($25, 3 items):</span>
-                                <span className="text-white">${indyCustomerPays.toFixed(2)}</span>
+                              
+                              {/* Customer pays breakdown */}
+                              <div className="border-t border-white/10 pt-3 mt-3">
+                                <p className="text-gray-300 font-semibold mb-2">On a $25 order, customer pays:</p>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">$25 order</span>
+                                  <span className="text-[#10b981]">${orderBase.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">$6 delivery</span>
+                                  <span className="text-[#10b981]">${indyDeliveryFee.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">$0.20/item fee (2 items)</span>
+                                  <span className="text-[#10b981]">${indyItemFee.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-400">CC fee ({(ccFeeRateTP * 100).toFixed(1)}%)</span>
+                                  <span className="text-[#10b981]">${indyCCFee.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
+                                  <span className="text-gray-300 font-semibold">Customer Total:</span>
+                                  <span className="text-white font-bold">${indyCustomerTotal.toFixed(2)}</span>
+                                </div>
                               </div>
+                              
+                              {/* You keep per order */}
                               <div className="flex justify-between items-center pt-2">
-                                <span className="text-gray-300 font-bold">YOU KEEP:</span>
-                                <span className="text-xl font-bold text-[#06b6d4]">
-                                  ${Math.round(indyYouKeep).toLocaleString()}
+                                <span className="text-gray-300 font-bold">YOU KEEP (per order):</span>
+                                <span className={`text-xl font-bold ${indyYouKeepPerOrder >= 0 ? 'text-[#06b6d4]' : 'text-[#ef4444]'}`}>
+                                  ${indyYouKeepPerOrder.toFixed(2)}
                                 </span>
+                              </div>
+                              
+                              {/* Weekly totals */}
+                              <div className="border-t border-white/10 pt-3 mt-3">
+                                <p className="text-gray-300 font-semibold mb-2">WEEKLY TOTALS on ${thirdPartySalesWeekly.toLocaleString()}/week:</p>
+                                <div className="flex justify-between items-center">
+                                  <span className="text-gray-300 font-bold">You Keep:</span>
+                                  <span className={`text-xl font-bold ${indyYouKeepWeekly >= 0 ? 'text-[#06b6d4]' : 'text-[#ef4444]'}`}>
+                                    ${Math.round(indyYouKeepWeekly).toLocaleString()}
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         )
                       })()}
-                    </div>
-
+                      
                     {/* Bottom insight */}
                     {(() => {
                       const ddLabor = ddSelectedLaborPercent
                       const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
-                      const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead
+                      const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
                       const ddNetImpactDollars = thirdPartySalesWeekly * (ddNetImpact / 100)
                       const ddFoodCostDollars = thirdPartySalesWeekly * foodCostRate
                       const ddYouKeep = thirdPartySalesWeekly + ddNetImpactDollars - ddFoodCostDollars
                       
                       const indyLabor = laborCostPercent
                       const indyOverhead = overheadPercent
-                      const indyNetImpact = -indyLabor - indyOverhead
+                      const indyNetImpact = -indyLabor - indyOverhead - estimatedFoodCostPercent
                       const indyNetImpactDollars = thirdPartySalesWeekly * (indyNetImpact / 100)
                       const indyFoodCostDollars = thirdPartySalesWeekly * foodCostRate
                       const indyYouKeep = thirdPartySalesWeekly + indyNetImpactDollars - indyFoodCostDollars
@@ -1346,7 +1452,7 @@ return (
                           <p className="text-sm text-gray-300">
                             <strong className="text-[#f59e0b]">The Math Doesn't Lie:</strong> On ${thirdPartySalesWeekly.toLocaleString()}/week, switching from DoorDash to Indy Eats could add{' '}
                             <span className="text-[#10b981] font-bold">${Math.round(difference).toLocaleString()}/week</span> to your bottom line
-                            {' '}- that's <span className="text-[#10b981] font-bold">${Math.round(difference * 52).toLocaleString()}/year</span>.
+                            {' '}— that's <span className="text-[#10b981] font-bold">${Math.round(difference * 52).toLocaleString()}/year</span>.
                           </p>
                         </div>
                       )
