@@ -10,53 +10,55 @@ import {
 
 export default function MegaCalculator() {
   // Sales & Revenue
-  const [weeklySales, setWeeklySales] = useState('20000')
-  const [ppa, setPpa] = useState('25')
+  const [weeklySales, setWeeklySales] = useState('')
+  const [ppa, setPpa] = useState('')
   
   // Food Costing
-  const [dishName, setDishName] = useState('Wings')
-  const [menuPrice, setMenuPrice] = useState('15')
+  const [dishName, setDishName] = useState('')
+  const [menuPrice, setMenuPrice] = useState('')
   const [quickMode, setQuickMode] = useState(true)
-  const [quickFoodCostPercent, setQuickFoodCostPercent] = useState('30')
+  const [quickFoodCostPercent, setQuickFoodCostPercent] = useState('')
   const [ingredients, setIngredients] = useState([
     { id: 1, name: '', soldBy: 'weight', dozenPerCase: '', caseQuantity: '', casePrice: '', plateAmount: '', plateUnit: 'oz' }
   ])
   
   // Labor
-  const [grossWages, setGrossWages] = useState('5000')
+  const [grossWages, setGrossWages] = useState('')
   const [tipPercent, setTipPercent] = useState('20')
   const [payrollTaxRate, setPayrollTaxRate] = useState('11')
-  const [benefits, setBenefits] = useState('0')
-  const [payrollProcessing, setPayrollProcessing] = useState('100')
+  const [benefits, setBenefits] = useState('')
+  const [payrollProcessing, setPayrollProcessing] = useState('')
   
   // Fixed Costs (Monthly)
-  const [rent, setRent] = useState('5000')
-  const [utilities, setUtilities] = useState('3000')
-  const [insurance, setInsurance] = useState('1000')
-  const [loanPayments, setLoanPayments] = useState('0')
-  const [ccPayments, setCcPayments] = useState('0')
-  const [ccFeePercent, setCcFeePercent] = useState('3.25')
+  const [rent, setRent] = useState('')
+  const [utilities, setUtilities] = useState('')
+  const [insurance, setInsurance] = useState('')
+  const [loanPayments, setLoanPayments] = useState('')
+  const [ccPayments, setCcPayments] = useState('')
+  const [ccFeePercent, setCcFeePercent] = useState('2.9')
   const [ccSalesPercent, setCcSalesPercent] = useState('80')
-  const [posSystem, setPosSystem] = useState('350')
+  const [posSystem, setPosSystem] = useState('')
   
   // Variable Costs (Weekly)
-  const [entertainment, setEntertainment] = useState('100')
-  const [trivia, setTrivia] = useState('100')
-  const [linens, setLinens] = useState('150')
-  const [advertising, setAdvertising] = useState('100')
+  const [entertainment, setEntertainment] = useState('')
+  const [trivia, setTrivia] = useState('')
+  const [linens, setLinens] = useState('')
+  const [advertising, setAdvertising] = useState('')
   
   // Periodic Costs
-  const [greaseTrap, setGreaseTrap] = useState('400')
-  const [hoodCleaning, setHoodCleaning] = useState('400')
-  const [alcoholLicense, setAlcoholLicense] = useState('6000')
+  const [greaseTrap, setGreaseTrap] = useState('')
+  const [hoodCleaning, setHoodCleaning] = useState('')
+  const [alcoholLicense, setAlcoholLicense] = useState('')
   
   // Third Party
-  const [thirdPartySales, setThirdPartySales] = useState('1000')
+  const [thirdPartySales, setThirdPartySales] = useState('')
   const [thirdPartyFeePercent, setThirdPartyFeePercent] = useState('30')
   const [thirdPartyPriceIncrease, setThirdPartyPriceIncrease] = useState('20')
   const [thirdPartyPromoPercent, setThirdPartyPromoPercent] = useState('15')
   const [thirdPartyLaborImpact, setThirdPartyLaborImpact] = useState('15')
   const [selectedLaborScenario, setSelectedLaborScenario] = useState<'best' | 'estimate' | 'worst'>('estimate')
+  const [websiteMarkupPercent, setWebsiteMarkupPercent] = useState('0')
+  const [indyMarkupPercent, setIndyMarkupPercent] = useState('0')
   
   // What-If
   const [whatIfFoodCostPercentReduction, setWhatIfFoodCostPercentReduction] = useState('')
@@ -1082,7 +1084,7 @@ export default function MegaCalculator() {
                         <p className="text-xs text-gray-400 mb-1">Best Case</p>
                         <p className="text-lg font-bold text-[#10b981]">0% Labor</p>
                         <p className="text-sm text-gray-500">Delivery fits existing staff</p>
-                        {selectedLaborScenario === 'best' && <p className="text-xs text-[#10b981] mt-2 font-bold">✓ SELECTED</p>}
+                        {selectedLaborScenario === 'best' && <p className="text-xs text-[#10b981] mt-2 font-bold">âœ“ SELECTED</p>}
                       </button>
                       
                       {/* User's Estimate */}
@@ -1097,7 +1099,7 @@ export default function MegaCalculator() {
                         <p className="text-xs text-gray-400 mb-1">Your Estimate</p>
                         <p className="text-lg font-bold text-[#06b6d4]">{(laborCostPercent * tpLaborRate).toFixed(1)}% Labor</p>
                         <p className="text-sm text-gray-500">{thirdPartyLaborImpact}% of your {laborCostPercent.toFixed(1)}%</p>
-                        {selectedLaborScenario === 'estimate' && <p className="text-xs text-[#06b6d4] mt-2 font-bold">✓ SELECTED</p>}
+                        {selectedLaborScenario === 'estimate' && <p className="text-xs text-[#06b6d4] mt-2 font-bold">âœ“ SELECTED</p>}
                       </button>
                       
                       {/* Worst Case */}
@@ -1112,7 +1114,7 @@ export default function MegaCalculator() {
                         <p className="text-xs text-gray-400 mb-1">Worst Case</p>
                         <p className="text-lg font-bold text-[#ef4444]">{laborCostPercent.toFixed(1)}% Labor</p>
                         <p className="text-sm text-gray-500">Fully burdened with labor</p>
-                        {selectedLaborScenario === 'worst' && <p className="text-xs text-[#ef4444] mt-2 font-bold">✓ SELECTED</p>}
+                        {selectedLaborScenario === 'worst' && <p className="text-xs text-[#ef4444] mt-2 font-bold">âœ“ SELECTED</p>}
                       </button>
                     </div>
                   </div>
@@ -1231,6 +1233,19 @@ export default function MegaCalculator() {
                                   </span>
                                 </div>
                               </div>
+                              
+                              {/* Scenario-specific message */}
+                              <div className="mt-3 p-2 rounded text-xs">
+                                {selectedLaborScenario === 'best' && (
+                                  <p className="text-[#fbbf24]">🦄 <strong>The fairy tale scenario.</strong> DoorDash wants you to believe this, but someone still preps, cooks, packs, and hands off every order. This rarely happens in reality.</p>
+                                )}
+                                {selectedLaborScenario === 'estimate' && (
+                                  <p className="text-[#06b6d4]">📊 <strong>Your realistic estimate:</strong> {thirdPartyLaborImpact}% of your labor going to third party orders. Adjust the slider above if this doesn't match your kitchen reality.</p>
+                                )}
+                                {selectedLaborScenario === 'worst' && (
+                                  <p className="text-[#ef4444]">💀 <strong>The ugly truth</strong> when delivery rushes hit during peak hours and you're adding staff or paying overtime to keep up.</p>
+                                )}
+                              </div>
                             </div>
                           </div>
                         )
@@ -1238,15 +1253,18 @@ export default function MegaCalculator() {
                       
                       {/* Your Website Column */}
                       {(() => {
+                        const webMarkup = parseFloat(websiteMarkupPercent) || 0
+                        const webMarkupRate = webMarkup / 100
                         const webCCFeePercent = ccFeeRateTP * 100
                         const webLabor = laborCostPercent
                         const webOverhead = overheadPercent
-                        const webNetImpact = -webCCFeePercent - webLabor - webOverhead - estimatedFoodCostPercent
+                        const webNetImpact = webMarkup - webCCFeePercent - webLabor - webOverhead - estimatedFoodCostPercent
                         
                         // Per $25 order calculations
                         const orderBase = 25
                         const webDeliveryFee = 7
-                        const webCustomerTotal = orderBase + webDeliveryFee
+                        const webMarkupDollars = orderBase * webMarkupRate
+                        const webCustomerTotal = orderBase + webDeliveryFee + webMarkupDollars
                         const webYouKeepPerOrder = orderBase * (1 + webNetImpact / 100)
                         const webProfitMargin = (webYouKeepPerOrder / orderBase) * 100
                         
@@ -1262,9 +1280,19 @@ export default function MegaCalculator() {
                                 <span className="text-gray-400">Commission:</span>
                                 <span className="text-[#10b981]">0% <span className="text-gray-500">($0)</span></span>
                               </div>
-                              <div className="flex justify-between">
+                              <div className="flex justify-between items-center">
                                 <span className="text-gray-400">Markup:</span>
-                                <span className="text-gray-400">0% <span className="text-gray-500">($0)</span></span>
+                                <div className="flex items-center gap-1">
+                                  <span className="text-[#10b981]">+</span>
+                                  <input 
+                                    type="number" 
+                                    value={websiteMarkupPercent} 
+                                    onChange={(e) => setWebsiteMarkupPercent(e.target.value)}
+                                    className="w-12 px-1 py-0.5 bg-transparent border-b border-[#10b981]/50 focus:border-[#10b981] focus:outline-none text-[#10b981] text-right font-bold"
+                                  />
+                                  <span className="text-[#10b981]">%</span>
+                                  <span className="text-gray-500 ml-1">(+${Math.round(thirdPartySalesWeekly * webMarkupRate).toLocaleString()})</span>
+                                </div>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Promo Costs:</span>
@@ -1288,8 +1316,8 @@ export default function MegaCalculator() {
                               </div>
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-300 font-semibold">Net Impact:</span>
-                                <span className="text-[#ef4444] font-bold">
-                                  {webNetImpact.toFixed(1)}%
+                                <span className={`font-bold ${webNetImpact >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                                  {webNetImpact >= 0 ? '+' : ''}{webNetImpact.toFixed(1)}%
                                 </span>
                               </div>
                               
@@ -1304,6 +1332,12 @@ export default function MegaCalculator() {
                                   <span className="text-gray-400">$7 delivery</span>
                                   <span className="text-[#10b981]">${webDeliveryFee.toFixed(2)}</span>
                                 </div>
+                                {webMarkup > 0 && (
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-400">+{webMarkup}% markup</span>
+                                    <span className="text-[#10b981]">${webMarkupDollars.toFixed(2)}</span>
+                                  </div>
+                                )}
                                 <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                   <span className="text-gray-300 font-semibold">Customer Total:</span>
                                   <span className="text-white font-bold">${webCustomerTotal.toFixed(2)}</span>
@@ -1343,16 +1377,19 @@ export default function MegaCalculator() {
                       
                       {/* Indy Eats Column */}
                       {(() => {
+                        const indyMarkup = parseFloat(indyMarkupPercent) || 0
+                        const indyMarkupRate = indyMarkup / 100
                         const indyLabor = laborCostPercent
                         const indyOverhead = overheadPercent
-                        const indyNetImpact = -indyLabor - indyOverhead - estimatedFoodCostPercent
+                        const indyNetImpact = indyMarkup - indyLabor - indyOverhead - estimatedFoodCostPercent
                         
                         // Per $25 order calculations
                         const orderBase = 25
                         const indyDeliveryFee = 6
                         const indyItemFee = 2 * 0.20  // 2 items at $0.20 each
                         const indyCCFee = orderBase * ccFeeRateTP  // CC fee customer pays
-                        const indyCustomerTotal = orderBase + indyDeliveryFee + indyItemFee + indyCCFee
+                        const indyMarkupDollars = orderBase * indyMarkupRate
+                        const indyCustomerTotal = orderBase + indyDeliveryFee + indyItemFee + indyCCFee + indyMarkupDollars
                         const indyYouKeepPerOrder = orderBase * (1 + indyNetImpact / 100)
                         const indyProfitMargin = (indyYouKeepPerOrder / orderBase) * 100
                         
@@ -1368,9 +1405,19 @@ export default function MegaCalculator() {
                                 <span className="text-gray-400">Commission:</span>
                                 <span className="text-[#10b981]">0% <span className="text-gray-500">($0)</span></span>
                               </div>
-                              <div className="flex justify-between">
+                              <div className="flex justify-between items-center">
                                 <span className="text-gray-400">Markup:</span>
-                                <span className="text-gray-400">0% <span className="text-gray-500">($0)</span></span>
+                                <div className="flex items-center gap-1">
+                                  <span className="text-[#06b6d4]">+</span>
+                                  <input 
+                                    type="number" 
+                                    value={indyMarkupPercent} 
+                                    onChange={(e) => setIndyMarkupPercent(e.target.value)}
+                                    className="w-12 px-1 py-0.5 bg-transparent border-b border-[#06b6d4]/50 focus:border-[#06b6d4] focus:outline-none text-[#06b6d4] text-right font-bold"
+                                  />
+                                  <span className="text-[#06b6d4]">%</span>
+                                  <span className="text-gray-500 ml-1">(+${Math.round(thirdPartySalesWeekly * indyMarkupRate).toLocaleString()})</span>
+                                </div>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-gray-400">Promo Costs:</span>
@@ -1398,8 +1445,8 @@ export default function MegaCalculator() {
                               </div>
                               <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                 <span className="text-gray-300 font-semibold">Net Impact:</span>
-                                <span className="text-[#ef4444] font-bold">
-                                  {indyNetImpact.toFixed(1)}%
+                                <span className={`font-bold ${indyNetImpact >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                                  {indyNetImpact >= 0 ? '+' : ''}{indyNetImpact.toFixed(1)}%
                                 </span>
                               </div>
                               
@@ -1422,6 +1469,12 @@ export default function MegaCalculator() {
                                   <span className="text-gray-400">CC fee ({(ccFeeRateTP * 100).toFixed(1)}%)</span>
                                   <span className="text-[#10b981]">${indyCCFee.toFixed(2)}</span>
                                 </div>
+                                {indyMarkup > 0 && (
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-400">+{indyMarkup}% markup</span>
+                                    <span className="text-[#06b6d4]">${indyMarkupDollars.toFixed(2)}</span>
+                                  </div>
+                                )}
                                 <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                                   <span className="text-gray-300 font-semibold">Customer Total:</span>
                                   <span className="text-white font-bold">${indyCustomerTotal.toFixed(2)}</span>
@@ -1459,35 +1512,100 @@ export default function MegaCalculator() {
                         )
                       })()}
                       
-                    {/* Bottom insight */}
+                      
+                    </div>
+                    
+                    {/* Bottom Coaching Box - Full Width */}
                     {(() => {
+                      // DoorDash calculations (using selected scenario)
                       const ddLabor = ddSelectedLaborPercent
                       const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
                       const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
-                      const ddNetImpactDollars = thirdPartySalesWeekly * (ddNetImpact / 100)
-                      const ddFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                      const ddYouKeep = thirdPartySalesWeekly + ddNetImpactDollars - ddFoodCostDollars
+                      const orderBase = 25
+                      const ddYouKeepPerOrder = orderBase * (1 + ddNetImpact / 100)
                       
-                      const indyLabor = laborCostPercent
-                      const indyOverhead = overheadPercent
-                      const indyNetImpact = -indyLabor - indyOverhead - estimatedFoodCostPercent
-                      const indyNetImpactDollars = thirdPartySalesWeekly * (indyNetImpact / 100)
-                      const indyFoodCostDollars = thirdPartySalesWeekly * foodCostRate
-                      const indyYouKeep = thirdPartySalesWeekly + indyNetImpactDollars - indyFoodCostDollars
+                      // Website calculations (with markup)
+                      const webMarkup = parseFloat(websiteMarkupPercent) || 0
+                      const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const webYouKeepPerOrder = orderBase * (1 + webNetImpact / 100)
                       
-                      const difference = indyYouKeep - ddYouKeep
+                      // Indy Eats calculations (with markup)
+                      const indyMarkup = parseFloat(indyMarkupPercent) || 0
+                      const indyNetImpact = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                      const indyYouKeepPerOrder = orderBase * (1 + indyNetImpact / 100)
+                      
+                      // Weekly differences
+                      const numOrders = thirdPartySalesWeekly / orderBase
+                      const ddWeekly = ddYouKeepPerOrder * numOrders
+                      const webWeekly = webYouKeepPerOrder * numOrders
+                      const indyWeekly = indyYouKeepPerOrder * numOrders
+                      
+                      const webVsDd = webWeekly - ddWeekly
+                      const indyVsDd = indyWeekly - ddWeekly
+                      const bestAltWeekly = Math.max(webWeekly, indyWeekly)
+                      const bestAltVsDd = bestAltWeekly - ddWeekly
+                      
+                      // Check if markup makes delivery more profitable than dine-in
+                      const hasMarkup = webMarkup > 0 || indyMarkup > 0
+                      const bestMarkupMargin = Math.max(webNetImpact, indyNetImpact)
+                      const deliveryBeatsDineIn = bestMarkupMargin > inHouseProfitMarginPercent
                       
                       return (
-                        <div className="mt-6 p-4 bg-black/80 border border-[#f59e0b]/30 rounded-lg text-center">
-                          <p className="text-sm text-gray-300">
-                            <strong className="text-[#f59e0b]">The Math Doesn't Lie:</strong> On ${thirdPartySalesWeekly.toLocaleString()}/week, switching from DoorDash to Indy Eats could add{' '}
-                            <span className="text-[#10b981] font-bold">${Math.round(difference).toLocaleString()}/week</span> to your bottom line
-                            {' '}— that's <span className="text-[#10b981] font-bold">${Math.round(difference * 52).toLocaleString()}/year</span>.
-                          </p>
+                        <div className="mt-6 p-6 bg-gradient-to-r from-[#f59e0b]/20 to-[#10b981]/20 border-2 border-[#f59e0b] rounded-xl">
+                          <h4 className="text-xl font-bold text-[#f59e0b] mb-4 flex items-center gap-2">
+                            🎯 Here's Your Play
+                          </h4>
+                          
+                          <div className="space-y-4 text-sm">
+                            <p className="text-gray-300">
+                              Third party apps like DoorDash take a massive cut — you're keeping just{' '}
+                              <span className={`font-bold ${ddYouKeepPerOrder >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                                ${ddYouKeepPerOrder.toFixed(2)}/order
+                              </span>. 
+                              But look at your other options:
+                            </p>
+                            
+                            <div className="grid md:grid-cols-2 gap-4">
+                              <div className="p-3 bg-black/30 rounded-lg">
+                                <p className="text-[#10b981] font-bold">Your Website keeps ${webYouKeepPerOrder.toFixed(2)}/order</p>
+                                <p className="text-gray-400 text-xs">That's <span className="text-[#10b981] font-bold">${Math.round(webVsDd).toLocaleString()}/week</span> more than DoorDash</p>
+                              </div>
+                              <div className="p-3 bg-black/30 rounded-lg">
+                                <p className="text-[#06b6d4] font-bold">Indy Eats keeps ${indyYouKeepPerOrder.toFixed(2)}/order</p>
+                                <p className="text-gray-400 text-xs">That's <span className="text-[#06b6d4] font-bold">${Math.round(indyVsDd).toLocaleString()}/week</span> more than DoorDash</p>
+                              </div>
+                            </div>
+                            
+                            <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg">
+                              <p className="text-[#10b981] font-bold mb-2">💡 Pro Move: Add a markup to your own ordering channels!</p>
+                              <p className="text-gray-300">
+                                Customers expect to pay a little more for delivery convenience. Try adding 10-15% using the markup fields on Your Website and Indy Eats cards above.
+                              </p>
+                              {hasMarkup && deliveryBeatsDineIn && (
+                                <p className="text-[#10b981] font-bold mt-2">
+                                  🔥 LOOK AT THAT! With your markup, delivery orders are now <span className="underline">MORE profitable than dine-in</span> — no table to bus, no server to tip out, no refills!
+                                </p>
+                              )}
+                              {hasMarkup && !deliveryBeatsDineIn && (
+                                <p className="text-[#fbbf24] mt-2">
+                                  You're getting closer! Try increasing your markup a bit more to make delivery MORE profitable than dine-in ({inHouseProfitMarginPercent.toFixed(1)}% margin).
+                                </p>
+                              )}
+                            </div>
+                            
+                            <div className="text-center pt-2 border-t border-white/10">
+                              <p className="text-gray-400">
+                                The math is clear: choosing the right channels puts{' '}
+                                <span className="text-[#10b981] font-bold text-lg">${Math.round(bestAltVsDd).toLocaleString()}/week</span> more in your pocket.
+                              </p>
+                              <p className="text-[#10b981] font-bold text-xl mt-1">
+                                That's ${Math.round(bestAltVsDd * 52).toLocaleString()}/year!
+                              </p>
+                            </div>
+                          </div>
                         </div>
                       )
                     })()}
-                    </div>
                   </div>
                 )}
 
