@@ -56,7 +56,8 @@ export default function MegaCalculator() {
   const [thirdPartyPriceIncrease, setThirdPartyPriceIncrease] = useState('20')
   const [thirdPartyPromoPercent, setThirdPartyPromoPercent] = useState('15')
   const [thirdPartyLaborImpact, setThirdPartyLaborImpact] = useState('15')
-  
+  const [selectedLaborScenario, setSelectedLaborScenario] = useState<'best' | 'estimate' | 'worst'>('estimate')
+ 
   // What-If
   const [whatIfFoodCostPercentReduction, setWhatIfFoodCostPercentReduction] = useState('')
   const [whatIfFoodSpendReduction, setWhatIfFoodSpendReduction] = useState('')
@@ -224,24 +225,88 @@ export default function MegaCalculator() {
     (parseFloat(linens) || 0) + (parseFloat(advertising) || 0)
   const monthlyVariableCosts = weeklyVariableCosts * 4.33
   
-  // Third Party
+ // Third Party Calculations
   const tpFeePercent = parseFloat(thirdPartyFeePercent) || 30
   const tpPriceIncreasePercent = parseFloat(thirdPartyPriceIncrease) || 20
   const tpPromoPercent = parseFloat(thirdPartyPromoPercent) || 15
-  const tpLaborImpactPercent = parseFloat(thirdPartyLaborImpact) || 0
-  const tpFeesWeekly = thirdPartySalesWeekly * (tpFeePercent / 100)
-  const tpMarkupRecoveryWeekly = thirdPartySalesWeekly * (tpPriceIncreasePercent / (100 + tpPriceIncreasePercent))
-  const tpPromoCostWeekly = thirdPartySalesWeekly * (tpPromoPercent / 100)
-  const tpFoodCostWeekly = thirdPartySalesWeekly * (estimatedFoodCostPercent / 100)
-  const tpLaborCostWeekly = thirdPartySalesWeekly * (laborCostPercent / 100) * (tpLaborImpactPercent / 100)
-  const tpNetCostWeekly = tpFeesWeekly - tpMarkupRecoveryWeekly + tpPromoCostWeekly
-  const tpProfitWeekly = thirdPartySalesWeekly - tpFoodCostWeekly - tpLaborCostWeekly - tpNetCostWeekly
-  const tpProfitMarginPercent = thirdPartySalesWeekly > 0 ? (tpProfitWeekly / thirdPartySalesWeekly) * 100 : 0
-  const tpProfitBestCase = thirdPartySalesWeekly - tpFoodCostWeekly - tpNetCostWeekly
-  const tpProfitWorstCase = thirdPartySalesWeekly - tpFoodCostWeekly - (thirdPartySalesWeekly * (laborCostPercent / 100)) - tpNetCostWeekly
-  const tpMarginBestCase = thirdPartySalesWeekly > 0 ? (tpProfitBestCase / thirdPartySalesWeekly) * 100 : 0
-  const tpMarginWorstCase = thirdPartySalesWeekly > 0 ? (tpProfitWorstCase / thirdPartySalesWeekly) * 100 : 0
+  const tpLaborImpactPercent = parseFloat(thirdPartyLaborImpact) || 15
+  const ccFeeRateTP = (parseFloat(ccFeePercent) || 2.9) / 100
+  
+  // Rates as decimals
+  const tpFeeRate = tpFeePercent / 100
+  const tpMarkupRate = tpPriceIncreasePercent / 100
+  const tpPromoRate = tpPromoPercent / 100
+  const tpLaborRate = tpLaborImpactPercent / 100
+  const foodCostRate = estimatedFoodCostPercent / 100
+  const laborRatePerSale = laborCostPercent / 100
+  
+  // === DOORDASH/UBEREATS MODEL ===
+  // Revenue per menu dollar after commission and promos
+  const ddGrossPerDollar = 1 + tpMarkupRate
+  const ddAfterCommission = ddGrossPerDollar * (1 - tpFeeRate)
+  const ddAfterPromos = ddAfterCommission - (ddGrossPerDollar * tpPromoRate)
+  const ddRevenuePerMenuDollar = ddAfterPromos
+  
+  // Three labor scenarios (per menu dollar)
+  const ddBestLabor = 0
+  const ddEstimateLabor = laborRatePerSale * tpLaborRate
+  const ddWorstLabor = laborRatePerSale
+  
+  // Profit per menu dollar
+  const ddBestProfit = ddRevenuePerMenuDollar - foodCostRate - ddBestLabor
+  const ddEstimateProfit = ddRevenuePerMenuDollar - foodCostRate - ddEstimateLabor
+  const ddWorstProfit = ddRevenuePerMenuDollar - foodCostRate - ddWorstLabor
+  
+  // Weekly projections
+  const ddBestWeekly = thirdPartySalesWeekly * ddBestProfit
+  const ddEstimateWeekly = thirdPartySalesWeekly * ddEstimateProfit
+  const ddWorstWeekly = thirdPartySalesWeekly * ddWorstProfit
+  
+  // Margins as percentages
+  const ddBestMargin = ddBestProfit * 100
+  const ddEstimateMargin = ddEstimateProfit * 100
+  const ddWorstMargin = ddWorstProfit * 100
+  
+  // Selected scenario (for comparison table)
+  const ddSelectedWeekly = selectedLaborScenario === 'best' ? ddBestWeekly 
+    : selectedLaborScenario === 'worst' ? ddWorstWeekly : ddEstimateWeekly
+  const ddSelectedMargin = selectedLaborScenario === 'best' ? ddBestMargin
+    : selectedLaborScenario === 'worst' ? ddWorstMargin : ddEstimateMargin
+  
+  // === YOUR WEBSITE MODEL ===
+  const webRevenuePerDollar = 1 - ccFeeRateTP
+  const webProfitPerDollar = webRevenuePerDollar - foodCostRate - laborRatePerSale
+  const webWeeklyProfit = thirdPartySalesWeekly * webProfitPerDollar
+  const webMargin = webProfitPerDollar * 100
+  
+  // === INDY EATS MODEL ===
+  const indyRevenuePerDollar = 1.0
+  const indyProfitPerDollar = indyRevenuePerDollar - foodCostRate - laborRatePerSale
+  const indyWeeklyProfit = thirdPartySalesWeekly * indyProfitPerDollar
+  const indyMargin = indyProfitPerDollar * 100
+  
+  // Example $25 order breakdown
+  const exampleOrder = 25
+  const exampleItems = 3
+  const ddCustomerPays = (exampleOrder * (1 + tpMarkupRate)) + 7
+  const webCustomerPays = exampleOrder + 7
+  const indyItemFee = Math.min(exampleItems * 0.20, 1.00)
+  const indySalesTax = exampleOrder * 0.035
+  const indyCustomerPays = exampleOrder + indyItemFee + 6 + indySalesTax
+  
+  // Restaurant keeps per $25 order
+  const ddRestaurantKeeps = exampleOrder * ddRevenuePerMenuDollar
+  const webRestaurantKeeps = exampleOrder * webRevenuePerDollar
+  const indyRestaurantKeeps = exampleOrder * indyRevenuePerDollar
+  
+  // Legacy variables for compatibility with rest of file
+  const tpProfitWeekly = ddSelectedWeekly
+  const tpProfitMarginPercent = ddSelectedMargin
+  const tpNetCostWeekly = thirdPartySalesWeekly - ddSelectedWeekly - (thirdPartySalesWeekly * foodCostRate)
   const tpNetCostMonthly = tpNetCostWeekly * 4.33
+  
+  // In-house margin for comparison
+  const inHouseProfitMarginPercent = sales > 0 ? (weeklyProfit / sales) * 100 : 0
   
   // Operating Costs & Break-Even
   const totalMonthlyOperatingCosts = totalMonthlyFixedCosts + monthlyVariableCosts + tpNetCostMonthly
@@ -958,7 +1023,7 @@ return (
             )}
           </div>
 
-          {/* THIRD PARTY REALITY CHECK */}
+{/* THIRD PARTY REALITY CHECK */}
           <div className="backdrop-blur-xl bg-gradient-to-r from-[#ef4444]/10 to-[#f97316]/10 border-2 border-[#ef4444]/50 rounded-2xl mb-6 overflow-hidden">
             <button onClick={() => toggleSection('thirdparty')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
               <div className="flex items-center gap-3">
@@ -971,10 +1036,10 @@ return (
             {expandedSections.thirdparty && (
               <div className="px-6 pb-6 border-t border-white/10">
                 {/* Intro Message */}
-                <div className="mt-6 p-4 bg-[#10b981]/20 border border-[#10b981]/50 rounded-lg">
+                <div className="mt-6 p-4 bg-[#ef4444]/20 border border-[#ef4444]/50 rounded-lg">
                   <p className="text-sm text-white flex items-start gap-2">
-                    <TrendingUp className="w-5 h-5 text-[#10b981] flex-shrink-0 mt-0.5" />
-                    <span><strong>Delivery can boost your bottom line!</strong> Since labor and overhead are largely fixed, third-party orders add incremental profit. The key is understanding your TRUE margins after fees.</span>
+                    <AlertTriangle className="w-5 h-5 text-[#fbbf24] flex-shrink-0 mt-0.5" />
+                    <span><strong>Third party apps want you to believe their fees replace your labor costs.</strong> They don't. Someone still preps, cooks, bags, and hands off every order. Select your labor reality below and see the truth.</span>
                   </p>
                 </div>
 
@@ -1015,15 +1080,14 @@ return (
                 </div>
 
                 {/* Labor Impact Slider */}
-                {thirdPartySalesWeekly > 0 && laborCostPercent > 0 && (
+                {thirdPartySalesWeekly > 0 && (
                   <div className="mt-6 p-4 bg-black/20 border border-white/10 rounded-lg">
                     <div className="flex items-center gap-2 mb-3">
                       <Info className="w-5 h-5 text-[#06b6d4]" />
-                      <label className="text-sm font-semibold text-gray-300">How much does delivery impact your labor?</label>
+                      <label className="text-sm font-semibold text-gray-300">How much does delivery impact your labor? (for "Your Estimate")</label>
                     </div>
                     <p className="text-xs text-gray-500 mb-4">
-                      If you are already staffed and delivery orders barely affect your kitchen, slide toward 0%. 
-                      If delivery rushes disrupt service and require extra hands, slide higher.
+                      Adjust the slider, then click one of the three scenarios below to see it reflected in the comparison table.
                     </p>
                     <div className="flex items-center gap-4">
                       <span className="text-xs text-gray-500 w-20">No impact</span>
@@ -1044,65 +1108,218 @@ return (
                   </div>
                 )}
 
-                {/* Margin Comparison - Side by Side Scenarios */}
+                {/* Clickable Scenario Selector */}
                 {thirdPartySalesWeekly > 0 && (
-                  <div className="mt-6 grid md:grid-cols-3 gap-4">
-                    {/* Best Case */}
-                    <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg text-center">
-                      <p className="text-xs text-gray-400 mb-1">Best Case (0% labor)</p>
-                      <p className="text-sm text-gray-500 mb-2">Delivery fits existing staff</p>
-                      <p className="text-2xl font-bold text-[#10b981]">${Math.round(tpProfitBestCase).toLocaleString()}/wk</p>
-                      <p className="text-sm text-[#10b981]">{tpMarginBestCase.toFixed(1)}% margin</p>
+                  <div className="mt-6">
+                    <p className="text-sm text-gray-400 mb-3 text-center">Click a scenario to see DoorDash/UberEats numbers in the comparison below:</p>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {/* Best Case */}
+                      <button 
+                        onClick={() => setSelectedLaborScenario('best')}
+                        className={`p-4 rounded-lg text-center transition-all ${
+                          selectedLaborScenario === 'best' 
+                            ? 'bg-[#10b981]/30 border-2 border-[#10b981] ring-2 ring-[#10b981]/50' 
+                            : 'bg-[#10b981]/10 border border-[#10b981]/30 hover:bg-[#10b981]/20'
+                        }`}
+                      >
+                        <p className="text-xs text-gray-400 mb-1">Best Case (0% labor)</p>
+                        <p className="text-sm text-gray-500 mb-2">Delivery fits existing staff</p>
+                        <p className="text-2xl font-bold text-[#10b981]">${Math.round(ddBestWeekly).toLocaleString()}/wk</p>
+                        <p className="text-sm text-[#10b981]">{ddBestMargin.toFixed(1)}% margin</p>
+                        {selectedLaborScenario === 'best' && <p className="text-xs text-[#10b981] mt-2 font-bold">✓ SELECTED</p>}
+                      </button>
+                      
+                      {/* User's Estimate */}
+                      <button 
+                        onClick={() => setSelectedLaborScenario('estimate')}
+                        className={`p-4 rounded-lg text-center transition-all ${
+                          selectedLaborScenario === 'estimate' 
+                            ? 'bg-[#06b6d4]/30 border-2 border-[#06b6d4] ring-2 ring-[#06b6d4]/50' 
+                            : 'bg-[#06b6d4]/10 border border-[#06b6d4]/30 hover:bg-[#06b6d4]/20'
+                        }`}
+                      >
+                        <p className="text-xs text-gray-400 mb-1">Your Estimate ({thirdPartyLaborImpact}% labor)</p>
+                        <p className="text-sm text-gray-500 mb-2">{getLaborImpactDescription(tpLaborImpactPercent)}</p>
+                        <p className="text-2xl font-bold text-[#06b6d4]">${Math.round(ddEstimateWeekly).toLocaleString()}/wk</p>
+                        <p className="text-sm text-[#06b6d4]">{ddEstimateMargin.toFixed(1)}% margin</p>
+                        {selectedLaborScenario === 'estimate' && <p className="text-xs text-[#06b6d4] mt-2 font-bold">✓ SELECTED</p>}
+                      </button>
+                      
+                      {/* Worst Case */}
+                      <button 
+                        onClick={() => setSelectedLaborScenario('worst')}
+                        className={`p-4 rounded-lg text-center transition-all ${
+                          selectedLaborScenario === 'worst' 
+                            ? 'bg-[#ef4444]/30 border-2 border-[#ef4444] ring-2 ring-[#ef4444]/50' 
+                            : 'bg-[#ef4444]/10 border border-[#ef4444]/30 hover:bg-[#ef4444]/20'
+                        }`}
+                      >
+                        <p className="text-xs text-gray-400 mb-1">Worst Case (100% labor)</p>
+                        <p className="text-sm text-gray-500 mb-2">Fully burdened with labor</p>
+                        <p className={`text-2xl font-bold ${ddWorstWeekly >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                          ${Math.round(ddWorstWeekly).toLocaleString()}/wk
+                        </p>
+                        <p className={`text-sm ${ddWorstMargin >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                          {ddWorstMargin.toFixed(1)}% margin
+                        </p>
+                        {selectedLaborScenario === 'worst' && <p className="text-xs text-[#ef4444] mt-2 font-bold">✓ SELECTED</p>}
+                      </button>
                     </div>
+                  </div>
+                )}
+
+                {/* Channel Comparison Table */}
+                {thirdPartySalesWeekly > 0 && (
+                  <div className="mt-8">
+                    <h3 className="text-lg font-bold text-white mb-4 text-center">Channel Comparison (on ${thirdPartySalesWeekly.toLocaleString()}/week in delivery sales)</h3>
                     
-                    {/* User's Estimate */}
-                    <div className="p-4 bg-[#06b6d4]/10 border-2 border-[#06b6d4] rounded-lg text-center">
-                      <p className="text-xs text-gray-400 mb-1">Your Estimate ({thirdPartyLaborImpact}% labor)</p>
-                      <p className="text-sm text-gray-500 mb-2">{getLaborImpactDescription(tpLaborImpactPercent)}</p>
-                      <p className="text-2xl font-bold text-[#06b6d4]">${Math.round(tpProfitWeekly).toLocaleString()}/wk</p>
-                      <p className="text-sm text-[#06b6d4]">{tpProfitMarginPercent.toFixed(1)}% margin</p>
+                    {/* Comparison Grid */}
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {/* DoorDash/UberEats Column */}
+                      <div className="p-5 bg-[#ef4444]/10 border-2 border-[#ef4444]/50 rounded-xl">
+                        <h4 className="text-lg font-bold text-[#ef4444] mb-4 text-center">DoorDash / UberEats</h4>
+                        <div className="space-y-3 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Commission:</span>
+                            <span className="text-[#ef4444]">-{tpFeePercent}%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Your Markup:</span>
+                            <span className="text-[#10b981]">+{tpPriceIncreasePercent}%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Promo Costs:</span>
+                            <span className="text-[#ef4444]">-{tpPromoPercent}%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Labor Impact:</span>
+                            <span className="text-[#fbbf24]">{selectedLaborScenario === 'best' ? '0' : selectedLaborScenario === 'worst' ? '100' : thirdPartyLaborImpact}%</span>
+                          </div>
+                          <div className="border-t border-white/10 pt-3 mt-3">
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">Customer Pays ($25 order):</span>
+                              <span className="text-white">${ddCustomerPays.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">You Keep:</span>
+                              <span className="text-white">${ddRestaurantKeeps.toFixed(2)}</span>
+                            </div>
+                          </div>
+                          <div className="border-t border-white/10 pt-3 mt-3">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-300 font-semibold">Weekly Profit:</span>
+                              <span className={`text-xl font-bold ${ddSelectedWeekly >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                                ${Math.round(ddSelectedWeekly).toLocaleString()}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">Margin:</span>
+                              <span className={`font-bold ${ddSelectedMargin >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                                {ddSelectedMargin.toFixed(1)}%
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Your Website Column */}
+                      <div className="p-5 bg-[#10b981]/10 border-2 border-[#10b981]/50 rounded-xl">
+                        <h4 className="text-lg font-bold text-[#10b981] mb-4 text-center">Your Website</h4>
+                        <div className="space-y-3 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Commission:</span>
+                            <span className="text-[#10b981]">0%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Price Markup:</span>
+                            <span className="text-gray-400">0%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">CC Fees:</span>
+                            <span className="text-[#fbbf24]">-{(ccFeeRateTP * 100).toFixed(1)}%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Labor:</span>
+                            <span className="text-gray-400">Normal (included)</span>
+                          </div>
+                          <div className="border-t border-white/10 pt-3 mt-3">
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">Customer Pays ($25 order):</span>
+                              <span className="text-white">${webCustomerPays.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">You Keep:</span>
+                              <span className="text-white">${webRestaurantKeeps.toFixed(2)}</span>
+                            </div>
+                          </div>
+                          <div className="border-t border-white/10 pt-3 mt-3">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-300 font-semibold">Weekly Profit:</span>
+                              <span className="text-xl font-bold text-[#10b981]">${Math.round(webWeeklyProfit).toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">Margin:</span>
+                              <span className="font-bold text-[#10b981]">{webMargin.toFixed(1)}%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Indy Eats Column */}
+                      <div className="p-5 bg-[#06b6d4]/10 border-2 border-[#06b6d4]/50 rounded-xl">
+                        <h4 className="text-lg font-bold text-[#06b6d4] mb-4 text-center">Indy Eats</h4>
+                        <div className="space-y-3 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Commission:</span>
+                            <span className="text-[#10b981]">0%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Price Markup:</span>
+                            <span className="text-gray-400">0%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Per-Item Fee:</span>
+                            <span className="text-gray-400">$0.20 (max $1)</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-400">Fees Paid By:</span>
+                            <span className="text-[#10b981]">Customer</span>
+                          </div>
+                          <div className="border-t border-white/10 pt-3 mt-3">
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">Customer Pays ($25, 3 items):</span>
+                              <span className="text-white">${indyCustomerPays.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">You Keep:</span>
+                              <span className="text-[#10b981] font-bold">${indyRestaurantKeeps.toFixed(2)}</span>
+                            </div>
+                          </div>
+                          <div className="border-t border-white/10 pt-3 mt-3">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-300 font-semibold">Weekly Profit:</span>
+                              <span className="text-xl font-bold text-[#06b6d4]">${Math.round(indyWeeklyProfit).toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400">Margin:</span>
+                              <span className="font-bold text-[#06b6d4]">{indyMargin.toFixed(1)}%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    
-                    {/* Worst Case */}
-                    <div className="p-4 bg-[#ef4444]/10 border border-[#ef4444]/30 rounded-lg text-center">
-                      <p className="text-xs text-gray-400 mb-1">Worst Case (100% labor)</p>
-                      <p className="text-sm text-gray-500 mb-2">Fully burdened with labor</p>
-                      <p className={`text-2xl font-bold ${tpProfitWorstCase >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                        ${Math.round(tpProfitWorstCase).toLocaleString()}/wk
-                      </p>
-                      <p className={`text-sm ${tpMarginWorstCase >= 0 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                        {tpMarginWorstCase.toFixed(1)}% margin
+
+                    {/* Bottom insight */}
+                    <div className="mt-6 p-4 bg-[#f59e0b]/10 border border-[#f59e0b]/30 rounded-lg text-center">
+                      <p className="text-sm text-gray-300">
+                        <strong className="text-[#f59e0b]">The Math Doesn't Lie:</strong> On ${thirdPartySalesWeekly.toLocaleString()}/week, switching from DoorDash to Indy Eats could add{' '}
+                        <span className="text-[#10b981] font-bold">${Math.round(indyWeeklyProfit - ddSelectedWeekly).toLocaleString()}/week</span> to your bottom line
+                        {' '}— that's <span className="text-[#10b981] font-bold">${Math.round((indyWeeklyProfit - ddSelectedWeekly) * 52).toLocaleString()}/year</span>.
                       </p>
                     </div>
                   </div>
                 )}
 
-                {/* In-House vs Third Party Comparison */}
-                {thirdPartySalesWeekly > 0 && (
-                  <div className="mt-6 grid md:grid-cols-2 gap-4">
-                    <div className="p-4 bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg text-center">
-                      <p className="text-sm text-gray-400 mb-2">In-House Profit Margin</p>
-                      <p className="text-3xl font-bold text-[#10b981]">{inHouseProfitMarginPercent.toFixed(1)}%</p>
-                      <p className="text-xs text-gray-500 mt-1">What you keep from dine-in/pickup</p>
-                    </div>
-                    <div className="p-4 bg-[#ef4444]/10 border border-[#ef4444]/30 rounded-lg text-center">
-                      <p className="text-sm text-gray-400 mb-2">Third Party Profit Margin</p>
-                      <p className="text-3xl font-bold text-[#ef4444]">{tpProfitMarginPercent.toFixed(1)}%</p>
-                      <p className="text-xs text-gray-500 mt-1">What you keep from DoorDash/UberEats</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Link to Full Calculator */}
-                <div className="mt-6 p-4 bg-[#f59e0b]/10 border border-[#f59e0b]/30 rounded-lg">
-                  <p className="text-sm text-gray-300">
-                    <strong className="text-[#f59e0b]">Want the full breakdown?</strong> Use our dedicated{' '}
-                    <Link href="/free-tools/third-party-fees" className="text-[#f59e0b] underline hover:text-[#fbbf24]">
-                      Third Party Fees Calculator
-                    </Link>{' '}
-                    for a complete comparison of DoorDash vs your own ordering system vs Indy Eats.
-                  </p>
-                </div>
               </div>
             )}
           </div>
