@@ -150,8 +150,8 @@ export default function MegaCalculator() {
   const whatIfFoodPctReduction = parseFloat(whatIfFoodCostPercentReduction) || 0
   const whatIfFoodSpendDollarReduction = parseFloat(whatIfFoodSpendReduction) || 0
   const whatIfPriceIncrease = parseFloat(priceIncreasePercent) || 0
-  const whatIfLaborReduction = parseFloat(laborReductionPercent) || 0
-  const hasActiveWhatIf = whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0 || whatIfPriceIncrease > 0 || whatIfLaborReduction > 0
+  const whatIfLaborPctReduction = parseFloat(laborReductionPercent) || 0 // Now % POINTS, not % of labor
+  const hasActiveWhatIf = whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0 || whatIfPriceIncrease > 0 || whatIfLaborPctReduction > 0
   const linkedFoodSpendFromPercent = sales > 0 ? sales * (whatIfFoodPctReduction / 100) : 0
   const linkedFoodPercentFromSpend = currentWeeklyFoodSpend > 0 ? (whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100 : 0
 
@@ -163,20 +163,37 @@ export default function MegaCalculator() {
     if (activeWhatIfInput === 'dollar' && whatIfFoodSpendDollarReduction > 0 && currentWeeklyFoodSpend > 0) setWhatIfFoodCostPercentReduction(((whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100).toFixed(1))
   }, [whatIfFoodSpendDollarReduction, activeWhatIfInput, currentWeeklyFoodSpend])
 
+  // Calculate what-if adjusted sales (price increase means more revenue)
+  const whatIfAdjustedSales = sales * (1 + whatIfPriceIncrease / 100)
+  
+  // Food cost % changes from: direct reduction OR price increase (same $ spend / higher sales = lower %)
+  const foodPercentReductionFromDirect = whatIfFoodPctReduction > 0 ? whatIfFoodPctReduction : (currentWeeklyFoodSpend > 0 && whatIfFoodSpendDollarReduction > 0 ? (whatIfFoodSpendDollarReduction / sales) * 100 : 0)
+  const foodSpendAfterReduction = currentWeeklyFoodSpend - (whatIfFoodPctReduction > 0 ? linkedFoodSpendFromPercent : whatIfFoodSpendDollarReduction)
+  const whatIfAdjustedFoodCostPercent = whatIfAdjustedSales > 0 ? (foodSpendAfterReduction / whatIfAdjustedSales) * 100 : estimatedFoodCostPercent
+  
+  // Labor cost % changes from: direct % point reduction OR price increase (same $ labor / higher sales = lower %)
+  const laborSpendAfterReduction = totalLaborCost - (sales * (whatIfLaborPctReduction / 100))
+  const whatIfAdjustedLaborCostPercent = whatIfAdjustedSales > 0 ? (laborSpendAfterReduction / whatIfAdjustedSales) * 100 : laborCostPercent
+  
+  // Prime cost is sum of adjusted food + labor
+  const whatIfAdjustedPrimeCostPercent = whatIfAdjustedFoodCostPercent + whatIfAdjustedLaborCostPercent
+  
+  // Calculate savings
   const effectiveFoodSavingsWeekly = whatIfFoodPctReduction > 0 ? linkedFoodSpendFromPercent : whatIfFoodSpendDollarReduction
   const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100)
-  const laborSavingsWeekly = totalLaborCost * (whatIfLaborReduction / 100)
+  const laborSavingsWeekly = sales * (whatIfLaborPctReduction / 100) // Now based on % points of SALES
   const grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly
   const grandTotalSavingsMonthly = grandTotalSavingsWeekly * 4.33
   const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
-  const foodPercentReductionForCalc = whatIfFoodPctReduction > 0 ? whatIfFoodPctReduction : (currentWeeklyFoodSpend > 0 && whatIfFoodSpendDollarReduction > 0 ? (whatIfFoodSpendDollarReduction / sales) * 100 : 0)
-  const whatIfAdjustedFoodCostPercent = estimatedFoodCostPercent - foodPercentReductionForCalc
-  const whatIfAdjustedLaborCostPercent = laborCostPercent * (1 - whatIfLaborReduction / 100)
-  const whatIfAdjustedPrimeCostPercent = whatIfAdjustedFoodCostPercent + whatIfAdjustedLaborCostPercent
+  
   const whatIfAdjustedWeeklyProfit = weeklyProfit + grandTotalSavingsWeekly
   const whatIfContributionMarginPercent = 100 - whatIfAdjustedPrimeCostPercent
   const whatIfBreakEvenMonthly = whatIfContributionMarginPercent > 0 ? (totalMonthlyOperatingCosts / (whatIfContributionMarginPercent / 100)) : 0
   const whatIfBreakEvenWeekly = whatIfBreakEvenMonthly / 4.33
+  
+  // For display deltas
+  const foodPercentDrop = estimatedFoodCostPercent - whatIfAdjustedFoodCostPercent
+  const laborPercentDrop = laborCostPercent - whatIfAdjustedLaborCostPercent
 
   // DISPLAY VALUES - switch based on what-if
   const displayFoodCostPercent = hasActiveWhatIf ? whatIfAdjustedFoodCostPercent : estimatedFoodCostPercent
@@ -233,46 +250,46 @@ export default function MegaCalculator() {
       <section className="relative pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           
-          {/* STICKY DASHBOARD */}
-          <div className="backdrop-blur-xl bg-black/80 border border-white/20 rounded-2xl p-6 mb-8 sticky top-20 z-10 shadow-2xl">
+          {/* STICKY DASHBOARD - Compact, pinned to nav */}
+          <div className="backdrop-blur-xl bg-black/90 border-b border-white/20 p-3 mb-8 sticky top-16 z-10 shadow-2xl -mx-4 px-4">
             {hasActiveWhatIf && (
-              <div className="mb-4 px-4 py-2 bg-[#f59e0b]/20 border border-[#f59e0b]/50 rounded-lg text-center">
-                <span className="text-[#f59e0b] font-semibold text-sm">⚡ What-If Mode Active — Showing projected numbers</span>
+              <div className="mb-2 px-3 py-1.5 bg-[#f59e0b]/20 border border-[#f59e0b]/50 rounded-lg text-center">
+                <span className="text-[#f59e0b] font-semibold text-xs">⚡ What-If Mode Active — Showing projected numbers</span>
               </div>
             )}
-            <div className="grid grid-cols-2 md:grid-cols-7 gap-4 text-center">
+            <div className="grid grid-cols-4 md:grid-cols-7 gap-2 md:gap-4 text-center">
               <div>
-                <p className="text-xs text-gray-400 mb-1">Food Cost</p>
-                <p className={`text-xl font-bold ${foodStatus.color}`}>{displayFoodCostPercent !== 0 ? `${displayFoodCostPercent.toFixed(1)}%` : '—'}</p>
-                {hasActiveWhatIf && foodPercentReductionForCalc > 0 && <p className="text-xs text-[#10b981]">↓ {foodPercentReductionForCalc.toFixed(1)}%</p>}
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5">Food Cost</p>
+                <p className={`text-lg md:text-xl font-bold ${foodStatus.color}`}>{displayFoodCostPercent !== 0 ? `${displayFoodCostPercent.toFixed(1)}%` : '—'}</p>
+                {hasActiveWhatIf && foodPercentDrop > 0.1 && <p className="text-[10px] text-[#10b981]">↓ {foodPercentDrop.toFixed(1)}%</p>}
               </div>
               <div>
-                <p className="text-xs text-gray-400 mb-1">Labor Cost</p>
-                <p className={`text-xl font-bold ${laborStatus.color}`}>{displayLaborCostPercent > 0 ? `${displayLaborCostPercent.toFixed(1)}%` : '—'}</p>
-                {hasActiveWhatIf && whatIfLaborReduction > 0 && <p className="text-xs text-[#10b981]">↓ {whatIfLaborReduction}%</p>}
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5">Labor Cost</p>
+                <p className={`text-lg md:text-xl font-bold ${laborStatus.color}`}>{displayLaborCostPercent > 0 ? `${displayLaborCostPercent.toFixed(1)}%` : '—'}</p>
+                {hasActiveWhatIf && laborPercentDrop > 0.1 && <p className="text-[10px] text-[#10b981]">↓ {laborPercentDrop.toFixed(1)}%</p>}
+              </div>
+              <div className="hidden md:block">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5">Prime Cost</p>
+                <p className={`text-lg md:text-xl font-bold ${primeStatus.color}`}>{displayPrimeCostPercent > 0 ? `${displayPrimeCostPercent.toFixed(1)}%` : '—'}</p>
+              </div>
+              <div className="border-l border-r border-white/10 px-1 md:px-2">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5">Break-Even</p>
+                <p className="text-lg md:text-xl font-bold text-[#06b6d4]">{displayBreakEvenWeekly > 0 ? `$${Math.round(displayBreakEvenWeekly/1000)}k` : '—'}</p>
+                {hasActiveWhatIf && breakEvenWeekly > 0 && whatIfBreakEvenWeekly < breakEvenWeekly && <p className="text-[10px] text-[#10b981]">↓ ${Math.round((breakEvenWeekly - whatIfBreakEvenWeekly)/100)*100}</p>}
+              </div>
+              <div className="hidden md:block">
+                <p className="text-[10px] md:text-xs text-green-400 mb-0.5">In-House</p>
+                <p className={`text-lg md:text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>{sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '—'}</p>
+              </div>
+              <div className="hidden md:block">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5">Blended</p>
+                <p className={`text-lg md:text-xl font-bold ${blendedProfitMarginPercent >= 10 ? 'text-[#10b981]' : blendedProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>{sales > 0 ? `${blendedProfitMarginPercent.toFixed(1)}%` : '—'}</p>
+                {marginDropPercent > 0.5 && <p className="text-[10px] text-red-400">↓ {marginDropPercent.toFixed(1)}%</p>}
               </div>
               <div>
-                <p className="text-xs text-gray-400 mb-1">Prime Cost</p>
-                <p className={`text-xl font-bold ${primeStatus.color}`}>{displayPrimeCostPercent > 0 ? `${displayPrimeCostPercent.toFixed(1)}%` : '—'}</p>
-              </div>
-              <div className="border-l border-r border-white/10 px-2">
-                <p className="text-xs text-gray-400 mb-1">Break-Even/wk</p>
-                <p className="text-xl font-bold text-[#06b6d4]">{displayBreakEvenWeekly > 0 ? `$${Math.round(displayBreakEvenWeekly).toLocaleString()}` : '—'}</p>
-                {hasActiveWhatIf && breakEvenWeekly > 0 && whatIfBreakEvenWeekly < breakEvenWeekly && <p className="text-xs text-[#10b981]">↓ ${Math.round(breakEvenWeekly - whatIfBreakEvenWeekly).toLocaleString()}</p>}
-              </div>
-              <div>
-                <p className="text-xs text-green-400 mb-1">In-House Margin</p>
-                <p className={`text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>{sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '—'}</p>
-              </div>
-              <div>
-                <p className="text-xs text-gray-400 mb-1">Blended Margin</p>
-                <p className={`text-xl font-bold ${blendedProfitMarginPercent >= 10 ? 'text-[#10b981]' : blendedProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>{sales > 0 ? `${blendedProfitMarginPercent.toFixed(1)}%` : '—'}</p>
-                {marginDropPercent > 0.5 && <p className="text-xs text-red-400">↓ {marginDropPercent.toFixed(1)}%</p>}
-              </div>
-              <div>
-                <p className="text-xs text-gray-400 mb-1">Weekly Profit</p>
-                <p className={`text-xl font-bold ${displayWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>{sales > 0 ? `$${Math.round(displayWeeklyProfit).toLocaleString()}` : '—'}</p>
-                {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && <p className="text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>}
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5">Profit/wk</p>
+                <p className={`text-lg md:text-xl font-bold ${displayWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>{sales > 0 ? `$${(displayWeeklyProfit/1000).toFixed(1)}k` : '—'}</p>
+                {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && <p className="text-[10px] text-[#10b981]">+${Math.round(grandTotalSavingsWeekly)}</p>}
               </div>
             </div>
           </div>
@@ -546,10 +563,10 @@ export default function MegaCalculator() {
                       {whatIfPriceIncrease > 0 && <div className="space-y-1 text-sm"><p className="text-gray-400">Weekly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly).toLocaleString()}</span></p><p className="text-gray-400">Yearly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly * 52).toLocaleString()}</span></p></div>}
                     </div>
                     <div className="p-4 bg-black/20 rounded-lg border border-white/10">
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Labor by ___%</label>
-                      <p className="text-xs text-gray-500 mb-3">Scheduling efficiency, cross-training</p>
-                      <div className="flex gap-2 mb-4"><input type="number" value={laborReductionPercent} onChange={(e) => setLaborReductionPercent(e.target.value)} placeholder="2" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">%</span></div>
-                      {whatIfLaborReduction > 0 && <div className="space-y-1 text-sm"><p className="text-gray-400">Weekly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly).toLocaleString()}</span></p><p className="text-gray-400">Yearly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly * 52).toLocaleString()}</span></p></div>}
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">Drop Labor % by ___ points</label>
+                      <p className="text-xs text-gray-500 mb-3">Example: 30% → 27% = enter 3</p>
+                      <div className="flex gap-2 mb-4"><input type="number" value={laborReductionPercent} onChange={(e) => setLaborReductionPercent(e.target.value)} placeholder="3" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">% pts</span></div>
+                      {whatIfLaborPctReduction > 0 && <div className="space-y-1 text-sm"><p className="text-gray-400">Weekly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly).toLocaleString()}</span></p><p className="text-gray-400">Yearly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly * 52).toLocaleString()}</span></p></div>}
                     </div>
                   </div>
 
