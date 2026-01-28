@@ -156,19 +156,35 @@ export default function MegaCalculator() {
   const linkedFoodPercentFromSpend = currentWeeklyFoodSpend > 0 ? (whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100 : 0
 
   useEffect(() => {
-    if (activeWhatIfInput === 'percent' && whatIfFoodPctReduction > 0 && sales > 0) setWhatIfFoodSpendReduction((sales * (whatIfFoodPctReduction / 100)).toFixed(0))
+    if (activeWhatIfInput === 'percent' && whatIfFoodPctReduction > 0 && sales > 0) {
+      // % points → $ conversion: % points * sales = dollar savings
+      setWhatIfFoodSpendReduction((sales * (whatIfFoodPctReduction / 100)).toFixed(0))
+    }
   }, [whatIfFoodPctReduction, activeWhatIfInput, sales])
 
   useEffect(() => {
-    if (activeWhatIfInput === 'dollar' && whatIfFoodSpendDollarReduction > 0 && currentWeeklyFoodSpend > 0) setWhatIfFoodCostPercentReduction(((whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100).toFixed(1))
-  }, [whatIfFoodSpendDollarReduction, activeWhatIfInput, currentWeeklyFoodSpend])
+    if (activeWhatIfInput === 'dollar' && whatIfFoodSpendDollarReduction > 0 && sales > 0) {
+      // $ → % points conversion: dollar savings / sales = % points
+      setWhatIfFoodCostPercentReduction(((whatIfFoodSpendDollarReduction / sales) * 100).toFixed(1))
+    }
+  }, [whatIfFoodSpendDollarReduction, activeWhatIfInput, sales])
+
+  // Clear the OTHER box when focusing on one
+  const handleFoodPercentFocus = () => {
+    setActiveWhatIfInput('percent')
+    setWhatIfFoodSpendReduction('')
+  }
+  const handleFoodDollarFocus = () => {
+    setActiveWhatIfInput('dollar')
+    setWhatIfFoodCostPercentReduction('')
+  }
 
   // Calculate what-if adjusted sales (price increase means more revenue)
   const whatIfAdjustedSales = sales * (1 + whatIfPriceIncrease / 100)
   
-  // Food cost % changes from: direct reduction OR price increase (same $ spend / higher sales = lower %)
-  const foodPercentReductionFromDirect = whatIfFoodPctReduction > 0 ? whatIfFoodPctReduction : (currentWeeklyFoodSpend > 0 && whatIfFoodSpendDollarReduction > 0 ? (whatIfFoodSpendDollarReduction / sales) * 100 : 0)
-  const foodSpendAfterReduction = currentWeeklyFoodSpend - (whatIfFoodPctReduction > 0 ? linkedFoodSpendFromPercent : whatIfFoodSpendDollarReduction)
+  // Food cost % - ONLY uses the % points box (which auto-fills from $ input)
+  // This is the single source of truth for food cost reduction
+  const foodSpendAfterReduction = currentWeeklyFoodSpend - (sales * (whatIfFoodPctReduction / 100))
   const whatIfAdjustedFoodCostPercent = whatIfAdjustedSales > 0 ? (foodSpendAfterReduction / whatIfAdjustedSales) * 100 : estimatedFoodCostPercent
   
   // Labor cost % changes from: direct % point reduction OR price increase (same $ labor / higher sales = lower %)
@@ -178,11 +194,11 @@ export default function MegaCalculator() {
   // Prime cost is sum of adjusted food + labor
   const whatIfAdjustedPrimeCostPercent = whatIfAdjustedFoodCostPercent + whatIfAdjustedLaborCostPercent
   
-  // Calculate savings
-  const effectiveFoodSavingsWeekly = whatIfFoodPctReduction > 0 ? linkedFoodSpendFromPercent : whatIfFoodSpendDollarReduction
+  // Calculate savings - all based on % points (the single source of truth)
+  const foodSavingsWeekly = sales * (whatIfFoodPctReduction / 100)
   const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100)
-  const laborSavingsWeekly = sales * (whatIfLaborPctReduction / 100) // Now based on % points of SALES
-  const grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly
+  const laborSavingsWeekly = sales * (whatIfLaborPctReduction / 100)
+  const grandTotalSavingsWeekly = foodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly
   const grandTotalSavingsMonthly = grandTotalSavingsWeekly * 4.33
   const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
   
@@ -542,14 +558,14 @@ export default function MegaCalculator() {
                       <div>
                         <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Food Cost by ___% of sales</label>
                         <p className="text-xs text-gray-500 mb-3">Example: Reduce from 30% to 28% = enter 2</p>
-                        <div className="flex gap-2"><input type="number" value={whatIfFoodCostPercentReduction} onChange={(e) => { setActiveWhatIfInput('percent'); setWhatIfFoodCostPercentReduction(e.target.value) }} onFocus={() => setActiveWhatIfInput('percent')} placeholder="2" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">% points</span></div>
+                        <div className="flex gap-2"><input type="number" value={whatIfFoodCostPercentReduction} onChange={(e) => setWhatIfFoodCostPercentReduction(e.target.value)} onFocus={handleFoodPercentFocus} placeholder="2" className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">% points</span></div>
                         {whatIfFoodPctReduction > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">Weekly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent).toLocaleString()}</strong></p><p className="text-sm text-gray-300">Yearly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent * 52).toLocaleString()}</strong></p></div>}
                       </div>
                       <div>
                         <label className="block text-sm font-semibold text-gray-300 mb-2">OR Reduce Food Spend by $___/week</label>
                         <p className="text-xs text-gray-500 mb-3">Direct dollar savings on food purchases</p>
-                        <div className="flex gap-2"><span className="py-2 text-gray-400">$</span><input type="number" value={whatIfFoodSpendReduction} onChange={(e) => { setActiveWhatIfInput('dollar'); setWhatIfFoodSpendReduction(e.target.value) }} onFocus={() => setActiveWhatIfInput('dollar')} placeholder="500" className="w-28 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">/week</span></div>
-                        {whatIfFoodSpendDollarReduction > 0 && currentWeeklyFoodSpend > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">That's <strong className="text-[#10b981]">{linkedFoodPercentFromSpend.toFixed(1)}%</strong> of your food spend</p><p className="text-sm text-gray-300">Yearly savings: <strong className="text-[#10b981]">+${Math.round(whatIfFoodSpendDollarReduction * 52).toLocaleString()}</strong></p></div>}
+                        <div className="flex gap-2"><span className="py-2 text-gray-400">$</span><input type="number" value={whatIfFoodSpendReduction} onChange={(e) => setWhatIfFoodSpendReduction(e.target.value)} onFocus={handleFoodDollarFocus} placeholder="500" className="w-28 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" /><span className="py-2 text-gray-400">/week</span></div>
+                        {whatIfFoodSpendDollarReduction > 0 && sales > 0 && <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg"><p className="text-sm text-gray-300">That's <strong className="text-[#10b981]">{((whatIfFoodSpendDollarReduction / sales) * 100).toFixed(1)}%</strong> points off your food cost</p><p className="text-sm text-gray-300">Yearly savings: <strong className="text-[#10b981]">+${Math.round(whatIfFoodSpendDollarReduction * 52).toLocaleString()}</strong></p></div>}
                       </div>
                     </div>
                     <div className="mt-4 p-3 bg-[#fbbf24]/10 border border-[#fbbf24]/30 rounded-lg"><p className="text-xs text-gray-300"><strong className="text-[#fbbf24]">Vendor Promises:</strong> When vendors promise 10% savings they mean 10% off your spend - NOT reducing your food cost percentage by 10 points. A 10% spend reduction on ${Math.round(currentWeeklyFoodSpend).toLocaleString()}/week = ${Math.round(currentWeeklyFoodSpend * 0.1).toLocaleString()}/week saved.</p></div>
