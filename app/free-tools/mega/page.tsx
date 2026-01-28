@@ -10,48 +10,48 @@ import {
 
 export default function MegaCalculator() {
   // Sales & Revenue
-  const [weeklySales, setWeeklySales] = useState('')
-  const [ppa, setPpa] = useState('')
+  const [weeklySales, setWeeklySales] = useState('20000')
+  const [ppa, setPpa] = useState('25')
   
   // Food Costing
-  const [dishName, setDishName] = useState('')
-  const [menuPrice, setMenuPrice] = useState('')
+  const [dishName, setDishName] = useState('Wings')
+  const [menuPrice, setMenuPrice] = useState('15')
   const [quickMode, setQuickMode] = useState(true)
-  const [quickFoodCostPercent, setQuickFoodCostPercent] = useState('')
+  const [quickFoodCostPercent, setQuickFoodCostPercent] = useState('30')
   const [ingredients, setIngredients] = useState([
     { id: 1, name: '', soldBy: 'weight', dozenPerCase: '', caseQuantity: '', casePrice: '', plateAmount: '', plateUnit: 'oz' }
   ])
   
   // Labor
-  const [grossWages, setGrossWages] = useState('')
+  const [grossWages, setGrossWages] = useState('5000')
   const [tipPercent, setTipPercent] = useState('20')
   const [payrollTaxRate, setPayrollTaxRate] = useState('11')
-  const [benefits, setBenefits] = useState('')
-  const [payrollProcessing, setPayrollProcessing] = useState('')
+  const [benefits, setBenefits] = useState('0')
+  const [payrollProcessing, setPayrollProcessing] = useState('100')
   
   // Fixed Costs (Monthly)
-  const [rent, setRent] = useState('')
-  const [utilities, setUtilities] = useState('')
-  const [insurance, setInsurance] = useState('')
-  const [loanPayments, setLoanPayments] = useState('')
-  const [ccPayments, setCcPayments] = useState('')
-  const [ccFeePercent, setCcFeePercent] = useState('2.9')
+  const [rent, setRent] = useState('5000')
+  const [utilities, setUtilities] = useState('3000')
+  const [insurance, setInsurance] = useState('1000')
+  const [loanPayments, setLoanPayments] = useState('0')
+  const [ccPayments, setCcPayments] = useState('0')
+  const [ccFeePercent, setCcFeePercent] = useState('3.25')
   const [ccSalesPercent, setCcSalesPercent] = useState('80')
-  const [posSystem, setPosSystem] = useState('')
+  const [posSystem, setPosSystem] = useState('350')
   
   // Variable Costs (Weekly)
-  const [entertainment, setEntertainment] = useState('')
-  const [trivia, setTrivia] = useState('')
-  const [linens, setLinens] = useState('')
-  const [advertising, setAdvertising] = useState('')
+  const [entertainment, setEntertainment] = useState('100')
+  const [trivia, setTrivia] = useState('100')
+  const [linens, setLinens] = useState('150')
+  const [advertising, setAdvertising] = useState('100')
   
   // Periodic Costs
-  const [greaseTrap, setGreaseTrap] = useState('')
-  const [hoodCleaning, setHoodCleaning] = useState('')
-  const [alcoholLicense, setAlcoholLicense] = useState('')
+  const [greaseTrap, setGreaseTrap] = useState('400')
+  const [hoodCleaning, setHoodCleaning] = useState('400')
+  const [alcoholLicense, setAlcoholLicense] = useState('6000')
   
   // Third Party
-  const [thirdPartySales, setThirdPartySales] = useState('')
+  const [thirdPartySales, setThirdPartySales] = useState('1000')
   const [thirdPartyFeePercent, setThirdPartyFeePercent] = useState('30')
   const [thirdPartyPriceIncrease, setThirdPartyPriceIncrease] = useState('20')
   const [thirdPartyPromoPercent, setThirdPartyPromoPercent] = useState('15')
