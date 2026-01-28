@@ -1000,7 +1000,7 @@ export default function MegaCalculator() {
             )}
           </div>
 
-{/* THIRD PARTY REALITY CHECK */}
+          {/* THIRD PARTY REALITY CHECK */}
           <div className="backdrop-blur-xl bg-gradient-to-r from-[#ef4444]/10 to-[#f97316]/10 border-2 border-[#ef4444]/50 rounded-2xl mb-6 overflow-hidden">
             <button onClick={() => toggleSection('thirdparty')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
               <div className="flex items-center gap-3">
