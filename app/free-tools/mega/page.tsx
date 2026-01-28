@@ -1457,6 +1457,7 @@ export default function MegaCalculator() {
                         </div>
                       )
                     })()}
+                    </div>
                   </div>
                 )}
 
