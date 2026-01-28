@@ -305,9 +305,6 @@ export default function MegaCalculator() {
   const tpNetCostWeekly = thirdPartySalesWeekly - ddSelectedWeekly - (thirdPartySalesWeekly * foodCostRate)
   const tpNetCostMonthly = tpNetCostWeekly * 4.33
   
-  // In-house margin for comparison
-  const inHouseProfitMarginPercent = sales > 0 ? (weeklyProfit / sales) * 100 : 0
-  
   // Operating Costs & Break-Even
   const totalMonthlyOperatingCosts = totalMonthlyFixedCosts + monthlyVariableCosts + tpNetCostMonthly
   const contributionMarginPercent = 100 - primeCostPercent
