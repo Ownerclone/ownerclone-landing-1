@@ -399,17 +399,17 @@ export default function MegaCalculator() {
       <section className="relative pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           
-          {/* STICKY DASHBOARD */}
+{/* STICKY DASHBOARD */}
           <div className="backdrop-blur-xl bg-black/80 border border-white/20 rounded-2xl p-4 md:p-6 mb-8 sticky top-16 z-10 shadow-2xl">
             {hasActiveWhatIf && (
               <div className="mb-3 px-3 py-1.5 bg-[#f59e0b]/20 border border-[#f59e0b]/50 rounded-lg text-center">
                 <span className="text-[#f59e0b] font-semibold text-xs md:text-sm">✨ What-If Mode Active - Showing projected numbers</span>
               </div>
             )}
-            <div className="grid grid-cols-4 md:grid-cols-8 gap-2 md:gap-4 text-center">
+            <div className="grid grid-cols-5 md:grid-cols-9 gap-2 md:gap-3 text-center">
               <div>
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Food Cost</p>
-                <p className={`text-base md:text-xl font-bold ${foodStatus.color}`}>
+                <p className={`text-sm md:text-xl font-bold ${foodStatus.color}`}>
                   {displayFoodCostPercent !== 0 ? `${displayFoodCostPercent.toFixed(1)}%` : '-'}
                 </p>
                 {hasActiveWhatIf && foodPercentReductionForCalc > 0 && (
@@ -418,7 +418,7 @@ export default function MegaCalculator() {
               </div>
               <div>
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Labor Cost</p>
-                <p className={`text-base md:text-xl font-bold ${laborStatus.color}`}>
+                <p className={`text-sm md:text-xl font-bold ${laborStatus.color}`}>
                   {displayLaborCostPercent > 0 ? `${displayLaborCostPercent.toFixed(1)}%` : '-'}
                 </p>
                 {hasActiveWhatIf && whatIfLaborReduction > 0 && (
@@ -427,13 +427,19 @@ export default function MegaCalculator() {
               </div>
               <div>
                 <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Prime Cost</p>
-                <p className={`text-base md:text-xl font-bold ${primeStatus.color}`}>
+                <p className={`text-sm md:text-xl font-bold ${primeStatus.color}`}>
                   {displayPrimeCostPercent > 0 ? `${displayPrimeCostPercent.toFixed(1)}%` : '-'}
                 </p>
               </div>
+              <div>
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Overhead</p>
+                <p className={`text-sm md:text-xl font-bold ${overheadPercent <= 15 ? 'text-[#10b981]' : overheadPercent <= 20 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                  {sales > 0 ? `${overheadPercent.toFixed(1)}%` : '-'}
+                </p>
+              </div>
               <div className="border-l border-white/10 pl-2">
-                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Break-Even/wk</p>
-                <p className="text-base md:text-xl font-bold text-[#06b6d4]">
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Break-Even</p>
+                <p className="text-sm md:text-xl font-bold text-[#06b6d4]">
                   {displayBreakEvenWeekly > 0 ? `$${Math.round(displayBreakEvenWeekly).toLocaleString()}` : '-'}
                 </p>
                 {hasActiveWhatIf && breakEvenWeekly > 0 && whatIfBreakEvenWeekly < breakEvenWeekly && (
@@ -442,7 +448,7 @@ export default function MegaCalculator() {
               </div>
               <div className="border-l border-white/10 pl-2">
                 <p className="text-[10px] md:text-xs text-[#10b981] mb-0.5 md:mb-1">In-House</p>
-                <p className={`text-base md:text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                <p className={`text-sm md:text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
                   {sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '-'}
                 </p>
               </div>
@@ -486,7 +492,7 @@ export default function MegaCalculator() {
                     })()}
                   </div>
                 ) : (
-                  <p className="text-base md:text-xl font-bold text-gray-500">-</p>
+                  <p className="text-sm md:text-xl font-bold text-gray-500">-</p>
                 )}
               </div>
               <div className="border-l border-white/10 pl-2">
@@ -523,7 +529,7 @@ export default function MegaCalculator() {
                   }
                   
                   return (
-                    <p className={`text-base md:text-xl font-bold ${blendedMargin >= 10 ? 'text-[#10b981]' : blendedMargin >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
+                    <p className={`text-sm md:text-xl font-bold ${blendedMargin >= 10 ? 'text-[#10b981]' : blendedMargin >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
                       {sales > 0 ? `${blendedMargin.toFixed(1)}%` : '-'}
                     </p>
                   )
@@ -533,10 +539,48 @@ export default function MegaCalculator() {
                 )}
               </div>
               <div className="border-l border-white/10 pl-2">
-                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Weekly Profit</p>
-                <p className={`text-base md:text-xl font-bold ${displayWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
-                  {sales > 0 ? `$${Math.round(displayWeeklyProfit).toLocaleString()}` : '-'}
-                </p>
+                <p className="text-[10px] md:text-xs text-gray-400 mb-0.5 md:mb-1">Profit/wk</p>
+                {(() => {
+                  // Calculate weekly profit with best 3P margin
+                  const orderBase = 25
+                  let adjustedWeeklyProfit = displayWeeklyProfit
+                  
+                  if (thirdPartySalesWeekly > 0 && sales > 0) {
+                    const ddLabor = ddSelectedLaborPercent
+                    const ddOverhead = overheadPercent * (ddLabor > 0 && laborCostPercent > 0 ? ddLabor / laborCostPercent : 0)
+                    const ddNetImpact = -tpFeePercent + tpPriceIncreasePercent - tpPromoPercent - ddLabor - ddOverhead - estimatedFoodCostPercent
+                    const ddYouKeep = orderBase * (1 + ddNetImpact / 100)
+                    const ddProfitMargin = (ddYouKeep / orderBase) * 100
+                    
+                    const webMarkup = parseFloat(websiteMarkupPercent) || 0
+                    const webNetImpact = webMarkup - (ccFeeRateTP * 100) - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const webYouKeep = orderBase * (1 + webNetImpact / 100)
+                    const webProfitMargin = (webYouKeep / orderBase) * 100
+                    
+                    const indyMarkup = parseFloat(indyMarkupPercent) || 0
+                    const indyNetImpact = indyMarkup - laborCostPercent - overheadPercent - estimatedFoodCostPercent
+                    const indyYouKeep = orderBase * (1 + indyNetImpact / 100)
+                    const indyProfitMargin = (indyYouKeep / orderBase) * 100
+                    
+                    const bestDeliveryMargin = Math.max(ddProfitMargin, webProfitMargin, indyProfitMargin)
+                    
+                    // In-house profit + best delivery profit
+                    const inHouseProfit = inHouseSalesWeekly * (inHouseProfitMarginPercent / 100)
+                    const deliveryProfit = thirdPartySalesWeekly * (bestDeliveryMargin / 100)
+                    adjustedWeeklyProfit = inHouseProfit + deliveryProfit
+                  }
+                  
+                  return (
+                    <>
+                      <p className={`text-sm md:text-xl font-bold ${adjustedWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                        ${Math.round(adjustedWeeklyProfit).toLocaleString()}
+                      </p>
+                      {thirdPartySalesWeekly > 0 && (
+                        <p className="text-[10px] md:text-xs text-gray-500">w/ best 3P</p>
+                      )}
+                    </>
+                  )
+                })()}
                 {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && (
                   <p className="text-[10px] md:text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>
                 )}
@@ -1093,7 +1137,7 @@ export default function MegaCalculator() {
             {expandedSections.thirdparty && (
               <div className="px-6 pb-6 border-t border-white/10">
                 {/* Intro Message */}
-                <div className="mt-6 p-4 bg-[#ef4444]/30 border border-[#ef4444]/50 rounded-lg">
+                <div className="mt-6 p-4 bg-[#ef4444]/20 border border-[#ef4444]/30 rounded-lg">
                   <p className="text-sm text-white flex items-start gap-2">
                     <AlertTriangle className="w-5 h-5 text-[#fbbf24] flex-shrink-0 mt-0.5" />
                     <span><strong>Third party apps want you to believe their fees replace your labor costs.</strong> They don't. Someone still preps, cooks, bags, and hands off every order. Select your labor reality below and see the truth.</span>
@@ -1750,7 +1794,7 @@ export default function MegaCalculator() {
           </div>
 
           {/* WHAT-IF SCENARIOS */}
-          <div className="backdrop-blur-xl bg-gradient-to-r from-[#f59e0b]/10 to-[#10b981]/10 border border-[#f59e0b]/30 rounded-2xl mb-6 overflow-hidden">
+          <div className="backdrop-blur-xl bg-gradient-to-r from-[#f59e0b]/5 to-[#10b981]/5 border border-[#f59e0b]/20 rounded-2xl mb-6 overflow-hidden">
             <button onClick={() => toggleSection('whatif')} className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors">
               <div className="flex items-center gap-3">
                 <Lightbulb className="w-6 h-6 text-[#fbbf24]" />
