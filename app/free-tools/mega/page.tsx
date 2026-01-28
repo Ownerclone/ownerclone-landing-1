@@ -137,27 +137,27 @@ export default function MegaCalculator() {
   }
 
   const getFoodCostStatus = (pct: number) => {
-    if (pct === 0) return { color: 'text-gray-500', label: 'â€”' }
-    if (pct < 28) return { color: 'text-[#10b981]', label: 'âœ“ Excellent' }
-    if (pct < 32) return { color: 'text-[#10b981]', label: 'âœ“ Good' }
-    if (pct < 35) return { color: 'text-[#fbbf24]', label: 'âš  High' }
-    return { color: 'text-[#ef4444]', label: 'âœ— Critical' }
+    if (pct === 0) return { color: 'text-gray-500', label: '-' }
+    if (pct < 28) return { color: 'text-[#10b981]', label: 'Excellent' }
+    if (pct < 32) return { color: 'text-[#10b981]', label: 'Good' }
+    if (pct < 35) return { color: 'text-[#fbbf24]', label: '!  High' }
+    return { color: 'text-[#ef4444]', label: 'X Critical' }
   }
   
   const getLaborCostStatus = (pct: number) => {
-    if (pct === 0) return { color: 'text-gray-500', label: 'â€”' }
-    if (pct < 25) return { color: 'text-[#10b981]', label: 'âœ“ Excellent' }
-    if (pct < 30) return { color: 'text-[#10b981]', label: 'âœ“ Good' }
-    if (pct < 35) return { color: 'text-[#fbbf24]', label: 'âš  High' }
-    return { color: 'text-[#ef4444]', label: 'âœ— Critical' }
+    if (pct === 0) return { color: 'text-gray-500', label: '-' }
+    if (pct < 25) return { color: 'text-[#10b981]', label: 'Excellent' }
+    if (pct < 30) return { color: 'text-[#10b981]', label: 'Good' }
+    if (pct < 35) return { color: 'text-[#fbbf24]', label: '!  High' }
+    return { color: 'text-[#ef4444]', label: 'X Critical' }
   }
   
   const getPrimeCostStatus = (pct: number) => {
-    if (pct === 0) return { color: 'text-gray-500', label: 'â€”' }
-    if (pct < 55) return { color: 'text-[#10b981]', label: 'âœ“ Excellent' }
-    if (pct < 60) return { color: 'text-[#10b981]', label: 'âœ“ Good' }
-    if (pct < 65) return { color: 'text-[#fbbf24]', label: 'âš  High' }
-    return { color: 'text-[#ef4444]', label: 'âœ— Critical' }
+    if (pct === 0) return { color: 'text-gray-500', label: '-' }
+    if (pct < 55) return { color: 'text-[#10b981]', label: 'Excellent' }
+    if (pct < 60) return { color: 'text-[#10b981]', label: 'Good' }
+    if (pct < 65) return { color: 'text-[#fbbf24]', label: '!  High' }
+    return { color: 'text-[#ef4444]', label: 'X Critical' }
   }
   
   const getLaborImpactDescription = (pct: number) => {
@@ -382,60 +382,60 @@ return (
           <div className="backdrop-blur-xl bg-black/80 border border-white/20 rounded-2xl p-6 mb-8 sticky top-20 z-10 shadow-2xl">
             {hasActiveWhatIf && (
               <div className="mb-4 px-4 py-2 bg-[#f59e0b]/20 border border-[#f59e0b]/50 rounded-lg text-center">
-                <span className="text-[#f59e0b] font-semibold text-sm">âš¡ What-If Mode Active â€” Showing projected numbers</span>
+                <span className="text-[#f59e0b] font-semibold text-sm">*  What-If Mode Active - Showing projected numbers</span>
               </div>
             )}
             <div className="grid grid-cols-2 md:grid-cols-7 gap-4 text-center">
               <div>
                 <p className="text-xs text-gray-400 mb-1">Food Cost</p>
                 <p className={`text-xl font-bold ${foodStatus.color}`}>
-                  {displayFoodCostPercent !== 0 ? `${displayFoodCostPercent.toFixed(1)}%` : 'â€”'}
+                  {displayFoodCostPercent !== 0 ? `${displayFoodCostPercent.toFixed(1)}%` : '-'}
                 </p>
                 {hasActiveWhatIf && foodPercentReductionForCalc > 0 && (
-                  <p className="text-xs text-[#10b981]">â†“ {foodPercentReductionForCalc.toFixed(1)}%</p>
+                  <p className="text-xs text-[#10b981]">-{foodPercentReductionForCalc.toFixed(1)}%</p>
                 )}
               </div>
               <div>
                 <p className="text-xs text-gray-400 mb-1">Labor Cost</p>
                 <p className={`text-xl font-bold ${laborStatus.color}`}>
-                  {displayLaborCostPercent > 0 ? `${displayLaborCostPercent.toFixed(1)}%` : 'â€”'}
+                  {displayLaborCostPercent > 0 ? `${displayLaborCostPercent.toFixed(1)}%` : '-'}
                 </p>
                 {hasActiveWhatIf && whatIfLaborReduction > 0 && (
-                  <p className="text-xs text-[#10b981]">â†“ {whatIfLaborReduction}%</p>
+                  <p className="text-xs text-[#10b981]">-{whatIfLaborReduction}%</p>
                 )}
               </div>
               <div>
                 <p className="text-xs text-gray-400 mb-1">Prime Cost</p>
                 <p className={`text-xl font-bold ${primeStatus.color}`}>
-                  {displayPrimeCostPercent > 0 ? `${displayPrimeCostPercent.toFixed(1)}%` : 'â€”'}
+                  {displayPrimeCostPercent > 0 ? `${displayPrimeCostPercent.toFixed(1)}%` : '-'}
                 </p>
               </div>
               <div className="border-l border-r border-white/10 px-2">
                 <p className="text-xs text-gray-400 mb-1">Break-Even/wk</p>
                 <p className="text-xl font-bold text-[#06b6d4]">
-                  {displayBreakEvenWeekly > 0 ? `$${Math.round(displayBreakEvenWeekly).toLocaleString()}` : 'â€”'}
+                  {displayBreakEvenWeekly > 0 ? `$${Math.round(displayBreakEvenWeekly).toLocaleString()}` : '-'}
                 </p>
                 {hasActiveWhatIf && breakEvenWeekly > 0 && whatIfBreakEvenWeekly < breakEvenWeekly && (
-                  <p className="text-xs text-[#10b981]">â†“ ${Math.round(breakEvenWeekly - whatIfBreakEvenWeekly).toLocaleString()}</p>
+                  <p className="text-xs text-[#10b981]">-${Math.round(breakEvenWeekly - whatIfBreakEvenWeekly).toLocaleString()}</p>
                 )}
               </div>
               <div>
                 <p className="text-xs text-green-400 mb-1">In-House Margin</p>
                 <p className={`text-xl font-bold ${inHouseProfitMarginPercent >= 10 ? 'text-[#10b981]' : inHouseProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                  {sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : 'â€”'}
+                  {sales > 0 && inHouseSalesWeekly > 0 ? `${inHouseProfitMarginPercent.toFixed(1)}%` : '-'}
                 </p>
               </div>
               <div>
                 <p className="text-xs text-gray-400 mb-1">Blended Margin</p>
                 <p className={`text-xl font-bold ${blendedProfitMarginPercent >= 10 ? 'text-[#10b981]' : blendedProfitMarginPercent >= 5 ? 'text-[#fbbf24]' : 'text-[#ef4444]'}`}>
-                  {sales > 0 ? `${blendedProfitMarginPercent.toFixed(1)}%` : 'â€”'}
+                  {sales > 0 ? `${blendedProfitMarginPercent.toFixed(1)}%` : '-'}
                 </p>
-                {marginDropPercent > 0.5 && <p className="text-xs text-red-400">â†“ {marginDropPercent.toFixed(1)}%</p>}
+                {marginDropPercent > 0.5 && <p className="text-xs text-red-400">-{marginDropPercent.toFixed(1)}%</p>}
               </div>
               <div>
                 <p className="text-xs text-gray-400 mb-1">Weekly Profit</p>
                 <p className={`text-xl font-bold ${displayWeeklyProfit >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
-                  {sales > 0 ? `$${Math.round(displayWeeklyProfit).toLocaleString()}` : 'â€”'}
+                  {sales > 0 ? `$${Math.round(displayWeeklyProfit).toLocaleString()}` : '-'}
                 </p>
                 {hasActiveWhatIf && grandTotalSavingsWeekly > 0 && (
                   <p className="text-xs text-[#10b981]">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}</p>
@@ -470,7 +470,7 @@ return (
                   <div className="flex items-end">
                     <div className="w-full p-4 bg-[#f59e0b]/10 border border-[#f59e0b]/30 rounded-lg text-center">
                       <p className="text-xs text-gray-400">Weekly Covers</p>
-                      <p className="text-2xl font-bold text-[#f59e0b]">{weeklyCovers > 0 ? weeklyCovers.toLocaleString() : 'â€”'}</p>
+                      <p className="text-2xl font-bold text-[#f59e0b]">{weeklyCovers > 0 ? weeklyCovers.toLocaleString() : '-'}</p>
                     </div>
                   </div>
                 </div>
@@ -541,7 +541,7 @@ return (
                         <div className="w-full p-4 bg-[#10b981]/20 border-2 border-[#10b981] rounded-lg text-center">
                           <p className="text-xs text-gray-400 mb-1">Calculated Plate Cost</p>
                           <p className="text-3xl font-bold text-[#10b981]">
-                            {quickPlateCostDollar > 0 ? `$${quickPlateCostDollar.toFixed(2)}` : 'â€”'}
+                            {quickPlateCostDollar > 0 ? `$${quickPlateCostDollar.toFixed(2)}` : '-'}
                           </p>
                           {currentMenuPrice > 0 && quickFoodCostPct > 0 && (
                             <p className="text-xs text-gray-400 mt-1">{quickFoodCostPct}% of ${currentMenuPrice}</p>
@@ -612,7 +612,7 @@ return (
                                   </div>
                                 ) : (
                                   <div className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-center">
-                                    <p className="text-xs text-gray-500">â€”</p>
+                                    <p className="text-xs text-gray-500">-</p>
                                   </div>
                                 )}
                               </div>
@@ -947,7 +947,7 @@ return (
                       </div>
                       <div className="flex justify-between border-t border-white/10 pt-3">
                         <span className="text-gray-400">Covers/Week to Break Even:</span>
-                        <span className="font-bold text-[#f59e0b]">{coversToBreakEvenWeekly > 0 ? coversToBreakEvenWeekly.toLocaleString() : 'â€”'}</span>
+                        <span className="font-bold text-[#f59e0b]">{coversToBreakEvenWeekly > 0 ? coversToBreakEvenWeekly.toLocaleString() : '-'}</span>
                       </div>
                     </div>
                   </div>
@@ -1138,7 +1138,7 @@ return (
                         const ddTaxNote = "You handle"
                         
                         return (
-                          <div className="p-5 bg-black/60 border-2 border-[#ef4444]/50 rounded-xl">
+                          <div className="p-5 bg-black/80 border-2 border-[#ef4444]/50 rounded-xl">
                             <h4 className="text-lg font-bold text-[#ef4444] mb-4 text-center">DoorDash / UberEats</h4>
                             <div className="space-y-2 text-sm">
                               <div className="flex justify-between">
@@ -1209,7 +1209,7 @@ return (
                         const webTaxNote = "You handle"
                         
                         return (
-                          <div className="p-5 bg-black/60 border-2 border-[#10b981]/50 rounded-xl">
+                          <div className="p-5 bg-black/80 border-2 border-[#10b981]/50 rounded-xl">
                             <h4 className="text-lg font-bold text-[#10b981] mb-4 text-center">Your Website</h4>
                             <div className="space-y-2 text-sm">
                               <div className="flex justify-between">
@@ -1278,7 +1278,7 @@ return (
                         const indyCustomerPays = 25 + indyItemFee + 6 + indySalesTax
                         
                         return (
-                          <div className="p-5 bg-black/60 border-2 border-[#06b6d4]/50 rounded-xl">
+                          <div className="p-5 bg-black/80 border-2 border-[#06b6d4]/50 rounded-xl">
                             <h4 className="text-lg font-bold text-[#06b6d4] mb-4 text-center">Indy Eats</h4>
                             <div className="space-y-2 text-sm">
                               <div className="flex justify-between">
@@ -1354,11 +1354,11 @@ return (
                       const difference = indyYouKeep - ddYouKeep
                       
                       return (
-                        <div className="mt-6 p-4 bg-black/50 border border-[#f59e0b]/30 rounded-lg text-center">
+                        <div className="mt-6 p-4 bg-black/80 border border-[#f59e0b]/30 rounded-lg text-center">
                           <p className="text-sm text-gray-300">
                             <strong className="text-[#f59e0b]">The Math Doesn't Lie:</strong> On ${thirdPartySalesWeekly.toLocaleString()}/week, switching from DoorDash to Indy Eats could add{' '}
                             <span className="text-[#10b981] font-bold">${Math.round(difference).toLocaleString()}/week</span> to your bottom line
-                            {' '}— that's <span className="text-[#10b981] font-bold">${Math.round(difference * 52).toLocaleString()}/year</span>.
+                            {' '}- that's <span className="text-[#10b981] font-bold">${Math.round(difference * 52).toLocaleString()}/year</span>.
                           </p>
                         </div>
                       )
@@ -1531,7 +1531,7 @@ return (
                       {whatIfCoversIncrease > 0 && weeklyCovers > 0 && (
                         <div className="space-y-1 text-sm">
                           <p className="text-gray-400">
-                            Covers: {weeklyCovers.toLocaleString()} â†’ <span className="text-[#10b981] font-bold">{newWeeklyCovers.toLocaleString()}</span>
+                            Covers: {weeklyCovers.toLocaleString()} {'->'} <span className="text-[#10b981] font-bold">{newWeeklyCovers.toLocaleString()}</span>
                             <span className="text-gray-500"> (+{extraCovers})</span>
                           </p>
                           <p className="text-gray-400">
