@@ -346,7 +346,9 @@ export default function MegaCalculator() {
   // Combined food savings (both methods can stack)
   const effectiveFoodSavingsWeekly = methodASavingsWeekly + methodBSavingsWeekly
   
-  const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100)
+  const priceIncreaseExtraRevenue = sales * (whatIfPriceIncrease / 100)
+  // Price increase profit = extra revenue × contribution margin (since COGS doesn't change)
+  const priceIncreaseSavingsWeekly = priceIncreaseExtraRevenue * ((100 - estimatedFoodCostPercent) / 100)
   // Method A savings (scheduling - % points reduction of labor cost)
   const laborMethodASavingsWeekly = sales * (whatIfLaborReduction / 100)
   // Method B savings (productivity - % reduction of labor spend)
@@ -363,7 +365,17 @@ export default function MegaCalculator() {
   const methodBPercentReduction = currentWeeklyFoodSpend > 0 && whatIfFoodSpendDollarReduction > 0 
     ? (whatIfFoodSpendDollarReduction / sales) * 100 
     : 0
-  const foodPercentReductionForCalc = methodAPercentReduction + methodBPercentReduction
+  const foodReductionFromMethods = methodAPercentReduction + methodBPercentReduction
+  
+  // Price increase reduces food cost % (same food cost / higher revenue)
+  // New food cost % = original food cost $ / new sales $ 
+  // Example: 30% food cost, 10% price increase → 30% / 1.10 = 27.3%
+  const priceAdjustedFoodCostPercent = whatIfPriceIncrease > 0 
+    ? estimatedFoodCostPercent / (1 + whatIfPriceIncrease / 100)
+    : estimatedFoodCostPercent
+  const foodPercentReductionFromPrice = estimatedFoodCostPercent - priceAdjustedFoodCostPercent
+  
+  const foodPercentReductionForCalc = foodReductionFromMethods + foodPercentReductionFromPrice
   const whatIfAdjustedFoodCostPercent = estimatedFoodCostPercent - foodPercentReductionForCalc
   // Method A reduces labor % directly by points, Method B reduces it by % of current labor spend
   const laborMethodAPercentReduction = whatIfLaborReduction
@@ -372,8 +384,10 @@ export default function MegaCalculator() {
   const whatIfAdjustedPrimeCostPercent = whatIfAdjustedFoodCostPercent + whatIfAdjustedLaborCostPercent
   const whatIfAdjustedWeeklyProfit = weeklyProfit + grandTotalSavingsWeekly
   const whatIfContributionMarginPercent = 100 - whatIfAdjustedPrimeCostPercent
+  // Break-even in dollars goes DOWN when prices increase (need fewer covers to hit same $)
+  // But we also need fewer DOLLARS because contribution margin improved
   const whatIfBreakEvenMonthly = whatIfContributionMarginPercent > 0 
-    ? (totalMonthlyOperatingCosts / (whatIfContributionMarginPercent / 100)) : 0
+    ? (baseMonthlyOperatingCosts / (whatIfContributionMarginPercent / 100)) : 0
   const whatIfBreakEvenWeekly = whatIfBreakEvenMonthly / 4.33
   
   // Display Values (switch based on what-if)
