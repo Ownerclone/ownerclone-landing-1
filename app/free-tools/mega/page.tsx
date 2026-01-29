@@ -1901,16 +1901,17 @@ export default function MegaCalculator() {
                           <span className="py-2 text-gray-400">% points</span>
                         </div>
                         {whatIfFoodPctReduction > 0 && (
-                          <div className="mt-3 p-3 bg-[#10b981]/10 rounded-lg">
-                            <p className="text-sm text-gray-300">
-                              Weekly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent).toLocaleString()}</strong>
-                            </p>
-                            <p className="text-sm text-gray-300">
-                              Yearly savings: <strong className="text-[#10b981]">+${Math.round(linkedFoodSpendFromPercent * 52).toLocaleString()}</strong>
-                            </p>
-                            <p className="text-xs text-[#fbbf24] mt-2">👆 Look up! Dashboard is updating live</p>
-                          </div>
-                        )}
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#10b981]">Menu Engineering ({whatIfFoodPctReduction}% pts)</span>
+                              <span className="text-[#10b981] font-bold">+${Math.round(linkedFoodSpendFromPercent).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfFoodSpendDollarReduction > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#06b6d4]">Vendor Savings ({((whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100).toFixed(0)}%)</span>
+                              <span className="text-[#06b6d4] font-bold">+${Math.round(whatIfFoodSpendDollarReduction).toLocaleString()}/wk</span>
+                            </div>
+                          )}
                       </div>
                       
                       {/* Method B: Vendor & Purchasing */}
@@ -1994,16 +1995,17 @@ export default function MegaCalculator() {
                           <span className="py-2 text-gray-400">% points</span>
                         </div>
                         {whatIfLaborReduction > 0 && (
-                          <div className="mt-3 p-3 bg-[#8b5cf6]/10 rounded-lg">
-                            <p className="text-sm text-gray-300">
-                              Weekly savings: <strong className="text-[#8b5cf6]">+${Math.round(laborMethodASavingsWeekly).toLocaleString()}</strong>
-                            </p>
-                            <p className="text-sm text-gray-300">
-                              Yearly savings: <strong className="text-[#8b5cf6]">+${Math.round(laborMethodASavingsWeekly * 52).toLocaleString()}</strong>
-                            </p>
-                            <p className="text-xs text-[#fbbf24] mt-2">👆 Look up! Dashboard is updating live</p>
-                          </div>
-                        )}
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#8b5cf6]">Scheduling ({whatIfLaborReduction}% pts)</span>
+                              <span className="text-[#8b5cf6] font-bold">+${Math.round(sales * (whatIfLaborReduction / 100)).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfLaborSpendReduction > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#ec4899]">Productivity ({whatIfLaborSpendReduction}%)</span>
+                              <span className="text-[#ec4899] font-bold">+${Math.round(totalLaborCost * (whatIfLaborSpendReduction / 100)).toLocaleString()}/wk</span>
+                            </div>
+                          )}
                       </div>
                       
                       {/* Method B: Productivity & Training */}
@@ -2199,7 +2201,7 @@ export default function MegaCalculator() {
                           {whatIfAvgTicketIncrease > 0 && (
                             <div className="flex justify-between items-center">
                               <span className="text-[#06b6d4]">Avg Ticket (+${whatIfAvgTicketIncrease})</span>
-                              <span className="text-[#06b6d4] font-bold">+${Math.round(avgTicketProfitWeekly).toLocaleString()}/wk</span>
+                              <span className="text-[#06b6d4] font-bold">+${Math.round(weeklyCovers * whatIfAvgTicketIncrease * 0.75).toLocaleString()}/wk</span>
                             </div>
                           )}
                           {whatIfCoversIncrease > 0 && (
