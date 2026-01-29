@@ -67,6 +67,7 @@ export default function MegaCalculator() {
   const [priceIncreasePercent, setPriceIncreasePercent] = useState('')
   const [laborReductionPercent, setLaborReductionPercent] = useState('')
   const [laborSpendReductionPercent, setLaborSpendReductionPercent] = useState('')
+  const [avgTicketIncrease, setAvgTicketIncrease] = useState('')
   const [coversIncreasePercent, setCoversIncreasePercent] = useState('')
   
   // Section Toggle
@@ -177,6 +178,7 @@ export default function MegaCalculator() {
     setPriceIncreasePercent('')
     setLaborReductionPercent('')
     setLaborSpendReductionPercent('')
+    setAvgTicketIncrease('')
     setCoversIncreasePercent('')
     setActiveWhatIfInput(null)
   }
@@ -325,13 +327,21 @@ export default function MegaCalculator() {
   const whatIfPriceIncrease = parseFloat(priceIncreasePercent) || 0
   const whatIfLaborReduction = parseFloat(laborReductionPercent) || 0
   const whatIfLaborSpendReduction = parseFloat(laborSpendReductionPercent) || 0
+  const whatIfAvgTicketIncrease = parseFloat(avgTicketIncrease) || 0
   const whatIfCoversIncrease = parseFloat(coversIncreasePercent) || 0
+  
+  // Average ticket increase: same covers, higher spend per person
+  const avgTicketExtraRevenue = weeklyCovers * whatIfAvgTicketIncrease
+  // Profit on upsells is high margin (drinks, appetizers, desserts typically 70-80%+)
+  const avgTicketProfitWeekly = avgTicketExtraRevenue * 0.75
+  
   const newWeeklyCovers = weeklyCovers > 0 ? Math.round(weeklyCovers * (1 + whatIfCoversIncrease / 100)) : 0
   const extraCovers = newWeeklyCovers - weeklyCovers
   const extraRevenueFromCovers = extraCovers * perPersonAvg
   const coversProfitWeekly = extraRevenueFromCovers * (inHouseProfitMarginPercent / 100)
   const hasActiveWhatIf = whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0 || 
-    whatIfPriceIncrease > 0 || whatIfLaborReduction > 0 || whatIfLaborSpendReduction > 0 || whatIfCoversIncrease > 0
+    whatIfPriceIncrease > 0 || whatIfLaborReduction > 0 || whatIfLaborSpendReduction > 0 || 
+    whatIfAvgTicketIncrease > 0 || whatIfCoversIncrease > 0
   const linkedFoodSpendFromPercent = sales > 0 ? sales * (whatIfFoodPctReduction / 100) : 0
   const linkedFoodPercentFromSpend = currentWeeklyFoodSpend > 0 
     ? (whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100 : 0
@@ -355,7 +365,7 @@ export default function MegaCalculator() {
   const laborMethodBSavingsWeekly = totalLaborCost * (whatIfLaborSpendReduction / 100)
   // Combined labor savings
   const laborSavingsWeekly = laborMethodASavingsWeekly + laborMethodBSavingsWeekly
-  const grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly + coversProfitWeekly
+  cconst grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly + avgTicketProfitWeekly + coversProfitWeekly
   const grandTotalSavingsMonthly = grandTotalSavingsWeekly * 4.33
   const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
   
@@ -2053,11 +2063,11 @@ export default function MegaCalculator() {
                     )}
                   </div>
                   
-                  {/* Price, Labor, Covers - 3 Column Grid */}
+                  {/* Price, Ticket, Covers - 3 Column Grid */}
                   <div className="grid md:grid-cols-3 gap-6">
                     {/* Raise Prices */}
-                    <div className="p-4 bg-black/20 rounded-lg border border-white/10">
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">Raise Prices by ___%</label>
+                    <div className="p-4 bg-black/20 rounded-lg border border-[#f59e0b]/30">
+                      <label className="block text-sm font-semibold text-[#f59e0b] mb-2">Raise Prices by ___%</label>
                       <p className="text-xs text-gray-500 mb-3">Menu price increase across the board</p>
                       <div className="flex gap-2 mb-4">
                         <input 
@@ -2065,38 +2075,58 @@ export default function MegaCalculator() {
                           value={priceIncreasePercent} 
                           onChange={(e) => setPriceIncreasePercent(e.target.value)} 
                           placeholder="5" 
-                          className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" 
+                          className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#f59e0b] focus:outline-none text-white" 
                         />
                         <span className="py-2 text-gray-400">%</span>
                       </div>
                       {whatIfPriceIncrease > 0 && (
                         <div className="space-y-1 text-sm">
                           <p className="text-gray-400">
-                            Weekly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly).toLocaleString()}</span>
+                            Extra profit: <span className="text-[#f59e0b] font-bold">+${Math.round(priceIncreaseSavingsWeekly).toLocaleString()}/wk</span>
                           </p>
                           <p className="text-gray-400">
-                            Yearly: <span className="text-[#10b981] font-bold">+${Math.round(priceIncreaseSavingsWeekly * 52).toLocaleString()}</span>
+                            Yearly: <span className="text-[#f59e0b] font-bold">+${Math.round(priceIncreaseSavingsWeekly * 52).toLocaleString()}</span>
                           </p>
+                          <p className="text-xs text-[#fbbf24] mt-2">👆 Food Cost % drops too!</p>
                         </div>
                       )}
                     </div>
 
-                    {/* Reduce Labor - Placeholder, full section below */}
-                    <div className="p-4 bg-black/20 rounded-lg border border-white/10">
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Labor Cost</label>
-                      <p className="text-xs text-gray-500 mb-3">See detailed breakdown below ↓</p>
-                      {(whatIfLaborReduction > 0 || whatIfLaborSpendReduction > 0) && (
+                    {/* Increase Average Ticket */}
+                    <div className="p-4 bg-black/20 rounded-lg border border-[#06b6d4]/30">
+                      <label className="block text-sm font-semibold text-[#06b6d4] mb-2">Increase Avg Ticket by $___</label>
+                      <p className="text-xs text-gray-500 mb-3">Upselling: sodas, apps, desserts, premium liquor</p>
+                      <div className="flex gap-2 mb-4">
+                        <span className="py-2 text-gray-400">$</span>
+                        <input 
+                          type="number" 
+                          value={avgTicketIncrease} 
+                          onChange={(e) => setAvgTicketIncrease(e.target.value)} 
+                          placeholder="2" 
+                          className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#06b6d4] focus:outline-none text-white" 
+                        />
+                      </div>
+                      {whatIfAvgTicketIncrease > 0 && weeklyCovers > 0 && (
                         <div className="space-y-1 text-sm">
                           <p className="text-gray-400">
-                            Combined: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly).toLocaleString()}/wk</span>
+                            Extra revenue: <span className="text-white">${Math.round(avgTicketExtraRevenue).toLocaleString()}/wk</span>
+                          </p>
+                          <p className="text-gray-400">
+                            Extra profit: <span className="text-[#06b6d4] font-bold">+${Math.round(avgTicketProfitWeekly).toLocaleString()}/wk</span>
+                          </p>
+                          <p className="text-gray-400">
+                            Yearly: <span className="text-[#06b6d4] font-bold">+${Math.round(avgTicketProfitWeekly * 52).toLocaleString()}</span>
+                          </p>
+                          <p className="text-xs text-gray-500 mt-2">
+                            {weeklyCovers} covers × ${whatIfAvgTicketIncrease} = ${Math.round(avgTicketExtraRevenue).toLocaleString()} @ ~75% margin
                           </p>
                         </div>
                       )}
                     </div>
 
                     {/* Increase Covers */}
-                    <div className="p-4 bg-black/20 rounded-lg border border-white/10">
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">Increase Covers by ___%</label>
+                    <div className="p-4 bg-black/20 rounded-lg border border-[#10b981]/30">
+                      <label className="block text-sm font-semibold text-[#10b981] mb-2">Increase Covers by ___%</label>
                       <p className="text-xs text-gray-500 mb-3">More butts in seats via marketing</p>
                       <div className="flex gap-2 mb-4">
                         <input 
