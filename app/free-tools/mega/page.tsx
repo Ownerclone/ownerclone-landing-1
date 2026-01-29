@@ -1857,6 +1857,7 @@ export default function MegaCalculator() {
               <div className="flex items-center gap-3">
                 <Lightbulb className="w-6 h-6 text-[#fbbf24]" />
                 <h2 className="text-xl font-bold">What-If Scenarios</h2>
+                <span className="text-gray-400 text-sm font-normal hidden md:inline">— Let's pull some levers!</span>
                 {hasActiveWhatIf && (
                   <span className="ml-2 px-3 py-1 rounded-full text-sm font-bold text-[#10b981] bg-[#10b981]/20">Active</span>
                 )}
@@ -2159,7 +2160,62 @@ export default function MegaCalculator() {
                   {/* Grand Total Impact */}
                   {sales > 0 && hasActiveWhatIf && (
                     <div className="mt-6 p-6 bg-gradient-to-r from-[#10b981]/20 to-[#06b6d4]/20 border-2 border-[#10b981] rounded-xl">
-                      <h4 className="text-xl font-bold text-[#10b981] mb-4 text-center">TOTAL PROJECTED IMPACT</h4>
+                      <h4 className="text-xl font-bold text-[#10b981] mb-4 text-center">🎯 TOTAL PROJECTED IMPACT</h4>
+                      
+                      {/* Itemized Breakdown */}
+                      <div className="mb-6 p-4 bg-black/30 rounded-lg">
+                        <p className="text-sm font-bold text-gray-300 mb-3">Levers You're Pulling:</p>
+                        <div className="space-y-2 text-sm">
+                          {whatIfFoodPctReduction > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#10b981]">Menu Engineering ({whatIfFoodPctReduction}% pts)</span>
+                              <span className="text-[#10b981] font-bold">+${Math.round(methodASavingsWeekly).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfFoodSpendDollarReduction > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#06b6d4]">Vendor Savings ({((whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100).toFixed(0)}%)</span>
+                              <span className="text-[#06b6d4] font-bold">+${Math.round(methodBSavingsWeekly).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfLaborReduction > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#8b5cf6]">Scheduling ({whatIfLaborReduction}% pts)</span>
+                              <span className="text-[#8b5cf6] font-bold">+${Math.round(laborMethodASavingsWeekly).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfLaborSpendReduction > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#ec4899]">Productivity ({whatIfLaborSpendReduction}%)</span>
+                              <span className="text-[#ec4899] font-bold">+${Math.round(laborMethodBSavingsWeekly).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfPriceIncrease > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#f59e0b]">Raise Prices ({whatIfPriceIncrease}%)</span>
+                              <span className="text-[#f59e0b] font-bold">+${Math.round(priceIncreaseSavingsWeekly).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfAvgTicketIncrease > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#06b6d4]">Avg Ticket (+${whatIfAvgTicketIncrease})</span>
+                              <span className="text-[#06b6d4] font-bold">+${Math.round(avgTicketProfitWeekly).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          {whatIfCoversIncrease > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-[#10b981]">More Covers ({whatIfCoversIncrease}%)</span>
+                              <span className="text-[#10b981] font-bold">+${Math.round(coversProfitWeekly).toLocaleString()}/wk</span>
+                            </div>
+                          )}
+                          <div className="flex justify-between items-center border-t border-white/20 pt-2 mt-2">
+                            <span className="text-white font-bold">TOTAL</span>
+                            <span className="text-[#10b981] font-bold">+${Math.round(grandTotalSavingsWeekly).toLocaleString()}/wk</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Weekly / Monthly / Yearly Grid */}
                       <div className="grid md:grid-cols-3 gap-4 text-center">
                         <div className="p-4 bg-black/30 rounded-lg">
                           <p className="text-sm text-gray-400">Weekly</p>
@@ -2174,6 +2230,7 @@ export default function MegaCalculator() {
                           <p className="text-4xl font-bold text-[#10b981]">+${Math.round(grandTotalSavingsYearly).toLocaleString()}</p>
                         </div>
                       </div>
+                      
                       <p className="text-center text-sm text-gray-400 mt-4">
                         New projected weekly profit: <strong className="text-[#10b981]">${Math.round(whatIfAdjustedWeeklyProfit).toLocaleString()}</strong> (was ${Math.round(weeklyProfit).toLocaleString()})
                       </p>
