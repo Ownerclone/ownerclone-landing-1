@@ -66,6 +66,7 @@ export default function MegaCalculator() {
   const [activeWhatIfInput, setActiveWhatIfInput] = useState<string | null>(null)
   const [priceIncreasePercent, setPriceIncreasePercent] = useState('')
   const [laborReductionPercent, setLaborReductionPercent] = useState('')
+  const [laborSpendReductionPercent, setLaborSpendReductionPercent] = useState('')
   const [coversIncreasePercent, setCoversIncreasePercent] = useState('')
   
   // Section Toggle
@@ -175,6 +176,7 @@ export default function MegaCalculator() {
     setWhatIfFoodSpendReduction('')
     setPriceIncreasePercent('')
     setLaborReductionPercent('')
+    setLaborSpendReductionPercent('')
     setCoversIncreasePercent('')
     setActiveWhatIfInput(null)
   }
@@ -322,13 +324,14 @@ export default function MegaCalculator() {
   const whatIfFoodSpendDollarReduction = parseFloat(whatIfFoodSpendReduction) || 0
   const whatIfPriceIncrease = parseFloat(priceIncreasePercent) || 0
   const whatIfLaborReduction = parseFloat(laborReductionPercent) || 0
+  const whatIfLaborSpendReduction = parseFloat(laborSpendReductionPercent) || 0
   const whatIfCoversIncrease = parseFloat(coversIncreasePercent) || 0
   const newWeeklyCovers = weeklyCovers > 0 ? Math.round(weeklyCovers * (1 + whatIfCoversIncrease / 100)) : 0
   const extraCovers = newWeeklyCovers - weeklyCovers
   const extraRevenueFromCovers = extraCovers * perPersonAvg
   const coversProfitWeekly = extraRevenueFromCovers * (inHouseProfitMarginPercent / 100)
   const hasActiveWhatIf = whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0 || 
-    whatIfPriceIncrease > 0 || whatIfLaborReduction > 0 || whatIfCoversIncrease > 0
+    whatIfPriceIncrease > 0 || whatIfLaborReduction > 0 || whatIfLaborSpendReduction > 0 || whatIfCoversIncrease > 0
   const linkedFoodSpendFromPercent = sales > 0 ? sales * (whatIfFoodPctReduction / 100) : 0
   const linkedFoodPercentFromSpend = currentWeeklyFoodSpend > 0 
     ? (whatIfFoodSpendDollarReduction / currentWeeklyFoodSpend) * 100 : 0
@@ -344,7 +347,12 @@ export default function MegaCalculator() {
   const effectiveFoodSavingsWeekly = methodASavingsWeekly + methodBSavingsWeekly
   
   const priceIncreaseSavingsWeekly = sales * (whatIfPriceIncrease / 100)
-  const laborSavingsWeekly = totalLaborCost * (whatIfLaborReduction / 100)
+  // Method A savings (scheduling - % points reduction of labor cost)
+  const laborMethodASavingsWeekly = sales * (whatIfLaborReduction / 100)
+  // Method B savings (productivity - % reduction of labor spend)
+  const laborMethodBSavingsWeekly = totalLaborCost * (whatIfLaborSpendReduction / 100)
+  // Combined labor savings
+  const laborSavingsWeekly = laborMethodASavingsWeekly + laborMethodBSavingsWeekly
   const grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly + coversProfitWeekly
   const grandTotalSavingsMonthly = grandTotalSavingsWeekly * 4.33
   const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
@@ -357,7 +365,10 @@ export default function MegaCalculator() {
     : 0
   const foodPercentReductionForCalc = methodAPercentReduction + methodBPercentReduction
   const whatIfAdjustedFoodCostPercent = estimatedFoodCostPercent - foodPercentReductionForCalc
-  const whatIfAdjustedLaborCostPercent = laborCostPercent * (1 - whatIfLaborReduction / 100)
+  // Method A reduces labor % directly by points, Method B reduces it by % of current labor spend
+  const laborMethodAPercentReduction = whatIfLaborReduction
+  const laborMethodBPercentReduction = laborCostPercent * (whatIfLaborSpendReduction / 100)
+  const whatIfAdjustedLaborCostPercent = laborCostPercent - laborMethodAPercentReduction - laborMethodBPercentReduction
   const whatIfAdjustedPrimeCostPercent = whatIfAdjustedFoodCostPercent + whatIfAdjustedLaborCostPercent
   const whatIfAdjustedWeeklyProfit = weeklyProfit + grandTotalSavingsWeekly
   const whatIfContributionMarginPercent = 100 - whatIfAdjustedPrimeCostPercent
@@ -1922,10 +1933,107 @@ export default function MegaCalculator() {
                     {(whatIfFoodPctReduction > 0 || whatIfFoodSpendDollarReduction > 0) && (
                       <div className="mt-3 text-center">
                         <button 
-                          onClick={() => { setWhatIfFoodCostPercentReduction(''); setWhatIfFoodSpendReduction(''); setActiveWhatIfInput(null); }}
+                          onClick={() => { setWhatIfFoodCostPercentReduction(''); setWhatIfFoodSpendReduction(''); }}
                           className="text-xs text-gray-400 hover:text-white underline"
                         >
                           Reset food cost values to see current numbers
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Labor Cost Reduction - Two Methods */}
+                  <div className="p-6 bg-black/20 rounded-lg border-2 border-[#8b5cf6]/30 mb-6">
+                    <h4 className="text-lg font-bold text-[#8b5cf6] mb-2">Reduce Labor Cost</h4>
+                    <p className="text-sm text-gray-400 mb-4">
+                      Current weekly labor cost: <strong className="text-white">${Math.round(totalLaborCost).toLocaleString()}</strong> ({laborCostPercent.toFixed(1)}% of ${sales.toLocaleString()})
+                    </p>
+                    
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {/* Method A: Scheduling & Efficiency */}
+                      <div className="p-4 bg-black/30 rounded-lg border border-[#8b5cf6]/20">
+                        <h5 className="text-md font-bold text-[#8b5cf6] mb-2">Method A: Scheduling & Efficiency</h5>
+                        <p className="text-xs text-gray-400 mb-3">
+                          Lower your labor cost as a % of sales through smarter scheduling, cross-training, and cutting dead hours
+                        </p>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">Drop labor cost % by ___ points</label>
+                        <p className="text-xs text-gray-500 mb-3">Example: 30% → 28% = enter 2</p>
+                        <div className="flex gap-2">
+                          <input 
+                            type="number" 
+                            value={laborReductionPercent} 
+                            onChange={(e) => setLaborReductionPercent(e.target.value)} 
+                            placeholder="2" 
+                            className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#8b5cf6] focus:outline-none text-white" 
+                          />
+                          <span className="py-2 text-gray-400">% points</span>
+                        </div>
+                        {whatIfLaborReduction > 0 && (
+                          <div className="mt-3 p-3 bg-[#8b5cf6]/10 rounded-lg">
+                            <p className="text-sm text-gray-300">
+                              Weekly savings: <strong className="text-[#8b5cf6]">+${Math.round(laborMethodASavingsWeekly).toLocaleString()}</strong>
+                            </p>
+                            <p className="text-sm text-gray-300">
+                              Yearly savings: <strong className="text-[#8b5cf6]">+${Math.round(laborMethodASavingsWeekly * 52).toLocaleString()}</strong>
+                            </p>
+                            <p className="text-xs text-[#fbbf24] mt-2">👆 Look up! Dashboard is updating live</p>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Method B: Productivity & Training */}
+                      <div className="p-4 bg-black/30 rounded-lg border border-[#ec4899]/20">
+                        <h5 className="text-md font-bold text-[#ec4899] mb-2">Method B: Productivity & Training</h5>
+                        <p className="text-xs text-gray-400 mb-3">
+                          Get more output from same hours through better training, performance pay, and reducing mistakes
+                        </p>
+                        <label className="block text-sm font-semibold text-gray-300 mb-2">Improve productivity by ___%</label>
+                        <p className="text-xs text-gray-500 mb-3">Example: Staff works 10% more efficiently = enter 10</p>
+                        <div className="flex gap-2">
+                          <input 
+                            type="number" 
+                            value={laborSpendReductionPercent} 
+                            onChange={(e) => setLaborSpendReductionPercent(e.target.value)} 
+                            placeholder="10" 
+                            className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#ec4899] focus:outline-none text-white" 
+                          />
+                          <span className="py-2 text-gray-400">%</span>
+                        </div>
+                        {whatIfLaborSpendReduction > 0 && (
+                          <div className="mt-3 p-3 bg-[#ec4899]/10 rounded-lg">
+                            <p className="text-sm text-gray-300">
+                              Weekly savings: <strong className="text-[#ec4899]">+${Math.round(laborMethodBSavingsWeekly).toLocaleString()}</strong>
+                            </p>
+                            <p className="text-sm text-gray-300">
+                              Yearly savings: <strong className="text-[#ec4899]">+${Math.round(laborMethodBSavingsWeekly * 52).toLocaleString()}</strong>
+                            </p>
+                            <p className="text-xs text-[#fbbf24] mt-2">👆 Look up! Dashboard is updating live</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    {/* Educational callout */}
+                    <div className="mt-4 p-3 bg-[#fbbf24]/10 border border-[#fbbf24]/30 rounded-lg">
+                      <p className="text-xs text-gray-300">
+                        <strong className="text-[#fbbf24]">⚠️ Know the difference:</strong> Cutting hours (Method A) directly reduces your labor %. But training and performance pay (Method B) can achieve the same savings WITHOUT cutting service quality - your team does more in the same time. Both methods can stack!
+                      </p>
+                    </div>
+                    
+                    {/* OwnerClone teaser */}
+                    <div className="mt-3 p-3 bg-[#8b5cf6]/10 border border-[#8b5cf6]/30 rounded-lg">
+                      <p className="text-xs text-gray-300">
+                        <strong className="text-[#8b5cf6]">🚀 Coming in OwnerClone:</strong> Smart Scheduling analyzes your sales patterns to eliminate overstaffing. Training Modules and Performance Pay help your team hit targets and earn bonuses - which actually SAVES you money through better productivity.
+                      </p>
+                    </div>
+                    
+                    {(whatIfLaborReduction > 0 || whatIfLaborSpendReduction > 0) && (
+                      <div className="mt-3 text-center">
+                        <button 
+                          onClick={() => { setLaborReductionPercent(''); setLaborSpendReductionPercent(''); }}
+                          className="text-xs text-gray-400 hover:text-white underline"
+                        >
+                          Reset labor cost values to see current numbers
                         </button>
                       </div>
                     )}
@@ -1959,27 +2067,14 @@ export default function MegaCalculator() {
                       )}
                     </div>
 
-                    {/* Reduce Labor */}
+                    {/* Reduce Labor - Placeholder, full section below */}
                     <div className="p-4 bg-black/20 rounded-lg border border-white/10">
-                      <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Labor by ___%</label>
-                      <p className="text-xs text-gray-500 mb-3">Scheduling efficiency, cross-training</p>
-                      <div className="flex gap-2 mb-4">
-                        <input 
-                          type="number" 
-                          value={laborReductionPercent} 
-                          onChange={(e) => setLaborReductionPercent(e.target.value)} 
-                          placeholder="2" 
-                          className="w-24 px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:border-[#10b981] focus:outline-none text-white" 
-                        />
-                        <span className="py-2 text-gray-400">%</span>
-                      </div>
-                      {whatIfLaborReduction > 0 && (
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">Reduce Labor Cost</label>
+                      <p className="text-xs text-gray-500 mb-3">See detailed breakdown below ↓</p>
+                      {(whatIfLaborReduction > 0 || whatIfLaborSpendReduction > 0) && (
                         <div className="space-y-1 text-sm">
                           <p className="text-gray-400">
-                            Weekly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly).toLocaleString()}</span>
-                          </p>
-                          <p className="text-gray-400">
-                            Yearly: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly * 52).toLocaleString()}</span>
+                            Combined: <span className="text-[#10b981] font-bold">+${Math.round(laborSavingsWeekly).toLocaleString()}/wk</span>
                           </p>
                         </div>
                       )}
