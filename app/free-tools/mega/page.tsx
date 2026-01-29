@@ -365,7 +365,7 @@ export default function MegaCalculator() {
   const laborMethodBSavingsWeekly = totalLaborCost * (whatIfLaborSpendReduction / 100)
   // Combined labor savings
   const laborSavingsWeekly = laborMethodASavingsWeekly + laborMethodBSavingsWeekly
-  cconst grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly + avgTicketProfitWeekly + coversProfitWeekly
+  const grandTotalSavingsWeekly = effectiveFoodSavingsWeekly + priceIncreaseSavingsWeekly + laborSavingsWeekly + avgTicketProfitWeekly + coversProfitWeekly
   const grandTotalSavingsMonthly = grandTotalSavingsWeekly * 4.33
   const grandTotalSavingsYearly = grandTotalSavingsWeekly * 52
   
